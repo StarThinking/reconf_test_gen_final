@@ -16,4 +16,4 @@ for i in *; do echo "$i $(cat $i | wc -l)"; done | sort -n -k2 -r
 cat * | awk '{print $4}' | sort  | uniq -c | sort -n -k1 -r
 
 # generate testing tuples
-for p in $(cat ./paras_this_round.txt); do ./generate_ff.sh $p > "$p".txt & pids+=($!); done; for id in ${pids[@]}; do wait $id; echo "$id done"; done
+pids=(); for p in $(cat ./paras_this_round.txt); do ./generate_ff.sh $p > testing_tuples_this_round/"$p".txt & pids+=($!); done; for id in ${pids[@]}; do wait $id; echo "$id done"; done

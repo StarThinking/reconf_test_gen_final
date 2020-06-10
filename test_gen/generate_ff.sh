@@ -18,7 +18,8 @@ if [ $# -ne 1 ]; then echo 'wrong: [parameter]'; exit -1; fi
 parameter=$1
 
 # create v_list
-para_value_list_dir='/root/reconf_test_gen/the_final/para_value_list'
+#para_value_list_dir='/root/reconf_test_gen/the_final/para_value_list'
+para_value_list_dir='./para_value_list'
 if [ $(grep -r ^"$parameter " $para_value_list_dir | wc -l) -ne 1 ]; then
     echo "ERROR: check $parameter value list!"
     exit -1
@@ -41,7 +42,7 @@ do
         
     	the_proj="$(echo $log | awk -F '/' '{print $1}')"
         the_test="$(echo $log | awk -F '/' '{print $4}' | awk -F '-ultimate-meta.txt' '{print $1}')"
-
+	#if [ "$the_test" != "org.apache.hadoop.mapreduce.jobhistory.TestJobHistoryEventHandler#testTimelineEventHandling" ]; then continue; else echo 'test: org.apache.hadoop.mapreduce.jobhistory.TestJobHistoryEventHandler#testTimelineEventHandling'; fi
         component_inits=( $(cat $log | grep ^"$parameter " | awk '{print $2}' | sort -u | grep -v OtherComponent | awk -F '.' '{print $1}' | uniq -c | awk '{print $2" "$1}') )
 	#echo ${component_inits[@]}	
     	# add the default value used for this component at this point and create value pairs	

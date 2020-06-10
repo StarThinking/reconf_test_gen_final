@@ -1,0 +1,155 @@
+reconf_parameter: hbase.hregion.memstore.mslab.enabled
+component: hbase:DefaultMemStore
+v1: false
+v2: true
+testProject: hbase
+unitTest: org.apache.hadoop.hbase.wal.TestAsyncFSWALCorruptionDueToDanglingByteBuffer#test
+reconfPoint: -1
+result: -1
+
+Test vvMode=v1v2
+tr.result is -1
+fail. do 5 v1v1 v2v2 tests to filter false alarm
+failed v1v2 test: org.apache.hadoop.hbase.wal.TestAsyncFSWALCorruptionDueToDanglingByteBuffer#test v1 false v2 true
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+v1v1 and v2v2 succeed for 5 times, it is issue
+---------------------------------------full report---------------------------------------------
+reconf_parameter: hbase.hregion.memstore.mslab.enabled
+component: hbase:DefaultMemStore
+v1: false
+v2: true
+testProject: hbase
+unitTest: org.apache.hadoop.hbase.wal.TestAsyncFSWALCorruptionDueToDanglingByteBuffer#test
+reconfPoint: -1
+result: -1
+failureMessage: org.apache.hadoop.hbase.client.RetriesExhaustedException: Failed after attempts=16, exceptions:
+2020-06-05T20:39:43.866Z, java.net.SocketTimeoutException: callTimeout=60000, callDuration=68666: Call to 3eb218646527/172.17.0.6:39841 failed on connection exception: org.apache.hbase.thirdparty.io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: 3eb218646527/172.17.0.6:39841 row '' on table 'Corruption' at region=Corruption,,1591389516488.8027bdb2636cd05a1d4b594eee2bf0a7., hostname=3eb218646527,39841,1591389488772, seqNum=2
+
+stackTrace: java.lang.RuntimeException: org.apache.hadoop.hbase.client.RetriesExhaustedException: Failed after attempts=16, exceptions:
+2020-06-05T20:39:43.866Z, java.net.SocketTimeoutException: callTimeout=60000, callDuration=68666: Call to 3eb218646527/172.17.0.6:39841 failed on connection exception: org.apache.hbase.thirdparty.io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: 3eb218646527/172.17.0.6:39841 row '' on table 'Corruption' at region=Corruption,,1591389516488.8027bdb2636cd05a1d4b594eee2bf0a7., hostname=3eb218646527,39841,1591389488772, seqNum=2
+
+	at org.apache.hadoop.hbase.Waiter.waitFor(Waiter.java:213)
+	at org.apache.hadoop.hbase.Waiter.waitFor(Waiter.java:137)
+	at org.apache.hadoop.hbase.HBaseCommonTestingUtility.waitFor(HBaseCommonTestingUtility.java:251)
+	at org.apache.hadoop.hbase.HBaseTestingUtility.waitTableAvailable(HBaseTestingUtility.java:3278)
+	at org.apache.hadoop.hbase.HBaseTestingUtility.waitTableAvailable(HBaseTestingUtility.java:3261)
+	at org.apache.hadoop.hbase.wal.WALCorruptionDueToDanglingByteBufferTestBase.test(WALCorruptionDueToDanglingByteBufferTestBase.java:82)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: org.apache.hadoop.hbase.client.RetriesExhaustedException: Failed after attempts=16, exceptions:
+2020-06-05T20:39:43.866Z, java.net.SocketTimeoutException: callTimeout=60000, callDuration=68666: Call to 3eb218646527/172.17.0.6:39841 failed on connection exception: org.apache.hbase.thirdparty.io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: 3eb218646527/172.17.0.6:39841 row '' on table 'Corruption' at region=Corruption,,1591389516488.8027bdb2636cd05a1d4b594eee2bf0a7., hostname=3eb218646527,39841,1591389488772, seqNum=2
+
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerWithReadReplicas.throwEnrichedException(RpcRetryingCallerWithReadReplicas.java:299)
+	at org.apache.hadoop.hbase.client.ScannerCallableWithReplicas.call(ScannerCallableWithReplicas.java:251)
+	at org.apache.hadoop.hbase.client.ScannerCallableWithReplicas.call(ScannerCallableWithReplicas.java:58)
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithoutRetries(RpcRetryingCallerImpl.java:192)
+	at org.apache.hadoop.hbase.client.ClientScanner.call(ClientScanner.java:267)
+	at org.apache.hadoop.hbase.client.ClientScanner.loadCache(ClientScanner.java:435)
+	at org.apache.hadoop.hbase.client.ClientScanner.nextWithSyncCache(ClientScanner.java:310)
+	at org.apache.hadoop.hbase.client.ClientScanner.next(ClientScanner.java:595)
+	at org.apache.hadoop.hbase.HBaseTestingUtility$9.evaluate(HBaseTestingUtility.java:4279)
+	at org.apache.hadoop.hbase.Waiter.waitFor(Waiter.java:185)
+	... 27 more
+Caused by: java.net.SocketTimeoutException: callTimeout=60000, callDuration=68666: Call to 3eb218646527/172.17.0.6:39841 failed on connection exception: org.apache.hbase.thirdparty.io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: 3eb218646527/172.17.0.6:39841 row '' on table 'Corruption' at region=Corruption,,1591389516488.8027bdb2636cd05a1d4b594eee2bf0a7., hostname=3eb218646527,39841,1591389488772, seqNum=2
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithRetries(RpcRetryingCallerImpl.java:159)
+	at org.apache.hadoop.hbase.client.ResultBoundedCompletionService$QueueingFuture.run(ResultBoundedCompletionService.java:80)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	... 1 more
+Caused by: java.net.ConnectException: Call to 3eb218646527/172.17.0.6:39841 failed on connection exception: org.apache.hbase.thirdparty.io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: 3eb218646527/172.17.0.6:39841
+	at org.apache.hadoop.hbase.ipc.IPCUtil.wrapException(IPCUtil.java:177)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.onCallFinished(AbstractRpcClient.java:392)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.access$100(AbstractRpcClient.java:97)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:423)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:419)
+	at org.apache.hadoop.hbase.ipc.Call.callComplete(Call.java:117)
+	at org.apache.hadoop.hbase.ipc.Call.setException(Call.java:132)
+	at org.apache.hadoop.hbase.ipc.BufferCallBeforeInitHandler.userEventTriggered(BufferCallBeforeInitHandler.java:92)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeUserEventTriggered(AbstractChannelHandlerContext.java:326)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeUserEventTriggered(AbstractChannelHandlerContext.java:312)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.fireUserEventTriggered(AbstractChannelHandlerContext.java:304)
+	at org.apache.hbase.thirdparty.io.netty.channel.DefaultChannelPipeline$HeadContext.userEventTriggered(DefaultChannelPipeline.java:1426)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeUserEventTriggered(AbstractChannelHandlerContext.java:326)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeUserEventTriggered(AbstractChannelHandlerContext.java:312)
+	at org.apache.hbase.thirdparty.io.netty.channel.DefaultChannelPipeline.fireUserEventTriggered(DefaultChannelPipeline.java:924)
+	at org.apache.hadoop.hbase.ipc.NettyRpcConnection.failInit(NettyRpcConnection.java:179)
+	at org.apache.hadoop.hbase.ipc.NettyRpcConnection.access$500(NettyRpcConnection.java:71)
+	at org.apache.hadoop.hbase.ipc.NettyRpcConnection$3.operationComplete(NettyRpcConnection.java:267)
+	at org.apache.hadoop.hbase.ipc.NettyRpcConnection$3.operationComplete(NettyRpcConnection.java:261)
+	at org.apache.hbase.thirdparty.io.netty.util.concurrent.DefaultPromise.notifyListener0(DefaultPromise.java:502)
+	at org.apache.hbase.thirdparty.io.netty.util.concurrent.DefaultPromise.notifyListeners0(DefaultPromise.java:495)
+	at org.apache.hbase.thirdparty.io.netty.util.concurrent.DefaultPromise.notifyListenersNow(DefaultPromise.java:474)
+	at org.apache.hbase.thirdparty.io.netty.util.concurrent.DefaultPromise.notifyListeners(DefaultPromise.java:415)
+	at org.apache.hbase.thirdparty.io.netty.util.concurrent.DefaultPromise.setValue0(DefaultPromise.java:540)
+	at org.apache.hbase.thirdparty.io.netty.util.concurrent.DefaultPromise.setFailure0(DefaultPromise.java:533)
+	at org.apache.hbase.thirdparty.io.netty.util.concurrent.DefaultPromise.tryFailure(DefaultPromise.java:114)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.fulfillConnectPromise(AbstractNioChannel.java:327)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:343)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:665)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:612)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:529)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:491)
+	at org.apache.hbase.thirdparty.io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:905)
+	at org.apache.hbase.thirdparty.io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	... 1 more
+Caused by: org.apache.hbase.thirdparty.io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: 3eb218646527/172.17.0.6:39841
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:714)
+	at org.apache.hbase.thirdparty.io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:327)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:340)
+	... 7 more
+Caused by: java.net.ConnectException: Connection refused
+	... 11 more
+
+
+Total execution time in seconds : 1122
+1
