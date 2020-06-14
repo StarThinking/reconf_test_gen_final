@@ -26,5 +26,3 @@ if [ "$field" == "run" ] || [ "$field" == "runlog" ]; then
     if [ $check_num -ne 1 ]; then echo "ERROR: when finding run_log for log sig $log_sig"; exit -1; fi
     find . -name "$log_sig"_run_*
 fi
-
-#para=$(sed -n 1p $line | awk '{print $2}'); comp=$(sed -n 2p $line | awk '{print $2}'); echo "$para $comp";
