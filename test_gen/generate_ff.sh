@@ -20,11 +20,16 @@ parameter=$1
 # create v_list
 #para_value_list_dir='/root/reconf_test_gen/the_final/para_value_list'
 para_value_list_dir='./para_value_list'
-if [ $(grep -r ^"$parameter " $para_value_list_dir | wc -l) -ne 1 ]; then
-    echo "ERROR: check $parameter value list!"
-    exit -1
+pv_line_num=$(grep -r ^"$parameter " $para_value_list_dir | wc -l)
+if [ $pv_line_num -ne 1 ]; then
+    if [ $pv_line_num -ge 2 ]; then 
+	echo "WARN: multiple pv lines for $parameter"
+    else
+	echo "ERROR: check $parameter value list!"
+    	exit -1
+    fi
 fi
-prior_v_list=( $(grep -r ^"$parameter " $para_value_list_dir | awk -F ':' '{print $2}' | awk '{for(i=2;i<=NF;i++) print $i}') )
+prior_v_list=( $(grep -r ^"$parameter " $para_value_list_dir | head -n 1 | awk -F ':' '{print $2}' | awk '{for(i=2;i<=NF;i++) print $i}') )
 v_index=1
 for v in ${prior_v_list[@]}
 do

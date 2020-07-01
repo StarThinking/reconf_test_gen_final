@@ -20,6 +20,17 @@ if [ "$field" == "para_and_comp" ] || [ "$field" == "parameter_and_component" ];
     echo "$para $comp"
 fi
 
+if [ "$field" == "tuple" ]; then
+    parameter=$(sed -n 1p $log | awk '{print $2}')
+    testProject=$(sed -n 5p $log | awk '{print $2}')
+    unitTest=$(sed -n 6p $log | awk '{print $2}')
+    component=$(sed -n 2p $log | awk '{print $2}')
+    reconfPoint=$(sed -n 7p $log | awk '{print $2}')
+    v1=$(sed -n 3p $log | awk '{print $2}')
+    v2=$(sed -n 4p $log | awk '{print $2}')
+    echo "$parameter $testProject $unitTest $component $reconfPoint $v1 $v2"
+fi
+
 if [ "$field" == "run" ] || [ "$field" == "runlog" ]; then
     log_sig=$(echo $log | awk -F '_hypothesis_' '{print $1}' | awk -F '/' '{print $NF}')
     check_num=$(find . -name "$log_sig"_run_* | wc -l)
