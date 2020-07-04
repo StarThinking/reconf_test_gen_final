@@ -23,7 +23,7 @@ para_value_list_dir='./para_value_list'
 pv_line_num=$(grep -r ^"$parameter " $para_value_list_dir | wc -l)
 if [ $pv_line_num -ne 1 ]; then
     if [ $pv_line_num -ge 2 ]; then 
-	echo "WARN: multiple pv lines for $parameter"
+	1>&2 echo "WARN: multiple pv lines for $parameter"
     else
 	echo "ERROR: check $parameter value list!"
     	exit -1
