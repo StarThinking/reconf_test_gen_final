@@ -21,15 +21,27 @@ parameter=$1
 #para_value_list_dir='/root/reconf_test_gen/the_final/para_value_list'
 para_value_list_dir='./para_value_list'
 pv_line_num=$(grep -r ^"$parameter " $para_value_list_dir | wc -l)
+current_line=0
+max_line=1 # default, the first line
+max_v_num=0
 if [ $pv_line_num -ne 1 ]; then
+    # resolve duplicates by using line with more values
     if [ $pv_line_num -ge 2 ]; then 
-	1>&2 echo "WARN: multiple pv lines for $parameter"
+	for line in $(grep -r ^"$parameter " $para_value_list_dir)
+	do
+	    echo "line $line"
+            current_line=$(( current_line + 1 ))
+	    v_num=$(echo $line | awk '{print NF}')
+	    if [ $v_num -gt $max_v_num ]; then max_v_num=$v_num; max_line=$current_line; fi
+	done
+	1>&2 echo "WARN: multiple pv lines for $parameter, let's use line $max_line with #value $max_v_num"
     else
 	echo "ERROR: check $parameter value list!"
     	exit -1
     fi
 fi
-prior_v_list=( $(grep -r ^"$parameter " $para_value_list_dir | head -n 1 | awk -F ':' '{print $2}' | awk '{for(i=2;i<=NF;i++) print $i}') )
+
+prior_v_list=( $(grep -r ^"$parameter " $para_value_list_dir | head -n $max_line | tail -n 1 | awk -F ':' '{print $2}' | awk '{for(i=2;i<=NF;i++) print $i}') )
 v_index=1
 for v in ${prior_v_list[@]}
 do
@@ -47,7 +59,6 @@ do
         
     	the_proj="$(echo $log | awk -F '/' '{print $1}')"
         the_test="$(echo $log | awk -F '/' '{print $4}' | awk -F '-ultimate-meta.txt' '{print $1}')"
-	#if [ "$the_test" != "org.apache.hadoop.mapreduce.jobhistory.TestJobHistoryEventHandler#testTimelineEventHandling" ]; then continue; else echo 'test: org.apache.hadoop.mapreduce.jobhistory.TestJobHistoryEventHandler#testTimelineEventHandling'; fi
         component_inits=( $(cat $log | grep ^"$parameter " | awk '{print $2}' | sort -u | grep -v OtherComponent | awk -F '.' '{print $1}' | uniq -c | awk '{print $2" "$1}') )
 	#echo ${component_inits[@]}	
     	# add the default value used for this component at this point and create value pairs	
