@@ -29,12 +29,13 @@ if [ $pv_line_num -ne 1 ]; then
     if [ $pv_line_num -ge 2 ]; then 
 	for line in $(grep -r ^"$parameter " $para_value_list_dir)
 	do
-	    echo "line $line"
+	    #1>&2 echo "line $line"
             current_line=$(( current_line + 1 ))
 	    v_num=$(echo $line | awk '{print NF}')
 	    if [ $v_num -gt $max_v_num ]; then max_v_num=$v_num; max_line=$current_line; fi
 	done
 	1>&2 echo "WARN: multiple pv lines for $parameter, let's use line $max_line with #value $max_v_num"
+	#echo "WARN: multiple pv lines for $parameter, let's use line $max_line with #value $max_v_num"
     else
 	echo "ERROR: check $parameter value list!"
     	exit -1
