@@ -1,0 +1,77 @@
+reconf_parameter: dfs.client.block.write.replace-datanode-on-failure.policy
+component: hdfs:NameNode
+v1: DEFAULT
+v2: ALWAYS
+testProject: hdfs
+unitTest: org.apache.hadoop.hdfs.server.namenode.snapshot.TestSnapshotFileLength#testSnapshotfileLength
+reconfPoint: 1
+result: -1
+
+Test vvMode=v1v2
+tr.result is -1
+fail. do 5 v1v1 v2v2 tests to filter false alarm
+failed v1v2 test: org.apache.hadoop.hdfs.server.namenode.snapshot.TestSnapshotFileLength#testSnapshotfileLength v1 DEFAULT v2 ALWAYS
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+v1v1 and v2v2 succeed for 5 times, it is issue
+---------------------------------------full report---------------------------------------------
+reconf_parameter: dfs.client.block.write.replace-datanode-on-failure.policy
+component: hdfs:NameNode
+v1: DEFAULT
+v2: ALWAYS
+testProject: hdfs
+unitTest: org.apache.hadoop.hdfs.server.namenode.snapshot.TestSnapshotFileLength#testSnapshotfileLength
+reconfPoint: 1
+result: -1
+failureMessage: `/TestSnapshotFileLength/sub1/.snapshot/snapshot1/file1': Fail to get block MD5 for LocatedBlock{BP-1574453957-172.17.0.6-1594248682784:blk_1073741826_1002; getBlockSize()=1; corrupt=false; offset=1024; locs=[DatanodeInfoWithStorage[127.0.0.1:35150,DS-0a6d0a8d-2c78-4ce6-9847-28809cb005e4,DISK]]}
+stackTrace: org.apache.hadoop.fs.PathIOException: `/TestSnapshotFileLength/sub1/.snapshot/snapshot1/file1': Fail to get block MD5 for LocatedBlock{BP-1574453957-172.17.0.6-1594248682784:blk_1073741826_1002; getBlockSize()=1; corrupt=false; offset=1024; locs=[DatanodeInfoWithStorage[127.0.0.1:35150,DS-0a6d0a8d-2c78-4ce6-9847-28809cb005e4,DISK]]}
+	at org.apache.hadoop.hdfs.FileChecksumHelper$ReplicatedFileChecksumComputer.checksumBlocks(FileChecksumHelper.java:507)
+	at org.apache.hadoop.hdfs.FileChecksumHelper$FileChecksumComputer.compute(FileChecksumHelper.java:252)
+	at org.apache.hadoop.hdfs.DFSClient.getFileChecksumInternal(DFSClient.java:1790)
+	at org.apache.hadoop.hdfs.DFSClient.getFileChecksumWithCombineMode(DFSClient.java:1810)
+	at org.apache.hadoop.hdfs.DistributedFileSystem$33.doCall(DistributedFileSystem.java:1691)
+	at org.apache.hadoop.hdfs.DistributedFileSystem$33.doCall(DistributedFileSystem.java:1688)
+	at org.apache.hadoop.fs.FileSystemLinkResolver.resolve(FileSystemLinkResolver.java:81)
+	at org.apache.hadoop.hdfs.DistributedFileSystem.getFileChecksum(DistributedFileSystem.java:1700)
+	at org.apache.hadoop.hdfs.server.namenode.snapshot.TestSnapshotFileLength.testSnapshotfileLength(TestSnapshotFileLength.java:137)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.FailOnTimeout$StatementThread.run(FailOnTimeout.java:74)
+
+
+Total execution time in seconds : 254
+1

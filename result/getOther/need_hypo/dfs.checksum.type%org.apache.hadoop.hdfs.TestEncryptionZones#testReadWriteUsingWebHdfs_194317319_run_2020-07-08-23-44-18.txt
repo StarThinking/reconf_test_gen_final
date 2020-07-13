@@ -1,0 +1,64 @@
+reconf_parameter: dfs.checksum.type
+component: hdfs:DataNode
+v1: CRC32C
+v2: NULL
+testProject: hdfs
+unitTest: org.apache.hadoop.hdfs.TestEncryptionZones#testReadWriteUsingWebHdfs
+reconfPoint: 1
+result: -1
+
+Test vvMode=v1v2
+tr.result is -1
+fail. do 5 v1v1 v2v2 tests to filter false alarm
+failed v1v2 test: org.apache.hadoop.hdfs.TestEncryptionZones#testReadWriteUsingWebHdfs v1 CRC32C v2 NULL
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+v1v1 and v2v2 succeed for 5 times, it is issue
+---------------------------------------full report---------------------------------------------
+reconf_parameter: dfs.checksum.type
+component: hdfs:DataNode
+v1: CRC32C
+v2: NULL
+testProject: hdfs
+unitTest: org.apache.hadoop.hdfs.TestEncryptionZones#testReadWriteUsingWebHdfs
+reconfPoint: 1
+result: -1
+failureMessage: All datanodes [DatanodeInfoWithStorage[127.0.0.1:41267,DS-fd5cc373-f089-414c-b0da-6b3b9dcaca41,DISK]] are bad. Aborting...
+stackTrace: java.io.IOException: All datanodes [DatanodeInfoWithStorage[127.0.0.1:41267,DS-fd5cc373-f089-414c-b0da-6b3b9dcaca41,DISK]] are bad. Aborting...
+	at org.apache.hadoop.hdfs.DataStreamer.handleBadDatanode(DataStreamer.java:1561)
+	at org.apache.hadoop.hdfs.DataStreamer.setupPipelineInternal(DataStreamer.java:1495)
+	at org.apache.hadoop.hdfs.DataStreamer.setupPipelineForAppendOrRecovery(DataStreamer.java:1481)
+	at org.apache.hadoop.hdfs.DataStreamer.processDatanodeOrExternalError(DataStreamer.java:1256)
+	at org.apache.hadoop.hdfs.DataStreamer.run(DataStreamer.java:667)
+
+
+Total execution time in seconds : 312
+1

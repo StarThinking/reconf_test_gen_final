@@ -1,0 +1,178 @@
+reconf_parameter: hadoop.rpc.protection
+component: yarn:ResourceManager
+v1: privacy
+v2: authentication
+testProject: mapreduce
+unitTest: org.apache.hadoop.mapreduce.v2.TestMRJobs#testJobClassloader
+reconfPoint: 1
+result: -1
+
+Test vvMode=v1v2
+tr.result is -1
+fail. do 5 v1v1 v2v2 tests to filter false alarm
+failed v1v2 test: org.apache.hadoop.mapreduce.v2.TestMRJobs#testJobClassloader v1 privacy v2 authentication
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+v1v1 and v2v2 succeed for 5 times, it is issue
+---------------------------------------full report---------------------------------------------
+reconf_parameter: hadoop.rpc.protection
+component: yarn:ResourceManager
+v1: privacy
+v2: authentication
+testProject: mapreduce
+unitTest: org.apache.hadoop.mapreduce.v2.TestMRJobs#testJobClassloader
+reconfPoint: 1
+result: -1
+failureMessage: Job status: Application application_1594336577126_0001 failed 2 times due to Error launching appattempt_1594336577126_0001_000002. Got exception: java.io.IOException: DestHost:destPort f864a6f21fea:37056 , LocalHost:localPort f864a6f21fea/172.17.0.17:0. Failed on local exception: java.io.IOException: javax.security.sasl.SaslException: DIGEST-MD5: No common protection layer between client and server
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at org.apache.hadoop.net.NetUtils.wrapWithMessage(NetUtils.java:833)
+	at org.apache.hadoop.net.NetUtils.wrapException(NetUtils.java:808)
+	at org.apache.hadoop.ipc.Client.getRpcResponse(Client.java:1549)
+	at org.apache.hadoop.ipc.Client.call(Client.java:1491)
+	at org.apache.hadoop.ipc.Client.call(Client.java:1388)
+	at org.apache.hadoop.ipc.ProtobufRpcEngine$Invoker.invoke(ProtobufRpcEngine.java:233)
+	at org.apache.hadoop.ipc.ProtobufRpcEngine$Invoker.invoke(ProtobufRpcEngine.java:118)
+	at com.sun.proxy.$Proxy102.startContainers(Unknown Source)
+	at org.apache.hadoop.yarn.api.impl.pb.client.ContainerManagementProtocolPBClientImpl.startContainers(ContainerManagementProtocolPBClientImpl.java:128)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.hadoop.io.retry.RetryInvocationHandler.invokeMethod(RetryInvocationHandler.java:422)
+	at org.apache.hadoop.io.retry.RetryInvocationHandler$Call.invokeMethod(RetryInvocationHandler.java:165)
+	at org.apache.hadoop.io.retry.RetryInvocationHandler$Call.invoke(RetryInvocationHandler.java:157)
+	at org.apache.hadoop.io.retry.RetryInvocationHandler$Call.invokeOnce(RetryInvocationHandler.java:95)
+	at org.apache.hadoop.io.retry.RetryInvocationHandler.invoke(RetryInvocationHandler.java:359)
+	at com.sun.proxy.$Proxy103.startContainers(Unknown Source)
+	at org.apache.hadoop.yarn.server.resourcemanager.amlauncher.AMLauncher.launch(AMLauncher.java:126)
+	at org.apache.hadoop.yarn.server.resourcemanager.amlauncher.AMLauncher.run(AMLauncher.java:311)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.io.IOException: javax.security.sasl.SaslException: DIGEST-MD5: No common protection layer between client and server
+	at org.apache.hadoop.ipc.Client$Connection$1.run(Client.java:770)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at javax.security.auth.Subject.doAs(Subject.java:422)
+	at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1730)
+	at org.apache.hadoop.ipc.Client$Connection.handleSaslConnectionFailure(Client.java:733)
+	at org.apache.hadoop.ipc.Client$Connection.setupIOstreams(Client.java:827)
+	at org.apache.hadoop.ipc.Client$Connection.access$3800(Client.java:421)
+	at org.apache.hadoop.ipc.Client.getConnection(Client.java:1606)
+	at org.apache.hadoop.ipc.Client.call(Client.java:1435)
+	... 20 more
+Caused by: javax.security.sasl.SaslException: DIGEST-MD5: No common protection layer between client and server
+	at com.sun.security.sasl.digest.DigestMD5Client.checkQopSupport(DigestMD5Client.java:418)
+	at com.sun.security.sasl.digest.DigestMD5Client.evaluateChallenge(DigestMD5Client.java:221)
+	at org.apache.hadoop.security.SaslRpcClient.saslConnect(SaslRpcClient.java:408)
+	at org.apache.hadoop.ipc.Client$Connection.setupSaslConnection(Client.java:627)
+	at org.apache.hadoop.ipc.Client$Connection.access$2300(Client.java:421)
+	at org.apache.hadoop.ipc.Client$Connection$2.run(Client.java:814)
+	at org.apache.hadoop.ipc.Client$Connection$2.run(Client.java:810)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at javax.security.auth.Subject.doAs(Subject.java:422)
+	at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1730)
+	at org.apache.hadoop.ipc.Client$Connection.setupIOstreams(Client.java:810)
+	... 23 more
+. Failing the application.
+stackTrace: java.lang.AssertionError: Job status: Application application_1594336577126_0001 failed 2 times due to Error launching appattempt_1594336577126_0001_000002. Got exception: java.io.IOException: DestHost:destPort f864a6f21fea:37056 , LocalHost:localPort f864a6f21fea/172.17.0.17:0. Failed on local exception: java.io.IOException: javax.security.sasl.SaslException: DIGEST-MD5: No common protection layer between client and server
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at org.apache.hadoop.net.NetUtils.wrapWithMessage(NetUtils.java:833)
+	at org.apache.hadoop.net.NetUtils.wrapException(NetUtils.java:808)
+	at org.apache.hadoop.ipc.Client.getRpcResponse(Client.java:1549)
+	at org.apache.hadoop.ipc.Client.call(Client.java:1491)
+	at org.apache.hadoop.ipc.Client.call(Client.java:1388)
+	at org.apache.hadoop.ipc.ProtobufRpcEngine$Invoker.invoke(ProtobufRpcEngine.java:233)
+	at org.apache.hadoop.ipc.ProtobufRpcEngine$Invoker.invoke(ProtobufRpcEngine.java:118)
+	at com.sun.proxy.$Proxy102.startContainers(Unknown Source)
+	at org.apache.hadoop.yarn.api.impl.pb.client.ContainerManagementProtocolPBClientImpl.startContainers(ContainerManagementProtocolPBClientImpl.java:128)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.hadoop.io.retry.RetryInvocationHandler.invokeMethod(RetryInvocationHandler.java:422)
+	at org.apache.hadoop.io.retry.RetryInvocationHandler$Call.invokeMethod(RetryInvocationHandler.java:165)
+	at org.apache.hadoop.io.retry.RetryInvocationHandler$Call.invoke(RetryInvocationHandler.java:157)
+	at org.apache.hadoop.io.retry.RetryInvocationHandler$Call.invokeOnce(RetryInvocationHandler.java:95)
+	at org.apache.hadoop.io.retry.RetryInvocationHandler.invoke(RetryInvocationHandler.java:359)
+	at com.sun.proxy.$Proxy103.startContainers(Unknown Source)
+	at org.apache.hadoop.yarn.server.resourcemanager.amlauncher.AMLauncher.launch(AMLauncher.java:126)
+	at org.apache.hadoop.yarn.server.resourcemanager.amlauncher.AMLauncher.run(AMLauncher.java:311)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.io.IOException: javax.security.sasl.SaslException: DIGEST-MD5: No common protection layer between client and server
+	at org.apache.hadoop.ipc.Client$Connection$1.run(Client.java:770)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at javax.security.auth.Subject.doAs(Subject.java:422)
+	at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1730)
+	at org.apache.hadoop.ipc.Client$Connection.handleSaslConnectionFailure(Client.java:733)
+	at org.apache.hadoop.ipc.Client$Connection.setupIOstreams(Client.java:827)
+	at org.apache.hadoop.ipc.Client$Connection.access$3800(Client.java:421)
+	at org.apache.hadoop.ipc.Client.getConnection(Client.java:1606)
+	at org.apache.hadoop.ipc.Client.call(Client.java:1435)
+	... 20 more
+Caused by: javax.security.sasl.SaslException: DIGEST-MD5: No common protection layer between client and server
+	at com.sun.security.sasl.digest.DigestMD5Client.checkQopSupport(DigestMD5Client.java:418)
+	at com.sun.security.sasl.digest.DigestMD5Client.evaluateChallenge(DigestMD5Client.java:221)
+	at org.apache.hadoop.security.SaslRpcClient.saslConnect(SaslRpcClient.java:408)
+	at org.apache.hadoop.ipc.Client$Connection.setupSaslConnection(Client.java:627)
+	at org.apache.hadoop.ipc.Client$Connection.access$2300(Client.java:421)
+	at org.apache.hadoop.ipc.Client$Connection$2.run(Client.java:814)
+	at org.apache.hadoop.ipc.Client$Connection$2.run(Client.java:810)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at javax.security.auth.Subject.doAs(Subject.java:422)
+	at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1730)
+	at org.apache.hadoop.ipc.Client$Connection.setupIOstreams(Client.java:810)
+	... 23 more
+. Failing the application.
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.junit.Assert.assertTrue(Assert.java:41)
+	at org.apache.hadoop.mapreduce.v2.TestMRJobs.testJobClassloader(TestMRJobs.java:529)
+	at org.apache.hadoop.mapreduce.v2.TestMRJobs.testJobClassloader(TestMRJobs.java:471)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.FailOnTimeout$StatementThread.run(FailOnTimeout.java:74)
+
+
+Total execution time in seconds : 995
+1

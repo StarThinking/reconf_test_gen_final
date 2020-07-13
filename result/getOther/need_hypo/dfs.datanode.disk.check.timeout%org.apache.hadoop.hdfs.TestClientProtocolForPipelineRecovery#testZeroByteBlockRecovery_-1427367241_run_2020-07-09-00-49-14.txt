@@ -1,0 +1,66 @@
+reconf_parameter: dfs.datanode.disk.check.timeout
+component: hdfs:DataNode
+v1: 10
+v2: 10m
+testProject: hdfs
+unitTest: org.apache.hadoop.hdfs.TestClientProtocolForPipelineRecovery#testZeroByteBlockRecovery
+reconfPoint: -2
+result: -1
+
+Test vvMode=v1v2
+tr.result is -1
+fail. do 5 v1v1 v2v2 tests to filter false alarm
+failed v1v2 test: org.apache.hadoop.hdfs.TestClientProtocolForPipelineRecovery#testZeroByteBlockRecovery v1 10 v2 10m
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+v1v1 and v2v2 succeed for 5 times, it is issue
+---------------------------------------full report---------------------------------------------
+reconf_parameter: dfs.datanode.disk.check.timeout
+component: hdfs:DataNode
+v1: 10
+v2: 10m
+testProject: hdfs
+unitTest: org.apache.hadoop.hdfs.TestClientProtocolForPipelineRecovery#testZeroByteBlockRecovery
+reconfPoint: -2
+result: -1
+failureMessage: Failed to replace a bad datanode on the existing pipeline due to no more good datanodes being available to try. (Nodes: current=[DatanodeInfoWithStorage[127.0.0.1:42553,DS-690ef2c9-c803-42f7-a0d1-42090b3e6cab,DISK]], original=[DatanodeInfoWithStorage[127.0.0.1:42553,DS-690ef2c9-c803-42f7-a0d1-42090b3e6cab,DISK]]). The current failed datanode replacement policy is ALWAYS, and a client may configure this via 'dfs.client.block.write.replace-datanode-on-failure.policy' in its configuration.
+stackTrace: java.io.IOException: Failed to replace a bad datanode on the existing pipeline due to no more good datanodes being available to try. (Nodes: current=[DatanodeInfoWithStorage[127.0.0.1:42553,DS-690ef2c9-c803-42f7-a0d1-42090b3e6cab,DISK]], original=[DatanodeInfoWithStorage[127.0.0.1:42553,DS-690ef2c9-c803-42f7-a0d1-42090b3e6cab,DISK]]). The current failed datanode replacement policy is ALWAYS, and a client may configure this via 'dfs.client.block.write.replace-datanode-on-failure.policy' in its configuration.
+	at org.apache.hadoop.hdfs.DataStreamer.findNewDatanode(DataStreamer.java:1304)
+	at org.apache.hadoop.hdfs.DataStreamer.addDatanode2ExistingPipeline(DataStreamer.java:1372)
+	at org.apache.hadoop.hdfs.DataStreamer.handleDatanodeReplacement(DataStreamer.java:1598)
+	at org.apache.hadoop.hdfs.DataStreamer.setupPipelineInternal(DataStreamer.java:1499)
+	at org.apache.hadoop.hdfs.DataStreamer.setupPipelineForAppendOrRecovery(DataStreamer.java:1481)
+	at org.apache.hadoop.hdfs.DataStreamer.processDatanodeOrExternalError(DataStreamer.java:1256)
+	at org.apache.hadoop.hdfs.DataStreamer.run(DataStreamer.java:667)
+
+
+Total execution time in seconds : 394
+1
