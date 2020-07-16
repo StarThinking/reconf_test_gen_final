@@ -1,6 +1,16 @@
 #!/bin/bash
 
+# structure final
+for i in $(seq 0 15); do tar zxvf $i.tar.gz ; done; rm *.tar.gz
+mkdir component; mkdir parameter; mkdir ultimate; mv *-component-meta.txt component; mv *-parameter-meta.txt parameter; mv *-ultimate-meta.txt ultimate;
+mkdir final; mv * final
+
 # show component init() stats
+# under ultimate
+cat * | grep -v 'OtherComponent' | awk '{print $1}' | sort | uniq -c | sort -n -k 1
+# under component
+grep -rn ' init,' . | awk '{print $2}' | sort | uniq -c | sort -n -r -k1 | awk '{print $1" "$2}'
+
 for proj in mapreduce hadoop-tools yarn hdfs hbase; do echo "proj: $proj"; grep -rn ' init,' $proj/final/component/ | awk '{print $2}' | sort | uniq -c | sort -n -r -k1 | awk '{print $1" "$2}'; echo ''; done
 
 # get all get-parameter table
@@ -9,14 +19,20 @@ for dir in $(find . -name parameter); do for i in $dir/*; do cat $i | awk '{prin
 # get 5-xml get-parameter
 IFS=$'\n'; for line in $(cat all_get_parameter.txt); do para=$(echo $line | awk '{print $2}'); if [ "$(grep ^"$para"$ all_xml_parameters.txt)" != "" ]; then echo "$line"; fi; done 
 
-# test num for each parameter
-for i in *; do echo "$i $(cat $i | wc -l)"; done | sort -n -k2 -r
+# exclude other component
+for dir in $(find . -name ultimate); do for i in $dir/*; do cat $i | grep -v 'OtherComponent'; done; done | awk '{print $1}' | sort -u > all_not_other_parameter.txt
 
-# test num for each component
-cat * | awk '{print $4}' | sort  | uniq -c | sort -n -k1 -r
+comm -12 all_not_other_parameter.txt all_xml_parameters.txt  > all_not_other_parameter_xml.txt
+
+IFS=$'\n'; for line in $(cat all_get_parameter.txt); do para=$(echo $line | awk '{print $2}'); if [ "$(grep ^"$para"$ all_not_other_parameter_xml.txt)" != "" ]; then echo "$line"; fi; done > all_get_parameter_xml_not_other.txt
 
 # generate testing tuples
 pids=(); for p in $(cat ./paras_this_round.txt); do ./generate_ff.sh $p > testing_tuples_this_round/"$p".txt & pids+=($!); done; for id in ${pids[@]}; do wait $id; echo "$id done"; done
+
+# test num for each parameter
+for i in *; do echo "$i $(cat $i | wc -l)"; done | sort -n -k2 -r
+# test num for each component
+cat * | awk '{print $4}' | sort  | uniq -c | sort -n -k1 -r
 
 # num of tested parameters
 find para_value_list/ -name '*.txt' | while read line; do cat $line; done | awk '{print $1}' | sort -u | wc -l
