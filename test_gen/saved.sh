@@ -1,10 +1,5 @@
 #!/bin/bash
 
-# structure final
-for i in $(seq 0 15); do tar zxvf $i.tar.gz ; done; rm *.tar.gz
-mkdir component; mkdir parameter; mkdir ultimate; mv *-component-meta.txt component; mv *-parameter-meta.txt parameter; mv *-ultimate-meta.txt ultimate;
-mkdir final; mv * final
-
 # show component init() stats
 # under ultimate
 cat * | grep -v 'OtherComponent' | awk '{print $1}' | sort | uniq -c | sort -n -k 1

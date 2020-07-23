@@ -78,6 +78,7 @@ do
 	 	else
 	            echo "$parameter"" ""$the_proj"" ""$the_test"" ""$the_component"" -1 ""$v_p"
 	            echo "$parameter"" ""$the_proj"" ""$the_test"" ""$the_component"" -2 ""$v_p"
+	            echo "$parameter"" ""$the_proj"" ""$the_test"" ""$the_component"" -3 ""$v_p"
 		fi
 	        #for the_init in $(seq 1 $the_inits)
 	  	#do
