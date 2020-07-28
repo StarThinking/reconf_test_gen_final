@@ -10,3 +10,6 @@ for i in *; do p_and_c="$(~/vm_images/the_final/result/extract_utility.sh $i 'pa
 
 # generate para hypo test tuples
 hypo_repeat=20; parallel=10; for i in $(seq 1 $parallel); do echo "$(./extract_utility.sh getInt/no_need_hypo/dfs.datanode.directoryscan.interval%hdfs\:DataNode/dfs.datanode.directoryscan.interval%org.apache.hadoop.hdfs.TestReplication#testReplicationWhenBlockCorruption_-1368869618_hypothesis_2020-06-20-12-54-37.txt_3 tuple) $hypo_repeat"; done
+
+# find msx debug .java
+grep -rn 'msx-debug' * | grep .java | awk -F '.java:' '{print $1".java"}' | sort -u
