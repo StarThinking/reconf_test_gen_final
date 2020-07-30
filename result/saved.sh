@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # find white list
-cf=0.99999; for hlog in *_hypothesis_*; do ~/parameter_test_controller/hypo_analysis.sh $hlog $cf 0; done | while read line; do ~/vm_images/the_final/result/extract_utility.sh $line para_and_comp; done
+#cf=0.99999; for hlog in *_hypothesis_*; do ~/parameter_test_controller/hypo_analysis.sh $hlog $cf 0; done | while read line; do ~/vm_images/the_final/result/extract_utility.sh $line para_and_comp; done
 
 mkdir no_need_hypo/; cf=0.99999; for hlog in *_hypothesis_*; do ~/parameter_test_controller/hypo_analysis.sh $hlog $cf 0; done | while read line; do mv $line no_need_hypo/; done
 
