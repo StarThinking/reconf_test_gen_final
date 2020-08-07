@@ -6,7 +6,8 @@ cat * | grep -v 'OtherComponent' | awk '{print $1}' | sort | uniq -c | sort -n -
 # under component
 grep -rn ' init,' . | awk '{print $2}' | sort | uniq -c | sort -n -r -k1 | awk '{print $1" "$2}'
 
-for proj in mapreduce hadoop-tools yarn hdfs hbase; do echo "proj: $proj"; grep -rn ' init,' $proj/final/component/ | awk '{print $2}' | sort | uniq -c | sort -n -r -k1 | awk '{print $1" "$2}'; echo ''; done
+# show component instances
+for proj in mapreduce; do echo "proj: $proj"; grep -rn 'registerMyComponent' $proj/final/component/ | awk '{print $5}' | awk -F '.' '{print $1}' | sort | uniq -c | sort -n -r -k1 | awk '{print $1" "$2}'; echo ''; done
 
 # get all get-parameter table
 for dir in $(find . -name parameter); do for i in $dir/*; do cat $i | awk '{print $5" "$3}'; done; done | sort -u > all_get_parameter.txt
