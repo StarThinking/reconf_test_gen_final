@@ -60,10 +60,10 @@ do
         
     	the_proj="$(echo $log | awk -F '/' '{print $1}')"
         the_test="$(echo $log | awk -F '/' '{print $4}' | awk -F '-ultimate-meta.txt' '{print $1}')"
-        component_inits=( $(cat $log | grep ^"$parameter " | awk '{print $2}' | sort -u | grep -v OtherComponent | awk -F '.' '{print $1}' | uniq -c | awk '{print $2" "$1}') )
+        component_inits=( $(cat $log | grep ^"$parameter " | awk '{print $2}' | sort -u | awk -F '.' '{print $1}' | uniq -c | awk '{print $2" "$1}') )
 	#echo ${component_inits[@]}	
     	# add the default value used for this component at this point and create value pairs	
-        value_used=( $(cat $log | grep ^"$parameter " | awk '{print $3}' | sort -u | grep -v OtherComponent | head -n 1) )       
+        value_used=( $(cat $log | grep ^"$parameter " | awk '{print $3}' | sort -u | head -n 1) )       
     	v_list[0]="$value_used"
     	v_pairs=( $(get_combo ${v_list[@]}) )
 	
