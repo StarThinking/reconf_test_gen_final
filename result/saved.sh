@@ -8,6 +8,8 @@ mkdir no_need_hypo/; cf=0.99999; for hlog in *_hypothesis_*; do ~/parameter_test
 # mkdir parameter%component
 for i in *; do p_and_c="$(~/vm_images/the_final/result/extract_utility.sh $i 'para')%$(~/vm_images/the_final/result/extract_utility.sh $i 'comp')"; if [ ! -d $p_and_c ]; then mkdir $p_and_c; fi; mv $i $p_and_c; done
 
+ls | awk -F '%' '{print $1}' | sort -u | while read line; do mkdir $line; mv "$line""%"* $line; done
+
 # generate para hypo test tuples
 hypo_repeat=20; parallel=10; for i in $(seq 1 $parallel); do echo "$(./extract_utility.sh getInt/no_need_hypo/dfs.datanode.directoryscan.interval%hdfs\:DataNode/dfs.datanode.directoryscan.interval%org.apache.hadoop.hdfs.TestReplication#testReplicationWhenBlockCorruption_-1368869618_hypothesis_2020-06-20-12-54-37.txt_3 tuple) $hypo_repeat"; done
 
