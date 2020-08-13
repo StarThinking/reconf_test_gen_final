@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# get*.txt
+find . -name parameter | while read line; do cat $line/*; done | grep ' getInt'$ | awk '{print $1}' | sort -u > getInt.txt
+comm -12 getInt.txt all_xml_parameters.txt > getInt_xml.txt
+
 # show component init() stats
 # under ultimate
 cat * | grep -v 'OtherComponent' | awk '{print $1}' | sort | uniq -c | sort -n -k 1
@@ -23,7 +27,7 @@ comm -12 all_not_other_parameter.txt all_xml_parameters.txt  > all_not_other_par
 IFS=$'\n'; for line in $(cat all_get_parameter.txt); do para=$(echo $line | awk '{print $2}'); if [ "$(grep ^"$para"$ all_not_other_parameter_xml.txt)" != "" ]; then echo "$line"; fi; done > all_get_parameter_xml_not_other.txt
 
 # generate testing tuples
-pids=(); for p in $(cat ./paras_this_round.txt); do ./generate_ff.sh $p > testing_tuples_this_round/"$p".txt & pids+=($!); done; for id in ${pids[@]}; do wait $id; echo "$id done"; done
+pids=(); for p in $(comm -23 get?_xml.txt get_tested.txt); do ./generate_ff.sh $p > testing_tuples_this_round/"$p".txt & pids+=($!); done; for id in ${pids[@]}; do wait $id; echo "$id done"; done
 
 # test num for each parameter
 for i in *; do echo "$i $(cat $i | wc -l)"; done | sort -n -k2 -r

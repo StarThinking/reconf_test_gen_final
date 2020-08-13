@@ -1,0 +1,42 @@
+Tuple Investigated:
+       org.apache.hadoop.hdfs.web.TestWebHdfsWithRestCsrfPreventionFilter#testCreate[0] 
+
+Conflict Parties: 
+	NameNodeHttpServer(NameNode) and WebHdfsFileSystem(Client Side)
+        Similar situation for DatanodeHttpServer(DataNode) and and WebHdfsFileSystem(Client Side)
+
+V Symmetricity:
+        Refer to 'Simple Explanation'.
+
+Error Message:
+	ThriftServer:
+failureMessage: Unexpected HTTP response: code=400 != 201, op=CREATE, message=Missing Required Header for CSRF Vulnerability Protection
+stackTrace: java.io.IOException: Unexpected HTTP response: code=400 != 201, op=CREATE, message=Missing Required Header for CSRF Vulnerability Protection
+        at org.apache.hadoop.hdfs.web.WebHdfsFileSystem.validateResponse(WebHdfsFileSystem.java:496)
+        at org.apache.hadoop.hdfs.web.WebHdfsFileSystem.access$200(WebHdfsFileSystem.java:135)
+        at org.apache.hadoop.hdfs.web.WebHdfsFileSystem$FsPathOutputStreamRunner$1.close(WebHdfsFileSystem.java:1017)
+        at org.apache.hadoop.fs.FileSystem.createNewFile(FileSystem.java:1363)
+        at org.apache.hadoop.hdfs.web.TestWebHdfsWithRestCsrfPreventionFilter.testCreate(TestWebHdfsWithRestCsrfPreventionFilter.java:128)
+Caused by: com.fasterxml.jackson.databind.exc.MismatchedInputException: No content to map due to end-of-input
+        at [Source: (sun.net.www.protocol.http.HttpURLConnection$HttpInputStream); line: 1, column: 0]
+        at com.fasterxml.jackson.databind.exc.MismatchedInputException.from(MismatchedInputException.java:59)
+        at com.fasterxml.jackson.databind.DeserializationContext.reportInputMismatch(DeserializationContext.java:1356)
+        at com.fasterxml.jackson.databind.ObjectReader._initForReading(ObjectReader.java:358)
+        at com.fasterxml.jackson.databind.ObjectReader._bindAndClose(ObjectReader.java:1596)
+        at com.fasterxml.jackson.databind.ObjectReader.readValue(ObjectReader.java:1188)
+        at org.apache.hadoop.hdfs.web.WebHdfsFileSystem.jsonParse(WebHdfsFileSystem.java:474)
+        at org.apache.hadoop.hdfs.web.WebHdfsFileSystem.validateResponse(WebHdfsFileSystem.java:492)
+        ... 41 more
+
+Simple Explanation:
+        Actually, the test itself is to test the effect of inconsistent configuration with different combinations.
+        
+        "Tests use of the cross-site-request forgery (CSRF) prevention filter with WebHDFS.  
+        This is a parameterized test that covers various combinations of
+        CSRF protection enabled or disabled at the NameNode, the DataNode and the
+        WebHDFS client.  If the server is configured with CSRF prevention, but the
+        client is not, then protected operations are expected to fail."
+
+Real Bug: Yes.
+
+Producible: Yes.
