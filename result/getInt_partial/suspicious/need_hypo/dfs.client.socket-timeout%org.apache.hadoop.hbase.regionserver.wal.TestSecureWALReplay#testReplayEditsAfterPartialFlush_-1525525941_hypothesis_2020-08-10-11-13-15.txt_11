@@ -1,0 +1,719 @@
+reconf_parameter: dfs.client.socket-timeout
+component: hdfs:DataNode
+v1: 60000
+v2: 600
+testProject: hbase
+unitTest: org.apache.hadoop.hbase.regionserver.wal.TestSecureWALReplay#testReplayEditsAfterPartialFlush
+reconfPoint: -2
+result: -1
+
+Test vvMode=v1v2
+tr.result is -1
+v1v2 test failed !!!
+reconf_parameter: dfs.client.socket-timeout
+component: hdfs:DataNode
+v1: 60000
+v2: 600
+testProject: hbase
+unitTest: org.apache.hadoop.hbase.regionserver.wal.TestSecureWALReplay#testReplayEditsAfterPartialFlush
+reconfPoint: -2
+result: -1
+failureMessage: region: testReplayEditsWrittenViaHRegion,,1597058058497.f2e9c08cdf705523d13b5454d03dfcd9.
+stackTrace: org.apache.hadoop.hbase.DroppedSnapshotException: region: testReplayEditsWrittenViaHRegion,,1597058058497.f2e9c08cdf705523d13b5454d03dfcd9.
+	at org.apache.hadoop.hbase.regionserver.HRegion.internalFlushCacheAndCommit(HRegion.java:2858)
+	at org.apache.hadoop.hbase.regionserver.HRegion.internalFlushcache(HRegion.java:2527)
+	at org.apache.hadoop.hbase.regionserver.HRegion.internalFlushcache(HRegion.java:2499)
+	at org.apache.hadoop.hbase.regionserver.HRegion.flushcache(HRegion.java:2389)
+	at org.apache.hadoop.hbase.regionserver.HRegion.flush(HRegion.java:2292)
+	at org.apache.hadoop.hbase.regionserver.wal.AbstractTestWALReplay.testReplayEditsAfterPartialFlush(AbstractTestWALReplay.java:612)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.rules.TestWatcher$1.evaluate(TestWatcher.java:55)
+	at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: org.apache.hadoop.hbase.regionserver.wal.DamagedWALException: Append sequenceId=35, requesting roll of WAL
+	at org.apache.hadoop.hbase.regionserver.wal.FSHLog$RingBufferEventHandler.append(FSHLog.java:1081)
+	at org.apache.hadoop.hbase.regionserver.wal.FSHLog$RingBufferEventHandler.onEvent(FSHLog.java:964)
+	at org.apache.hadoop.hbase.regionserver.wal.FSHLog$RingBufferEventHandler.onEvent(FSHLog.java:873)
+	at com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:129)
+	... 1 more
+Caused by: java.io.IOException: Failed to replace a bad datanode on the existing pipeline due to no more good datanodes being available to try. (Nodes: current=[DatanodeInfoWithStorage[127.0.0.1:40384,DS-e4c4fdb4-9cb6-4380-acb7-86052fc6f34a,DISK], DatanodeInfoWithStorage[127.0.0.1:46666,DS-af71d421-0616-4cf1-b44a-dd62ce38bc29,DISK]], original=[DatanodeInfoWithStorage[127.0.0.1:46666,DS-af71d421-0616-4cf1-b44a-dd62ce38bc29,DISK], DatanodeInfoWithStorage[127.0.0.1:40384,DS-e4c4fdb4-9cb6-4380-acb7-86052fc6f34a,DISK]]). The current failed datanode replacement policy is DEFAULT, and a client may configure this via 'dfs.client.block.write.replace-datanode-on-failure.policy' in its configuration.
+	at org.apache.hadoop.hdfs.DataStreamer.findNewDatanode(DataStreamer.java:1281)
+	at org.apache.hadoop.hdfs.DataStreamer.addDatanode2ExistingPipeline(DataStreamer.java:1353)
+	at org.apache.hadoop.hdfs.DataStreamer.handleDatanodeReplacement(DataStreamer.java:1568)
+	at org.apache.hadoop.hdfs.DataStreamer.setupPipelineForAppendOrRecovery(DataStreamer.java:1469)
+	at org.apache.hadoop.hdfs.DataStreamer.processDatanodeError(DataStreamer.java:1237)
+	at org.apache.hadoop.hdfs.DataStreamer.run(DataStreamer.java:657)
+
+
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is -1
+v1v2 test failed !!!
+reconf_parameter: dfs.client.socket-timeout
+component: hdfs:DataNode
+v1: 60000
+v2: 600
+testProject: hbase
+unitTest: org.apache.hadoop.hbase.regionserver.wal.TestSecureWALReplay#testReplayEditsAfterPartialFlush
+reconfPoint: -2
+result: -1
+failureMessage: region: testReplayEditsWrittenViaHRegion,,1597058251547.637c8924e5be45791d1168ff7e00cc68.
+stackTrace: org.apache.hadoop.hbase.DroppedSnapshotException: region: testReplayEditsWrittenViaHRegion,,1597058251547.637c8924e5be45791d1168ff7e00cc68.
+	at org.apache.hadoop.hbase.regionserver.HRegion.internalFlushCacheAndCommit(HRegion.java:2858)
+	at org.apache.hadoop.hbase.regionserver.HRegion.internalFlushcache(HRegion.java:2527)
+	at org.apache.hadoop.hbase.regionserver.HRegion.internalFlushcache(HRegion.java:2499)
+	at org.apache.hadoop.hbase.regionserver.HRegion.flushcache(HRegion.java:2389)
+	at org.apache.hadoop.hbase.regionserver.HRegion.flush(HRegion.java:2292)
+	at org.apache.hadoop.hbase.regionserver.wal.AbstractTestWALReplay.testReplayEditsAfterPartialFlush(AbstractTestWALReplay.java:612)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.rules.TestWatcher$1.evaluate(TestWatcher.java:55)
+	at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: org.apache.hadoop.hbase.regionserver.wal.DamagedWALException: Append sequenceId=35, requesting roll of WAL
+	at org.apache.hadoop.hbase.regionserver.wal.FSHLog$RingBufferEventHandler.append(FSHLog.java:1081)
+	at org.apache.hadoop.hbase.regionserver.wal.FSHLog$RingBufferEventHandler.onEvent(FSHLog.java:964)
+	at org.apache.hadoop.hbase.regionserver.wal.FSHLog$RingBufferEventHandler.onEvent(FSHLog.java:873)
+	at com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:129)
+	... 1 more
+Caused by: java.io.IOException: Failed to replace a bad datanode on the existing pipeline due to no more good datanodes being available to try. (Nodes: current=[DatanodeInfoWithStorage[127.0.0.1:34776,DS-412de726-ae46-49ab-bfd5-a15ee0596a38,DISK], DatanodeInfoWithStorage[127.0.0.1:45639,DS-8ce8fe3c-8e22-42e1-962d-f8a2f450d675,DISK]], original=[DatanodeInfoWithStorage[127.0.0.1:34776,DS-412de726-ae46-49ab-bfd5-a15ee0596a38,DISK], DatanodeInfoWithStorage[127.0.0.1:45639,DS-8ce8fe3c-8e22-42e1-962d-f8a2f450d675,DISK]]). The current failed datanode replacement policy is DEFAULT, and a client may configure this via 'dfs.client.block.write.replace-datanode-on-failure.policy' in its configuration.
+	at org.apache.hadoop.hdfs.DataStreamer.findNewDatanode(DataStreamer.java:1281)
+	at org.apache.hadoop.hdfs.DataStreamer.addDatanode2ExistingPipeline(DataStreamer.java:1353)
+	at org.apache.hadoop.hdfs.DataStreamer.handleDatanodeReplacement(DataStreamer.java:1568)
+	at org.apache.hadoop.hdfs.DataStreamer.setupPipelineForAppendOrRecovery(DataStreamer.java:1469)
+	at org.apache.hadoop.hdfs.DataStreamer.processDatanodeError(DataStreamer.java:1237)
+	at org.apache.hadoop.hdfs.DataStreamer.run(DataStreamer.java:657)
+
+
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is -1
+v1v2 test failed !!!
+reconf_parameter: dfs.client.socket-timeout
+component: hdfs:DataNode
+v1: 60000
+v2: 600
+testProject: hbase
+unitTest: org.apache.hadoop.hbase.regionserver.wal.TestSecureWALReplay#testReplayEditsAfterPartialFlush
+reconfPoint: -2
+result: -1
+failureMessage: region: testReplayEditsWrittenViaHRegion,,1597058431217.bb72de045c1175fd9c4580658765a547.
+stackTrace: org.apache.hadoop.hbase.DroppedSnapshotException: region: testReplayEditsWrittenViaHRegion,,1597058431217.bb72de045c1175fd9c4580658765a547.
+	at org.apache.hadoop.hbase.regionserver.HRegion.internalFlushCacheAndCommit(HRegion.java:2858)
+	at org.apache.hadoop.hbase.regionserver.HRegion.internalFlushcache(HRegion.java:2527)
+	at org.apache.hadoop.hbase.regionserver.HRegion.internalFlushcache(HRegion.java:2499)
+	at org.apache.hadoop.hbase.regionserver.HRegion.flushcache(HRegion.java:2389)
+	at org.apache.hadoop.hbase.regionserver.HRegion.flush(HRegion.java:2292)
+	at org.apache.hadoop.hbase.regionserver.wal.AbstractTestWALReplay.testReplayEditsAfterPartialFlush(AbstractTestWALReplay.java:612)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.rules.TestWatcher$1.evaluate(TestWatcher.java:55)
+	at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: org.apache.hadoop.hbase.regionserver.wal.DamagedWALException: Append sequenceId=35, requesting roll of WAL
+	at org.apache.hadoop.hbase.regionserver.wal.FSHLog$RingBufferEventHandler.append(FSHLog.java:1081)
+	at org.apache.hadoop.hbase.regionserver.wal.FSHLog$RingBufferEventHandler.onEvent(FSHLog.java:964)
+	at org.apache.hadoop.hbase.regionserver.wal.FSHLog$RingBufferEventHandler.onEvent(FSHLog.java:873)
+	at com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:129)
+	... 1 more
+Caused by: java.io.IOException: Failed to replace a bad datanode on the existing pipeline due to no more good datanodes being available to try. (Nodes: current=[DatanodeInfoWithStorage[127.0.0.1:44147,DS-d196820d-2668-4a34-aa0e-c42f2b54e2d3,DISK], DatanodeInfoWithStorage[127.0.0.1:38978,DS-f11e2252-3514-4b46-a8bc-af2ba91ebae0,DISK]], original=[DatanodeInfoWithStorage[127.0.0.1:38978,DS-f11e2252-3514-4b46-a8bc-af2ba91ebae0,DISK], DatanodeInfoWithStorage[127.0.0.1:44147,DS-d196820d-2668-4a34-aa0e-c42f2b54e2d3,DISK]]). The current failed datanode replacement policy is DEFAULT, and a client may configure this via 'dfs.client.block.write.replace-datanode-on-failure.policy' in its configuration.
+	at org.apache.hadoop.hdfs.DataStreamer.findNewDatanode(DataStreamer.java:1281)
+	at org.apache.hadoop.hdfs.DataStreamer.addDatanode2ExistingPipeline(DataStreamer.java:1353)
+	at org.apache.hadoop.hdfs.DataStreamer.handleDatanodeReplacement(DataStreamer.java:1568)
+	at org.apache.hadoop.hdfs.DataStreamer.setupPipelineForAppendOrRecovery(DataStreamer.java:1469)
+	at org.apache.hadoop.hdfs.DataStreamer.processDatanodeError(DataStreamer.java:1237)
+	at org.apache.hadoop.hdfs.DataStreamer.run(DataStreamer.java:657)
+
+
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is -1
+v1v2 test failed !!!
+reconf_parameter: dfs.client.socket-timeout
+component: hdfs:DataNode
+v1: 60000
+v2: 600
+testProject: hbase
+unitTest: org.apache.hadoop.hbase.regionserver.wal.TestSecureWALReplay#testReplayEditsAfterPartialFlush
+reconfPoint: -2
+result: -1
+failureMessage: region: testReplayEditsWrittenViaHRegion,,1597058621827.dc6a593cd13111f4170b06d4e0eff951.
+stackTrace: org.apache.hadoop.hbase.DroppedSnapshotException: region: testReplayEditsWrittenViaHRegion,,1597058621827.dc6a593cd13111f4170b06d4e0eff951.
+	at org.apache.hadoop.hbase.regionserver.HRegion.internalFlushCacheAndCommit(HRegion.java:2858)
+	at org.apache.hadoop.hbase.regionserver.HRegion.internalFlushcache(HRegion.java:2527)
+	at org.apache.hadoop.hbase.regionserver.HRegion.internalFlushcache(HRegion.java:2499)
+	at org.apache.hadoop.hbase.regionserver.HRegion.flushcache(HRegion.java:2389)
+	at org.apache.hadoop.hbase.regionserver.HRegion.flush(HRegion.java:2292)
+	at org.apache.hadoop.hbase.regionserver.wal.AbstractTestWALReplay.testReplayEditsAfterPartialFlush(AbstractTestWALReplay.java:612)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.rules.TestWatcher$1.evaluate(TestWatcher.java:55)
+	at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: org.apache.hadoop.hbase.regionserver.wal.DamagedWALException: Append sequenceId=35, requesting roll of WAL
+	at org.apache.hadoop.hbase.regionserver.wal.FSHLog$RingBufferEventHandler.append(FSHLog.java:1081)
+	at org.apache.hadoop.hbase.regionserver.wal.FSHLog$RingBufferEventHandler.onEvent(FSHLog.java:964)
+	at org.apache.hadoop.hbase.regionserver.wal.FSHLog$RingBufferEventHandler.onEvent(FSHLog.java:873)
+	at com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:129)
+	... 1 more
+Caused by: java.io.IOException: Failed to replace a bad datanode on the existing pipeline due to no more good datanodes being available to try. (Nodes: current=[DatanodeInfoWithStorage[127.0.0.1:46122,DS-6b649403-0307-4a46-93b7-b190ddb6734b,DISK], DatanodeInfoWithStorage[127.0.0.1:41827,DS-7c18e0b8-4f12-4580-9278-0627449b0a71,DISK]], original=[DatanodeInfoWithStorage[127.0.0.1:46122,DS-6b649403-0307-4a46-93b7-b190ddb6734b,DISK], DatanodeInfoWithStorage[127.0.0.1:41827,DS-7c18e0b8-4f12-4580-9278-0627449b0a71,DISK]]). The current failed datanode replacement policy is DEFAULT, and a client may configure this via 'dfs.client.block.write.replace-datanode-on-failure.policy' in its configuration.
+	at org.apache.hadoop.hdfs.DataStreamer.findNewDatanode(DataStreamer.java:1281)
+	at org.apache.hadoop.hdfs.DataStreamer.addDatanode2ExistingPipeline(DataStreamer.java:1353)
+	at org.apache.hadoop.hdfs.DataStreamer.handleDatanodeReplacement(DataStreamer.java:1568)
+	at org.apache.hadoop.hdfs.DataStreamer.setupPipelineForAppendOrRecovery(DataStreamer.java:1469)
+	at org.apache.hadoop.hdfs.DataStreamer.processDatanodeError(DataStreamer.java:1237)
+	at org.apache.hadoop.hdfs.DataStreamer.run(DataStreamer.java:657)
+
+
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is -1
+v1v2 test failed !!!
+reconf_parameter: dfs.client.socket-timeout
+component: hdfs:DataNode
+v1: 60000
+v2: 600
+testProject: hbase
+unitTest: org.apache.hadoop.hbase.regionserver.wal.TestSecureWALReplay#testReplayEditsAfterPartialFlush
+reconfPoint: -2
+result: -1
+failureMessage: region: testReplayEditsWrittenViaHRegion,,1597058812093.62a6d9985ae28b1784d8c87df026f757.
+stackTrace: org.apache.hadoop.hbase.DroppedSnapshotException: region: testReplayEditsWrittenViaHRegion,,1597058812093.62a6d9985ae28b1784d8c87df026f757.
+	at org.apache.hadoop.hbase.regionserver.HRegion.internalFlushCacheAndCommit(HRegion.java:2858)
+	at org.apache.hadoop.hbase.regionserver.HRegion.internalFlushcache(HRegion.java:2527)
+	at org.apache.hadoop.hbase.regionserver.HRegion.internalFlushcache(HRegion.java:2499)
+	at org.apache.hadoop.hbase.regionserver.HRegion.flushcache(HRegion.java:2389)
+	at org.apache.hadoop.hbase.regionserver.HRegion.flush(HRegion.java:2292)
+	at org.apache.hadoop.hbase.regionserver.wal.AbstractTestWALReplay.testReplayEditsAfterPartialFlush(AbstractTestWALReplay.java:612)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.rules.TestWatcher$1.evaluate(TestWatcher.java:55)
+	at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: org.apache.hadoop.hbase.regionserver.wal.DamagedWALException: Append sequenceId=35, requesting roll of WAL
+	at org.apache.hadoop.hbase.regionserver.wal.FSHLog$RingBufferEventHandler.append(FSHLog.java:1081)
+	at org.apache.hadoop.hbase.regionserver.wal.FSHLog$RingBufferEventHandler.onEvent(FSHLog.java:964)
+	at org.apache.hadoop.hbase.regionserver.wal.FSHLog$RingBufferEventHandler.onEvent(FSHLog.java:873)
+	at com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:129)
+	... 1 more
+Caused by: java.io.IOException: Failed to replace a bad datanode on the existing pipeline due to no more good datanodes being available to try. (Nodes: current=[DatanodeInfoWithStorage[127.0.0.1:33749,DS-0b876517-0f6d-47a5-8b79-752507f5f4ba,DISK], DatanodeInfoWithStorage[127.0.0.1:43910,DS-ab45b6f9-5a9b-4980-b2e4-9f24b17545aa,DISK]], original=[DatanodeInfoWithStorage[127.0.0.1:33749,DS-0b876517-0f6d-47a5-8b79-752507f5f4ba,DISK], DatanodeInfoWithStorage[127.0.0.1:43910,DS-ab45b6f9-5a9b-4980-b2e4-9f24b17545aa,DISK]]). The current failed datanode replacement policy is DEFAULT, and a client may configure this via 'dfs.client.block.write.replace-datanode-on-failure.policy' in its configuration.
+	at org.apache.hadoop.hdfs.DataStreamer.findNewDatanode(DataStreamer.java:1281)
+	at org.apache.hadoop.hdfs.DataStreamer.addDatanode2ExistingPipeline(DataStreamer.java:1353)
+	at org.apache.hadoop.hdfs.DataStreamer.handleDatanodeReplacement(DataStreamer.java:1568)
+	at org.apache.hadoop.hdfs.DataStreamer.setupPipelineForAppendOrRecovery(DataStreamer.java:1469)
+	at org.apache.hadoop.hdfs.DataStreamer.processDatanodeError(DataStreamer.java:1237)
+	at org.apache.hadoop.hdfs.DataStreamer.run(DataStreamer.java:657)
+
+
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is -1
+v1v2 test failed !!!
+reconf_parameter: dfs.client.socket-timeout
+component: hdfs:DataNode
+v1: 60000
+v2: 600
+testProject: hbase
+unitTest: org.apache.hadoop.hbase.regionserver.wal.TestSecureWALReplay#testReplayEditsAfterPartialFlush
+reconfPoint: -2
+result: -1
+failureMessage: region: testReplayEditsWrittenViaHRegion,,1597058994638.2c53b9b02056948e26f61f003e819075.
+stackTrace: org.apache.hadoop.hbase.DroppedSnapshotException: region: testReplayEditsWrittenViaHRegion,,1597058994638.2c53b9b02056948e26f61f003e819075.
+	at org.apache.hadoop.hbase.regionserver.HRegion.internalFlushCacheAndCommit(HRegion.java:2858)
+	at org.apache.hadoop.hbase.regionserver.HRegion.internalFlushcache(HRegion.java:2527)
+	at org.apache.hadoop.hbase.regionserver.HRegion.internalFlushcache(HRegion.java:2499)
+	at org.apache.hadoop.hbase.regionserver.HRegion.flushcache(HRegion.java:2389)
+	at org.apache.hadoop.hbase.regionserver.HRegion.flush(HRegion.java:2292)
+	at org.apache.hadoop.hbase.regionserver.wal.AbstractTestWALReplay.testReplayEditsAfterPartialFlush(AbstractTestWALReplay.java:612)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.rules.TestWatcher$1.evaluate(TestWatcher.java:55)
+	at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: org.apache.hadoop.hbase.regionserver.wal.DamagedWALException: Append sequenceId=35, requesting roll of WAL
+	at org.apache.hadoop.hbase.regionserver.wal.FSHLog$RingBufferEventHandler.append(FSHLog.java:1081)
+	at org.apache.hadoop.hbase.regionserver.wal.FSHLog$RingBufferEventHandler.onEvent(FSHLog.java:964)
+	at org.apache.hadoop.hbase.regionserver.wal.FSHLog$RingBufferEventHandler.onEvent(FSHLog.java:873)
+	at com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:129)
+	... 1 more
+Caused by: java.io.IOException: Failed to replace a bad datanode on the existing pipeline due to no more good datanodes being available to try. (Nodes: current=[DatanodeInfoWithStorage[127.0.0.1:38647,DS-4c3beee7-86b5-43fb-a1ae-46e0234fbefe,DISK], DatanodeInfoWithStorage[127.0.0.1:33096,DS-6b1d5d6e-dc64-4b4a-851a-6a18c2c8a481,DISK]], original=[DatanodeInfoWithStorage[127.0.0.1:38647,DS-4c3beee7-86b5-43fb-a1ae-46e0234fbefe,DISK], DatanodeInfoWithStorage[127.0.0.1:33096,DS-6b1d5d6e-dc64-4b4a-851a-6a18c2c8a481,DISK]]). The current failed datanode replacement policy is DEFAULT, and a client may configure this via 'dfs.client.block.write.replace-datanode-on-failure.policy' in its configuration.
+	at org.apache.hadoop.hdfs.DataStreamer.findNewDatanode(DataStreamer.java:1281)
+	at org.apache.hadoop.hdfs.DataStreamer.addDatanode2ExistingPipeline(DataStreamer.java:1353)
+	at org.apache.hadoop.hdfs.DataStreamer.handleDatanodeReplacement(DataStreamer.java:1568)
+	at org.apache.hadoop.hdfs.DataStreamer.setupPipelineForAppendOrRecovery(DataStreamer.java:1469)
+	at org.apache.hadoop.hdfs.DataStreamer.processDatanodeError(DataStreamer.java:1237)
+	at org.apache.hadoop.hdfs.DataStreamer.run(DataStreamer.java:657)
+
+
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is -1
+v1v2 test failed !!!
+reconf_parameter: dfs.client.socket-timeout
+component: hdfs:DataNode
+v1: 60000
+v2: 600
+testProject: hbase
+unitTest: org.apache.hadoop.hbase.regionserver.wal.TestSecureWALReplay#testReplayEditsAfterPartialFlush
+reconfPoint: -2
+result: -1
+failureMessage: region: testReplayEditsWrittenViaHRegion,,1597059730187.6603ef0b1331090697c0e6acf24444b7.
+stackTrace: org.apache.hadoop.hbase.DroppedSnapshotException: region: testReplayEditsWrittenViaHRegion,,1597059730187.6603ef0b1331090697c0e6acf24444b7.
+	at org.apache.hadoop.hbase.regionserver.HRegion.internalFlushCacheAndCommit(HRegion.java:2858)
+	at org.apache.hadoop.hbase.regionserver.HRegion.internalFlushcache(HRegion.java:2527)
+	at org.apache.hadoop.hbase.regionserver.HRegion.internalFlushcache(HRegion.java:2499)
+	at org.apache.hadoop.hbase.regionserver.HRegion.flushcache(HRegion.java:2389)
+	at org.apache.hadoop.hbase.regionserver.HRegion.flush(HRegion.java:2292)
+	at org.apache.hadoop.hbase.regionserver.wal.AbstractTestWALReplay.testReplayEditsAfterPartialFlush(AbstractTestWALReplay.java:612)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.rules.TestWatcher$1.evaluate(TestWatcher.java:55)
+	at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: org.apache.hadoop.hbase.regionserver.wal.DamagedWALException: Append sequenceId=35, requesting roll of WAL
+	at org.apache.hadoop.hbase.regionserver.wal.FSHLog$RingBufferEventHandler.append(FSHLog.java:1081)
+	at org.apache.hadoop.hbase.regionserver.wal.FSHLog$RingBufferEventHandler.onEvent(FSHLog.java:964)
+	at org.apache.hadoop.hbase.regionserver.wal.FSHLog$RingBufferEventHandler.onEvent(FSHLog.java:873)
+	at com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:129)
+	... 1 more
+Caused by: java.io.IOException: Failed to replace a bad datanode on the existing pipeline due to no more good datanodes being available to try. (Nodes: current=[DatanodeInfoWithStorage[127.0.0.1:35892,DS-bc8ead9e-ec7b-4c74-b25c-eb4a846b1753,DISK], DatanodeInfoWithStorage[127.0.0.1:33053,DS-5f578f34-b67c-4bb2-b854-a638b2df34be,DISK]], original=[DatanodeInfoWithStorage[127.0.0.1:35892,DS-bc8ead9e-ec7b-4c74-b25c-eb4a846b1753,DISK], DatanodeInfoWithStorage[127.0.0.1:33053,DS-5f578f34-b67c-4bb2-b854-a638b2df34be,DISK]]). The current failed datanode replacement policy is DEFAULT, and a client may configure this via 'dfs.client.block.write.replace-datanode-on-failure.policy' in its configuration.
+	at org.apache.hadoop.hdfs.DataStreamer.findNewDatanode(DataStreamer.java:1281)
+	at org.apache.hadoop.hdfs.DataStreamer.addDatanode2ExistingPipeline(DataStreamer.java:1353)
+	at org.apache.hadoop.hdfs.DataStreamer.handleDatanodeReplacement(DataStreamer.java:1568)
+	at org.apache.hadoop.hdfs.DataStreamer.setupPipelineForAppendOrRecovery(DataStreamer.java:1469)
+	at org.apache.hadoop.hdfs.DataStreamer.processDatanodeError(DataStreamer.java:1237)
+	at org.apache.hadoop.hdfs.DataStreamer.run(DataStreamer.java:657)
+
+
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is -1
+v1v2 test failed !!!
+reconf_parameter: dfs.client.socket-timeout
+component: hdfs:DataNode
+v1: 60000
+v2: 600
+testProject: hbase
+unitTest: org.apache.hadoop.hbase.regionserver.wal.TestSecureWALReplay#testReplayEditsAfterPartialFlush
+reconfPoint: -2
+result: -1
+failureMessage: region: testReplayEditsWrittenViaHRegion,,1597059915378.098cce85522672cdc5446c6e581cdd3c.
+stackTrace: org.apache.hadoop.hbase.DroppedSnapshotException: region: testReplayEditsWrittenViaHRegion,,1597059915378.098cce85522672cdc5446c6e581cdd3c.
+	at org.apache.hadoop.hbase.regionserver.HRegion.internalFlushCacheAndCommit(HRegion.java:2858)
+	at org.apache.hadoop.hbase.regionserver.HRegion.internalFlushcache(HRegion.java:2527)
+	at org.apache.hadoop.hbase.regionserver.HRegion.internalFlushcache(HRegion.java:2499)
+	at org.apache.hadoop.hbase.regionserver.HRegion.flushcache(HRegion.java:2389)
+	at org.apache.hadoop.hbase.regionserver.HRegion.flush(HRegion.java:2292)
+	at org.apache.hadoop.hbase.regionserver.wal.AbstractTestWALReplay.testReplayEditsAfterPartialFlush(AbstractTestWALReplay.java:612)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.rules.TestWatcher$1.evaluate(TestWatcher.java:55)
+	at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: org.apache.hadoop.hbase.regionserver.wal.DamagedWALException: Append sequenceId=35, requesting roll of WAL
+	at org.apache.hadoop.hbase.regionserver.wal.FSHLog$RingBufferEventHandler.append(FSHLog.java:1081)
+	at org.apache.hadoop.hbase.regionserver.wal.FSHLog$RingBufferEventHandler.onEvent(FSHLog.java:964)
+	at org.apache.hadoop.hbase.regionserver.wal.FSHLog$RingBufferEventHandler.onEvent(FSHLog.java:873)
+	at com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:129)
+	... 1 more
+Caused by: java.io.IOException: Failed to replace a bad datanode on the existing pipeline due to no more good datanodes being available to try. (Nodes: current=[DatanodeInfoWithStorage[127.0.0.1:37769,DS-4c82dbc2-5617-4942-9c5d-b29633a3489e,DISK], DatanodeInfoWithStorage[127.0.0.1:40776,DS-6250a028-5722-4c72-8a28-58ee0671eaf1,DISK]], original=[DatanodeInfoWithStorage[127.0.0.1:37769,DS-4c82dbc2-5617-4942-9c5d-b29633a3489e,DISK], DatanodeInfoWithStorage[127.0.0.1:40776,DS-6250a028-5722-4c72-8a28-58ee0671eaf1,DISK]]). The current failed datanode replacement policy is DEFAULT, and a client may configure this via 'dfs.client.block.write.replace-datanode-on-failure.policy' in its configuration.
+	at org.apache.hadoop.hdfs.DataStreamer.findNewDatanode(DataStreamer.java:1281)
+	at org.apache.hadoop.hdfs.DataStreamer.addDatanode2ExistingPipeline(DataStreamer.java:1353)
+	at org.apache.hadoop.hdfs.DataStreamer.handleDatanodeReplacement(DataStreamer.java:1568)
+	at org.apache.hadoop.hdfs.DataStreamer.setupPipelineForAppendOrRecovery(DataStreamer.java:1469)
+	at org.apache.hadoop.hdfs.DataStreamer.processDatanodeError(DataStreamer.java:1237)
+	at org.apache.hadoop.hdfs.DataStreamer.run(DataStreamer.java:657)
+
+
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is -1
+v1v2 test failed !!!
+reconf_parameter: dfs.client.socket-timeout
+component: hdfs:DataNode
+v1: 60000
+v2: 600
+testProject: hbase
+unitTest: org.apache.hadoop.hbase.regionserver.wal.TestSecureWALReplay#testReplayEditsAfterPartialFlush
+reconfPoint: -2
+result: -1
+failureMessage: region: testReplayEditsWrittenViaHRegion,,1597060315050.f9d5bbebc4937773d8bde336148d9746.
+stackTrace: org.apache.hadoop.hbase.DroppedSnapshotException: region: testReplayEditsWrittenViaHRegion,,1597060315050.f9d5bbebc4937773d8bde336148d9746.
+	at org.apache.hadoop.hbase.regionserver.HRegion.internalFlushCacheAndCommit(HRegion.java:2858)
+	at org.apache.hadoop.hbase.regionserver.HRegion.internalFlushcache(HRegion.java:2527)
+	at org.apache.hadoop.hbase.regionserver.HRegion.internalFlushcache(HRegion.java:2499)
+	at org.apache.hadoop.hbase.regionserver.HRegion.flushcache(HRegion.java:2389)
+	at org.apache.hadoop.hbase.regionserver.HRegion.flush(HRegion.java:2292)
+	at org.apache.hadoop.hbase.regionserver.wal.AbstractTestWALReplay.testReplayEditsAfterPartialFlush(AbstractTestWALReplay.java:612)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.rules.TestWatcher$1.evaluate(TestWatcher.java:55)
+	at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: org.apache.hadoop.hbase.regionserver.wal.DamagedWALException: Append sequenceId=35, requesting roll of WAL
+	at org.apache.hadoop.hbase.regionserver.wal.FSHLog$RingBufferEventHandler.append(FSHLog.java:1081)
+	at org.apache.hadoop.hbase.regionserver.wal.FSHLog$RingBufferEventHandler.onEvent(FSHLog.java:964)
+	at org.apache.hadoop.hbase.regionserver.wal.FSHLog$RingBufferEventHandler.onEvent(FSHLog.java:873)
+	at com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:129)
+	... 1 more
+Caused by: java.io.IOException: Failed to replace a bad datanode on the existing pipeline due to no more good datanodes being available to try. (Nodes: current=[DatanodeInfoWithStorage[127.0.0.1:43756,DS-ae38b766-66d8-44dc-b7a3-c1de1faeb294,DISK], DatanodeInfoWithStorage[127.0.0.1:32794,DS-85a68f38-dab9-4060-aade-246c90c4a1d2,DISK]], original=[DatanodeInfoWithStorage[127.0.0.1:43756,DS-ae38b766-66d8-44dc-b7a3-c1de1faeb294,DISK], DatanodeInfoWithStorage[127.0.0.1:32794,DS-85a68f38-dab9-4060-aade-246c90c4a1d2,DISK]]). The current failed datanode replacement policy is DEFAULT, and a client may configure this via 'dfs.client.block.write.replace-datanode-on-failure.policy' in its configuration.
+	at org.apache.hadoop.hdfs.DataStreamer.findNewDatanode(DataStreamer.java:1281)
+	at org.apache.hadoop.hdfs.DataStreamer.addDatanode2ExistingPipeline(DataStreamer.java:1353)
+	at org.apache.hadoop.hdfs.DataStreamer.handleDatanodeReplacement(DataStreamer.java:1568)
+	at org.apache.hadoop.hdfs.DataStreamer.setupPipelineForAppendOrRecovery(DataStreamer.java:1469)
+	at org.apache.hadoop.hdfs.DataStreamer.processDatanodeError(DataStreamer.java:1237)
+	at org.apache.hadoop.hdfs.DataStreamer.run(DataStreamer.java:657)
+
+
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is -1
+v1v2 test failed !!!
+reconf_parameter: dfs.client.socket-timeout
+component: hdfs:DataNode
+v1: 60000
+v2: 600
+testProject: hbase
+unitTest: org.apache.hadoop.hbase.regionserver.wal.TestSecureWALReplay#testReplayEditsAfterPartialFlush
+reconfPoint: -2
+result: -1
+failureMessage: region: testReplayEditsWrittenViaHRegion,,1597060514379.348618be6b33c67a9f431d31cdb0709a.
+stackTrace: org.apache.hadoop.hbase.DroppedSnapshotException: region: testReplayEditsWrittenViaHRegion,,1597060514379.348618be6b33c67a9f431d31cdb0709a.
+	at org.apache.hadoop.hbase.regionserver.HRegion.internalFlushCacheAndCommit(HRegion.java:2858)
+	at org.apache.hadoop.hbase.regionserver.HRegion.internalFlushcache(HRegion.java:2527)
+	at org.apache.hadoop.hbase.regionserver.HRegion.internalFlushcache(HRegion.java:2499)
+	at org.apache.hadoop.hbase.regionserver.HRegion.flushcache(HRegion.java:2389)
+	at org.apache.hadoop.hbase.regionserver.HRegion.flush(HRegion.java:2292)
+	at org.apache.hadoop.hbase.regionserver.wal.AbstractTestWALReplay.testReplayEditsAfterPartialFlush(AbstractTestWALReplay.java:612)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.rules.TestWatcher$1.evaluate(TestWatcher.java:55)
+	at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: org.apache.hadoop.hbase.regionserver.wal.DamagedWALException: Append sequenceId=35, requesting roll of WAL
+	at org.apache.hadoop.hbase.regionserver.wal.FSHLog$RingBufferEventHandler.append(FSHLog.java:1081)
+	at org.apache.hadoop.hbase.regionserver.wal.FSHLog$RingBufferEventHandler.onEvent(FSHLog.java:964)
+	at org.apache.hadoop.hbase.regionserver.wal.FSHLog$RingBufferEventHandler.onEvent(FSHLog.java:873)
+	at com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:129)
+	... 1 more
+Caused by: java.io.IOException: Failed to replace a bad datanode on the existing pipeline due to no more good datanodes being available to try. (Nodes: current=[DatanodeInfoWithStorage[127.0.0.1:40569,DS-be907984-e0fa-4fe8-928a-2e19b0bc50d5,DISK], DatanodeInfoWithStorage[127.0.0.1:39270,DS-966a2fae-2379-4ec8-9cba-068161790926,DISK]], original=[DatanodeInfoWithStorage[127.0.0.1:40569,DS-be907984-e0fa-4fe8-928a-2e19b0bc50d5,DISK], DatanodeInfoWithStorage[127.0.0.1:39270,DS-966a2fae-2379-4ec8-9cba-068161790926,DISK]]). The current failed datanode replacement policy is DEFAULT, and a client may configure this via 'dfs.client.block.write.replace-datanode-on-failure.policy' in its configuration.
+	at org.apache.hadoop.hdfs.DataStreamer.findNewDatanode(DataStreamer.java:1281)
+	at org.apache.hadoop.hdfs.DataStreamer.addDatanode2ExistingPipeline(DataStreamer.java:1353)
+	at org.apache.hadoop.hdfs.DataStreamer.handleDatanodeReplacement(DataStreamer.java:1568)
+	at org.apache.hadoop.hdfs.DataStreamer.setupPipelineForAppendOrRecovery(DataStreamer.java:1469)
+	at org.apache.hadoop.hdfs.DataStreamer.processDatanodeError(DataStreamer.java:1237)
+	at org.apache.hadoop.hdfs.DataStreamer.run(DataStreamer.java:657)
+
+
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+early stop after 10 is satisfied
+v1v2 failed with probability 10 out of 14
+v1v1v2v2 failed with probability 0 out of 14
+result: might be true error
+Total execution time in seconds : 2664

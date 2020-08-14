@@ -63,6 +63,7 @@ do
         component_inits=( $(cat $log | grep ^"$parameter " | awk '{print $2}' | sort -u | awk -F '.' '{print $1}' | uniq -c | awk '{print $2" "$1}') )
 	#echo ${component_inits[@]}	
     	# add the default value used for this component at this point and create value pairs	
+	# WARN!!! It might be a problem that we didn't filter out null value in configuration get printing.
         value_used=( $(cat $log | grep ^"$parameter " | awk '{print $3}' | sort -u | head -n 1) )       
     	v_list[0]="$value_used"
     	v_pairs=( $(get_combo ${v_list[@]}) )
