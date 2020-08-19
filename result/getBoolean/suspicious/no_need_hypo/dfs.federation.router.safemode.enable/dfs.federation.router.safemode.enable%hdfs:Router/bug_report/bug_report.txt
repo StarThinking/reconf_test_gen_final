@@ -1,0 +1,48 @@
+Tuple Investigated:
+	org.apache.hadoop.hdfs.server.federation.router.TestRouter#testRouterService
+
+Conflict Parties:
+	Test's global configuration routerConfig (hdfs:Router.1's root conf) and hdfs:Router.2's configuration.
+
+V Symmetricity:
+	vv_point: -1
+	v1: false, v2: true
+
+Error Message:
+[ERROR] testRouterService(org.apache.hadoop.hdfs.server.federation.router.TestRouter)  Time elapsed: 0.27 s  <<< FAILURE!
+java.lang.AssertionError: expected:<SAFEMODE> but was:<INITIALIZING>
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.junit.Assert.failNotEquals(Assert.java:743)
+	at org.junit.Assert.assertEquals(Assert.java:118)
+	at org.junit.Assert.assertEquals(Assert.java:144)
+	at org.apache.hadoop.hdfs.server.federation.router.TestRouter.testRouterStartup(TestRouter.java:93)
+	at org.apache.hadoop.hdfs.server.federation.router.TestRouter.testRouterService(TestRouter.java:120)
+
+Simple Explanation:
+	In TestRouter:testRouterStartup(), 'router.init(routerConfig)' will initialize a new Router who invoke ConfController's API for component instance registeration.
+	ConfController manages to clone a new conf for the second Router instance, internally.
+	However, the assertion check from line 90-96 depends on an external global configuration 'routerConfig' throughout this test.
+	Because vv_point is set to '-1', hdfs:Router.1 (registered with routerConfig) is supposed to return v2 when routerConfig is being accessed.
+	Finally, routerConfig's SAFEMODE_ENABLE is true, but hdfs:Router.2's SAFEMODE_ENABLE is false (vv_point is -1, using v1 for the 2nd Router instance).
+
+	Even though we cut off the connection between global conf and Router.1  by cloning and returning new conf anyway, this issue won't disappear.
+	Because an external conf is used for testing (assuming the current Router is initialized based on it),
+	but the Router-internal conf is controlled by whichV. There is still a conflict.
+	
+	I think this is a shortness of our current component registeration mechanism, which still allows external conf to be used for testing the internal system.
+
+	test log:
+msx-confcontroller reconf_vvmode=v1v2, reconf_parameter=dfs.federation.router.safemode.enable, reconf_component=hdfs:Router, reconf_v1=false, reconf_v2=true, reconf_point=-1
+msx-confcontroller originConf 963269035 is unique for registering as hdfs:Router
+msx-confcontroller registerMyComponent for comoponent hdfs:Router.1 uniqueConf 963269035 originConf 963269035
+msx-confcontroller return v2 for hdfs:Router.1
+msx-confcontroller return v2 for hdfs:Router.1
+msx-confcontroller return v2 for hdfs:Router.1
+msx-debug testRouterStartup admin done
+msx-confcontroller INFO: conf 963269035 is shared with component hdfs:Router.1, let clone and return new conf 630074945
+msx-confcontroller registerMyComponent for comoponent hdfs:Router.2 uniqueConf 630074945 originConf 963269035
+msx-confcontroller return v2 for hdfs:Router.1
+	
+Real Bug: No.
+
+Producible:
