@@ -1,0 +1,2460 @@
+reconf_parameter: dfs.namenode.stale.datanode.interval
+component: hdfs:NameNode
+v1: 300
+v2: 30000
+testProject: hbase
+unitTest: org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages#testHeartbeatWithSparseCellFilter
+reconfPoint: 1
+result: -1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is -1
+v1v2 test failed !!!
+reconf_parameter: dfs.namenode.stale.datanode.interval
+component: hdfs:NameNode
+v1: 300
+v2: 30000
+testProject: hbase
+unitTest: org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages#testHeartbeatWithSparseCellFilter
+reconfPoint: 1
+result: -1
+failureMessage: Heartbeat messages are enabled, exceptions should NOT be thrown. Exception trace:org.apache.hadoop.hbase.client.RetriesExhaustedException: Failed after attempts=16, exceptions:
+2020-08-16T16:14:57.211Z, java.net.SocketTimeoutException: callTimeout=1000, callDuration=1189: Call to df7b0ce315e4/172.17.0.18:32913 failed on local exception: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call[id=201,methodName=Scan], waitTime=1171, rpcTimeout=1000 row '' on table 'testScannerHeartbeatMessagesTable' at region=testScannerHeartbeatMessagesTable,,1597594421934.f4c8941040c22b8f350a8de0e75d9471., hostname=df7b0ce315e4,32913,1597594398564, seqNum=2
+
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerWithReadReplicas.throwEnrichedException(RpcRetryingCallerWithReadReplicas.java:299)
+	at org.apache.hadoop.hbase.client.ScannerCallableWithReplicas.call(ScannerCallableWithReplicas.java:251)
+	at org.apache.hadoop.hbase.client.ScannerCallableWithReplicas.call(ScannerCallableWithReplicas.java:58)
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithoutRetries(RpcRetryingCallerImpl.java:192)
+	at org.apache.hadoop.hbase.client.ClientScanner.call(ClientScanner.java:267)
+	at org.apache.hadoop.hbase.client.ClientScanner.loadCache(ClientScanner.java:435)
+	at org.apache.hadoop.hbase.client.ClientScanner.nextWithSyncCache(ClientScanner.java:310)
+	at org.apache.hadoop.hbase.client.ClientScanner.next(ClientScanner.java:595)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages$3.call(TestScannerHeartbeatMessages.java:324)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages$3.call(TestScannerHeartbeatMessages.java:302)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testImportanceOfHeartbeats(TestScannerHeartbeatMessages.java:197)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testHeartbeatWithSparseCellFilter(TestScannerHeartbeatMessages.java:302)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.net.SocketTimeoutException: callTimeout=1000, callDuration=1189: Call to df7b0ce315e4/172.17.0.18:32913 failed on local exception: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call[id=201,methodName=Scan], waitTime=1171, rpcTimeout=1000 row '' on table 'testScannerHeartbeatMessagesTable' at region=testScannerHeartbeatMessagesTable,,1597594421934.f4c8941040c22b8f350a8de0e75d9471., hostname=df7b0ce315e4,32913,1597594398564, seqNum=2
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithRetries(RpcRetryingCallerImpl.java:159)
+	at org.apache.hadoop.hbase.client.ResultBoundedCompletionService$QueueingFuture.run(ResultBoundedCompletionService.java:80)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	... 1 more
+Caused by: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call to df7b0ce315e4/172.17.0.18:32913 failed on local exception: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call[id=201,methodName=Scan], waitTime=1171, rpcTimeout=1000
+	at org.apache.hadoop.hbase.ipc.IPCUtil.wrapException(IPCUtil.java:204)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.onCallFinished(AbstractRpcClient.java:392)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.access$100(AbstractRpcClient.java:97)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:423)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:419)
+	at org.apache.hadoop.hbase.ipc.Call.setTimeout(Call.java:110)
+	at org.apache.hadoop.hbase.ipc.RpcConnection$1.run(RpcConnection.java:199)
+	at org.apache.hbase.thirdparty.io.netty.util.HashedWheelTimer$HashedWheelTimeout.expire(HashedWheelTimer.java:682)
+	at org.apache.hbase.thirdparty.io.netty.util.HashedWheelTimer$HashedWheelBucket.expireTimeouts(HashedWheelTimer.java:757)
+	at org.apache.hbase.thirdparty.io.netty.util.HashedWheelTimer$Worker.run(HashedWheelTimer.java:485)
+	... 1 more
+Caused by: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call[id=201,methodName=Scan], waitTime=1171, rpcTimeout=1000
+	at org.apache.hadoop.hbase.ipc.RpcConnection$1.run(RpcConnection.java:200)
+	... 4 more
+
+stackTrace: java.lang.AssertionError: Heartbeat messages are enabled, exceptions should NOT be thrown. Exception trace:org.apache.hadoop.hbase.client.RetriesExhaustedException: Failed after attempts=16, exceptions:
+2020-08-16T16:14:57.211Z, java.net.SocketTimeoutException: callTimeout=1000, callDuration=1189: Call to df7b0ce315e4/172.17.0.18:32913 failed on local exception: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call[id=201,methodName=Scan], waitTime=1171, rpcTimeout=1000 row '' on table 'testScannerHeartbeatMessagesTable' at region=testScannerHeartbeatMessagesTable,,1597594421934.f4c8941040c22b8f350a8de0e75d9471., hostname=df7b0ce315e4,32913,1597594398564, seqNum=2
+
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerWithReadReplicas.throwEnrichedException(RpcRetryingCallerWithReadReplicas.java:299)
+	at org.apache.hadoop.hbase.client.ScannerCallableWithReplicas.call(ScannerCallableWithReplicas.java:251)
+	at org.apache.hadoop.hbase.client.ScannerCallableWithReplicas.call(ScannerCallableWithReplicas.java:58)
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithoutRetries(RpcRetryingCallerImpl.java:192)
+	at org.apache.hadoop.hbase.client.ClientScanner.call(ClientScanner.java:267)
+	at org.apache.hadoop.hbase.client.ClientScanner.loadCache(ClientScanner.java:435)
+	at org.apache.hadoop.hbase.client.ClientScanner.nextWithSyncCache(ClientScanner.java:310)
+	at org.apache.hadoop.hbase.client.ClientScanner.next(ClientScanner.java:595)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages$3.call(TestScannerHeartbeatMessages.java:324)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages$3.call(TestScannerHeartbeatMessages.java:302)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testImportanceOfHeartbeats(TestScannerHeartbeatMessages.java:197)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testHeartbeatWithSparseCellFilter(TestScannerHeartbeatMessages.java:302)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.net.SocketTimeoutException: callTimeout=1000, callDuration=1189: Call to df7b0ce315e4/172.17.0.18:32913 failed on local exception: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call[id=201,methodName=Scan], waitTime=1171, rpcTimeout=1000 row '' on table 'testScannerHeartbeatMessagesTable' at region=testScannerHeartbeatMessagesTable,,1597594421934.f4c8941040c22b8f350a8de0e75d9471., hostname=df7b0ce315e4,32913,1597594398564, seqNum=2
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithRetries(RpcRetryingCallerImpl.java:159)
+	at org.apache.hadoop.hbase.client.ResultBoundedCompletionService$QueueingFuture.run(ResultBoundedCompletionService.java:80)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	... 1 more
+Caused by: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call to df7b0ce315e4/172.17.0.18:32913 failed on local exception: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call[id=201,methodName=Scan], waitTime=1171, rpcTimeout=1000
+	at org.apache.hadoop.hbase.ipc.IPCUtil.wrapException(IPCUtil.java:204)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.onCallFinished(AbstractRpcClient.java:392)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.access$100(AbstractRpcClient.java:97)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:423)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:419)
+	at org.apache.hadoop.hbase.ipc.Call.setTimeout(Call.java:110)
+	at org.apache.hadoop.hbase.ipc.RpcConnection$1.run(RpcConnection.java:199)
+	at org.apache.hbase.thirdparty.io.netty.util.HashedWheelTimer$HashedWheelTimeout.expire(HashedWheelTimer.java:682)
+	at org.apache.hbase.thirdparty.io.netty.util.HashedWheelTimer$HashedWheelBucket.expireTimeouts(HashedWheelTimer.java:757)
+	at org.apache.hbase.thirdparty.io.netty.util.HashedWheelTimer$Worker.run(HashedWheelTimer.java:485)
+	... 1 more
+Caused by: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call[id=201,methodName=Scan], waitTime=1171, rpcTimeout=1000
+	at org.apache.hadoop.hbase.ipc.RpcConnection$1.run(RpcConnection.java:200)
+	... 4 more
+
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testImportanceOfHeartbeats(TestScannerHeartbeatMessages.java:199)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testHeartbeatWithSparseCellFilter(TestScannerHeartbeatMessages.java:302)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.lang.Thread.run(Thread.java:748)
+
+
+
+Test vvMode=v1v1
+tr.result is -1
+
+Test vvMode=v2v2
+tr.result is 1
+v1v1 or v2v2 test failed !!!
+reconf_parameter: dfs.namenode.stale.datanode.interval
+component: hdfs:NameNode
+v1: 300
+v2: 30000
+testProject: hbase
+unitTest: org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages#testHeartbeatWithSparseCellFilter
+reconfPoint: 1
+result: -1
+failureMessage: Heartbeat messages are enabled, exceptions should NOT be thrown. Exception trace:org.apache.hadoop.hbase.client.RetriesExhaustedException: Failed after attempts=16, exceptions:
+2020-08-16T16:16:49.866Z, java.net.SocketTimeoutException: callTimeout=1000, callDuration=1622: Call to df7b0ce315e4/172.17.0.18:34775 failed on local exception: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call[id=112,methodName=Scan], waitTime=1019, rpcTimeout=1000 row '' on table 'testScannerHeartbeatMessagesTable' at region=testScannerHeartbeatMessagesTable,,1597594592260.a74d6dc89601f70a1eaa62b3b039d467., hostname=df7b0ce315e4,34775,1597594568165, seqNum=2
+
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerWithReadReplicas.throwEnrichedException(RpcRetryingCallerWithReadReplicas.java:299)
+	at org.apache.hadoop.hbase.client.ScannerCallableWithReplicas.call(ScannerCallableWithReplicas.java:251)
+	at org.apache.hadoop.hbase.client.ScannerCallableWithReplicas.call(ScannerCallableWithReplicas.java:58)
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithoutRetries(RpcRetryingCallerImpl.java:192)
+	at org.apache.hadoop.hbase.client.ClientScanner.call(ClientScanner.java:267)
+	at org.apache.hadoop.hbase.client.ClientScanner.loadCache(ClientScanner.java:435)
+	at org.apache.hadoop.hbase.client.ClientScanner.nextWithSyncCache(ClientScanner.java:310)
+	at org.apache.hadoop.hbase.client.ClientScanner.next(ClientScanner.java:595)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages$3.call(TestScannerHeartbeatMessages.java:311)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages$3.call(TestScannerHeartbeatMessages.java:302)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testImportanceOfHeartbeats(TestScannerHeartbeatMessages.java:197)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testHeartbeatWithSparseCellFilter(TestScannerHeartbeatMessages.java:302)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.net.SocketTimeoutException: callTimeout=1000, callDuration=1622: Call to df7b0ce315e4/172.17.0.18:34775 failed on local exception: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call[id=112,methodName=Scan], waitTime=1019, rpcTimeout=1000 row '' on table 'testScannerHeartbeatMessagesTable' at region=testScannerHeartbeatMessagesTable,,1597594592260.a74d6dc89601f70a1eaa62b3b039d467., hostname=df7b0ce315e4,34775,1597594568165, seqNum=2
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithRetries(RpcRetryingCallerImpl.java:159)
+	at org.apache.hadoop.hbase.client.ResultBoundedCompletionService$QueueingFuture.run(ResultBoundedCompletionService.java:80)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	... 1 more
+Caused by: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call to df7b0ce315e4/172.17.0.18:34775 failed on local exception: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call[id=112,methodName=Scan], waitTime=1019, rpcTimeout=1000
+	at org.apache.hadoop.hbase.ipc.IPCUtil.wrapException(IPCUtil.java:204)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.onCallFinished(AbstractRpcClient.java:392)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.access$100(AbstractRpcClient.java:97)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:423)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:419)
+	at org.apache.hadoop.hbase.ipc.Call.setTimeout(Call.java:110)
+	at org.apache.hadoop.hbase.ipc.RpcConnection$1.run(RpcConnection.java:199)
+	at org.apache.hbase.thirdparty.io.netty.util.HashedWheelTimer$HashedWheelTimeout.expire(HashedWheelTimer.java:682)
+	at org.apache.hbase.thirdparty.io.netty.util.HashedWheelTimer$HashedWheelBucket.expireTimeouts(HashedWheelTimer.java:757)
+	at org.apache.hbase.thirdparty.io.netty.util.HashedWheelTimer$Worker.run(HashedWheelTimer.java:485)
+	... 1 more
+Caused by: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call[id=112,methodName=Scan], waitTime=1019, rpcTimeout=1000
+	at org.apache.hadoop.hbase.ipc.RpcConnection$1.run(RpcConnection.java:200)
+	... 4 more
+
+stackTrace: java.lang.AssertionError: Heartbeat messages are enabled, exceptions should NOT be thrown. Exception trace:org.apache.hadoop.hbase.client.RetriesExhaustedException: Failed after attempts=16, exceptions:
+2020-08-16T16:16:49.866Z, java.net.SocketTimeoutException: callTimeout=1000, callDuration=1622: Call to df7b0ce315e4/172.17.0.18:34775 failed on local exception: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call[id=112,methodName=Scan], waitTime=1019, rpcTimeout=1000 row '' on table 'testScannerHeartbeatMessagesTable' at region=testScannerHeartbeatMessagesTable,,1597594592260.a74d6dc89601f70a1eaa62b3b039d467., hostname=df7b0ce315e4,34775,1597594568165, seqNum=2
+
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerWithReadReplicas.throwEnrichedException(RpcRetryingCallerWithReadReplicas.java:299)
+	at org.apache.hadoop.hbase.client.ScannerCallableWithReplicas.call(ScannerCallableWithReplicas.java:251)
+	at org.apache.hadoop.hbase.client.ScannerCallableWithReplicas.call(ScannerCallableWithReplicas.java:58)
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithoutRetries(RpcRetryingCallerImpl.java:192)
+	at org.apache.hadoop.hbase.client.ClientScanner.call(ClientScanner.java:267)
+	at org.apache.hadoop.hbase.client.ClientScanner.loadCache(ClientScanner.java:435)
+	at org.apache.hadoop.hbase.client.ClientScanner.nextWithSyncCache(ClientScanner.java:310)
+	at org.apache.hadoop.hbase.client.ClientScanner.next(ClientScanner.java:595)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages$3.call(TestScannerHeartbeatMessages.java:311)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages$3.call(TestScannerHeartbeatMessages.java:302)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testImportanceOfHeartbeats(TestScannerHeartbeatMessages.java:197)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testHeartbeatWithSparseCellFilter(TestScannerHeartbeatMessages.java:302)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.net.SocketTimeoutException: callTimeout=1000, callDuration=1622: Call to df7b0ce315e4/172.17.0.18:34775 failed on local exception: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call[id=112,methodName=Scan], waitTime=1019, rpcTimeout=1000 row '' on table 'testScannerHeartbeatMessagesTable' at region=testScannerHeartbeatMessagesTable,,1597594592260.a74d6dc89601f70a1eaa62b3b039d467., hostname=df7b0ce315e4,34775,1597594568165, seqNum=2
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithRetries(RpcRetryingCallerImpl.java:159)
+	at org.apache.hadoop.hbase.client.ResultBoundedCompletionService$QueueingFuture.run(ResultBoundedCompletionService.java:80)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	... 1 more
+Caused by: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call to df7b0ce315e4/172.17.0.18:34775 failed on local exception: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call[id=112,methodName=Scan], waitTime=1019, rpcTimeout=1000
+	at org.apache.hadoop.hbase.ipc.IPCUtil.wrapException(IPCUtil.java:204)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.onCallFinished(AbstractRpcClient.java:392)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.access$100(AbstractRpcClient.java:97)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:423)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:419)
+	at org.apache.hadoop.hbase.ipc.Call.setTimeout(Call.java:110)
+	at org.apache.hadoop.hbase.ipc.RpcConnection$1.run(RpcConnection.java:199)
+	at org.apache.hbase.thirdparty.io.netty.util.HashedWheelTimer$HashedWheelTimeout.expire(HashedWheelTimer.java:682)
+	at org.apache.hbase.thirdparty.io.netty.util.HashedWheelTimer$HashedWheelBucket.expireTimeouts(HashedWheelTimer.java:757)
+	at org.apache.hbase.thirdparty.io.netty.util.HashedWheelTimer$Worker.run(HashedWheelTimer.java:485)
+	... 1 more
+Caused by: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call[id=112,methodName=Scan], waitTime=1019, rpcTimeout=1000
+	at org.apache.hadoop.hbase.ipc.RpcConnection$1.run(RpcConnection.java:200)
+	... 4 more
+
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testImportanceOfHeartbeats(TestScannerHeartbeatMessages.java:199)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testHeartbeatWithSparseCellFilter(TestScannerHeartbeatMessages.java:302)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.lang.Thread.run(Thread.java:748)
+
+
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is -1
+v1v2 test failed !!!
+reconf_parameter: dfs.namenode.stale.datanode.interval
+component: hdfs:NameNode
+v1: 300
+v2: 30000
+testProject: hbase
+unitTest: org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages#testHeartbeatWithSparseCellFilter
+reconfPoint: 1
+result: -1
+failureMessage: Heartbeat messages are enabled, exceptions should NOT be thrown. Exception trace:org.apache.hadoop.hbase.client.RetriesExhaustedException: Failed after attempts=16, exceptions:
+2020-08-16T16:31:12.958Z, java.net.SocketTimeoutException: callTimeout=1000, callDuration=1537: Call to df7b0ce315e4/172.17.0.18:43892 failed on local exception: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call[id=198,methodName=Scan], waitTime=1010, rpcTimeout=1000 row '' on table 'testScannerHeartbeatMessagesTable' at region=testScannerHeartbeatMessagesTable,,1597595394584.f0c4dbe42c6e292d323244fcdcdcda92., hostname=df7b0ce315e4,43892,1597595370657, seqNum=2
+
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerWithReadReplicas.throwEnrichedException(RpcRetryingCallerWithReadReplicas.java:299)
+	at org.apache.hadoop.hbase.client.ScannerCallableWithReplicas.call(ScannerCallableWithReplicas.java:251)
+	at org.apache.hadoop.hbase.client.ScannerCallableWithReplicas.call(ScannerCallableWithReplicas.java:58)
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithoutRetries(RpcRetryingCallerImpl.java:192)
+	at org.apache.hadoop.hbase.client.ClientScanner.call(ClientScanner.java:267)
+	at org.apache.hadoop.hbase.client.ClientScanner.loadCache(ClientScanner.java:435)
+	at org.apache.hadoop.hbase.client.ClientScanner.nextWithSyncCache(ClientScanner.java:310)
+	at org.apache.hadoop.hbase.client.ClientScanner.next(ClientScanner.java:595)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages$3.call(TestScannerHeartbeatMessages.java:324)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages$3.call(TestScannerHeartbeatMessages.java:302)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testImportanceOfHeartbeats(TestScannerHeartbeatMessages.java:197)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testHeartbeatWithSparseCellFilter(TestScannerHeartbeatMessages.java:302)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.net.SocketTimeoutException: callTimeout=1000, callDuration=1537: Call to df7b0ce315e4/172.17.0.18:43892 failed on local exception: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call[id=198,methodName=Scan], waitTime=1010, rpcTimeout=1000 row '' on table 'testScannerHeartbeatMessagesTable' at region=testScannerHeartbeatMessagesTable,,1597595394584.f0c4dbe42c6e292d323244fcdcdcda92., hostname=df7b0ce315e4,43892,1597595370657, seqNum=2
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithRetries(RpcRetryingCallerImpl.java:159)
+	at org.apache.hadoop.hbase.client.ResultBoundedCompletionService$QueueingFuture.run(ResultBoundedCompletionService.java:80)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	... 1 more
+Caused by: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call to df7b0ce315e4/172.17.0.18:43892 failed on local exception: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call[id=198,methodName=Scan], waitTime=1010, rpcTimeout=1000
+	at org.apache.hadoop.hbase.ipc.IPCUtil.wrapException(IPCUtil.java:204)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.onCallFinished(AbstractRpcClient.java:392)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.access$100(AbstractRpcClient.java:97)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:423)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:419)
+	at org.apache.hadoop.hbase.ipc.Call.setTimeout(Call.java:110)
+	at org.apache.hadoop.hbase.ipc.RpcConnection$1.run(RpcConnection.java:199)
+	at org.apache.hbase.thirdparty.io.netty.util.HashedWheelTimer$HashedWheelTimeout.expire(HashedWheelTimer.java:682)
+	at org.apache.hbase.thirdparty.io.netty.util.HashedWheelTimer$HashedWheelBucket.expireTimeouts(HashedWheelTimer.java:757)
+	at org.apache.hbase.thirdparty.io.netty.util.HashedWheelTimer$Worker.run(HashedWheelTimer.java:485)
+	... 1 more
+Caused by: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call[id=198,methodName=Scan], waitTime=1010, rpcTimeout=1000
+	at org.apache.hadoop.hbase.ipc.RpcConnection$1.run(RpcConnection.java:200)
+	... 4 more
+
+stackTrace: java.lang.AssertionError: Heartbeat messages are enabled, exceptions should NOT be thrown. Exception trace:org.apache.hadoop.hbase.client.RetriesExhaustedException: Failed after attempts=16, exceptions:
+2020-08-16T16:31:12.958Z, java.net.SocketTimeoutException: callTimeout=1000, callDuration=1537: Call to df7b0ce315e4/172.17.0.18:43892 failed on local exception: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call[id=198,methodName=Scan], waitTime=1010, rpcTimeout=1000 row '' on table 'testScannerHeartbeatMessagesTable' at region=testScannerHeartbeatMessagesTable,,1597595394584.f0c4dbe42c6e292d323244fcdcdcda92., hostname=df7b0ce315e4,43892,1597595370657, seqNum=2
+
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerWithReadReplicas.throwEnrichedException(RpcRetryingCallerWithReadReplicas.java:299)
+	at org.apache.hadoop.hbase.client.ScannerCallableWithReplicas.call(ScannerCallableWithReplicas.java:251)
+	at org.apache.hadoop.hbase.client.ScannerCallableWithReplicas.call(ScannerCallableWithReplicas.java:58)
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithoutRetries(RpcRetryingCallerImpl.java:192)
+	at org.apache.hadoop.hbase.client.ClientScanner.call(ClientScanner.java:267)
+	at org.apache.hadoop.hbase.client.ClientScanner.loadCache(ClientScanner.java:435)
+	at org.apache.hadoop.hbase.client.ClientScanner.nextWithSyncCache(ClientScanner.java:310)
+	at org.apache.hadoop.hbase.client.ClientScanner.next(ClientScanner.java:595)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages$3.call(TestScannerHeartbeatMessages.java:324)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages$3.call(TestScannerHeartbeatMessages.java:302)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testImportanceOfHeartbeats(TestScannerHeartbeatMessages.java:197)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testHeartbeatWithSparseCellFilter(TestScannerHeartbeatMessages.java:302)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.net.SocketTimeoutException: callTimeout=1000, callDuration=1537: Call to df7b0ce315e4/172.17.0.18:43892 failed on local exception: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call[id=198,methodName=Scan], waitTime=1010, rpcTimeout=1000 row '' on table 'testScannerHeartbeatMessagesTable' at region=testScannerHeartbeatMessagesTable,,1597595394584.f0c4dbe42c6e292d323244fcdcdcda92., hostname=df7b0ce315e4,43892,1597595370657, seqNum=2
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithRetries(RpcRetryingCallerImpl.java:159)
+	at org.apache.hadoop.hbase.client.ResultBoundedCompletionService$QueueingFuture.run(ResultBoundedCompletionService.java:80)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	... 1 more
+Caused by: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call to df7b0ce315e4/172.17.0.18:43892 failed on local exception: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call[id=198,methodName=Scan], waitTime=1010, rpcTimeout=1000
+	at org.apache.hadoop.hbase.ipc.IPCUtil.wrapException(IPCUtil.java:204)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.onCallFinished(AbstractRpcClient.java:392)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.access$100(AbstractRpcClient.java:97)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:423)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:419)
+	at org.apache.hadoop.hbase.ipc.Call.setTimeout(Call.java:110)
+	at org.apache.hadoop.hbase.ipc.RpcConnection$1.run(RpcConnection.java:199)
+	at org.apache.hbase.thirdparty.io.netty.util.HashedWheelTimer$HashedWheelTimeout.expire(HashedWheelTimer.java:682)
+	at org.apache.hbase.thirdparty.io.netty.util.HashedWheelTimer$HashedWheelBucket.expireTimeouts(HashedWheelTimer.java:757)
+	at org.apache.hbase.thirdparty.io.netty.util.HashedWheelTimer$Worker.run(HashedWheelTimer.java:485)
+	... 1 more
+Caused by: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call[id=198,methodName=Scan], waitTime=1010, rpcTimeout=1000
+	at org.apache.hadoop.hbase.ipc.RpcConnection$1.run(RpcConnection.java:200)
+	... 4 more
+
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testImportanceOfHeartbeats(TestScannerHeartbeatMessages.java:199)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testHeartbeatWithSparseCellFilter(TestScannerHeartbeatMessages.java:302)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.lang.Thread.run(Thread.java:748)
+
+
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is -1
+v1v2 test failed !!!
+reconf_parameter: dfs.namenode.stale.datanode.interval
+component: hdfs:NameNode
+v1: 300
+v2: 30000
+testProject: hbase
+unitTest: org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages#testHeartbeatWithSparseCellFilter
+reconfPoint: 1
+result: -1
+failureMessage: Heartbeat messages are enabled, exceptions should NOT be thrown. Exception trace:java.io.IOException: Failed to get result within timeout, timeout=1000ms
+	at org.apache.hadoop.hbase.client.ScannerCallableWithReplicas.call(ScannerCallableWithReplicas.java:241)
+	at org.apache.hadoop.hbase.client.ScannerCallableWithReplicas.call(ScannerCallableWithReplicas.java:58)
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithoutRetries(RpcRetryingCallerImpl.java:192)
+	at org.apache.hadoop.hbase.client.ClientScanner.call(ClientScanner.java:267)
+	at org.apache.hadoop.hbase.client.ClientScanner.loadCache(ClientScanner.java:435)
+	at org.apache.hadoop.hbase.client.ClientScanner.nextWithSyncCache(ClientScanner.java:310)
+	at org.apache.hadoop.hbase.client.ClientScanner.next(ClientScanner.java:595)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages$3.call(TestScannerHeartbeatMessages.java:324)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages$3.call(TestScannerHeartbeatMessages.java:302)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testImportanceOfHeartbeats(TestScannerHeartbeatMessages.java:197)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testHeartbeatWithSparseCellFilter(TestScannerHeartbeatMessages.java:302)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.lang.Thread.run(Thread.java:748)
+
+stackTrace: java.lang.AssertionError: Heartbeat messages are enabled, exceptions should NOT be thrown. Exception trace:java.io.IOException: Failed to get result within timeout, timeout=1000ms
+	at org.apache.hadoop.hbase.client.ScannerCallableWithReplicas.call(ScannerCallableWithReplicas.java:241)
+	at org.apache.hadoop.hbase.client.ScannerCallableWithReplicas.call(ScannerCallableWithReplicas.java:58)
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithoutRetries(RpcRetryingCallerImpl.java:192)
+	at org.apache.hadoop.hbase.client.ClientScanner.call(ClientScanner.java:267)
+	at org.apache.hadoop.hbase.client.ClientScanner.loadCache(ClientScanner.java:435)
+	at org.apache.hadoop.hbase.client.ClientScanner.nextWithSyncCache(ClientScanner.java:310)
+	at org.apache.hadoop.hbase.client.ClientScanner.next(ClientScanner.java:595)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages$3.call(TestScannerHeartbeatMessages.java:324)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages$3.call(TestScannerHeartbeatMessages.java:302)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testImportanceOfHeartbeats(TestScannerHeartbeatMessages.java:197)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testHeartbeatWithSparseCellFilter(TestScannerHeartbeatMessages.java:302)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.lang.Thread.run(Thread.java:748)
+
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testImportanceOfHeartbeats(TestScannerHeartbeatMessages.java:199)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testHeartbeatWithSparseCellFilter(TestScannerHeartbeatMessages.java:302)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.lang.Thread.run(Thread.java:748)
+
+
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is -1
+v1v1 or v2v2 test failed !!!
+reconf_parameter: dfs.namenode.stale.datanode.interval
+component: hdfs:NameNode
+v1: 300
+v2: 30000
+testProject: hbase
+unitTest: org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages#testHeartbeatWithSparseCellFilter
+reconfPoint: 1
+result: -1
+failureMessage: Heartbeat messages are enabled, exceptions should NOT be thrown. Exception trace:org.apache.hadoop.hbase.client.RetriesExhaustedException: Failed after attempts=16, exceptions:
+2020-08-16T17:36:37.242Z, java.net.SocketTimeoutException: callTimeout=1000, callDuration=1029: Call to df7b0ce315e4/172.17.0.18:45488 failed on local exception: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call[id=143,methodName=Scan], waitTime=1021, rpcTimeout=999 row '' on table 'testScannerHeartbeatMessagesTable' at region=testScannerHeartbeatMessagesTable,,1597599364630.87488c848ab1bac48bcbad9be6438912., hostname=df7b0ce315e4,45488,1597599338909, seqNum=2
+
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerWithReadReplicas.throwEnrichedException(RpcRetryingCallerWithReadReplicas.java:299)
+	at org.apache.hadoop.hbase.client.ScannerCallableWithReplicas.call(ScannerCallableWithReplicas.java:251)
+	at org.apache.hadoop.hbase.client.ScannerCallableWithReplicas.call(ScannerCallableWithReplicas.java:58)
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithoutRetries(RpcRetryingCallerImpl.java:192)
+	at org.apache.hadoop.hbase.client.ClientScanner.call(ClientScanner.java:267)
+	at org.apache.hadoop.hbase.client.ClientScanner.loadCache(ClientScanner.java:435)
+	at org.apache.hadoop.hbase.client.ClientScanner.nextWithSyncCache(ClientScanner.java:310)
+	at org.apache.hadoop.hbase.client.ClientScanner.next(ClientScanner.java:595)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages$3.call(TestScannerHeartbeatMessages.java:311)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages$3.call(TestScannerHeartbeatMessages.java:302)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testImportanceOfHeartbeats(TestScannerHeartbeatMessages.java:197)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testHeartbeatWithSparseCellFilter(TestScannerHeartbeatMessages.java:302)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.net.SocketTimeoutException: callTimeout=1000, callDuration=1029: Call to df7b0ce315e4/172.17.0.18:45488 failed on local exception: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call[id=143,methodName=Scan], waitTime=1021, rpcTimeout=999 row '' on table 'testScannerHeartbeatMessagesTable' at region=testScannerHeartbeatMessagesTable,,1597599364630.87488c848ab1bac48bcbad9be6438912., hostname=df7b0ce315e4,45488,1597599338909, seqNum=2
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithRetries(RpcRetryingCallerImpl.java:159)
+	at org.apache.hadoop.hbase.client.ResultBoundedCompletionService$QueueingFuture.run(ResultBoundedCompletionService.java:80)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	... 1 more
+Caused by: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call to df7b0ce315e4/172.17.0.18:45488 failed on local exception: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call[id=143,methodName=Scan], waitTime=1021, rpcTimeout=999
+	at org.apache.hadoop.hbase.ipc.IPCUtil.wrapException(IPCUtil.java:204)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.onCallFinished(AbstractRpcClient.java:392)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.access$100(AbstractRpcClient.java:97)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:423)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:419)
+	at org.apache.hadoop.hbase.ipc.Call.setTimeout(Call.java:110)
+	at org.apache.hadoop.hbase.ipc.RpcConnection$1.run(RpcConnection.java:199)
+	at org.apache.hbase.thirdparty.io.netty.util.HashedWheelTimer$HashedWheelTimeout.expire(HashedWheelTimer.java:682)
+	at org.apache.hbase.thirdparty.io.netty.util.HashedWheelTimer$HashedWheelBucket.expireTimeouts(HashedWheelTimer.java:757)
+	at org.apache.hbase.thirdparty.io.netty.util.HashedWheelTimer$Worker.run(HashedWheelTimer.java:485)
+	... 1 more
+Caused by: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call[id=143,methodName=Scan], waitTime=1021, rpcTimeout=999
+	at org.apache.hadoop.hbase.ipc.RpcConnection$1.run(RpcConnection.java:200)
+	... 4 more
+
+stackTrace: java.lang.AssertionError: Heartbeat messages are enabled, exceptions should NOT be thrown. Exception trace:org.apache.hadoop.hbase.client.RetriesExhaustedException: Failed after attempts=16, exceptions:
+2020-08-16T17:36:37.242Z, java.net.SocketTimeoutException: callTimeout=1000, callDuration=1029: Call to df7b0ce315e4/172.17.0.18:45488 failed on local exception: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call[id=143,methodName=Scan], waitTime=1021, rpcTimeout=999 row '' on table 'testScannerHeartbeatMessagesTable' at region=testScannerHeartbeatMessagesTable,,1597599364630.87488c848ab1bac48bcbad9be6438912., hostname=df7b0ce315e4,45488,1597599338909, seqNum=2
+
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerWithReadReplicas.throwEnrichedException(RpcRetryingCallerWithReadReplicas.java:299)
+	at org.apache.hadoop.hbase.client.ScannerCallableWithReplicas.call(ScannerCallableWithReplicas.java:251)
+	at org.apache.hadoop.hbase.client.ScannerCallableWithReplicas.call(ScannerCallableWithReplicas.java:58)
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithoutRetries(RpcRetryingCallerImpl.java:192)
+	at org.apache.hadoop.hbase.client.ClientScanner.call(ClientScanner.java:267)
+	at org.apache.hadoop.hbase.client.ClientScanner.loadCache(ClientScanner.java:435)
+	at org.apache.hadoop.hbase.client.ClientScanner.nextWithSyncCache(ClientScanner.java:310)
+	at org.apache.hadoop.hbase.client.ClientScanner.next(ClientScanner.java:595)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages$3.call(TestScannerHeartbeatMessages.java:311)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages$3.call(TestScannerHeartbeatMessages.java:302)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testImportanceOfHeartbeats(TestScannerHeartbeatMessages.java:197)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testHeartbeatWithSparseCellFilter(TestScannerHeartbeatMessages.java:302)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.net.SocketTimeoutException: callTimeout=1000, callDuration=1029: Call to df7b0ce315e4/172.17.0.18:45488 failed on local exception: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call[id=143,methodName=Scan], waitTime=1021, rpcTimeout=999 row '' on table 'testScannerHeartbeatMessagesTable' at region=testScannerHeartbeatMessagesTable,,1597599364630.87488c848ab1bac48bcbad9be6438912., hostname=df7b0ce315e4,45488,1597599338909, seqNum=2
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithRetries(RpcRetryingCallerImpl.java:159)
+	at org.apache.hadoop.hbase.client.ResultBoundedCompletionService$QueueingFuture.run(ResultBoundedCompletionService.java:80)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	... 1 more
+Caused by: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call to df7b0ce315e4/172.17.0.18:45488 failed on local exception: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call[id=143,methodName=Scan], waitTime=1021, rpcTimeout=999
+	at org.apache.hadoop.hbase.ipc.IPCUtil.wrapException(IPCUtil.java:204)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.onCallFinished(AbstractRpcClient.java:392)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.access$100(AbstractRpcClient.java:97)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:423)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:419)
+	at org.apache.hadoop.hbase.ipc.Call.setTimeout(Call.java:110)
+	at org.apache.hadoop.hbase.ipc.RpcConnection$1.run(RpcConnection.java:199)
+	at org.apache.hbase.thirdparty.io.netty.util.HashedWheelTimer$HashedWheelTimeout.expire(HashedWheelTimer.java:682)
+	at org.apache.hbase.thirdparty.io.netty.util.HashedWheelTimer$HashedWheelBucket.expireTimeouts(HashedWheelTimer.java:757)
+	at org.apache.hbase.thirdparty.io.netty.util.HashedWheelTimer$Worker.run(HashedWheelTimer.java:485)
+	... 1 more
+Caused by: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call[id=143,methodName=Scan], waitTime=1021, rpcTimeout=999
+	at org.apache.hadoop.hbase.ipc.RpcConnection$1.run(RpcConnection.java:200)
+	... 4 more
+
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testImportanceOfHeartbeats(TestScannerHeartbeatMessages.java:199)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testHeartbeatWithSparseCellFilter(TestScannerHeartbeatMessages.java:302)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.lang.Thread.run(Thread.java:748)
+
+
+
+Test vvMode=v1v2
+tr.result is -1
+v1v2 test failed !!!
+reconf_parameter: dfs.namenode.stale.datanode.interval
+component: hdfs:NameNode
+v1: 300
+v2: 30000
+testProject: hbase
+unitTest: org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages#testHeartbeatWithSparseCellFilter
+reconfPoint: 1
+result: -1
+failureMessage: Heartbeat messages are enabled, exceptions should NOT be thrown. Exception trace:java.io.IOException: Failed to get result within timeout, timeout=1000ms
+	at org.apache.hadoop.hbase.client.ScannerCallableWithReplicas.call(ScannerCallableWithReplicas.java:241)
+	at org.apache.hadoop.hbase.client.ScannerCallableWithReplicas.call(ScannerCallableWithReplicas.java:58)
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithoutRetries(RpcRetryingCallerImpl.java:192)
+	at org.apache.hadoop.hbase.client.ClientScanner.call(ClientScanner.java:267)
+	at org.apache.hadoop.hbase.client.ClientScanner.loadCache(ClientScanner.java:435)
+	at org.apache.hadoop.hbase.client.ClientScanner.nextWithSyncCache(ClientScanner.java:310)
+	at org.apache.hadoop.hbase.client.ClientScanner.next(ClientScanner.java:595)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages$3.call(TestScannerHeartbeatMessages.java:324)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages$3.call(TestScannerHeartbeatMessages.java:302)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testImportanceOfHeartbeats(TestScannerHeartbeatMessages.java:197)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testHeartbeatWithSparseCellFilter(TestScannerHeartbeatMessages.java:302)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.lang.Thread.run(Thread.java:748)
+
+stackTrace: java.lang.AssertionError: Heartbeat messages are enabled, exceptions should NOT be thrown. Exception trace:java.io.IOException: Failed to get result within timeout, timeout=1000ms
+	at org.apache.hadoop.hbase.client.ScannerCallableWithReplicas.call(ScannerCallableWithReplicas.java:241)
+	at org.apache.hadoop.hbase.client.ScannerCallableWithReplicas.call(ScannerCallableWithReplicas.java:58)
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithoutRetries(RpcRetryingCallerImpl.java:192)
+	at org.apache.hadoop.hbase.client.ClientScanner.call(ClientScanner.java:267)
+	at org.apache.hadoop.hbase.client.ClientScanner.loadCache(ClientScanner.java:435)
+	at org.apache.hadoop.hbase.client.ClientScanner.nextWithSyncCache(ClientScanner.java:310)
+	at org.apache.hadoop.hbase.client.ClientScanner.next(ClientScanner.java:595)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages$3.call(TestScannerHeartbeatMessages.java:324)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages$3.call(TestScannerHeartbeatMessages.java:302)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testImportanceOfHeartbeats(TestScannerHeartbeatMessages.java:197)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testHeartbeatWithSparseCellFilter(TestScannerHeartbeatMessages.java:302)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.lang.Thread.run(Thread.java:748)
+
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testImportanceOfHeartbeats(TestScannerHeartbeatMessages.java:199)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testHeartbeatWithSparseCellFilter(TestScannerHeartbeatMessages.java:302)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.lang.Thread.run(Thread.java:748)
+
+
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is -1
+v1v2 test failed !!!
+reconf_parameter: dfs.namenode.stale.datanode.interval
+component: hdfs:NameNode
+v1: 300
+v2: 30000
+testProject: hbase
+unitTest: org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages#testHeartbeatWithSparseCellFilter
+reconfPoint: 1
+result: -1
+failureMessage: Heartbeat messages are enabled, exceptions should NOT be thrown. Exception trace:org.apache.hadoop.hbase.client.RetriesExhaustedException: Failed after attempts=16, exceptions:
+2020-08-16T18:14:14.900Z, java.net.SocketTimeoutException: callTimeout=1000, callDuration=1324: Call to df7b0ce315e4/172.17.0.18:34331 failed on local exception: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call[id=152,methodName=Scan], waitTime=1307, rpcTimeout=1000 row '' on table 'testScannerHeartbeatMessagesTable' at region=testScannerHeartbeatMessagesTable,,1597601596352.cab1df592c2d194104f3751db9eff0aa., hostname=df7b0ce315e4,34331,1597601576225, seqNum=2
+
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerWithReadReplicas.throwEnrichedException(RpcRetryingCallerWithReadReplicas.java:299)
+	at org.apache.hadoop.hbase.client.ScannerCallableWithReplicas.call(ScannerCallableWithReplicas.java:251)
+	at org.apache.hadoop.hbase.client.ScannerCallableWithReplicas.call(ScannerCallableWithReplicas.java:58)
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithoutRetries(RpcRetryingCallerImpl.java:192)
+	at org.apache.hadoop.hbase.client.ClientScanner.call(ClientScanner.java:267)
+	at org.apache.hadoop.hbase.client.ClientScanner.loadCache(ClientScanner.java:435)
+	at org.apache.hadoop.hbase.client.ClientScanner.nextWithSyncCache(ClientScanner.java:310)
+	at org.apache.hadoop.hbase.client.ClientScanner.next(ClientScanner.java:595)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages$3.call(TestScannerHeartbeatMessages.java:324)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages$3.call(TestScannerHeartbeatMessages.java:302)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testImportanceOfHeartbeats(TestScannerHeartbeatMessages.java:197)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testHeartbeatWithSparseCellFilter(TestScannerHeartbeatMessages.java:302)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.net.SocketTimeoutException: callTimeout=1000, callDuration=1324: Call to df7b0ce315e4/172.17.0.18:34331 failed on local exception: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call[id=152,methodName=Scan], waitTime=1307, rpcTimeout=1000 row '' on table 'testScannerHeartbeatMessagesTable' at region=testScannerHeartbeatMessagesTable,,1597601596352.cab1df592c2d194104f3751db9eff0aa., hostname=df7b0ce315e4,34331,1597601576225, seqNum=2
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithRetries(RpcRetryingCallerImpl.java:159)
+	at org.apache.hadoop.hbase.client.ResultBoundedCompletionService$QueueingFuture.run(ResultBoundedCompletionService.java:80)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	... 1 more
+Caused by: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call to df7b0ce315e4/172.17.0.18:34331 failed on local exception: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call[id=152,methodName=Scan], waitTime=1307, rpcTimeout=1000
+	at org.apache.hadoop.hbase.ipc.IPCUtil.wrapException(IPCUtil.java:204)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.onCallFinished(AbstractRpcClient.java:392)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.access$100(AbstractRpcClient.java:97)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:423)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:419)
+	at org.apache.hadoop.hbase.ipc.Call.setTimeout(Call.java:110)
+	at org.apache.hadoop.hbase.ipc.RpcConnection$1.run(RpcConnection.java:199)
+	at org.apache.hbase.thirdparty.io.netty.util.HashedWheelTimer$HashedWheelTimeout.expire(HashedWheelTimer.java:682)
+	at org.apache.hbase.thirdparty.io.netty.util.HashedWheelTimer$HashedWheelBucket.expireTimeouts(HashedWheelTimer.java:757)
+	at org.apache.hbase.thirdparty.io.netty.util.HashedWheelTimer$Worker.run(HashedWheelTimer.java:485)
+	... 1 more
+Caused by: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call[id=152,methodName=Scan], waitTime=1307, rpcTimeout=1000
+	at org.apache.hadoop.hbase.ipc.RpcConnection$1.run(RpcConnection.java:200)
+	... 4 more
+
+stackTrace: java.lang.AssertionError: Heartbeat messages are enabled, exceptions should NOT be thrown. Exception trace:org.apache.hadoop.hbase.client.RetriesExhaustedException: Failed after attempts=16, exceptions:
+2020-08-16T18:14:14.900Z, java.net.SocketTimeoutException: callTimeout=1000, callDuration=1324: Call to df7b0ce315e4/172.17.0.18:34331 failed on local exception: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call[id=152,methodName=Scan], waitTime=1307, rpcTimeout=1000 row '' on table 'testScannerHeartbeatMessagesTable' at region=testScannerHeartbeatMessagesTable,,1597601596352.cab1df592c2d194104f3751db9eff0aa., hostname=df7b0ce315e4,34331,1597601576225, seqNum=2
+
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerWithReadReplicas.throwEnrichedException(RpcRetryingCallerWithReadReplicas.java:299)
+	at org.apache.hadoop.hbase.client.ScannerCallableWithReplicas.call(ScannerCallableWithReplicas.java:251)
+	at org.apache.hadoop.hbase.client.ScannerCallableWithReplicas.call(ScannerCallableWithReplicas.java:58)
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithoutRetries(RpcRetryingCallerImpl.java:192)
+	at org.apache.hadoop.hbase.client.ClientScanner.call(ClientScanner.java:267)
+	at org.apache.hadoop.hbase.client.ClientScanner.loadCache(ClientScanner.java:435)
+	at org.apache.hadoop.hbase.client.ClientScanner.nextWithSyncCache(ClientScanner.java:310)
+	at org.apache.hadoop.hbase.client.ClientScanner.next(ClientScanner.java:595)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages$3.call(TestScannerHeartbeatMessages.java:324)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages$3.call(TestScannerHeartbeatMessages.java:302)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testImportanceOfHeartbeats(TestScannerHeartbeatMessages.java:197)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testHeartbeatWithSparseCellFilter(TestScannerHeartbeatMessages.java:302)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.net.SocketTimeoutException: callTimeout=1000, callDuration=1324: Call to df7b0ce315e4/172.17.0.18:34331 failed on local exception: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call[id=152,methodName=Scan], waitTime=1307, rpcTimeout=1000 row '' on table 'testScannerHeartbeatMessagesTable' at region=testScannerHeartbeatMessagesTable,,1597601596352.cab1df592c2d194104f3751db9eff0aa., hostname=df7b0ce315e4,34331,1597601576225, seqNum=2
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithRetries(RpcRetryingCallerImpl.java:159)
+	at org.apache.hadoop.hbase.client.ResultBoundedCompletionService$QueueingFuture.run(ResultBoundedCompletionService.java:80)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	... 1 more
+Caused by: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call to df7b0ce315e4/172.17.0.18:34331 failed on local exception: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call[id=152,methodName=Scan], waitTime=1307, rpcTimeout=1000
+	at org.apache.hadoop.hbase.ipc.IPCUtil.wrapException(IPCUtil.java:204)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.onCallFinished(AbstractRpcClient.java:392)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.access$100(AbstractRpcClient.java:97)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:423)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:419)
+	at org.apache.hadoop.hbase.ipc.Call.setTimeout(Call.java:110)
+	at org.apache.hadoop.hbase.ipc.RpcConnection$1.run(RpcConnection.java:199)
+	at org.apache.hbase.thirdparty.io.netty.util.HashedWheelTimer$HashedWheelTimeout.expire(HashedWheelTimer.java:682)
+	at org.apache.hbase.thirdparty.io.netty.util.HashedWheelTimer$HashedWheelBucket.expireTimeouts(HashedWheelTimer.java:757)
+	at org.apache.hbase.thirdparty.io.netty.util.HashedWheelTimer$Worker.run(HashedWheelTimer.java:485)
+	... 1 more
+Caused by: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call[id=152,methodName=Scan], waitTime=1307, rpcTimeout=1000
+	at org.apache.hadoop.hbase.ipc.RpcConnection$1.run(RpcConnection.java:200)
+	... 4 more
+
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testImportanceOfHeartbeats(TestScannerHeartbeatMessages.java:199)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testHeartbeatWithSparseCellFilter(TestScannerHeartbeatMessages.java:302)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.lang.Thread.run(Thread.java:748)
+
+
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is -1
+
+Test vvMode=v2v2
+tr.result is 1
+v1v1 or v2v2 test failed !!!
+reconf_parameter: dfs.namenode.stale.datanode.interval
+component: hdfs:NameNode
+v1: 300
+v2: 30000
+testProject: hbase
+unitTest: org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages#testHeartbeatWithSparseCellFilter
+reconfPoint: 1
+result: -1
+failureMessage: Heartbeat messages are enabled, exceptions should NOT be thrown. Exception trace:java.io.IOException: Failed to get result within timeout, timeout=1000ms
+	at org.apache.hadoop.hbase.client.ScannerCallableWithReplicas.call(ScannerCallableWithReplicas.java:241)
+	at org.apache.hadoop.hbase.client.ScannerCallableWithReplicas.call(ScannerCallableWithReplicas.java:58)
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithoutRetries(RpcRetryingCallerImpl.java:192)
+	at org.apache.hadoop.hbase.client.ClientScanner.call(ClientScanner.java:267)
+	at org.apache.hadoop.hbase.client.ClientScanner.loadCache(ClientScanner.java:435)
+	at org.apache.hadoop.hbase.client.ClientScanner.nextWithSyncCache(ClientScanner.java:310)
+	at org.apache.hadoop.hbase.client.ClientScanner.next(ClientScanner.java:595)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages$3.call(TestScannerHeartbeatMessages.java:311)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages$3.call(TestScannerHeartbeatMessages.java:302)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testImportanceOfHeartbeats(TestScannerHeartbeatMessages.java:197)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testHeartbeatWithSparseCellFilter(TestScannerHeartbeatMessages.java:302)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.lang.Thread.run(Thread.java:748)
+
+stackTrace: java.lang.AssertionError: Heartbeat messages are enabled, exceptions should NOT be thrown. Exception trace:java.io.IOException: Failed to get result within timeout, timeout=1000ms
+	at org.apache.hadoop.hbase.client.ScannerCallableWithReplicas.call(ScannerCallableWithReplicas.java:241)
+	at org.apache.hadoop.hbase.client.ScannerCallableWithReplicas.call(ScannerCallableWithReplicas.java:58)
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithoutRetries(RpcRetryingCallerImpl.java:192)
+	at org.apache.hadoop.hbase.client.ClientScanner.call(ClientScanner.java:267)
+	at org.apache.hadoop.hbase.client.ClientScanner.loadCache(ClientScanner.java:435)
+	at org.apache.hadoop.hbase.client.ClientScanner.nextWithSyncCache(ClientScanner.java:310)
+	at org.apache.hadoop.hbase.client.ClientScanner.next(ClientScanner.java:595)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages$3.call(TestScannerHeartbeatMessages.java:311)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages$3.call(TestScannerHeartbeatMessages.java:302)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testImportanceOfHeartbeats(TestScannerHeartbeatMessages.java:197)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testHeartbeatWithSparseCellFilter(TestScannerHeartbeatMessages.java:302)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.lang.Thread.run(Thread.java:748)
+
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testImportanceOfHeartbeats(TestScannerHeartbeatMessages.java:199)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testHeartbeatWithSparseCellFilter(TestScannerHeartbeatMessages.java:302)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.lang.Thread.run(Thread.java:748)
+
+
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is -1
+v1v2 test failed !!!
+reconf_parameter: dfs.namenode.stale.datanode.interval
+component: hdfs:NameNode
+v1: 300
+v2: 30000
+testProject: hbase
+unitTest: org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages#testHeartbeatWithSparseCellFilter
+reconfPoint: 1
+result: -1
+failureMessage: Heartbeat messages are enabled, exceptions should NOT be thrown. Exception trace:java.io.IOException: Failed to get result within timeout, timeout=1000ms
+	at org.apache.hadoop.hbase.client.ScannerCallableWithReplicas.call(ScannerCallableWithReplicas.java:241)
+	at org.apache.hadoop.hbase.client.ScannerCallableWithReplicas.call(ScannerCallableWithReplicas.java:58)
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithoutRetries(RpcRetryingCallerImpl.java:192)
+	at org.apache.hadoop.hbase.client.ClientScanner.call(ClientScanner.java:267)
+	at org.apache.hadoop.hbase.client.ClientScanner.loadCache(ClientScanner.java:435)
+	at org.apache.hadoop.hbase.client.ClientScanner.nextWithSyncCache(ClientScanner.java:310)
+	at org.apache.hadoop.hbase.client.ClientScanner.next(ClientScanner.java:595)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages$3.call(TestScannerHeartbeatMessages.java:311)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages$3.call(TestScannerHeartbeatMessages.java:302)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testImportanceOfHeartbeats(TestScannerHeartbeatMessages.java:197)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testHeartbeatWithSparseCellFilter(TestScannerHeartbeatMessages.java:302)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.lang.Thread.run(Thread.java:748)
+
+stackTrace: java.lang.AssertionError: Heartbeat messages are enabled, exceptions should NOT be thrown. Exception trace:java.io.IOException: Failed to get result within timeout, timeout=1000ms
+	at org.apache.hadoop.hbase.client.ScannerCallableWithReplicas.call(ScannerCallableWithReplicas.java:241)
+	at org.apache.hadoop.hbase.client.ScannerCallableWithReplicas.call(ScannerCallableWithReplicas.java:58)
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithoutRetries(RpcRetryingCallerImpl.java:192)
+	at org.apache.hadoop.hbase.client.ClientScanner.call(ClientScanner.java:267)
+	at org.apache.hadoop.hbase.client.ClientScanner.loadCache(ClientScanner.java:435)
+	at org.apache.hadoop.hbase.client.ClientScanner.nextWithSyncCache(ClientScanner.java:310)
+	at org.apache.hadoop.hbase.client.ClientScanner.next(ClientScanner.java:595)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages$3.call(TestScannerHeartbeatMessages.java:311)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages$3.call(TestScannerHeartbeatMessages.java:302)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testImportanceOfHeartbeats(TestScannerHeartbeatMessages.java:197)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testHeartbeatWithSparseCellFilter(TestScannerHeartbeatMessages.java:302)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.lang.Thread.run(Thread.java:748)
+
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testImportanceOfHeartbeats(TestScannerHeartbeatMessages.java:199)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testHeartbeatWithSparseCellFilter(TestScannerHeartbeatMessages.java:302)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.lang.Thread.run(Thread.java:748)
+
+
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is -1
+v1v1 or v2v2 test failed !!!
+reconf_parameter: dfs.namenode.stale.datanode.interval
+component: hdfs:NameNode
+v1: 300
+v2: 30000
+testProject: hbase
+unitTest: org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages#testHeartbeatWithSparseCellFilter
+reconfPoint: 1
+result: -1
+failureMessage: Heartbeat messages are enabled, exceptions should NOT be thrown. Exception trace:org.apache.hadoop.hbase.client.RetriesExhaustedException: Failed after attempts=16, exceptions:
+2020-08-16T21:36:22.349Z, java.net.SocketTimeoutException: callTimeout=1000, callDuration=1167: Call to df7b0ce315e4/172.17.0.18:38192 failed on local exception: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call[id=167,methodName=Scan], waitTime=1148, rpcTimeout=1000 row '' on table 'testScannerHeartbeatMessagesTable' at region=testScannerHeartbeatMessagesTable,,1597613711399.6d3cd6dc26109d225ff1c99b9fc856be., hostname=df7b0ce315e4,38192,1597613684285, seqNum=2
+
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerWithReadReplicas.throwEnrichedException(RpcRetryingCallerWithReadReplicas.java:299)
+	at org.apache.hadoop.hbase.client.ScannerCallableWithReplicas.call(ScannerCallableWithReplicas.java:251)
+	at org.apache.hadoop.hbase.client.ScannerCallableWithReplicas.call(ScannerCallableWithReplicas.java:58)
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithoutRetries(RpcRetryingCallerImpl.java:192)
+	at org.apache.hadoop.hbase.client.ClientScanner.call(ClientScanner.java:267)
+	at org.apache.hadoop.hbase.client.ClientScanner.loadCache(ClientScanner.java:435)
+	at org.apache.hadoop.hbase.client.ClientScanner.nextWithSyncCache(ClientScanner.java:310)
+	at org.apache.hadoop.hbase.client.ClientScanner.next(ClientScanner.java:595)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages$3.call(TestScannerHeartbeatMessages.java:324)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages$3.call(TestScannerHeartbeatMessages.java:302)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testImportanceOfHeartbeats(TestScannerHeartbeatMessages.java:197)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testHeartbeatWithSparseCellFilter(TestScannerHeartbeatMessages.java:302)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.net.SocketTimeoutException: callTimeout=1000, callDuration=1167: Call to df7b0ce315e4/172.17.0.18:38192 failed on local exception: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call[id=167,methodName=Scan], waitTime=1148, rpcTimeout=1000 row '' on table 'testScannerHeartbeatMessagesTable' at region=testScannerHeartbeatMessagesTable,,1597613711399.6d3cd6dc26109d225ff1c99b9fc856be., hostname=df7b0ce315e4,38192,1597613684285, seqNum=2
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithRetries(RpcRetryingCallerImpl.java:159)
+	at org.apache.hadoop.hbase.client.ResultBoundedCompletionService$QueueingFuture.run(ResultBoundedCompletionService.java:80)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	... 1 more
+Caused by: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call to df7b0ce315e4/172.17.0.18:38192 failed on local exception: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call[id=167,methodName=Scan], waitTime=1148, rpcTimeout=1000
+	at org.apache.hadoop.hbase.ipc.IPCUtil.wrapException(IPCUtil.java:204)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.onCallFinished(AbstractRpcClient.java:392)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.access$100(AbstractRpcClient.java:97)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:423)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:419)
+	at org.apache.hadoop.hbase.ipc.Call.setTimeout(Call.java:110)
+	at org.apache.hadoop.hbase.ipc.RpcConnection$1.run(RpcConnection.java:199)
+	at org.apache.hbase.thirdparty.io.netty.util.HashedWheelTimer$HashedWheelTimeout.expire(HashedWheelTimer.java:682)
+	at org.apache.hbase.thirdparty.io.netty.util.HashedWheelTimer$HashedWheelBucket.expireTimeouts(HashedWheelTimer.java:757)
+	at org.apache.hbase.thirdparty.io.netty.util.HashedWheelTimer$Worker.run(HashedWheelTimer.java:485)
+	... 1 more
+Caused by: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call[id=167,methodName=Scan], waitTime=1148, rpcTimeout=1000
+	at org.apache.hadoop.hbase.ipc.RpcConnection$1.run(RpcConnection.java:200)
+	... 4 more
+
+stackTrace: java.lang.AssertionError: Heartbeat messages are enabled, exceptions should NOT be thrown. Exception trace:org.apache.hadoop.hbase.client.RetriesExhaustedException: Failed after attempts=16, exceptions:
+2020-08-16T21:36:22.349Z, java.net.SocketTimeoutException: callTimeout=1000, callDuration=1167: Call to df7b0ce315e4/172.17.0.18:38192 failed on local exception: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call[id=167,methodName=Scan], waitTime=1148, rpcTimeout=1000 row '' on table 'testScannerHeartbeatMessagesTable' at region=testScannerHeartbeatMessagesTable,,1597613711399.6d3cd6dc26109d225ff1c99b9fc856be., hostname=df7b0ce315e4,38192,1597613684285, seqNum=2
+
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerWithReadReplicas.throwEnrichedException(RpcRetryingCallerWithReadReplicas.java:299)
+	at org.apache.hadoop.hbase.client.ScannerCallableWithReplicas.call(ScannerCallableWithReplicas.java:251)
+	at org.apache.hadoop.hbase.client.ScannerCallableWithReplicas.call(ScannerCallableWithReplicas.java:58)
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithoutRetries(RpcRetryingCallerImpl.java:192)
+	at org.apache.hadoop.hbase.client.ClientScanner.call(ClientScanner.java:267)
+	at org.apache.hadoop.hbase.client.ClientScanner.loadCache(ClientScanner.java:435)
+	at org.apache.hadoop.hbase.client.ClientScanner.nextWithSyncCache(ClientScanner.java:310)
+	at org.apache.hadoop.hbase.client.ClientScanner.next(ClientScanner.java:595)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages$3.call(TestScannerHeartbeatMessages.java:324)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages$3.call(TestScannerHeartbeatMessages.java:302)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testImportanceOfHeartbeats(TestScannerHeartbeatMessages.java:197)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testHeartbeatWithSparseCellFilter(TestScannerHeartbeatMessages.java:302)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.net.SocketTimeoutException: callTimeout=1000, callDuration=1167: Call to df7b0ce315e4/172.17.0.18:38192 failed on local exception: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call[id=167,methodName=Scan], waitTime=1148, rpcTimeout=1000 row '' on table 'testScannerHeartbeatMessagesTable' at region=testScannerHeartbeatMessagesTable,,1597613711399.6d3cd6dc26109d225ff1c99b9fc856be., hostname=df7b0ce315e4,38192,1597613684285, seqNum=2
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithRetries(RpcRetryingCallerImpl.java:159)
+	at org.apache.hadoop.hbase.client.ResultBoundedCompletionService$QueueingFuture.run(ResultBoundedCompletionService.java:80)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	... 1 more
+Caused by: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call to df7b0ce315e4/172.17.0.18:38192 failed on local exception: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call[id=167,methodName=Scan], waitTime=1148, rpcTimeout=1000
+	at org.apache.hadoop.hbase.ipc.IPCUtil.wrapException(IPCUtil.java:204)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.onCallFinished(AbstractRpcClient.java:392)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.access$100(AbstractRpcClient.java:97)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:423)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:419)
+	at org.apache.hadoop.hbase.ipc.Call.setTimeout(Call.java:110)
+	at org.apache.hadoop.hbase.ipc.RpcConnection$1.run(RpcConnection.java:199)
+	at org.apache.hbase.thirdparty.io.netty.util.HashedWheelTimer$HashedWheelTimeout.expire(HashedWheelTimer.java:682)
+	at org.apache.hbase.thirdparty.io.netty.util.HashedWheelTimer$HashedWheelBucket.expireTimeouts(HashedWheelTimer.java:757)
+	at org.apache.hbase.thirdparty.io.netty.util.HashedWheelTimer$Worker.run(HashedWheelTimer.java:485)
+	... 1 more
+Caused by: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call[id=167,methodName=Scan], waitTime=1148, rpcTimeout=1000
+	at org.apache.hadoop.hbase.ipc.RpcConnection$1.run(RpcConnection.java:200)
+	... 4 more
+
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testImportanceOfHeartbeats(TestScannerHeartbeatMessages.java:199)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testHeartbeatWithSparseCellFilter(TestScannerHeartbeatMessages.java:302)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.lang.Thread.run(Thread.java:748)
+
+
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is -1
+
+Test vvMode=v2v2
+tr.result is -1
+v1v1 or v2v2 test failed !!!
+reconf_parameter: dfs.namenode.stale.datanode.interval
+component: hdfs:NameNode
+v1: 300
+v2: 30000
+testProject: hbase
+unitTest: org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages#testHeartbeatWithSparseCellFilter
+reconfPoint: 1
+result: -1
+failureMessage: Heartbeat messages are enabled, exceptions should NOT be thrown. Exception trace:org.apache.hadoop.hbase.client.RetriesExhaustedException: Failed after attempts=16, exceptions:
+2020-08-16T22:52:23.652Z, java.net.SocketTimeoutException: callTimeout=1000, callDuration=1322: Call to df7b0ce315e4/172.17.0.18:40683 failed on local exception: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call[id=176,methodName=Scan], waitTime=1303, rpcTimeout=999 row '' on table 'testScannerHeartbeatMessagesTable' at region=testScannerHeartbeatMessagesTable,,1597618291509.c21258c90fd184ae0896edda21bbc624., hostname=df7b0ce315e4,40683,1597618263290, seqNum=2
+
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerWithReadReplicas.throwEnrichedException(RpcRetryingCallerWithReadReplicas.java:299)
+	at org.apache.hadoop.hbase.client.ScannerCallableWithReplicas.call(ScannerCallableWithReplicas.java:251)
+	at org.apache.hadoop.hbase.client.ScannerCallableWithReplicas.call(ScannerCallableWithReplicas.java:58)
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithoutRetries(RpcRetryingCallerImpl.java:192)
+	at org.apache.hadoop.hbase.client.ClientScanner.call(ClientScanner.java:267)
+	at org.apache.hadoop.hbase.client.ClientScanner.loadCache(ClientScanner.java:435)
+	at org.apache.hadoop.hbase.client.ClientScanner.nextWithSyncCache(ClientScanner.java:310)
+	at org.apache.hadoop.hbase.client.ClientScanner.next(ClientScanner.java:595)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages$3.call(TestScannerHeartbeatMessages.java:324)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages$3.call(TestScannerHeartbeatMessages.java:302)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testImportanceOfHeartbeats(TestScannerHeartbeatMessages.java:197)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testHeartbeatWithSparseCellFilter(TestScannerHeartbeatMessages.java:302)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.net.SocketTimeoutException: callTimeout=1000, callDuration=1322: Call to df7b0ce315e4/172.17.0.18:40683 failed on local exception: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call[id=176,methodName=Scan], waitTime=1303, rpcTimeout=999 row '' on table 'testScannerHeartbeatMessagesTable' at region=testScannerHeartbeatMessagesTable,,1597618291509.c21258c90fd184ae0896edda21bbc624., hostname=df7b0ce315e4,40683,1597618263290, seqNum=2
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithRetries(RpcRetryingCallerImpl.java:159)
+	at org.apache.hadoop.hbase.client.ResultBoundedCompletionService$QueueingFuture.run(ResultBoundedCompletionService.java:80)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	... 1 more
+Caused by: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call to df7b0ce315e4/172.17.0.18:40683 failed on local exception: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call[id=176,methodName=Scan], waitTime=1303, rpcTimeout=999
+	at org.apache.hadoop.hbase.ipc.IPCUtil.wrapException(IPCUtil.java:204)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.onCallFinished(AbstractRpcClient.java:392)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.access$100(AbstractRpcClient.java:97)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:423)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:419)
+	at org.apache.hadoop.hbase.ipc.Call.setTimeout(Call.java:110)
+	at org.apache.hadoop.hbase.ipc.RpcConnection$1.run(RpcConnection.java:199)
+	at org.apache.hbase.thirdparty.io.netty.util.HashedWheelTimer$HashedWheelTimeout.expire(HashedWheelTimer.java:682)
+	at org.apache.hbase.thirdparty.io.netty.util.HashedWheelTimer$HashedWheelBucket.expireTimeouts(HashedWheelTimer.java:757)
+	at org.apache.hbase.thirdparty.io.netty.util.HashedWheelTimer$Worker.run(HashedWheelTimer.java:485)
+	... 1 more
+Caused by: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call[id=176,methodName=Scan], waitTime=1303, rpcTimeout=999
+	at org.apache.hadoop.hbase.ipc.RpcConnection$1.run(RpcConnection.java:200)
+	... 4 more
+
+stackTrace: java.lang.AssertionError: Heartbeat messages are enabled, exceptions should NOT be thrown. Exception trace:org.apache.hadoop.hbase.client.RetriesExhaustedException: Failed after attempts=16, exceptions:
+2020-08-16T22:52:23.652Z, java.net.SocketTimeoutException: callTimeout=1000, callDuration=1322: Call to df7b0ce315e4/172.17.0.18:40683 failed on local exception: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call[id=176,methodName=Scan], waitTime=1303, rpcTimeout=999 row '' on table 'testScannerHeartbeatMessagesTable' at region=testScannerHeartbeatMessagesTable,,1597618291509.c21258c90fd184ae0896edda21bbc624., hostname=df7b0ce315e4,40683,1597618263290, seqNum=2
+
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerWithReadReplicas.throwEnrichedException(RpcRetryingCallerWithReadReplicas.java:299)
+	at org.apache.hadoop.hbase.client.ScannerCallableWithReplicas.call(ScannerCallableWithReplicas.java:251)
+	at org.apache.hadoop.hbase.client.ScannerCallableWithReplicas.call(ScannerCallableWithReplicas.java:58)
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithoutRetries(RpcRetryingCallerImpl.java:192)
+	at org.apache.hadoop.hbase.client.ClientScanner.call(ClientScanner.java:267)
+	at org.apache.hadoop.hbase.client.ClientScanner.loadCache(ClientScanner.java:435)
+	at org.apache.hadoop.hbase.client.ClientScanner.nextWithSyncCache(ClientScanner.java:310)
+	at org.apache.hadoop.hbase.client.ClientScanner.next(ClientScanner.java:595)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages$3.call(TestScannerHeartbeatMessages.java:324)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages$3.call(TestScannerHeartbeatMessages.java:302)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testImportanceOfHeartbeats(TestScannerHeartbeatMessages.java:197)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testHeartbeatWithSparseCellFilter(TestScannerHeartbeatMessages.java:302)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.net.SocketTimeoutException: callTimeout=1000, callDuration=1322: Call to df7b0ce315e4/172.17.0.18:40683 failed on local exception: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call[id=176,methodName=Scan], waitTime=1303, rpcTimeout=999 row '' on table 'testScannerHeartbeatMessagesTable' at region=testScannerHeartbeatMessagesTable,,1597618291509.c21258c90fd184ae0896edda21bbc624., hostname=df7b0ce315e4,40683,1597618263290, seqNum=2
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithRetries(RpcRetryingCallerImpl.java:159)
+	at org.apache.hadoop.hbase.client.ResultBoundedCompletionService$QueueingFuture.run(ResultBoundedCompletionService.java:80)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	... 1 more
+Caused by: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call to df7b0ce315e4/172.17.0.18:40683 failed on local exception: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call[id=176,methodName=Scan], waitTime=1303, rpcTimeout=999
+	at org.apache.hadoop.hbase.ipc.IPCUtil.wrapException(IPCUtil.java:204)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.onCallFinished(AbstractRpcClient.java:392)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.access$100(AbstractRpcClient.java:97)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:423)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:419)
+	at org.apache.hadoop.hbase.ipc.Call.setTimeout(Call.java:110)
+	at org.apache.hadoop.hbase.ipc.RpcConnection$1.run(RpcConnection.java:199)
+	at org.apache.hbase.thirdparty.io.netty.util.HashedWheelTimer$HashedWheelTimeout.expire(HashedWheelTimer.java:682)
+	at org.apache.hbase.thirdparty.io.netty.util.HashedWheelTimer$HashedWheelBucket.expireTimeouts(HashedWheelTimer.java:757)
+	at org.apache.hbase.thirdparty.io.netty.util.HashedWheelTimer$Worker.run(HashedWheelTimer.java:485)
+	... 1 more
+Caused by: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call[id=176,methodName=Scan], waitTime=1303, rpcTimeout=999
+	at org.apache.hadoop.hbase.ipc.RpcConnection$1.run(RpcConnection.java:200)
+	... 4 more
+
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testImportanceOfHeartbeats(TestScannerHeartbeatMessages.java:199)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testHeartbeatWithSparseCellFilter(TestScannerHeartbeatMessages.java:302)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.lang.Thread.run(Thread.java:748)
+
+
+reconf_parameter: dfs.namenode.stale.datanode.interval
+component: hdfs:NameNode
+v1: 300
+v2: 30000
+testProject: hbase
+unitTest: org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages#testHeartbeatWithSparseCellFilter
+reconfPoint: 1
+result: -1
+failureMessage: Heartbeat messages are enabled, exceptions should NOT be thrown. Exception trace:org.apache.hadoop.hbase.client.RetriesExhaustedException: Failed after attempts=16, exceptions:
+2020-08-16T22:54:52.545Z, java.net.SocketTimeoutException: callTimeout=1000, callDuration=1310: Call to df7b0ce315e4/172.17.0.18:46238 failed on local exception: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call[id=178,methodName=Scan], waitTime=1301, rpcTimeout=1000 row '' on table 'testScannerHeartbeatMessagesTable' at region=testScannerHeartbeatMessagesTable,,1597618437768.c7554c1bbeec622919683f76160645d7., hostname=df7b0ce315e4,46238,1597618413121, seqNum=2
+
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerWithReadReplicas.throwEnrichedException(RpcRetryingCallerWithReadReplicas.java:299)
+	at org.apache.hadoop.hbase.client.ScannerCallableWithReplicas.call(ScannerCallableWithReplicas.java:251)
+	at org.apache.hadoop.hbase.client.ScannerCallableWithReplicas.call(ScannerCallableWithReplicas.java:58)
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithoutRetries(RpcRetryingCallerImpl.java:192)
+	at org.apache.hadoop.hbase.client.ClientScanner.call(ClientScanner.java:267)
+	at org.apache.hadoop.hbase.client.ClientScanner.loadCache(ClientScanner.java:435)
+	at org.apache.hadoop.hbase.client.ClientScanner.nextWithSyncCache(ClientScanner.java:310)
+	at org.apache.hadoop.hbase.client.ClientScanner.next(ClientScanner.java:595)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages$3.call(TestScannerHeartbeatMessages.java:324)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages$3.call(TestScannerHeartbeatMessages.java:302)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testImportanceOfHeartbeats(TestScannerHeartbeatMessages.java:197)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testHeartbeatWithSparseCellFilter(TestScannerHeartbeatMessages.java:302)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.net.SocketTimeoutException: callTimeout=1000, callDuration=1310: Call to df7b0ce315e4/172.17.0.18:46238 failed on local exception: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call[id=178,methodName=Scan], waitTime=1301, rpcTimeout=1000 row '' on table 'testScannerHeartbeatMessagesTable' at region=testScannerHeartbeatMessagesTable,,1597618437768.c7554c1bbeec622919683f76160645d7., hostname=df7b0ce315e4,46238,1597618413121, seqNum=2
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithRetries(RpcRetryingCallerImpl.java:159)
+	at org.apache.hadoop.hbase.client.ResultBoundedCompletionService$QueueingFuture.run(ResultBoundedCompletionService.java:80)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	... 1 more
+Caused by: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call to df7b0ce315e4/172.17.0.18:46238 failed on local exception: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call[id=178,methodName=Scan], waitTime=1301, rpcTimeout=1000
+	at org.apache.hadoop.hbase.ipc.IPCUtil.wrapException(IPCUtil.java:204)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.onCallFinished(AbstractRpcClient.java:392)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.access$100(AbstractRpcClient.java:97)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:423)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:419)
+	at org.apache.hadoop.hbase.ipc.Call.setTimeout(Call.java:110)
+	at org.apache.hadoop.hbase.ipc.RpcConnection$1.run(RpcConnection.java:199)
+	at org.apache.hbase.thirdparty.io.netty.util.HashedWheelTimer$HashedWheelTimeout.expire(HashedWheelTimer.java:682)
+	at org.apache.hbase.thirdparty.io.netty.util.HashedWheelTimer$HashedWheelBucket.expireTimeouts(HashedWheelTimer.java:757)
+	at org.apache.hbase.thirdparty.io.netty.util.HashedWheelTimer$Worker.run(HashedWheelTimer.java:485)
+	... 1 more
+Caused by: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call[id=178,methodName=Scan], waitTime=1301, rpcTimeout=1000
+	at org.apache.hadoop.hbase.ipc.RpcConnection$1.run(RpcConnection.java:200)
+	... 4 more
+
+stackTrace: java.lang.AssertionError: Heartbeat messages are enabled, exceptions should NOT be thrown. Exception trace:org.apache.hadoop.hbase.client.RetriesExhaustedException: Failed after attempts=16, exceptions:
+2020-08-16T22:54:52.545Z, java.net.SocketTimeoutException: callTimeout=1000, callDuration=1310: Call to df7b0ce315e4/172.17.0.18:46238 failed on local exception: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call[id=178,methodName=Scan], waitTime=1301, rpcTimeout=1000 row '' on table 'testScannerHeartbeatMessagesTable' at region=testScannerHeartbeatMessagesTable,,1597618437768.c7554c1bbeec622919683f76160645d7., hostname=df7b0ce315e4,46238,1597618413121, seqNum=2
+
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerWithReadReplicas.throwEnrichedException(RpcRetryingCallerWithReadReplicas.java:299)
+	at org.apache.hadoop.hbase.client.ScannerCallableWithReplicas.call(ScannerCallableWithReplicas.java:251)
+	at org.apache.hadoop.hbase.client.ScannerCallableWithReplicas.call(ScannerCallableWithReplicas.java:58)
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithoutRetries(RpcRetryingCallerImpl.java:192)
+	at org.apache.hadoop.hbase.client.ClientScanner.call(ClientScanner.java:267)
+	at org.apache.hadoop.hbase.client.ClientScanner.loadCache(ClientScanner.java:435)
+	at org.apache.hadoop.hbase.client.ClientScanner.nextWithSyncCache(ClientScanner.java:310)
+	at org.apache.hadoop.hbase.client.ClientScanner.next(ClientScanner.java:595)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages$3.call(TestScannerHeartbeatMessages.java:324)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages$3.call(TestScannerHeartbeatMessages.java:302)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testImportanceOfHeartbeats(TestScannerHeartbeatMessages.java:197)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testHeartbeatWithSparseCellFilter(TestScannerHeartbeatMessages.java:302)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.net.SocketTimeoutException: callTimeout=1000, callDuration=1310: Call to df7b0ce315e4/172.17.0.18:46238 failed on local exception: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call[id=178,methodName=Scan], waitTime=1301, rpcTimeout=1000 row '' on table 'testScannerHeartbeatMessagesTable' at region=testScannerHeartbeatMessagesTable,,1597618437768.c7554c1bbeec622919683f76160645d7., hostname=df7b0ce315e4,46238,1597618413121, seqNum=2
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithRetries(RpcRetryingCallerImpl.java:159)
+	at org.apache.hadoop.hbase.client.ResultBoundedCompletionService$QueueingFuture.run(ResultBoundedCompletionService.java:80)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	... 1 more
+Caused by: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call to df7b0ce315e4/172.17.0.18:46238 failed on local exception: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call[id=178,methodName=Scan], waitTime=1301, rpcTimeout=1000
+	at org.apache.hadoop.hbase.ipc.IPCUtil.wrapException(IPCUtil.java:204)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.onCallFinished(AbstractRpcClient.java:392)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.access$100(AbstractRpcClient.java:97)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:423)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:419)
+	at org.apache.hadoop.hbase.ipc.Call.setTimeout(Call.java:110)
+	at org.apache.hadoop.hbase.ipc.RpcConnection$1.run(RpcConnection.java:199)
+	at org.apache.hbase.thirdparty.io.netty.util.HashedWheelTimer$HashedWheelTimeout.expire(HashedWheelTimer.java:682)
+	at org.apache.hbase.thirdparty.io.netty.util.HashedWheelTimer$HashedWheelBucket.expireTimeouts(HashedWheelTimer.java:757)
+	at org.apache.hbase.thirdparty.io.netty.util.HashedWheelTimer$Worker.run(HashedWheelTimer.java:485)
+	... 1 more
+Caused by: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call[id=178,methodName=Scan], waitTime=1301, rpcTimeout=1000
+	at org.apache.hadoop.hbase.ipc.RpcConnection$1.run(RpcConnection.java:200)
+	... 4 more
+
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testImportanceOfHeartbeats(TestScannerHeartbeatMessages.java:199)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testHeartbeatWithSparseCellFilter(TestScannerHeartbeatMessages.java:302)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.lang.Thread.run(Thread.java:748)
+
+
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is -1
+
+Test vvMode=v2v2
+tr.result is -1
+v1v1 or v2v2 test failed !!!
+reconf_parameter: dfs.namenode.stale.datanode.interval
+component: hdfs:NameNode
+v1: 300
+v2: 30000
+testProject: hbase
+unitTest: org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages#testHeartbeatWithSparseCellFilter
+reconfPoint: 1
+result: -1
+failureMessage: Heartbeat messages are enabled, exceptions should NOT be thrown. Exception trace:org.apache.hadoop.hbase.client.RetriesExhaustedException: Failed after attempts=16, exceptions:
+2020-08-16T23:09:02.350Z, java.net.SocketTimeoutException: callTimeout=1000, callDuration=1873: Call to df7b0ce315e4/172.17.0.18:40639 failed on local exception: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call[id=169,methodName=Scan], waitTime=1010, rpcTimeout=1000 row '' on table 'testScannerHeartbeatMessagesTable' at region=testScannerHeartbeatMessagesTable,,1597619275963.3ef61683ac48a1d91a1ca9caefcc3e71., hostname=df7b0ce315e4,40639,1597619256375, seqNum=2
+
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerWithReadReplicas.throwEnrichedException(RpcRetryingCallerWithReadReplicas.java:299)
+	at org.apache.hadoop.hbase.client.ScannerCallableWithReplicas.call(ScannerCallableWithReplicas.java:251)
+	at org.apache.hadoop.hbase.client.ScannerCallableWithReplicas.call(ScannerCallableWithReplicas.java:58)
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithoutRetries(RpcRetryingCallerImpl.java:192)
+	at org.apache.hadoop.hbase.client.ClientScanner.call(ClientScanner.java:267)
+	at org.apache.hadoop.hbase.client.ClientScanner.loadCache(ClientScanner.java:435)
+	at org.apache.hadoop.hbase.client.ClientScanner.nextWithSyncCache(ClientScanner.java:310)
+	at org.apache.hadoop.hbase.client.ClientScanner.next(ClientScanner.java:595)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages$3.call(TestScannerHeartbeatMessages.java:324)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages$3.call(TestScannerHeartbeatMessages.java:302)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testImportanceOfHeartbeats(TestScannerHeartbeatMessages.java:197)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testHeartbeatWithSparseCellFilter(TestScannerHeartbeatMessages.java:302)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.net.SocketTimeoutException: callTimeout=1000, callDuration=1873: Call to df7b0ce315e4/172.17.0.18:40639 failed on local exception: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call[id=169,methodName=Scan], waitTime=1010, rpcTimeout=1000 row '' on table 'testScannerHeartbeatMessagesTable' at region=testScannerHeartbeatMessagesTable,,1597619275963.3ef61683ac48a1d91a1ca9caefcc3e71., hostname=df7b0ce315e4,40639,1597619256375, seqNum=2
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithRetries(RpcRetryingCallerImpl.java:159)
+	at org.apache.hadoop.hbase.client.ResultBoundedCompletionService$QueueingFuture.run(ResultBoundedCompletionService.java:80)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	... 1 more
+Caused by: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call to df7b0ce315e4/172.17.0.18:40639 failed on local exception: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call[id=169,methodName=Scan], waitTime=1010, rpcTimeout=1000
+	at org.apache.hadoop.hbase.ipc.IPCUtil.wrapException(IPCUtil.java:204)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.onCallFinished(AbstractRpcClient.java:392)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.access$100(AbstractRpcClient.java:97)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:423)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:419)
+	at org.apache.hadoop.hbase.ipc.Call.setTimeout(Call.java:110)
+	at org.apache.hadoop.hbase.ipc.RpcConnection$1.run(RpcConnection.java:199)
+	at org.apache.hbase.thirdparty.io.netty.util.HashedWheelTimer$HashedWheelTimeout.expire(HashedWheelTimer.java:682)
+	at org.apache.hbase.thirdparty.io.netty.util.HashedWheelTimer$HashedWheelBucket.expireTimeouts(HashedWheelTimer.java:757)
+	at org.apache.hbase.thirdparty.io.netty.util.HashedWheelTimer$Worker.run(HashedWheelTimer.java:485)
+	... 1 more
+Caused by: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call[id=169,methodName=Scan], waitTime=1010, rpcTimeout=1000
+	at org.apache.hadoop.hbase.ipc.RpcConnection$1.run(RpcConnection.java:200)
+	... 4 more
+
+stackTrace: java.lang.AssertionError: Heartbeat messages are enabled, exceptions should NOT be thrown. Exception trace:org.apache.hadoop.hbase.client.RetriesExhaustedException: Failed after attempts=16, exceptions:
+2020-08-16T23:09:02.350Z, java.net.SocketTimeoutException: callTimeout=1000, callDuration=1873: Call to df7b0ce315e4/172.17.0.18:40639 failed on local exception: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call[id=169,methodName=Scan], waitTime=1010, rpcTimeout=1000 row '' on table 'testScannerHeartbeatMessagesTable' at region=testScannerHeartbeatMessagesTable,,1597619275963.3ef61683ac48a1d91a1ca9caefcc3e71., hostname=df7b0ce315e4,40639,1597619256375, seqNum=2
+
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerWithReadReplicas.throwEnrichedException(RpcRetryingCallerWithReadReplicas.java:299)
+	at org.apache.hadoop.hbase.client.ScannerCallableWithReplicas.call(ScannerCallableWithReplicas.java:251)
+	at org.apache.hadoop.hbase.client.ScannerCallableWithReplicas.call(ScannerCallableWithReplicas.java:58)
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithoutRetries(RpcRetryingCallerImpl.java:192)
+	at org.apache.hadoop.hbase.client.ClientScanner.call(ClientScanner.java:267)
+	at org.apache.hadoop.hbase.client.ClientScanner.loadCache(ClientScanner.java:435)
+	at org.apache.hadoop.hbase.client.ClientScanner.nextWithSyncCache(ClientScanner.java:310)
+	at org.apache.hadoop.hbase.client.ClientScanner.next(ClientScanner.java:595)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages$3.call(TestScannerHeartbeatMessages.java:324)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages$3.call(TestScannerHeartbeatMessages.java:302)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testImportanceOfHeartbeats(TestScannerHeartbeatMessages.java:197)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testHeartbeatWithSparseCellFilter(TestScannerHeartbeatMessages.java:302)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.net.SocketTimeoutException: callTimeout=1000, callDuration=1873: Call to df7b0ce315e4/172.17.0.18:40639 failed on local exception: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call[id=169,methodName=Scan], waitTime=1010, rpcTimeout=1000 row '' on table 'testScannerHeartbeatMessagesTable' at region=testScannerHeartbeatMessagesTable,,1597619275963.3ef61683ac48a1d91a1ca9caefcc3e71., hostname=df7b0ce315e4,40639,1597619256375, seqNum=2
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithRetries(RpcRetryingCallerImpl.java:159)
+	at org.apache.hadoop.hbase.client.ResultBoundedCompletionService$QueueingFuture.run(ResultBoundedCompletionService.java:80)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	... 1 more
+Caused by: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call to df7b0ce315e4/172.17.0.18:40639 failed on local exception: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call[id=169,methodName=Scan], waitTime=1010, rpcTimeout=1000
+	at org.apache.hadoop.hbase.ipc.IPCUtil.wrapException(IPCUtil.java:204)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.onCallFinished(AbstractRpcClient.java:392)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.access$100(AbstractRpcClient.java:97)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:423)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:419)
+	at org.apache.hadoop.hbase.ipc.Call.setTimeout(Call.java:110)
+	at org.apache.hadoop.hbase.ipc.RpcConnection$1.run(RpcConnection.java:199)
+	at org.apache.hbase.thirdparty.io.netty.util.HashedWheelTimer$HashedWheelTimeout.expire(HashedWheelTimer.java:682)
+	at org.apache.hbase.thirdparty.io.netty.util.HashedWheelTimer$HashedWheelBucket.expireTimeouts(HashedWheelTimer.java:757)
+	at org.apache.hbase.thirdparty.io.netty.util.HashedWheelTimer$Worker.run(HashedWheelTimer.java:485)
+	... 1 more
+Caused by: org.apache.hadoop.hbase.ipc.CallTimeoutException: Call[id=169,methodName=Scan], waitTime=1010, rpcTimeout=1000
+	at org.apache.hadoop.hbase.ipc.RpcConnection$1.run(RpcConnection.java:200)
+	... 4 more
+
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testImportanceOfHeartbeats(TestScannerHeartbeatMessages.java:199)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testHeartbeatWithSparseCellFilter(TestScannerHeartbeatMessages.java:302)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.lang.Thread.run(Thread.java:748)
+
+
+reconf_parameter: dfs.namenode.stale.datanode.interval
+component: hdfs:NameNode
+v1: 300
+v2: 30000
+testProject: hbase
+unitTest: org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages#testHeartbeatWithSparseCellFilter
+reconfPoint: 1
+result: -1
+failureMessage: Heartbeat messages are enabled, exceptions should NOT be thrown. Exception trace:java.io.IOException: Failed to get result within timeout, timeout=1000ms
+	at org.apache.hadoop.hbase.client.ScannerCallableWithReplicas.call(ScannerCallableWithReplicas.java:241)
+	at org.apache.hadoop.hbase.client.ScannerCallableWithReplicas.call(ScannerCallableWithReplicas.java:58)
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithoutRetries(RpcRetryingCallerImpl.java:192)
+	at org.apache.hadoop.hbase.client.ClientScanner.call(ClientScanner.java:267)
+	at org.apache.hadoop.hbase.client.ClientScanner.loadCache(ClientScanner.java:435)
+	at org.apache.hadoop.hbase.client.ClientScanner.nextWithSyncCache(ClientScanner.java:310)
+	at org.apache.hadoop.hbase.client.ClientScanner.next(ClientScanner.java:595)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages$3.call(TestScannerHeartbeatMessages.java:324)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages$3.call(TestScannerHeartbeatMessages.java:302)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testImportanceOfHeartbeats(TestScannerHeartbeatMessages.java:197)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testHeartbeatWithSparseCellFilter(TestScannerHeartbeatMessages.java:302)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.lang.Thread.run(Thread.java:748)
+
+stackTrace: java.lang.AssertionError: Heartbeat messages are enabled, exceptions should NOT be thrown. Exception trace:java.io.IOException: Failed to get result within timeout, timeout=1000ms
+	at org.apache.hadoop.hbase.client.ScannerCallableWithReplicas.call(ScannerCallableWithReplicas.java:241)
+	at org.apache.hadoop.hbase.client.ScannerCallableWithReplicas.call(ScannerCallableWithReplicas.java:58)
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithoutRetries(RpcRetryingCallerImpl.java:192)
+	at org.apache.hadoop.hbase.client.ClientScanner.call(ClientScanner.java:267)
+	at org.apache.hadoop.hbase.client.ClientScanner.loadCache(ClientScanner.java:435)
+	at org.apache.hadoop.hbase.client.ClientScanner.nextWithSyncCache(ClientScanner.java:310)
+	at org.apache.hadoop.hbase.client.ClientScanner.next(ClientScanner.java:595)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages$3.call(TestScannerHeartbeatMessages.java:324)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages$3.call(TestScannerHeartbeatMessages.java:302)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testImportanceOfHeartbeats(TestScannerHeartbeatMessages.java:197)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testHeartbeatWithSparseCellFilter(TestScannerHeartbeatMessages.java:302)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.lang.Thread.run(Thread.java:748)
+
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testImportanceOfHeartbeats(TestScannerHeartbeatMessages.java:199)
+	at org.apache.hadoop.hbase.regionserver.TestScannerHeartbeatMessages.testHeartbeatWithSparseCellFilter(TestScannerHeartbeatMessages.java:302)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.lang.Thread.run(Thread.java:748)
+
+
+v1v2 failed with probability 6 out of 50
+v1v1v2v2 failed with probability 6 out of 50
+result: false positive !!!
+Total execution time in seconds : 26174

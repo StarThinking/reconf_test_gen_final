@@ -10,8 +10,8 @@ hadoop.http.authentication.signature.secret.file yarn:ApplicationHistoryServer.1
 hadoop.http.authentication.simple.anonymous.allowed yarn:ApplicationHistoryServer.1 true get
 hadoop.http.authentication.token.validity yarn:ApplicationHistoryServer.1 36000 get
 hadoop.http.authentication.type yarn:ApplicationHistoryServer.1 simple get
-hadoop.http.filter.initializers yarn:ApplicationHistoryServer.1 [Ljava.lang.Class;@2fd611e5 getClasses
-hadoop.http.filter.initializers yarn:ApplicationHistoryServer.1 [Ljava.lang.String;@5a448385 getTrimmedStrings
+hadoop.http.filter.initializers yarn:ApplicationHistoryServer.1 [Ljava.lang.Class;@15aa74e2 getClasses
+hadoop.http.filter.initializers yarn:ApplicationHistoryServer.1 [Ljava.lang.String;@51100077 getTrimmedStrings
 hadoop.http.filter.initializers yarn:ApplicationHistoryServer.1 org.apache.hadoop.http.lib.StaticUserWebFilter get
 hadoop.http.filter.initializers yarn:ApplicationHistoryServer.1 org.apache.hadoop.http.lib.StaticUserWebFilter,org.apache.hadoop.yarn.server.timeline.security.TimelineAuthenticationFilterInitializer get
 hadoop.http.filter.initializers yarn:ApplicationHistoryServer.1 org.apache.hadoop.http.lib.StaticUserWebFilter,org.apache.hadoop.yarn.server.timeline.security.TimelineAuthenticationFilterInitializer getRaw
@@ -125,14 +125,15 @@ org.apache.hadoop.yarn.server.timeline.security.TimelineAuthenticationFilterInit
 rpc.engine.org.apache.hadoop.yarn.api.ApplicationHistoryProtocolPB yarn:ApplicationHistoryServer.1 class org.apache.hadoop.ipc.ProtobufRpcEngine getClass
 rpc.engine.org.apache.hadoop.yarn.api.ApplicationHistoryProtocolPB yarn:ApplicationHistoryServer.1 org.apache.hadoop.ipc.ProtobufRpcEngine get
 rpc.engine.org.apache.hadoop.yarn.api.ApplicationHistoryProtocolPB yarn:ApplicationHistoryServer.1 org.apache.hadoop.ipc.ProtobufRpcEngine getTrimmed
-rpc.metrics.percentiles.intervals yarn:ApplicationHistoryServer.1 [I@4578b8a9 getInts
-rpc.metrics.percentiles.intervals yarn:ApplicationHistoryServer.1 [Ljava.lang.String;@1bea6ae8 getTrimmedStrings
+rpc.metrics.percentiles.intervals yarn:ApplicationHistoryServer.1 [I@2db398a3 getInts
+rpc.metrics.percentiles.intervals yarn:ApplicationHistoryServer.1 [Ljava.lang.String;@29507ac0 getTrimmedStrings
 rpc.metrics.percentiles.intervals yarn:ApplicationHistoryServer.1 null get
 yarn.acl.enable yarn:ApplicationHistoryServer.1 false get
 yarn.acl.enable yarn:ApplicationHistoryServer.1 false getBoolean
 yarn.acl.enable yarn:ApplicationHistoryServer.1 false getTrimmed
 yarn.admin.acl yarn:ApplicationHistoryServer.1 * get
 yarn.http.policy yarn:ApplicationHistoryServer.1 HTTP_ONLY get
+yarn.http.policy yarn:TimelineClientImpl.1 HTTP_ONLY get
 yarn.ipc.rpc.class yarn:ApplicationHistoryServer.1 org.apache.hadoop.yarn.ipc.HadoopYarnProtoRPC get
 yarn.ipc.server.factory.class yarn:ApplicationHistoryServer.1 org.apache.hadoop.yarn.factories.impl.pb.RpcServerFactoryPBImpl get
 yarn.log-aggregation.TFile.remote-app-log-dir yarn:ApplicationHistoryServer.1 null get
@@ -147,13 +148,17 @@ yarn.nodemanager.log-aggregation.num-log-files-per-app yarn:ApplicationHistorySe
 yarn.nodemanager.log-aggregation.num-log-files-per-app yarn:ApplicationHistoryServer.1 30 getTrimmed
 yarn.nodemanager.remote-app-log-dir yarn:ApplicationHistoryServer.1 /tmp/logs get
 yarn.nodemanager.remote-app-log-dir-suffix yarn:ApplicationHistoryServer.1 logs get
-yarn.resourcemanager.ha.enabled yarn:ApplicationHistoryServer.1 false get
-yarn.resourcemanager.ha.enabled yarn:ApplicationHistoryServer.1 false getBoolean
-yarn.resourcemanager.ha.enabled yarn:ApplicationHistoryServer.1 false getTrimmed
 yarn.timeline-service.address yarn:ApplicationHistoryServer.1 0.0.0.0:10200 get
 yarn.timeline-service.address yarn:ApplicationHistoryServer.1 0.0.0.0:10200 getTrimmed
+yarn.timeline-service.address yarn:ApplicationHistoryServer.1 95a12ef9ef5c:10200 get
 yarn.timeline-service.bind-host yarn:ApplicationHistoryServer.1 null get
 yarn.timeline-service.bind-host yarn:ApplicationHistoryServer.1 null getTrimmed
+yarn.timeline-service.client.max-retries yarn:TimelineClientImpl.1 30 get
+yarn.timeline-service.client.max-retries yarn:TimelineClientImpl.1 30 getInt
+yarn.timeline-service.client.max-retries yarn:TimelineClientImpl.1 30 getTrimmed
+yarn.timeline-service.client.retry-interval-ms yarn:TimelineClientImpl.1 1000 get
+yarn.timeline-service.client.retry-interval-ms yarn:TimelineClientImpl.1 1000 getLong
+yarn.timeline-service.client.retry-interval-ms yarn:TimelineClientImpl.1 1000 getTrimmed
 yarn.timeline-service.delegation.key.update-interval yarn:ApplicationHistoryServer.1 86400000 getLong
 yarn.timeline-service.delegation.key.update-interval yarn:ApplicationHistoryServer.1 null get
 yarn.timeline-service.delegation.key.update-interval yarn:ApplicationHistoryServer.1 null getTrimmed
@@ -163,6 +168,9 @@ yarn.timeline-service.delegation.token.max-lifetime yarn:ApplicationHistoryServe
 yarn.timeline-service.delegation.token.renew-interval yarn:ApplicationHistoryServer.1 86400000 getLong
 yarn.timeline-service.delegation.token.renew-interval yarn:ApplicationHistoryServer.1 null get
 yarn.timeline-service.delegation.token.renew-interval yarn:ApplicationHistoryServer.1 null getTrimmed
+yarn.timeline-service.enabled yarn:TimelineClientImpl.1 true get
+yarn.timeline-service.enabled yarn:TimelineClientImpl.1 true getBoolean
+yarn.timeline-service.enabled yarn:TimelineClientImpl.1 true getTrimmed
 yarn.timeline-service.generic-application-history.max-applications yarn:ApplicationHistoryServer.1 10000 get
 yarn.timeline-service.generic-application-history.max-applications yarn:ApplicationHistoryServer.1 10000 getLong
 yarn.timeline-service.generic-application-history.max-applications yarn:ApplicationHistoryServer.1 10000 getTrimmed
@@ -182,9 +190,16 @@ yarn.timeline-service.recovery.enabled yarn:ApplicationHistoryServer.1 false get
 yarn.timeline-service.store-class yarn:ApplicationHistoryServer.1 class org.apache.hadoop.yarn.server.timeline.MemoryTimelineStore getClass
 yarn.timeline-service.store-class yarn:ApplicationHistoryServer.1 org.apache.hadoop.yarn.server.timeline.MemoryTimelineStore get
 yarn.timeline-service.store-class yarn:ApplicationHistoryServer.1 org.apache.hadoop.yarn.server.timeline.MemoryTimelineStore getTrimmed
-yarn.timeline-service.ui-names yarn:ApplicationHistoryServer.1 [Ljava.lang.String;@1bea6ae8 getTrimmedStrings
+yarn.timeline-service.ui-names yarn:ApplicationHistoryServer.1 [Ljava.lang.String;@29507ac0 getTrimmedStrings
 yarn.timeline-service.ui-names yarn:ApplicationHistoryServer.1 null get
+yarn.timeline-service.version yarn:TimelineClientImpl.1 1.0 get
+yarn.timeline-service.version yarn:TimelineClientImpl.1 1.0 getFloat
+yarn.timeline-service.version yarn:TimelineClientImpl.1 1.0 getTrimmed
+yarn.timeline-service.versions yarn:TimelineClientImpl.1 null get
 yarn.timeline-service.webapp.address yarn:ApplicationHistoryServer.1 0.0.0.0:8188 get
+yarn.timeline-service.webapp.address yarn:ApplicationHistoryServer.1 0.0.0.0:8188 getTrimmed
+yarn.timeline-service.webapp.address yarn:ApplicationHistoryServer.1 95a12ef9ef5c:8188 get
+yarn.timeline-service.webapp.address yarn:TimelineClientImpl.1 95a12ef9ef5c:8188 get
 yarn.timeline-service.webapp.rest-csrf.custom-header yarn:ApplicationHistoryServer.1 X-XSRF-Header get
 yarn.timeline-service.webapp.rest-csrf.enabled yarn:ApplicationHistoryServer.1 false get
 yarn.timeline-service.webapp.rest-csrf.methods-to-ignore yarn:ApplicationHistoryServer.1 GET,OPTIONS,HEAD get

@@ -1,0 +1,560 @@
+reconf_parameter: dfs.content-summary.sleep-microsec
+component: hdfs:NameNode
+v1: 500
+v2: 5
+testProject: hdfs
+unitTest: org.apache.hadoop.hdfs.server.namenode.TestFSImage#testSaveAndLoadErasureCodingPolicies
+reconfPoint: -2
+result: -1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is -1
+
+Test vvMode=v2v2
+tr.result is 1
+v1v1 or v2v2 test failed !!!
+reconf_parameter: dfs.content-summary.sleep-microsec
+component: hdfs:NameNode
+v1: 500
+v2: 5
+testProject: hdfs
+unitTest: org.apache.hadoop.hdfs.server.namenode.TestFSImage#testSaveAndLoadErasureCodingPolicies
+reconfPoint: -2
+result: -1
+failureMessage: 4 missing blocks, the stripe is: AlignedStripe(Offset=0, length=1048576, fetchedChunksNum=0, missingChunksNum=4); locatedBlocks is: LocatedBlocks{;  fileLength=100663296;  underConstruction=false;  blocks=[LocatedStripedBlock{BP-983612730-172.17.0.7-1597538510955:blk_-9223372036854775776_1002; getBlockSize()=100663296; corrupt=false; offset=0; locs=[DatanodeInfoWithStorage[127.0.0.1:43186,DS-3d78d38b-642a-4aac-a4d3-a07374bf3485,DISK], DatanodeInfoWithStorage[127.0.0.1:42427,DS-3142a8eb-56da-48f9-ad18-e56185f3ddf7,DISK], DatanodeInfoWithStorage[127.0.0.1:33374,DS-9add6f2e-a984-4d07-9f48-6cfef16affcd,DISK], DatanodeInfoWithStorage[127.0.0.1:36301,DS-8cd9ca7e-02e9-4a35-b676-1b595b1ff494,DISK], DatanodeInfoWithStorage[127.0.0.1:45562,DS-90d882a0-3ea2-4af5-a5b1-74b862000828,DISK]]; indices=[1, 4, 5, 7, 8]}];  lastLocatedBlock=LocatedStripedBlock{BP-983612730-172.17.0.7-1597538510955:blk_-9223372036854775776_1002; getBlockSize()=100663296; corrupt=false; offset=0; locs=[DatanodeInfoWithStorage[127.0.0.1:43186,DS-3d78d38b-642a-4aac-a4d3-a07374bf3485,DISK], DatanodeInfoWithStorage[127.0.0.1:42427,DS-3142a8eb-56da-48f9-ad18-e56185f3ddf7,DISK], DatanodeInfoWithStorage[127.0.0.1:33374,DS-9add6f2e-a984-4d07-9f48-6cfef16affcd,DISK], DatanodeInfoWithStorage[127.0.0.1:36301,DS-8cd9ca7e-02e9-4a35-b676-1b595b1ff494,DISK], DatanodeInfoWithStorage[127.0.0.1:45562,DS-90d882a0-3ea2-4af5-a5b1-74b862000828,DISK]]; indices=[1, 4, 5, 7, 8]};  isLastBlockComplete=true;  ecPolicy=ErasureCodingPolicy=[Name=RS-6-3-1024k, Schema=[ECSchema=[Codec=rs, numDataUnits=6, numParityUnits=3]], CellSize=1048576, Id=1]}
+stackTrace: java.io.IOException: 4 missing blocks, the stripe is: AlignedStripe(Offset=0, length=1048576, fetchedChunksNum=0, missingChunksNum=4); locatedBlocks is: LocatedBlocks{;  fileLength=100663296;  underConstruction=false;  blocks=[LocatedStripedBlock{BP-983612730-172.17.0.7-1597538510955:blk_-9223372036854775776_1002; getBlockSize()=100663296; corrupt=false; offset=0; locs=[DatanodeInfoWithStorage[127.0.0.1:43186,DS-3d78d38b-642a-4aac-a4d3-a07374bf3485,DISK], DatanodeInfoWithStorage[127.0.0.1:42427,DS-3142a8eb-56da-48f9-ad18-e56185f3ddf7,DISK], DatanodeInfoWithStorage[127.0.0.1:33374,DS-9add6f2e-a984-4d07-9f48-6cfef16affcd,DISK], DatanodeInfoWithStorage[127.0.0.1:36301,DS-8cd9ca7e-02e9-4a35-b676-1b595b1ff494,DISK], DatanodeInfoWithStorage[127.0.0.1:45562,DS-90d882a0-3ea2-4af5-a5b1-74b862000828,DISK]]; indices=[1, 4, 5, 7, 8]}];  lastLocatedBlock=LocatedStripedBlock{BP-983612730-172.17.0.7-1597538510955:blk_-9223372036854775776_1002; getBlockSize()=100663296; corrupt=false; offset=0; locs=[DatanodeInfoWithStorage[127.0.0.1:43186,DS-3d78d38b-642a-4aac-a4d3-a07374bf3485,DISK], DatanodeInfoWithStorage[127.0.0.1:42427,DS-3142a8eb-56da-48f9-ad18-e56185f3ddf7,DISK], DatanodeInfoWithStorage[127.0.0.1:33374,DS-9add6f2e-a984-4d07-9f48-6cfef16affcd,DISK], DatanodeInfoWithStorage[127.0.0.1:36301,DS-8cd9ca7e-02e9-4a35-b676-1b595b1ff494,DISK], DatanodeInfoWithStorage[127.0.0.1:45562,DS-90d882a0-3ea2-4af5-a5b1-74b862000828,DISK]]; indices=[1, 4, 5, 7, 8]};  isLastBlockComplete=true;  ecPolicy=ErasureCodingPolicy=[Name=RS-6-3-1024k, Schema=[ECSchema=[Codec=rs, numDataUnits=6, numParityUnits=3]], CellSize=1048576, Id=1]}
+	at org.apache.hadoop.hdfs.StripeReader.checkMissingBlocks(StripeReader.java:179)
+	at org.apache.hadoop.hdfs.StripeReader.readParityChunks(StripeReader.java:211)
+	at org.apache.hadoop.hdfs.StripeReader.readStripe(StripeReader.java:341)
+	at org.apache.hadoop.hdfs.DFSStripedInputStream.readOneStripe(DFSStripedInputStream.java:326)
+	at org.apache.hadoop.hdfs.DFSStripedInputStream.readWithStrategy(DFSStripedInputStream.java:419)
+	at org.apache.hadoop.hdfs.DFSInputStream.read(DFSInputStream.java:829)
+	at java.io.DataInputStream.read(DataInputStream.java:100)
+	at org.apache.hadoop.io.IOUtils.copyBytes(IOUtils.java:94)
+	at org.apache.hadoop.hdfs.DFSTestUtil.readFileAsBytes(DFSTestUtil.java:372)
+	at org.apache.hadoop.hdfs.server.namenode.TestFSImage.testChangeErasureCodingPolicyState(TestFSImage.java:960)
+	at org.apache.hadoop.hdfs.server.namenode.TestFSImage.testSaveAndLoadErasureCodingPolicies(TestFSImage.java:889)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:271)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:70)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:50)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:365)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeWithRerun(JUnit4Provider.java:273)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:238)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:159)
+	at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:384)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:345)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:126)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:418)
+
+
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is -1
+v1v2 test failed !!!
+reconf_parameter: dfs.content-summary.sleep-microsec
+component: hdfs:NameNode
+v1: 500
+v2: 5
+testProject: hdfs
+unitTest: org.apache.hadoop.hdfs.server.namenode.TestFSImage#testSaveAndLoadErasureCodingPolicies
+reconfPoint: -2
+result: -1
+failureMessage: 4 missing blocks, the stripe is: AlignedStripe(Offset=0, length=1048576, fetchedChunksNum=0, missingChunksNum=4); locatedBlocks is: LocatedBlocks{;  fileLength=100663296;  underConstruction=false;  blocks=[LocatedStripedBlock{BP-265886949-172.17.0.7-1597552477726:blk_-9223372036854775776_1002; getBlockSize()=100663296; corrupt=false; offset=0; locs=[DatanodeInfoWithStorage[127.0.0.1:44863,DS-1e5cf4e8-1e6f-4de8-a07b-20dcade37b7c,DISK], DatanodeInfoWithStorage[127.0.0.1:37149,DS-b50b8df8-d4f3-4014-82a6-aa6b8f19c91a,DISK], DatanodeInfoWithStorage[127.0.0.1:34595,DS-ecf6f51f-8665-4689-9e28-ae3eb94c89cb,DISK], DatanodeInfoWithStorage[127.0.0.1:35134,DS-38cd1392-9384-4be0-a424-8cc67930c820,DISK], DatanodeInfoWithStorage[127.0.0.1:35353,DS-d370a462-6dd0-4a4f-8d47-34e07253d431,DISK]]; indices=[1, 3, 5, 6, 8]}];  lastLocatedBlock=LocatedStripedBlock{BP-265886949-172.17.0.7-1597552477726:blk_-9223372036854775776_1002; getBlockSize()=100663296; corrupt=false; offset=0; locs=[DatanodeInfoWithStorage[127.0.0.1:44863,DS-1e5cf4e8-1e6f-4de8-a07b-20dcade37b7c,DISK], DatanodeInfoWithStorage[127.0.0.1:37149,DS-b50b8df8-d4f3-4014-82a6-aa6b8f19c91a,DISK], DatanodeInfoWithStorage[127.0.0.1:34595,DS-ecf6f51f-8665-4689-9e28-ae3eb94c89cb,DISK], DatanodeInfoWithStorage[127.0.0.1:35134,DS-38cd1392-9384-4be0-a424-8cc67930c820,DISK], DatanodeInfoWithStorage[127.0.0.1:35353,DS-d370a462-6dd0-4a4f-8d47-34e07253d431,DISK]]; indices=[1, 3, 5, 6, 8]};  isLastBlockComplete=true;  ecPolicy=ErasureCodingPolicy=[Name=RS-6-3-1024k, Schema=[ECSchema=[Codec=rs, numDataUnits=6, numParityUnits=3]], CellSize=1048576, Id=1]}
+stackTrace: java.io.IOException: 4 missing blocks, the stripe is: AlignedStripe(Offset=0, length=1048576, fetchedChunksNum=0, missingChunksNum=4); locatedBlocks is: LocatedBlocks{;  fileLength=100663296;  underConstruction=false;  blocks=[LocatedStripedBlock{BP-265886949-172.17.0.7-1597552477726:blk_-9223372036854775776_1002; getBlockSize()=100663296; corrupt=false; offset=0; locs=[DatanodeInfoWithStorage[127.0.0.1:44863,DS-1e5cf4e8-1e6f-4de8-a07b-20dcade37b7c,DISK], DatanodeInfoWithStorage[127.0.0.1:37149,DS-b50b8df8-d4f3-4014-82a6-aa6b8f19c91a,DISK], DatanodeInfoWithStorage[127.0.0.1:34595,DS-ecf6f51f-8665-4689-9e28-ae3eb94c89cb,DISK], DatanodeInfoWithStorage[127.0.0.1:35134,DS-38cd1392-9384-4be0-a424-8cc67930c820,DISK], DatanodeInfoWithStorage[127.0.0.1:35353,DS-d370a462-6dd0-4a4f-8d47-34e07253d431,DISK]]; indices=[1, 3, 5, 6, 8]}];  lastLocatedBlock=LocatedStripedBlock{BP-265886949-172.17.0.7-1597552477726:blk_-9223372036854775776_1002; getBlockSize()=100663296; corrupt=false; offset=0; locs=[DatanodeInfoWithStorage[127.0.0.1:44863,DS-1e5cf4e8-1e6f-4de8-a07b-20dcade37b7c,DISK], DatanodeInfoWithStorage[127.0.0.1:37149,DS-b50b8df8-d4f3-4014-82a6-aa6b8f19c91a,DISK], DatanodeInfoWithStorage[127.0.0.1:34595,DS-ecf6f51f-8665-4689-9e28-ae3eb94c89cb,DISK], DatanodeInfoWithStorage[127.0.0.1:35134,DS-38cd1392-9384-4be0-a424-8cc67930c820,DISK], DatanodeInfoWithStorage[127.0.0.1:35353,DS-d370a462-6dd0-4a4f-8d47-34e07253d431,DISK]]; indices=[1, 3, 5, 6, 8]};  isLastBlockComplete=true;  ecPolicy=ErasureCodingPolicy=[Name=RS-6-3-1024k, Schema=[ECSchema=[Codec=rs, numDataUnits=6, numParityUnits=3]], CellSize=1048576, Id=1]}
+	at org.apache.hadoop.hdfs.StripeReader.checkMissingBlocks(StripeReader.java:179)
+	at org.apache.hadoop.hdfs.StripeReader.readParityChunks(StripeReader.java:211)
+	at org.apache.hadoop.hdfs.StripeReader.readStripe(StripeReader.java:341)
+	at org.apache.hadoop.hdfs.DFSStripedInputStream.readOneStripe(DFSStripedInputStream.java:326)
+	at org.apache.hadoop.hdfs.DFSStripedInputStream.readWithStrategy(DFSStripedInputStream.java:419)
+	at org.apache.hadoop.hdfs.DFSInputStream.read(DFSInputStream.java:829)
+	at java.io.DataInputStream.read(DataInputStream.java:100)
+	at org.apache.hadoop.io.IOUtils.copyBytes(IOUtils.java:94)
+	at org.apache.hadoop.hdfs.DFSTestUtil.readFileAsBytes(DFSTestUtil.java:372)
+	at org.apache.hadoop.hdfs.server.namenode.TestFSImage.testChangeErasureCodingPolicyState(TestFSImage.java:932)
+	at org.apache.hadoop.hdfs.server.namenode.TestFSImage.testSaveAndLoadErasureCodingPolicies(TestFSImage.java:889)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:271)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:70)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:50)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:365)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeWithRerun(JUnit4Provider.java:273)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:238)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:159)
+	at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:384)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:345)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:126)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:418)
+
+
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+v1v2 failed with probability 1 out of 50
+v1v1v2v2 failed with probability 1 out of 50
+result: false positive !!!
+Total execution time in seconds : 14925

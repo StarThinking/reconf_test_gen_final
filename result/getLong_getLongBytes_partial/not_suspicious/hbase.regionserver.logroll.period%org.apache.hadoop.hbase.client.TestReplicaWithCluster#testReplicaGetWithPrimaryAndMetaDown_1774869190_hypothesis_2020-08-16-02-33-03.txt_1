@@ -1,0 +1,1902 @@
+reconf_parameter: hbase.regionserver.logroll.period
+component: hbase:HRegionServer
+v1: 30
+v2: 3600000
+testProject: hbase
+unitTest: org.apache.hadoop.hbase.client.TestReplicaWithCluster#testReplicaGetWithPrimaryAndMetaDown
+reconfPoint: -2
+result: -1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is -1
+v1v2 test failed !!!
+reconf_parameter: hbase.regionserver.logroll.period
+component: hbase:HRegionServer
+v1: 30
+v2: 3600000
+testProject: hbase
+unitTest: org.apache.hadoop.hbase.client.TestReplicaWithCluster#testReplicaGetWithPrimaryAndMetaDown
+reconfPoint: -2
+result: -1
+failureMessage: Failed after attempts=2, exceptions:
+2020-08-16T02:38:14.116Z, RpcRetryingCaller{globalStartTime=1597545494112, pause=100, maxAttempts=2}, org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=35512 startCode=1597545464806. As of locationSeqNum=2.
+2020-08-16T02:38:14.438Z, RpcRetryingCaller{globalStartTime=1597545494112, pause=100, maxAttempts=2}, org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=35512 startCode=1597545464806. As of locationSeqNum=2.
+
+stackTrace: org.apache.hadoop.hbase.client.RetriesExhaustedException: Failed after attempts=2, exceptions:
+2020-08-16T02:38:14.116Z, RpcRetryingCaller{globalStartTime=1597545494112, pause=100, maxAttempts=2}, org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=35512 startCode=1597545464806. As of locationSeqNum=2.
+2020-08-16T02:38:14.438Z, RpcRetryingCaller{globalStartTime=1597545494112, pause=100, maxAttempts=2}, org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=35512 startCode=1597545464806. As of locationSeqNum=2.
+
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithRetries(RpcRetryingCallerImpl.java:145)
+	at org.apache.hadoop.hbase.client.ResultBoundedCompletionService$QueueingFuture.run(ResultBoundedCompletionService.java:80)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=35512 startCode=1597545464806. As of locationSeqNum=2.
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at org.apache.hadoop.hbase.ipc.RemoteWithExtrasException.instantiateException(RemoteWithExtrasException.java:99)
+	at org.apache.hadoop.hbase.ipc.RemoteWithExtrasException.unwrapRemoteException(RemoteWithExtrasException.java:89)
+	at org.apache.hadoop.hbase.protobuf.ProtobufUtil.makeIOExceptionOfException(ProtobufUtil.java:282)
+	at org.apache.hadoop.hbase.protobuf.ProtobufUtil.handleRemoteException(ProtobufUtil.java:269)
+	at org.apache.hadoop.hbase.client.RegionServerCallable.call(RegionServerCallable.java:129)
+	at org.apache.hadoop.hbase.client.CancellableRegionServerCallable.call(CancellableRegionServerCallable.java:67)
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithRetries(RpcRetryingCallerImpl.java:107)
+	... 4 more
+Caused by: org.apache.hadoop.hbase.ipc.RemoteWithExtrasException(org.apache.hadoop.hbase.exceptions.RegionMovedException): org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=35512 startCode=1597545464806. As of locationSeqNum=2.
+	at org.apache.hadoop.hbase.regionserver.HRegionServer.getRegionByEncodedName(HRegionServer.java:3367)
+	at org.apache.hadoop.hbase.regionserver.HRegionServer.getRegion(HRegionServer.java:3353)
+	at org.apache.hadoop.hbase.regionserver.RSRpcServices.getRegion(RSRpcServices.java:1439)
+	at org.apache.hadoop.hbase.regionserver.RSRpcServices.get(RSRpcServices.java:2517)
+	at org.apache.hadoop.hbase.shaded.protobuf.generated.ClientProtos$ClientService$2.callBlockingMethod(ClientProtos.java:42274)
+	at org.apache.hadoop.hbase.ipc.RpcServer.call(RpcServer.java:413)
+	at org.apache.hadoop.hbase.ipc.CallRunner.run(CallRunner.java:133)
+	at org.apache.hadoop.hbase.ipc.RpcExecutor$Handler.run(RpcExecutor.java:338)
+	at org.apache.hadoop.hbase.ipc.RpcExecutor$Handler.run(RpcExecutor.java:318)
+
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.onCallFinished(AbstractRpcClient.java:389)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.access$100(AbstractRpcClient.java:97)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:423)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:419)
+	at org.apache.hadoop.hbase.ipc.Call.callComplete(Call.java:117)
+	at org.apache.hadoop.hbase.ipc.Call.setException(Call.java:132)
+	at org.apache.hadoop.hbase.ipc.NettyRpcDuplexHandler.readResponse(NettyRpcDuplexHandler.java:162)
+	at org.apache.hadoop.hbase.ipc.NettyRpcDuplexHandler.channelRead(NettyRpcDuplexHandler.java:192)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:359)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:345)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:337)
+	at org.apache.hbase.thirdparty.io.netty.handler.codec.ByteToMessageDecoder.fireChannelRead(ByteToMessageDecoder.java:323)
+	at org.apache.hbase.thirdparty.io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:297)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:359)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:345)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:337)
+	at org.apache.hbase.thirdparty.io.netty.handler.timeout.IdleStateHandler.channelRead(IdleStateHandler.java:286)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:359)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:345)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:337)
+	at org.apache.hbase.thirdparty.io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1408)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:359)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:345)
+	at org.apache.hbase.thirdparty.io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:930)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:163)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:677)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:612)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:529)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:491)
+	at org.apache.hbase.thirdparty.io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:905)
+	at org.apache.hbase.thirdparty.io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	... 1 more
+
+
+
+Test vvMode=v1v1
+tr.result is -1
+
+Test vvMode=v2v2
+tr.result is 1
+v1v1 or v2v2 test failed !!!
+reconf_parameter: hbase.regionserver.logroll.period
+component: hbase:HRegionServer
+v1: 30
+v2: 3600000
+testProject: hbase
+unitTest: org.apache.hadoop.hbase.client.TestReplicaWithCluster#testReplicaGetWithPrimaryAndMetaDown
+reconfPoint: -2
+result: -1
+failureMessage: Failed after attempts=2, exceptions:
+2020-08-16T02:39:39.021Z, RpcRetryingCaller{globalStartTime=1597545578989, pause=100, maxAttempts=2}, org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=35241 startCode=1597545547041. As of locationSeqNum=2.
+2020-08-16T02:39:39.337Z, RpcRetryingCaller{globalStartTime=1597545578989, pause=100, maxAttempts=2}, org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=35241 startCode=1597545547041. As of locationSeqNum=2.
+
+stackTrace: org.apache.hadoop.hbase.client.RetriesExhaustedException: Failed after attempts=2, exceptions:
+2020-08-16T02:39:39.021Z, RpcRetryingCaller{globalStartTime=1597545578989, pause=100, maxAttempts=2}, org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=35241 startCode=1597545547041. As of locationSeqNum=2.
+2020-08-16T02:39:39.337Z, RpcRetryingCaller{globalStartTime=1597545578989, pause=100, maxAttempts=2}, org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=35241 startCode=1597545547041. As of locationSeqNum=2.
+
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithRetries(RpcRetryingCallerImpl.java:145)
+	at org.apache.hadoop.hbase.client.ResultBoundedCompletionService$QueueingFuture.run(ResultBoundedCompletionService.java:80)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=35241 startCode=1597545547041. As of locationSeqNum=2.
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at org.apache.hadoop.hbase.ipc.RemoteWithExtrasException.instantiateException(RemoteWithExtrasException.java:99)
+	at org.apache.hadoop.hbase.ipc.RemoteWithExtrasException.unwrapRemoteException(RemoteWithExtrasException.java:89)
+	at org.apache.hadoop.hbase.protobuf.ProtobufUtil.makeIOExceptionOfException(ProtobufUtil.java:282)
+	at org.apache.hadoop.hbase.protobuf.ProtobufUtil.handleRemoteException(ProtobufUtil.java:269)
+	at org.apache.hadoop.hbase.client.RegionServerCallable.call(RegionServerCallable.java:129)
+	at org.apache.hadoop.hbase.client.CancellableRegionServerCallable.call(CancellableRegionServerCallable.java:67)
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithRetries(RpcRetryingCallerImpl.java:107)
+	... 4 more
+Caused by: org.apache.hadoop.hbase.ipc.RemoteWithExtrasException(org.apache.hadoop.hbase.exceptions.RegionMovedException): org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=35241 startCode=1597545547041. As of locationSeqNum=2.
+	at org.apache.hadoop.hbase.regionserver.HRegionServer.getRegionByEncodedName(HRegionServer.java:3367)
+	at org.apache.hadoop.hbase.regionserver.HRegionServer.getRegion(HRegionServer.java:3353)
+	at org.apache.hadoop.hbase.regionserver.RSRpcServices.getRegion(RSRpcServices.java:1439)
+	at org.apache.hadoop.hbase.regionserver.RSRpcServices.get(RSRpcServices.java:2517)
+	at org.apache.hadoop.hbase.shaded.protobuf.generated.ClientProtos$ClientService$2.callBlockingMethod(ClientProtos.java:42274)
+	at org.apache.hadoop.hbase.ipc.RpcServer.call(RpcServer.java:413)
+	at org.apache.hadoop.hbase.ipc.CallRunner.run(CallRunner.java:133)
+	at org.apache.hadoop.hbase.ipc.RpcExecutor$Handler.run(RpcExecutor.java:338)
+	at org.apache.hadoop.hbase.ipc.RpcExecutor$Handler.run(RpcExecutor.java:318)
+
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.onCallFinished(AbstractRpcClient.java:389)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.access$100(AbstractRpcClient.java:97)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:423)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:419)
+	at org.apache.hadoop.hbase.ipc.Call.callComplete(Call.java:117)
+	at org.apache.hadoop.hbase.ipc.Call.setException(Call.java:132)
+	at org.apache.hadoop.hbase.ipc.NettyRpcDuplexHandler.readResponse(NettyRpcDuplexHandler.java:162)
+	at org.apache.hadoop.hbase.ipc.NettyRpcDuplexHandler.channelRead(NettyRpcDuplexHandler.java:192)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:359)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:345)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:337)
+	at org.apache.hbase.thirdparty.io.netty.handler.codec.ByteToMessageDecoder.fireChannelRead(ByteToMessageDecoder.java:323)
+	at org.apache.hbase.thirdparty.io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:297)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:359)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:345)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:337)
+	at org.apache.hbase.thirdparty.io.netty.handler.timeout.IdleStateHandler.channelRead(IdleStateHandler.java:286)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:359)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:345)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:337)
+	at org.apache.hbase.thirdparty.io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1408)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:359)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:345)
+	at org.apache.hbase.thirdparty.io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:930)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:163)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:677)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:612)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:529)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:491)
+	at org.apache.hbase.thirdparty.io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:905)
+	at org.apache.hbase.thirdparty.io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	... 1 more
+
+
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is -1
+
+Test vvMode=v2v2
+tr.result is 1
+v1v1 or v2v2 test failed !!!
+reconf_parameter: hbase.regionserver.logroll.period
+component: hbase:HRegionServer
+v1: 30
+v2: 3600000
+testProject: hbase
+unitTest: org.apache.hadoop.hbase.client.TestReplicaWithCluster#testReplicaGetWithPrimaryAndMetaDown
+reconfPoint: -2
+result: -1
+failureMessage: Failed after attempts=2, exceptions:
+2020-08-16T02:55:01.427Z, RpcRetryingCaller{globalStartTime=1597546501423, pause=100, maxAttempts=2}, org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=36604 startCode=1597546472376. As of locationSeqNum=2.
+2020-08-16T02:55:01.666Z, RpcRetryingCaller{globalStartTime=1597546501423, pause=100, maxAttempts=2}, org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=36604 startCode=1597546472376. As of locationSeqNum=2.
+
+stackTrace: org.apache.hadoop.hbase.client.RetriesExhaustedException: Failed after attempts=2, exceptions:
+2020-08-16T02:55:01.427Z, RpcRetryingCaller{globalStartTime=1597546501423, pause=100, maxAttempts=2}, org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=36604 startCode=1597546472376. As of locationSeqNum=2.
+2020-08-16T02:55:01.666Z, RpcRetryingCaller{globalStartTime=1597546501423, pause=100, maxAttempts=2}, org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=36604 startCode=1597546472376. As of locationSeqNum=2.
+
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithRetries(RpcRetryingCallerImpl.java:145)
+	at org.apache.hadoop.hbase.client.ResultBoundedCompletionService$QueueingFuture.run(ResultBoundedCompletionService.java:80)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=36604 startCode=1597546472376. As of locationSeqNum=2.
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at org.apache.hadoop.hbase.ipc.RemoteWithExtrasException.instantiateException(RemoteWithExtrasException.java:99)
+	at org.apache.hadoop.hbase.ipc.RemoteWithExtrasException.unwrapRemoteException(RemoteWithExtrasException.java:89)
+	at org.apache.hadoop.hbase.protobuf.ProtobufUtil.makeIOExceptionOfException(ProtobufUtil.java:282)
+	at org.apache.hadoop.hbase.protobuf.ProtobufUtil.handleRemoteException(ProtobufUtil.java:269)
+	at org.apache.hadoop.hbase.client.RegionServerCallable.call(RegionServerCallable.java:129)
+	at org.apache.hadoop.hbase.client.CancellableRegionServerCallable.call(CancellableRegionServerCallable.java:67)
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithRetries(RpcRetryingCallerImpl.java:107)
+	... 4 more
+Caused by: org.apache.hadoop.hbase.ipc.RemoteWithExtrasException(org.apache.hadoop.hbase.exceptions.RegionMovedException): org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=36604 startCode=1597546472376. As of locationSeqNum=2.
+	at org.apache.hadoop.hbase.regionserver.HRegionServer.getRegionByEncodedName(HRegionServer.java:3367)
+	at org.apache.hadoop.hbase.regionserver.HRegionServer.getRegion(HRegionServer.java:3353)
+	at org.apache.hadoop.hbase.regionserver.RSRpcServices.getRegion(RSRpcServices.java:1439)
+	at org.apache.hadoop.hbase.regionserver.RSRpcServices.get(RSRpcServices.java:2517)
+	at org.apache.hadoop.hbase.shaded.protobuf.generated.ClientProtos$ClientService$2.callBlockingMethod(ClientProtos.java:42274)
+	at org.apache.hadoop.hbase.ipc.RpcServer.call(RpcServer.java:413)
+	at org.apache.hadoop.hbase.ipc.CallRunner.run(CallRunner.java:133)
+	at org.apache.hadoop.hbase.ipc.RpcExecutor$Handler.run(RpcExecutor.java:338)
+	at org.apache.hadoop.hbase.ipc.RpcExecutor$Handler.run(RpcExecutor.java:318)
+
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.onCallFinished(AbstractRpcClient.java:389)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.access$100(AbstractRpcClient.java:97)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:423)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:419)
+	at org.apache.hadoop.hbase.ipc.Call.callComplete(Call.java:117)
+	at org.apache.hadoop.hbase.ipc.Call.setException(Call.java:132)
+	at org.apache.hadoop.hbase.ipc.NettyRpcDuplexHandler.readResponse(NettyRpcDuplexHandler.java:162)
+	at org.apache.hadoop.hbase.ipc.NettyRpcDuplexHandler.channelRead(NettyRpcDuplexHandler.java:192)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:359)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:345)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:337)
+	at org.apache.hbase.thirdparty.io.netty.handler.codec.ByteToMessageDecoder.fireChannelRead(ByteToMessageDecoder.java:323)
+	at org.apache.hbase.thirdparty.io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:297)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:359)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:345)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:337)
+	at org.apache.hbase.thirdparty.io.netty.handler.timeout.IdleStateHandler.channelRead(IdleStateHandler.java:286)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:359)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:345)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:337)
+	at org.apache.hbase.thirdparty.io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1408)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:359)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:345)
+	at org.apache.hbase.thirdparty.io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:930)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:163)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:677)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:612)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:529)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:491)
+	at org.apache.hbase.thirdparty.io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:905)
+	at org.apache.hbase.thirdparty.io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	... 1 more
+
+
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is -1
+v1v2 test failed !!!
+reconf_parameter: hbase.regionserver.logroll.period
+component: hbase:HRegionServer
+v1: 30
+v2: 3600000
+testProject: hbase
+unitTest: org.apache.hadoop.hbase.client.TestReplicaWithCluster#testReplicaGetWithPrimaryAndMetaDown
+reconfPoint: -2
+result: -1
+failureMessage: Failed after attempts=2, exceptions:
+2020-08-16T03:01:21.618Z, RpcRetryingCaller{globalStartTime=1597546881611, pause=100, maxAttempts=2}, org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=44872 startCode=1597546853034. As of locationSeqNum=2.
+2020-08-16T03:01:21.891Z, RpcRetryingCaller{globalStartTime=1597546881611, pause=100, maxAttempts=2}, org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=44872 startCode=1597546853034. As of locationSeqNum=2.
+
+stackTrace: org.apache.hadoop.hbase.client.RetriesExhaustedException: Failed after attempts=2, exceptions:
+2020-08-16T03:01:21.618Z, RpcRetryingCaller{globalStartTime=1597546881611, pause=100, maxAttempts=2}, org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=44872 startCode=1597546853034. As of locationSeqNum=2.
+2020-08-16T03:01:21.891Z, RpcRetryingCaller{globalStartTime=1597546881611, pause=100, maxAttempts=2}, org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=44872 startCode=1597546853034. As of locationSeqNum=2.
+
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithRetries(RpcRetryingCallerImpl.java:145)
+	at org.apache.hadoop.hbase.client.ResultBoundedCompletionService$QueueingFuture.run(ResultBoundedCompletionService.java:80)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=44872 startCode=1597546853034. As of locationSeqNum=2.
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at org.apache.hadoop.hbase.ipc.RemoteWithExtrasException.instantiateException(RemoteWithExtrasException.java:99)
+	at org.apache.hadoop.hbase.ipc.RemoteWithExtrasException.unwrapRemoteException(RemoteWithExtrasException.java:89)
+	at org.apache.hadoop.hbase.protobuf.ProtobufUtil.makeIOExceptionOfException(ProtobufUtil.java:282)
+	at org.apache.hadoop.hbase.protobuf.ProtobufUtil.handleRemoteException(ProtobufUtil.java:269)
+	at org.apache.hadoop.hbase.client.RegionServerCallable.call(RegionServerCallable.java:129)
+	at org.apache.hadoop.hbase.client.CancellableRegionServerCallable.call(CancellableRegionServerCallable.java:67)
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithRetries(RpcRetryingCallerImpl.java:107)
+	... 4 more
+Caused by: org.apache.hadoop.hbase.ipc.RemoteWithExtrasException(org.apache.hadoop.hbase.exceptions.RegionMovedException): org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=44872 startCode=1597546853034. As of locationSeqNum=2.
+	at org.apache.hadoop.hbase.regionserver.HRegionServer.getRegionByEncodedName(HRegionServer.java:3367)
+	at org.apache.hadoop.hbase.regionserver.HRegionServer.getRegion(HRegionServer.java:3353)
+	at org.apache.hadoop.hbase.regionserver.RSRpcServices.getRegion(RSRpcServices.java:1439)
+	at org.apache.hadoop.hbase.regionserver.RSRpcServices.get(RSRpcServices.java:2517)
+	at org.apache.hadoop.hbase.shaded.protobuf.generated.ClientProtos$ClientService$2.callBlockingMethod(ClientProtos.java:42274)
+	at org.apache.hadoop.hbase.ipc.RpcServer.call(RpcServer.java:413)
+	at org.apache.hadoop.hbase.ipc.CallRunner.run(CallRunner.java:133)
+	at org.apache.hadoop.hbase.ipc.RpcExecutor$Handler.run(RpcExecutor.java:338)
+	at org.apache.hadoop.hbase.ipc.RpcExecutor$Handler.run(RpcExecutor.java:318)
+
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.onCallFinished(AbstractRpcClient.java:389)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.access$100(AbstractRpcClient.java:97)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:423)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:419)
+	at org.apache.hadoop.hbase.ipc.Call.callComplete(Call.java:117)
+	at org.apache.hadoop.hbase.ipc.Call.setException(Call.java:132)
+	at org.apache.hadoop.hbase.ipc.NettyRpcDuplexHandler.readResponse(NettyRpcDuplexHandler.java:162)
+	at org.apache.hadoop.hbase.ipc.NettyRpcDuplexHandler.channelRead(NettyRpcDuplexHandler.java:192)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:359)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:345)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:337)
+	at org.apache.hbase.thirdparty.io.netty.handler.codec.ByteToMessageDecoder.fireChannelRead(ByteToMessageDecoder.java:323)
+	at org.apache.hbase.thirdparty.io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:297)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:359)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:345)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:337)
+	at org.apache.hbase.thirdparty.io.netty.handler.timeout.IdleStateHandler.channelRead(IdleStateHandler.java:286)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:359)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:345)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:337)
+	at org.apache.hbase.thirdparty.io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1408)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:359)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:345)
+	at org.apache.hbase.thirdparty.io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:930)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:163)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:677)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:612)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:529)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:491)
+	at org.apache.hbase.thirdparty.io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:905)
+	at org.apache.hbase.thirdparty.io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	... 1 more
+
+
+
+Test vvMode=v1v1
+tr.result is -1
+
+Test vvMode=v2v2
+tr.result is 1
+v1v1 or v2v2 test failed !!!
+reconf_parameter: hbase.regionserver.logroll.period
+component: hbase:HRegionServer
+v1: 30
+v2: 3600000
+testProject: hbase
+unitTest: org.apache.hadoop.hbase.client.TestReplicaWithCluster#testReplicaGetWithPrimaryAndMetaDown
+reconfPoint: -2
+result: -1
+failureMessage: Failed after attempts=2, exceptions:
+2020-08-16T03:02:37.470Z, RpcRetryingCaller{globalStartTime=1597546957419, pause=100, maxAttempts=2}, org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=46393 startCode=1597546932102. As of locationSeqNum=2.
+2020-08-16T03:02:37.820Z, RpcRetryingCaller{globalStartTime=1597546957419, pause=100, maxAttempts=2}, org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=46393 startCode=1597546932102. As of locationSeqNum=2.
+
+stackTrace: org.apache.hadoop.hbase.client.RetriesExhaustedException: Failed after attempts=2, exceptions:
+2020-08-16T03:02:37.470Z, RpcRetryingCaller{globalStartTime=1597546957419, pause=100, maxAttempts=2}, org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=46393 startCode=1597546932102. As of locationSeqNum=2.
+2020-08-16T03:02:37.820Z, RpcRetryingCaller{globalStartTime=1597546957419, pause=100, maxAttempts=2}, org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=46393 startCode=1597546932102. As of locationSeqNum=2.
+
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithRetries(RpcRetryingCallerImpl.java:145)
+	at org.apache.hadoop.hbase.client.ResultBoundedCompletionService$QueueingFuture.run(ResultBoundedCompletionService.java:80)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=46393 startCode=1597546932102. As of locationSeqNum=2.
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at org.apache.hadoop.hbase.ipc.RemoteWithExtrasException.instantiateException(RemoteWithExtrasException.java:99)
+	at org.apache.hadoop.hbase.ipc.RemoteWithExtrasException.unwrapRemoteException(RemoteWithExtrasException.java:89)
+	at org.apache.hadoop.hbase.protobuf.ProtobufUtil.makeIOExceptionOfException(ProtobufUtil.java:282)
+	at org.apache.hadoop.hbase.protobuf.ProtobufUtil.handleRemoteException(ProtobufUtil.java:269)
+	at org.apache.hadoop.hbase.client.RegionServerCallable.call(RegionServerCallable.java:129)
+	at org.apache.hadoop.hbase.client.CancellableRegionServerCallable.call(CancellableRegionServerCallable.java:67)
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithRetries(RpcRetryingCallerImpl.java:107)
+	... 4 more
+Caused by: org.apache.hadoop.hbase.ipc.RemoteWithExtrasException(org.apache.hadoop.hbase.exceptions.RegionMovedException): org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=46393 startCode=1597546932102. As of locationSeqNum=2.
+	at org.apache.hadoop.hbase.regionserver.HRegionServer.getRegionByEncodedName(HRegionServer.java:3367)
+	at org.apache.hadoop.hbase.regionserver.HRegionServer.getRegion(HRegionServer.java:3353)
+	at org.apache.hadoop.hbase.regionserver.RSRpcServices.getRegion(RSRpcServices.java:1439)
+	at org.apache.hadoop.hbase.regionserver.RSRpcServices.get(RSRpcServices.java:2517)
+	at org.apache.hadoop.hbase.shaded.protobuf.generated.ClientProtos$ClientService$2.callBlockingMethod(ClientProtos.java:42274)
+	at org.apache.hadoop.hbase.ipc.RpcServer.call(RpcServer.java:413)
+	at org.apache.hadoop.hbase.ipc.CallRunner.run(CallRunner.java:133)
+	at org.apache.hadoop.hbase.ipc.RpcExecutor$Handler.run(RpcExecutor.java:338)
+	at org.apache.hadoop.hbase.ipc.RpcExecutor$Handler.run(RpcExecutor.java:318)
+
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.onCallFinished(AbstractRpcClient.java:389)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.access$100(AbstractRpcClient.java:97)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:423)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:419)
+	at org.apache.hadoop.hbase.ipc.Call.callComplete(Call.java:117)
+	at org.apache.hadoop.hbase.ipc.Call.setException(Call.java:132)
+	at org.apache.hadoop.hbase.ipc.NettyRpcDuplexHandler.readResponse(NettyRpcDuplexHandler.java:162)
+	at org.apache.hadoop.hbase.ipc.NettyRpcDuplexHandler.channelRead(NettyRpcDuplexHandler.java:192)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:359)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:345)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:337)
+	at org.apache.hbase.thirdparty.io.netty.handler.codec.ByteToMessageDecoder.fireChannelRead(ByteToMessageDecoder.java:323)
+	at org.apache.hbase.thirdparty.io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:297)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:359)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:345)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:337)
+	at org.apache.hbase.thirdparty.io.netty.handler.timeout.IdleStateHandler.channelRead(IdleStateHandler.java:286)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:359)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:345)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:337)
+	at org.apache.hbase.thirdparty.io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1408)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:359)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:345)
+	at org.apache.hbase.thirdparty.io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:930)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:163)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:677)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:612)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:529)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:491)
+	at org.apache.hbase.thirdparty.io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:905)
+	at org.apache.hbase.thirdparty.io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	... 1 more
+
+
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is -1
+
+Test vvMode=v2v2
+tr.result is 1
+v1v1 or v2v2 test failed !!!
+reconf_parameter: hbase.regionserver.logroll.period
+component: hbase:HRegionServer
+v1: 30
+v2: 3600000
+testProject: hbase
+unitTest: org.apache.hadoop.hbase.client.TestReplicaWithCluster#testReplicaGetWithPrimaryAndMetaDown
+reconfPoint: -2
+result: -1
+failureMessage: Failed after attempts=2, exceptions:
+2020-08-16T03:06:32.324Z, RpcRetryingCaller{globalStartTime=1597547192320, pause=100, maxAttempts=2}, org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=35823 startCode=1597547164443. As of locationSeqNum=2.
+2020-08-16T03:06:32.604Z, RpcRetryingCaller{globalStartTime=1597547192320, pause=100, maxAttempts=2}, org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=35823 startCode=1597547164443. As of locationSeqNum=2.
+
+stackTrace: org.apache.hadoop.hbase.client.RetriesExhaustedException: Failed after attempts=2, exceptions:
+2020-08-16T03:06:32.324Z, RpcRetryingCaller{globalStartTime=1597547192320, pause=100, maxAttempts=2}, org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=35823 startCode=1597547164443. As of locationSeqNum=2.
+2020-08-16T03:06:32.604Z, RpcRetryingCaller{globalStartTime=1597547192320, pause=100, maxAttempts=2}, org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=35823 startCode=1597547164443. As of locationSeqNum=2.
+
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithRetries(RpcRetryingCallerImpl.java:145)
+	at org.apache.hadoop.hbase.client.ResultBoundedCompletionService$QueueingFuture.run(ResultBoundedCompletionService.java:80)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=35823 startCode=1597547164443. As of locationSeqNum=2.
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at org.apache.hadoop.hbase.ipc.RemoteWithExtrasException.instantiateException(RemoteWithExtrasException.java:99)
+	at org.apache.hadoop.hbase.ipc.RemoteWithExtrasException.unwrapRemoteException(RemoteWithExtrasException.java:89)
+	at org.apache.hadoop.hbase.protobuf.ProtobufUtil.makeIOExceptionOfException(ProtobufUtil.java:282)
+	at org.apache.hadoop.hbase.protobuf.ProtobufUtil.handleRemoteException(ProtobufUtil.java:269)
+	at org.apache.hadoop.hbase.client.RegionServerCallable.call(RegionServerCallable.java:129)
+	at org.apache.hadoop.hbase.client.CancellableRegionServerCallable.call(CancellableRegionServerCallable.java:67)
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithRetries(RpcRetryingCallerImpl.java:107)
+	... 4 more
+Caused by: org.apache.hadoop.hbase.ipc.RemoteWithExtrasException(org.apache.hadoop.hbase.exceptions.RegionMovedException): org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=35823 startCode=1597547164443. As of locationSeqNum=2.
+	at org.apache.hadoop.hbase.regionserver.HRegionServer.getRegionByEncodedName(HRegionServer.java:3367)
+	at org.apache.hadoop.hbase.regionserver.HRegionServer.getRegion(HRegionServer.java:3353)
+	at org.apache.hadoop.hbase.regionserver.RSRpcServices.getRegion(RSRpcServices.java:1439)
+	at org.apache.hadoop.hbase.regionserver.RSRpcServices.get(RSRpcServices.java:2517)
+	at org.apache.hadoop.hbase.shaded.protobuf.generated.ClientProtos$ClientService$2.callBlockingMethod(ClientProtos.java:42274)
+	at org.apache.hadoop.hbase.ipc.RpcServer.call(RpcServer.java:413)
+	at org.apache.hadoop.hbase.ipc.CallRunner.run(CallRunner.java:133)
+	at org.apache.hadoop.hbase.ipc.RpcExecutor$Handler.run(RpcExecutor.java:338)
+	at org.apache.hadoop.hbase.ipc.RpcExecutor$Handler.run(RpcExecutor.java:318)
+
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.onCallFinished(AbstractRpcClient.java:389)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.access$100(AbstractRpcClient.java:97)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:423)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:419)
+	at org.apache.hadoop.hbase.ipc.Call.callComplete(Call.java:117)
+	at org.apache.hadoop.hbase.ipc.Call.setException(Call.java:132)
+	at org.apache.hadoop.hbase.ipc.NettyRpcDuplexHandler.readResponse(NettyRpcDuplexHandler.java:162)
+	at org.apache.hadoop.hbase.ipc.NettyRpcDuplexHandler.channelRead(NettyRpcDuplexHandler.java:192)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:359)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:345)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:337)
+	at org.apache.hbase.thirdparty.io.netty.handler.codec.ByteToMessageDecoder.fireChannelRead(ByteToMessageDecoder.java:323)
+	at org.apache.hbase.thirdparty.io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:297)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:359)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:345)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:337)
+	at org.apache.hbase.thirdparty.io.netty.handler.timeout.IdleStateHandler.channelRead(IdleStateHandler.java:286)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:359)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:345)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:337)
+	at org.apache.hbase.thirdparty.io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1408)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:359)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:345)
+	at org.apache.hbase.thirdparty.io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:930)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:163)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:677)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:612)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:529)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:491)
+	at org.apache.hbase.thirdparty.io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:905)
+	at org.apache.hbase.thirdparty.io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	... 1 more
+
+
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is -1
+v1v2 test failed !!!
+reconf_parameter: hbase.regionserver.logroll.period
+component: hbase:HRegionServer
+v1: 30
+v2: 3600000
+testProject: hbase
+unitTest: org.apache.hadoop.hbase.client.TestReplicaWithCluster#testReplicaGetWithPrimaryAndMetaDown
+reconfPoint: -2
+result: -1
+failureMessage: Failed after attempts=2, exceptions:
+2020-08-16T03:20:08.973Z, RpcRetryingCaller{globalStartTime=1597548008966, pause=100, maxAttempts=2}, org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=43150 startCode=1597547982516. As of locationSeqNum=2.
+2020-08-16T03:20:09.252Z, RpcRetryingCaller{globalStartTime=1597548008966, pause=100, maxAttempts=2}, org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=43150 startCode=1597547982516. As of locationSeqNum=2.
+
+stackTrace: org.apache.hadoop.hbase.client.RetriesExhaustedException: Failed after attempts=2, exceptions:
+2020-08-16T03:20:08.973Z, RpcRetryingCaller{globalStartTime=1597548008966, pause=100, maxAttempts=2}, org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=43150 startCode=1597547982516. As of locationSeqNum=2.
+2020-08-16T03:20:09.252Z, RpcRetryingCaller{globalStartTime=1597548008966, pause=100, maxAttempts=2}, org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=43150 startCode=1597547982516. As of locationSeqNum=2.
+
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithRetries(RpcRetryingCallerImpl.java:145)
+	at org.apache.hadoop.hbase.client.ResultBoundedCompletionService$QueueingFuture.run(ResultBoundedCompletionService.java:80)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=43150 startCode=1597547982516. As of locationSeqNum=2.
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at org.apache.hadoop.hbase.ipc.RemoteWithExtrasException.instantiateException(RemoteWithExtrasException.java:99)
+	at org.apache.hadoop.hbase.ipc.RemoteWithExtrasException.unwrapRemoteException(RemoteWithExtrasException.java:89)
+	at org.apache.hadoop.hbase.protobuf.ProtobufUtil.makeIOExceptionOfException(ProtobufUtil.java:282)
+	at org.apache.hadoop.hbase.protobuf.ProtobufUtil.handleRemoteException(ProtobufUtil.java:269)
+	at org.apache.hadoop.hbase.client.RegionServerCallable.call(RegionServerCallable.java:129)
+	at org.apache.hadoop.hbase.client.CancellableRegionServerCallable.call(CancellableRegionServerCallable.java:67)
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithRetries(RpcRetryingCallerImpl.java:107)
+	... 4 more
+Caused by: org.apache.hadoop.hbase.ipc.RemoteWithExtrasException(org.apache.hadoop.hbase.exceptions.RegionMovedException): org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=43150 startCode=1597547982516. As of locationSeqNum=2.
+	at org.apache.hadoop.hbase.regionserver.HRegionServer.getRegionByEncodedName(HRegionServer.java:3367)
+	at org.apache.hadoop.hbase.regionserver.HRegionServer.getRegion(HRegionServer.java:3353)
+	at org.apache.hadoop.hbase.regionserver.RSRpcServices.getRegion(RSRpcServices.java:1439)
+	at org.apache.hadoop.hbase.regionserver.RSRpcServices.get(RSRpcServices.java:2517)
+	at org.apache.hadoop.hbase.shaded.protobuf.generated.ClientProtos$ClientService$2.callBlockingMethod(ClientProtos.java:42274)
+	at org.apache.hadoop.hbase.ipc.RpcServer.call(RpcServer.java:413)
+	at org.apache.hadoop.hbase.ipc.CallRunner.run(CallRunner.java:133)
+	at org.apache.hadoop.hbase.ipc.RpcExecutor$Handler.run(RpcExecutor.java:338)
+	at org.apache.hadoop.hbase.ipc.RpcExecutor$Handler.run(RpcExecutor.java:318)
+
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.onCallFinished(AbstractRpcClient.java:389)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.access$100(AbstractRpcClient.java:97)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:423)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:419)
+	at org.apache.hadoop.hbase.ipc.Call.callComplete(Call.java:117)
+	at org.apache.hadoop.hbase.ipc.Call.setException(Call.java:132)
+	at org.apache.hadoop.hbase.ipc.NettyRpcDuplexHandler.readResponse(NettyRpcDuplexHandler.java:162)
+	at org.apache.hadoop.hbase.ipc.NettyRpcDuplexHandler.channelRead(NettyRpcDuplexHandler.java:192)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:359)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:345)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:337)
+	at org.apache.hbase.thirdparty.io.netty.handler.codec.ByteToMessageDecoder.fireChannelRead(ByteToMessageDecoder.java:323)
+	at org.apache.hbase.thirdparty.io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:297)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:359)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:345)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:337)
+	at org.apache.hbase.thirdparty.io.netty.handler.timeout.IdleStateHandler.channelRead(IdleStateHandler.java:286)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:359)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:345)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:337)
+	at org.apache.hbase.thirdparty.io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1408)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:359)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:345)
+	at org.apache.hbase.thirdparty.io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:930)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:163)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:677)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:612)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:529)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:491)
+	at org.apache.hbase.thirdparty.io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:905)
+	at org.apache.hbase.thirdparty.io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	... 1 more
+
+
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is -1
+v1v2 test failed !!!
+reconf_parameter: hbase.regionserver.logroll.period
+component: hbase:HRegionServer
+v1: 30
+v2: 3600000
+testProject: hbase
+unitTest: org.apache.hadoop.hbase.client.TestReplicaWithCluster#testReplicaGetWithPrimaryAndMetaDown
+reconfPoint: -2
+result: -1
+failureMessage: Failed after attempts=2, exceptions:
+2020-08-16T03:24:16.021Z, RpcRetryingCaller{globalStartTime=1597548256017, pause=100, maxAttempts=2}, org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=34586 startCode=1597548219356. As of locationSeqNum=2.
+2020-08-16T03:24:16.357Z, RpcRetryingCaller{globalStartTime=1597548256017, pause=100, maxAttempts=2}, org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=34586 startCode=1597548219356. As of locationSeqNum=2.
+
+stackTrace: org.apache.hadoop.hbase.client.RetriesExhaustedException: Failed after attempts=2, exceptions:
+2020-08-16T03:24:16.021Z, RpcRetryingCaller{globalStartTime=1597548256017, pause=100, maxAttempts=2}, org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=34586 startCode=1597548219356. As of locationSeqNum=2.
+2020-08-16T03:24:16.357Z, RpcRetryingCaller{globalStartTime=1597548256017, pause=100, maxAttempts=2}, org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=34586 startCode=1597548219356. As of locationSeqNum=2.
+
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithRetries(RpcRetryingCallerImpl.java:145)
+	at org.apache.hadoop.hbase.client.ResultBoundedCompletionService$QueueingFuture.run(ResultBoundedCompletionService.java:80)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=34586 startCode=1597548219356. As of locationSeqNum=2.
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at org.apache.hadoop.hbase.ipc.RemoteWithExtrasException.instantiateException(RemoteWithExtrasException.java:99)
+	at org.apache.hadoop.hbase.ipc.RemoteWithExtrasException.unwrapRemoteException(RemoteWithExtrasException.java:89)
+	at org.apache.hadoop.hbase.protobuf.ProtobufUtil.makeIOExceptionOfException(ProtobufUtil.java:282)
+	at org.apache.hadoop.hbase.protobuf.ProtobufUtil.handleRemoteException(ProtobufUtil.java:269)
+	at org.apache.hadoop.hbase.client.RegionServerCallable.call(RegionServerCallable.java:129)
+	at org.apache.hadoop.hbase.client.CancellableRegionServerCallable.call(CancellableRegionServerCallable.java:67)
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithRetries(RpcRetryingCallerImpl.java:107)
+	... 4 more
+Caused by: org.apache.hadoop.hbase.ipc.RemoteWithExtrasException(org.apache.hadoop.hbase.exceptions.RegionMovedException): org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=34586 startCode=1597548219356. As of locationSeqNum=2.
+	at org.apache.hadoop.hbase.regionserver.HRegionServer.getRegionByEncodedName(HRegionServer.java:3367)
+	at org.apache.hadoop.hbase.regionserver.HRegionServer.getRegion(HRegionServer.java:3353)
+	at org.apache.hadoop.hbase.regionserver.RSRpcServices.getRegion(RSRpcServices.java:1439)
+	at org.apache.hadoop.hbase.regionserver.RSRpcServices.get(RSRpcServices.java:2517)
+	at org.apache.hadoop.hbase.shaded.protobuf.generated.ClientProtos$ClientService$2.callBlockingMethod(ClientProtos.java:42274)
+	at org.apache.hadoop.hbase.ipc.RpcServer.call(RpcServer.java:413)
+	at org.apache.hadoop.hbase.ipc.CallRunner.run(CallRunner.java:133)
+	at org.apache.hadoop.hbase.ipc.RpcExecutor$Handler.run(RpcExecutor.java:338)
+	at org.apache.hadoop.hbase.ipc.RpcExecutor$Handler.run(RpcExecutor.java:318)
+
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.onCallFinished(AbstractRpcClient.java:389)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.access$100(AbstractRpcClient.java:97)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:423)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:419)
+	at org.apache.hadoop.hbase.ipc.Call.callComplete(Call.java:117)
+	at org.apache.hadoop.hbase.ipc.Call.setException(Call.java:132)
+	at org.apache.hadoop.hbase.ipc.NettyRpcDuplexHandler.readResponse(NettyRpcDuplexHandler.java:162)
+	at org.apache.hadoop.hbase.ipc.NettyRpcDuplexHandler.channelRead(NettyRpcDuplexHandler.java:192)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:359)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:345)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:337)
+	at org.apache.hbase.thirdparty.io.netty.handler.codec.ByteToMessageDecoder.fireChannelRead(ByteToMessageDecoder.java:323)
+	at org.apache.hbase.thirdparty.io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:297)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:359)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:345)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:337)
+	at org.apache.hbase.thirdparty.io.netty.handler.timeout.IdleStateHandler.channelRead(IdleStateHandler.java:286)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:359)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:345)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:337)
+	at org.apache.hbase.thirdparty.io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1408)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:359)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:345)
+	at org.apache.hbase.thirdparty.io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:930)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:163)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:677)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:612)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:529)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:491)
+	at org.apache.hbase.thirdparty.io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:905)
+	at org.apache.hbase.thirdparty.io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	... 1 more
+
+
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is -1
+v1v2 test failed !!!
+reconf_parameter: hbase.regionserver.logroll.period
+component: hbase:HRegionServer
+v1: 30
+v2: 3600000
+testProject: hbase
+unitTest: org.apache.hadoop.hbase.client.TestReplicaWithCluster#testReplicaGetWithPrimaryAndMetaDown
+reconfPoint: -2
+result: -1
+failureMessage: Failed after attempts=2, exceptions:
+2020-08-16T03:28:05.958Z, RpcRetryingCaller{globalStartTime=1597548485953, pause=100, maxAttempts=2}, org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=46097 startCode=1597548456319. As of locationSeqNum=2.
+2020-08-16T03:28:06.362Z, RpcRetryingCaller{globalStartTime=1597548485953, pause=100, maxAttempts=2}, org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=46097 startCode=1597548456319. As of locationSeqNum=2.
+
+stackTrace: org.apache.hadoop.hbase.client.RetriesExhaustedException: Failed after attempts=2, exceptions:
+2020-08-16T03:28:05.958Z, RpcRetryingCaller{globalStartTime=1597548485953, pause=100, maxAttempts=2}, org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=46097 startCode=1597548456319. As of locationSeqNum=2.
+2020-08-16T03:28:06.362Z, RpcRetryingCaller{globalStartTime=1597548485953, pause=100, maxAttempts=2}, org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=46097 startCode=1597548456319. As of locationSeqNum=2.
+
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithRetries(RpcRetryingCallerImpl.java:145)
+	at org.apache.hadoop.hbase.client.ResultBoundedCompletionService$QueueingFuture.run(ResultBoundedCompletionService.java:80)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=46097 startCode=1597548456319. As of locationSeqNum=2.
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at org.apache.hadoop.hbase.ipc.RemoteWithExtrasException.instantiateException(RemoteWithExtrasException.java:99)
+	at org.apache.hadoop.hbase.ipc.RemoteWithExtrasException.unwrapRemoteException(RemoteWithExtrasException.java:89)
+	at org.apache.hadoop.hbase.protobuf.ProtobufUtil.makeIOExceptionOfException(ProtobufUtil.java:282)
+	at org.apache.hadoop.hbase.protobuf.ProtobufUtil.handleRemoteException(ProtobufUtil.java:269)
+	at org.apache.hadoop.hbase.client.RegionServerCallable.call(RegionServerCallable.java:129)
+	at org.apache.hadoop.hbase.client.CancellableRegionServerCallable.call(CancellableRegionServerCallable.java:67)
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithRetries(RpcRetryingCallerImpl.java:107)
+	... 4 more
+Caused by: org.apache.hadoop.hbase.ipc.RemoteWithExtrasException(org.apache.hadoop.hbase.exceptions.RegionMovedException): org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=46097 startCode=1597548456319. As of locationSeqNum=2.
+	at org.apache.hadoop.hbase.regionserver.HRegionServer.getRegionByEncodedName(HRegionServer.java:3367)
+	at org.apache.hadoop.hbase.regionserver.HRegionServer.getRegion(HRegionServer.java:3353)
+	at org.apache.hadoop.hbase.regionserver.RSRpcServices.getRegion(RSRpcServices.java:1439)
+	at org.apache.hadoop.hbase.regionserver.RSRpcServices.get(RSRpcServices.java:2517)
+	at org.apache.hadoop.hbase.shaded.protobuf.generated.ClientProtos$ClientService$2.callBlockingMethod(ClientProtos.java:42274)
+	at org.apache.hadoop.hbase.ipc.RpcServer.call(RpcServer.java:413)
+	at org.apache.hadoop.hbase.ipc.CallRunner.run(CallRunner.java:133)
+	at org.apache.hadoop.hbase.ipc.RpcExecutor$Handler.run(RpcExecutor.java:338)
+	at org.apache.hadoop.hbase.ipc.RpcExecutor$Handler.run(RpcExecutor.java:318)
+
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.onCallFinished(AbstractRpcClient.java:389)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.access$100(AbstractRpcClient.java:97)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:423)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:419)
+	at org.apache.hadoop.hbase.ipc.Call.callComplete(Call.java:117)
+	at org.apache.hadoop.hbase.ipc.Call.setException(Call.java:132)
+	at org.apache.hadoop.hbase.ipc.NettyRpcDuplexHandler.readResponse(NettyRpcDuplexHandler.java:162)
+	at org.apache.hadoop.hbase.ipc.NettyRpcDuplexHandler.channelRead(NettyRpcDuplexHandler.java:192)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:359)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:345)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:337)
+	at org.apache.hbase.thirdparty.io.netty.handler.codec.ByteToMessageDecoder.fireChannelRead(ByteToMessageDecoder.java:323)
+	at org.apache.hbase.thirdparty.io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:297)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:359)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:345)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:337)
+	at org.apache.hbase.thirdparty.io.netty.handler.timeout.IdleStateHandler.channelRead(IdleStateHandler.java:286)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:359)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:345)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:337)
+	at org.apache.hbase.thirdparty.io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1408)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:359)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:345)
+	at org.apache.hbase.thirdparty.io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:930)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:163)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:677)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:612)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:529)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:491)
+	at org.apache.hbase.thirdparty.io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:905)
+	at org.apache.hbase.thirdparty.io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	... 1 more
+
+
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is -1
+
+Test vvMode=v2v2
+tr.result is 1
+v1v1 or v2v2 test failed !!!
+reconf_parameter: hbase.regionserver.logroll.period
+component: hbase:HRegionServer
+v1: 30
+v2: 3600000
+testProject: hbase
+unitTest: org.apache.hadoop.hbase.client.TestReplicaWithCluster#testReplicaGetWithPrimaryAndMetaDown
+reconfPoint: -2
+result: -1
+failureMessage: Failed after attempts=2, exceptions:
+2020-08-16T03:40:57.200Z, RpcRetryingCaller{globalStartTime=1597549257189, pause=100, maxAttempts=2}, org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=41873 startCode=1597549217142. As of locationSeqNum=2.
+2020-08-16T03:40:57.783Z, RpcRetryingCaller{globalStartTime=1597549257189, pause=100, maxAttempts=2}, org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=41873 startCode=1597549217142. As of locationSeqNum=2.
+
+stackTrace: org.apache.hadoop.hbase.client.RetriesExhaustedException: Failed after attempts=2, exceptions:
+2020-08-16T03:40:57.200Z, RpcRetryingCaller{globalStartTime=1597549257189, pause=100, maxAttempts=2}, org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=41873 startCode=1597549217142. As of locationSeqNum=2.
+2020-08-16T03:40:57.783Z, RpcRetryingCaller{globalStartTime=1597549257189, pause=100, maxAttempts=2}, org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=41873 startCode=1597549217142. As of locationSeqNum=2.
+
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithRetries(RpcRetryingCallerImpl.java:145)
+	at org.apache.hadoop.hbase.client.ResultBoundedCompletionService$QueueingFuture.run(ResultBoundedCompletionService.java:80)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=41873 startCode=1597549217142. As of locationSeqNum=2.
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at org.apache.hadoop.hbase.ipc.RemoteWithExtrasException.instantiateException(RemoteWithExtrasException.java:99)
+	at org.apache.hadoop.hbase.ipc.RemoteWithExtrasException.unwrapRemoteException(RemoteWithExtrasException.java:89)
+	at org.apache.hadoop.hbase.protobuf.ProtobufUtil.makeIOExceptionOfException(ProtobufUtil.java:282)
+	at org.apache.hadoop.hbase.protobuf.ProtobufUtil.handleRemoteException(ProtobufUtil.java:269)
+	at org.apache.hadoop.hbase.client.RegionServerCallable.call(RegionServerCallable.java:129)
+	at org.apache.hadoop.hbase.client.CancellableRegionServerCallable.call(CancellableRegionServerCallable.java:67)
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithRetries(RpcRetryingCallerImpl.java:107)
+	... 4 more
+Caused by: org.apache.hadoop.hbase.ipc.RemoteWithExtrasException(org.apache.hadoop.hbase.exceptions.RegionMovedException): org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=41873 startCode=1597549217142. As of locationSeqNum=2.
+	at org.apache.hadoop.hbase.regionserver.HRegionServer.getRegionByEncodedName(HRegionServer.java:3367)
+	at org.apache.hadoop.hbase.regionserver.HRegionServer.getRegion(HRegionServer.java:3353)
+	at org.apache.hadoop.hbase.regionserver.RSRpcServices.getRegion(RSRpcServices.java:1439)
+	at org.apache.hadoop.hbase.regionserver.RSRpcServices.get(RSRpcServices.java:2517)
+	at org.apache.hadoop.hbase.shaded.protobuf.generated.ClientProtos$ClientService$2.callBlockingMethod(ClientProtos.java:42274)
+	at org.apache.hadoop.hbase.ipc.RpcServer.call(RpcServer.java:413)
+	at org.apache.hadoop.hbase.ipc.CallRunner.run(CallRunner.java:133)
+	at org.apache.hadoop.hbase.ipc.RpcExecutor$Handler.run(RpcExecutor.java:338)
+	at org.apache.hadoop.hbase.ipc.RpcExecutor$Handler.run(RpcExecutor.java:318)
+
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.onCallFinished(AbstractRpcClient.java:389)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.access$100(AbstractRpcClient.java:97)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:423)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:419)
+	at org.apache.hadoop.hbase.ipc.Call.callComplete(Call.java:117)
+	at org.apache.hadoop.hbase.ipc.Call.setException(Call.java:132)
+	at org.apache.hadoop.hbase.ipc.NettyRpcDuplexHandler.readResponse(NettyRpcDuplexHandler.java:162)
+	at org.apache.hadoop.hbase.ipc.NettyRpcDuplexHandler.channelRead(NettyRpcDuplexHandler.java:192)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:359)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:345)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:337)
+	at org.apache.hbase.thirdparty.io.netty.handler.codec.ByteToMessageDecoder.fireChannelRead(ByteToMessageDecoder.java:323)
+	at org.apache.hbase.thirdparty.io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:297)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:359)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:345)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:337)
+	at org.apache.hbase.thirdparty.io.netty.handler.timeout.IdleStateHandler.channelRead(IdleStateHandler.java:286)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:359)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:345)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:337)
+	at org.apache.hbase.thirdparty.io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1408)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:359)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:345)
+	at org.apache.hbase.thirdparty.io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:930)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:163)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:677)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:612)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:529)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:491)
+	at org.apache.hbase.thirdparty.io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:905)
+	at org.apache.hbase.thirdparty.io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	... 1 more
+
+
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is -1
+
+Test vvMode=v2v2
+tr.result is 1
+v1v1 or v2v2 test failed !!!
+reconf_parameter: hbase.regionserver.logroll.period
+component: hbase:HRegionServer
+v1: 30
+v2: 3600000
+testProject: hbase
+unitTest: org.apache.hadoop.hbase.client.TestReplicaWithCluster#testReplicaGetWithPrimaryAndMetaDown
+reconfPoint: -2
+result: -1
+failureMessage: Failed after attempts=2, exceptions:
+2020-08-16T03:48:44.822Z, RpcRetryingCaller{globalStartTime=1597549724800, pause=100, maxAttempts=2}, org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=33706 startCode=1597549699703. As of locationSeqNum=2.
+2020-08-16T03:48:45.145Z, RpcRetryingCaller{globalStartTime=1597549724800, pause=100, maxAttempts=2}, org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=33706 startCode=1597549699703. As of locationSeqNum=2.
+
+stackTrace: org.apache.hadoop.hbase.client.RetriesExhaustedException: Failed after attempts=2, exceptions:
+2020-08-16T03:48:44.822Z, RpcRetryingCaller{globalStartTime=1597549724800, pause=100, maxAttempts=2}, org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=33706 startCode=1597549699703. As of locationSeqNum=2.
+2020-08-16T03:48:45.145Z, RpcRetryingCaller{globalStartTime=1597549724800, pause=100, maxAttempts=2}, org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=33706 startCode=1597549699703. As of locationSeqNum=2.
+
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithRetries(RpcRetryingCallerImpl.java:145)
+	at org.apache.hadoop.hbase.client.ResultBoundedCompletionService$QueueingFuture.run(ResultBoundedCompletionService.java:80)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=33706 startCode=1597549699703. As of locationSeqNum=2.
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at org.apache.hadoop.hbase.ipc.RemoteWithExtrasException.instantiateException(RemoteWithExtrasException.java:99)
+	at org.apache.hadoop.hbase.ipc.RemoteWithExtrasException.unwrapRemoteException(RemoteWithExtrasException.java:89)
+	at org.apache.hadoop.hbase.protobuf.ProtobufUtil.makeIOExceptionOfException(ProtobufUtil.java:282)
+	at org.apache.hadoop.hbase.protobuf.ProtobufUtil.handleRemoteException(ProtobufUtil.java:269)
+	at org.apache.hadoop.hbase.client.RegionServerCallable.call(RegionServerCallable.java:129)
+	at org.apache.hadoop.hbase.client.CancellableRegionServerCallable.call(CancellableRegionServerCallable.java:67)
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithRetries(RpcRetryingCallerImpl.java:107)
+	... 4 more
+Caused by: org.apache.hadoop.hbase.ipc.RemoteWithExtrasException(org.apache.hadoop.hbase.exceptions.RegionMovedException): org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=33706 startCode=1597549699703. As of locationSeqNum=2.
+	at org.apache.hadoop.hbase.regionserver.HRegionServer.getRegionByEncodedName(HRegionServer.java:3367)
+	at org.apache.hadoop.hbase.regionserver.HRegionServer.getRegion(HRegionServer.java:3353)
+	at org.apache.hadoop.hbase.regionserver.RSRpcServices.getRegion(RSRpcServices.java:1439)
+	at org.apache.hadoop.hbase.regionserver.RSRpcServices.get(RSRpcServices.java:2517)
+	at org.apache.hadoop.hbase.shaded.protobuf.generated.ClientProtos$ClientService$2.callBlockingMethod(ClientProtos.java:42274)
+	at org.apache.hadoop.hbase.ipc.RpcServer.call(RpcServer.java:413)
+	at org.apache.hadoop.hbase.ipc.CallRunner.run(CallRunner.java:133)
+	at org.apache.hadoop.hbase.ipc.RpcExecutor$Handler.run(RpcExecutor.java:338)
+	at org.apache.hadoop.hbase.ipc.RpcExecutor$Handler.run(RpcExecutor.java:318)
+
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.onCallFinished(AbstractRpcClient.java:389)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.access$100(AbstractRpcClient.java:97)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:423)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:419)
+	at org.apache.hadoop.hbase.ipc.Call.callComplete(Call.java:117)
+	at org.apache.hadoop.hbase.ipc.Call.setException(Call.java:132)
+	at org.apache.hadoop.hbase.ipc.NettyRpcDuplexHandler.readResponse(NettyRpcDuplexHandler.java:162)
+	at org.apache.hadoop.hbase.ipc.NettyRpcDuplexHandler.channelRead(NettyRpcDuplexHandler.java:192)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:359)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:345)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:337)
+	at org.apache.hbase.thirdparty.io.netty.handler.codec.ByteToMessageDecoder.fireChannelRead(ByteToMessageDecoder.java:323)
+	at org.apache.hbase.thirdparty.io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:297)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:359)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:345)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:337)
+	at org.apache.hbase.thirdparty.io.netty.handler.timeout.IdleStateHandler.channelRead(IdleStateHandler.java:286)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:359)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:345)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:337)
+	at org.apache.hbase.thirdparty.io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1408)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:359)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:345)
+	at org.apache.hbase.thirdparty.io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:930)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:163)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:677)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:612)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:529)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:491)
+	at org.apache.hbase.thirdparty.io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:905)
+	at org.apache.hbase.thirdparty.io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	... 1 more
+
+
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is -1
+
+Test vvMode=v2v2
+tr.result is 1
+v1v1 or v2v2 test failed !!!
+reconf_parameter: hbase.regionserver.logroll.period
+component: hbase:HRegionServer
+v1: 30
+v2: 3600000
+testProject: hbase
+unitTest: org.apache.hadoop.hbase.client.TestReplicaWithCluster#testReplicaGetWithPrimaryAndMetaDown
+reconfPoint: -2
+result: -1
+failureMessage: Failed after attempts=2, exceptions:
+2020-08-16T04:08:27.414Z, RpcRetryingCaller{globalStartTime=1597550907411, pause=100, maxAttempts=2}, org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=36461 startCode=1597550878595. As of locationSeqNum=2.
+2020-08-16T04:08:27.686Z, RpcRetryingCaller{globalStartTime=1597550907411, pause=100, maxAttempts=2}, org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=36461 startCode=1597550878595. As of locationSeqNum=2.
+
+stackTrace: org.apache.hadoop.hbase.client.RetriesExhaustedException: Failed after attempts=2, exceptions:
+2020-08-16T04:08:27.414Z, RpcRetryingCaller{globalStartTime=1597550907411, pause=100, maxAttempts=2}, org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=36461 startCode=1597550878595. As of locationSeqNum=2.
+2020-08-16T04:08:27.686Z, RpcRetryingCaller{globalStartTime=1597550907411, pause=100, maxAttempts=2}, org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=36461 startCode=1597550878595. As of locationSeqNum=2.
+
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithRetries(RpcRetryingCallerImpl.java:145)
+	at org.apache.hadoop.hbase.client.ResultBoundedCompletionService$QueueingFuture.run(ResultBoundedCompletionService.java:80)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=36461 startCode=1597550878595. As of locationSeqNum=2.
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at org.apache.hadoop.hbase.ipc.RemoteWithExtrasException.instantiateException(RemoteWithExtrasException.java:99)
+	at org.apache.hadoop.hbase.ipc.RemoteWithExtrasException.unwrapRemoteException(RemoteWithExtrasException.java:89)
+	at org.apache.hadoop.hbase.protobuf.ProtobufUtil.makeIOExceptionOfException(ProtobufUtil.java:282)
+	at org.apache.hadoop.hbase.protobuf.ProtobufUtil.handleRemoteException(ProtobufUtil.java:269)
+	at org.apache.hadoop.hbase.client.RegionServerCallable.call(RegionServerCallable.java:129)
+	at org.apache.hadoop.hbase.client.CancellableRegionServerCallable.call(CancellableRegionServerCallable.java:67)
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithRetries(RpcRetryingCallerImpl.java:107)
+	... 4 more
+Caused by: org.apache.hadoop.hbase.ipc.RemoteWithExtrasException(org.apache.hadoop.hbase.exceptions.RegionMovedException): org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=36461 startCode=1597550878595. As of locationSeqNum=2.
+	at org.apache.hadoop.hbase.regionserver.HRegionServer.getRegionByEncodedName(HRegionServer.java:3367)
+	at org.apache.hadoop.hbase.regionserver.HRegionServer.getRegion(HRegionServer.java:3353)
+	at org.apache.hadoop.hbase.regionserver.RSRpcServices.getRegion(RSRpcServices.java:1439)
+	at org.apache.hadoop.hbase.regionserver.RSRpcServices.get(RSRpcServices.java:2517)
+	at org.apache.hadoop.hbase.shaded.protobuf.generated.ClientProtos$ClientService$2.callBlockingMethod(ClientProtos.java:42274)
+	at org.apache.hadoop.hbase.ipc.RpcServer.call(RpcServer.java:413)
+	at org.apache.hadoop.hbase.ipc.CallRunner.run(CallRunner.java:133)
+	at org.apache.hadoop.hbase.ipc.RpcExecutor$Handler.run(RpcExecutor.java:338)
+	at org.apache.hadoop.hbase.ipc.RpcExecutor$Handler.run(RpcExecutor.java:318)
+
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.onCallFinished(AbstractRpcClient.java:389)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.access$100(AbstractRpcClient.java:97)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:423)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:419)
+	at org.apache.hadoop.hbase.ipc.Call.callComplete(Call.java:117)
+	at org.apache.hadoop.hbase.ipc.Call.setException(Call.java:132)
+	at org.apache.hadoop.hbase.ipc.NettyRpcDuplexHandler.readResponse(NettyRpcDuplexHandler.java:162)
+	at org.apache.hadoop.hbase.ipc.NettyRpcDuplexHandler.channelRead(NettyRpcDuplexHandler.java:192)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:359)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:345)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:337)
+	at org.apache.hbase.thirdparty.io.netty.handler.codec.ByteToMessageDecoder.fireChannelRead(ByteToMessageDecoder.java:323)
+	at org.apache.hbase.thirdparty.io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:297)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:359)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:345)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:337)
+	at org.apache.hbase.thirdparty.io.netty.handler.timeout.IdleStateHandler.channelRead(IdleStateHandler.java:286)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:359)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:345)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:337)
+	at org.apache.hbase.thirdparty.io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1408)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:359)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:345)
+	at org.apache.hbase.thirdparty.io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:930)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:163)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:677)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:612)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:529)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:491)
+	at org.apache.hbase.thirdparty.io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:905)
+	at org.apache.hbase.thirdparty.io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	... 1 more
+
+
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is -1
+
+Test vvMode=v2v2
+tr.result is 1
+v1v1 or v2v2 test failed !!!
+reconf_parameter: hbase.regionserver.logroll.period
+component: hbase:HRegionServer
+v1: 30
+v2: 3600000
+testProject: hbase
+unitTest: org.apache.hadoop.hbase.client.TestReplicaWithCluster#testReplicaGetWithPrimaryAndMetaDown
+reconfPoint: -2
+result: -1
+failureMessage: Failed after attempts=2, exceptions:
+2020-08-16T04:12:16.643Z, RpcRetryingCaller{globalStartTime=1597551136618, pause=100, maxAttempts=2}, org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=41456 startCode=1597551104266. As of locationSeqNum=2.
+2020-08-16T04:12:16.956Z, RpcRetryingCaller{globalStartTime=1597551136618, pause=100, maxAttempts=2}, org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=41456 startCode=1597551104266. As of locationSeqNum=2.
+
+stackTrace: org.apache.hadoop.hbase.client.RetriesExhaustedException: Failed after attempts=2, exceptions:
+2020-08-16T04:12:16.643Z, RpcRetryingCaller{globalStartTime=1597551136618, pause=100, maxAttempts=2}, org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=41456 startCode=1597551104266. As of locationSeqNum=2.
+2020-08-16T04:12:16.956Z, RpcRetryingCaller{globalStartTime=1597551136618, pause=100, maxAttempts=2}, org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=41456 startCode=1597551104266. As of locationSeqNum=2.
+
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithRetries(RpcRetryingCallerImpl.java:145)
+	at org.apache.hadoop.hbase.client.ResultBoundedCompletionService$QueueingFuture.run(ResultBoundedCompletionService.java:80)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=41456 startCode=1597551104266. As of locationSeqNum=2.
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at org.apache.hadoop.hbase.ipc.RemoteWithExtrasException.instantiateException(RemoteWithExtrasException.java:99)
+	at org.apache.hadoop.hbase.ipc.RemoteWithExtrasException.unwrapRemoteException(RemoteWithExtrasException.java:89)
+	at org.apache.hadoop.hbase.protobuf.ProtobufUtil.makeIOExceptionOfException(ProtobufUtil.java:282)
+	at org.apache.hadoop.hbase.protobuf.ProtobufUtil.handleRemoteException(ProtobufUtil.java:269)
+	at org.apache.hadoop.hbase.client.RegionServerCallable.call(RegionServerCallable.java:129)
+	at org.apache.hadoop.hbase.client.CancellableRegionServerCallable.call(CancellableRegionServerCallable.java:67)
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithRetries(RpcRetryingCallerImpl.java:107)
+	... 4 more
+Caused by: org.apache.hadoop.hbase.ipc.RemoteWithExtrasException(org.apache.hadoop.hbase.exceptions.RegionMovedException): org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=41456 startCode=1597551104266. As of locationSeqNum=2.
+	at org.apache.hadoop.hbase.regionserver.HRegionServer.getRegionByEncodedName(HRegionServer.java:3367)
+	at org.apache.hadoop.hbase.regionserver.HRegionServer.getRegion(HRegionServer.java:3353)
+	at org.apache.hadoop.hbase.regionserver.RSRpcServices.getRegion(RSRpcServices.java:1439)
+	at org.apache.hadoop.hbase.regionserver.RSRpcServices.get(RSRpcServices.java:2517)
+	at org.apache.hadoop.hbase.shaded.protobuf.generated.ClientProtos$ClientService$2.callBlockingMethod(ClientProtos.java:42274)
+	at org.apache.hadoop.hbase.ipc.RpcServer.call(RpcServer.java:413)
+	at org.apache.hadoop.hbase.ipc.CallRunner.run(CallRunner.java:133)
+	at org.apache.hadoop.hbase.ipc.RpcExecutor$Handler.run(RpcExecutor.java:338)
+	at org.apache.hadoop.hbase.ipc.RpcExecutor$Handler.run(RpcExecutor.java:318)
+
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.onCallFinished(AbstractRpcClient.java:389)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.access$100(AbstractRpcClient.java:97)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:423)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:419)
+	at org.apache.hadoop.hbase.ipc.Call.callComplete(Call.java:117)
+	at org.apache.hadoop.hbase.ipc.Call.setException(Call.java:132)
+	at org.apache.hadoop.hbase.ipc.NettyRpcDuplexHandler.readResponse(NettyRpcDuplexHandler.java:162)
+	at org.apache.hadoop.hbase.ipc.NettyRpcDuplexHandler.channelRead(NettyRpcDuplexHandler.java:192)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:359)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:345)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:337)
+	at org.apache.hbase.thirdparty.io.netty.handler.codec.ByteToMessageDecoder.fireChannelRead(ByteToMessageDecoder.java:323)
+	at org.apache.hbase.thirdparty.io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:297)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:359)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:345)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:337)
+	at org.apache.hbase.thirdparty.io.netty.handler.timeout.IdleStateHandler.channelRead(IdleStateHandler.java:286)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:359)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:345)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:337)
+	at org.apache.hbase.thirdparty.io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1408)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:359)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:345)
+	at org.apache.hbase.thirdparty.io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:930)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:163)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:677)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:612)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:529)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:491)
+	at org.apache.hbase.thirdparty.io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:905)
+	at org.apache.hbase.thirdparty.io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	... 1 more
+
+
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is -1
+
+Test vvMode=v2v2
+tr.result is 1
+v1v1 or v2v2 test failed !!!
+reconf_parameter: hbase.regionserver.logroll.period
+component: hbase:HRegionServer
+v1: 30
+v2: 3600000
+testProject: hbase
+unitTest: org.apache.hadoop.hbase.client.TestReplicaWithCluster#testReplicaGetWithPrimaryAndMetaDown
+reconfPoint: -2
+result: -1
+failureMessage: Failed after attempts=2, exceptions:
+2020-08-16T04:16:00.189Z, RpcRetryingCaller{globalStartTime=1597551360186, pause=100, maxAttempts=2}, org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=43226 startCode=1597551330454. As of locationSeqNum=2.
+2020-08-16T04:16:00.458Z, RpcRetryingCaller{globalStartTime=1597551360186, pause=100, maxAttempts=2}, org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=43226 startCode=1597551330454. As of locationSeqNum=2.
+
+stackTrace: org.apache.hadoop.hbase.client.RetriesExhaustedException: Failed after attempts=2, exceptions:
+2020-08-16T04:16:00.189Z, RpcRetryingCaller{globalStartTime=1597551360186, pause=100, maxAttempts=2}, org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=43226 startCode=1597551330454. As of locationSeqNum=2.
+2020-08-16T04:16:00.458Z, RpcRetryingCaller{globalStartTime=1597551360186, pause=100, maxAttempts=2}, org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=43226 startCode=1597551330454. As of locationSeqNum=2.
+
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithRetries(RpcRetryingCallerImpl.java:145)
+	at org.apache.hadoop.hbase.client.ResultBoundedCompletionService$QueueingFuture.run(ResultBoundedCompletionService.java:80)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=43226 startCode=1597551330454. As of locationSeqNum=2.
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at org.apache.hadoop.hbase.ipc.RemoteWithExtrasException.instantiateException(RemoteWithExtrasException.java:99)
+	at org.apache.hadoop.hbase.ipc.RemoteWithExtrasException.unwrapRemoteException(RemoteWithExtrasException.java:89)
+	at org.apache.hadoop.hbase.protobuf.ProtobufUtil.makeIOExceptionOfException(ProtobufUtil.java:282)
+	at org.apache.hadoop.hbase.protobuf.ProtobufUtil.handleRemoteException(ProtobufUtil.java:269)
+	at org.apache.hadoop.hbase.client.RegionServerCallable.call(RegionServerCallable.java:129)
+	at org.apache.hadoop.hbase.client.CancellableRegionServerCallable.call(CancellableRegionServerCallable.java:67)
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithRetries(RpcRetryingCallerImpl.java:107)
+	... 4 more
+Caused by: org.apache.hadoop.hbase.ipc.RemoteWithExtrasException(org.apache.hadoop.hbase.exceptions.RegionMovedException): org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=43226 startCode=1597551330454. As of locationSeqNum=2.
+	at org.apache.hadoop.hbase.regionserver.HRegionServer.getRegionByEncodedName(HRegionServer.java:3367)
+	at org.apache.hadoop.hbase.regionserver.HRegionServer.getRegion(HRegionServer.java:3353)
+	at org.apache.hadoop.hbase.regionserver.RSRpcServices.getRegion(RSRpcServices.java:1439)
+	at org.apache.hadoop.hbase.regionserver.RSRpcServices.get(RSRpcServices.java:2517)
+	at org.apache.hadoop.hbase.shaded.protobuf.generated.ClientProtos$ClientService$2.callBlockingMethod(ClientProtos.java:42274)
+	at org.apache.hadoop.hbase.ipc.RpcServer.call(RpcServer.java:413)
+	at org.apache.hadoop.hbase.ipc.CallRunner.run(CallRunner.java:133)
+	at org.apache.hadoop.hbase.ipc.RpcExecutor$Handler.run(RpcExecutor.java:338)
+	at org.apache.hadoop.hbase.ipc.RpcExecutor$Handler.run(RpcExecutor.java:318)
+
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.onCallFinished(AbstractRpcClient.java:389)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.access$100(AbstractRpcClient.java:97)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:423)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:419)
+	at org.apache.hadoop.hbase.ipc.Call.callComplete(Call.java:117)
+	at org.apache.hadoop.hbase.ipc.Call.setException(Call.java:132)
+	at org.apache.hadoop.hbase.ipc.NettyRpcDuplexHandler.readResponse(NettyRpcDuplexHandler.java:162)
+	at org.apache.hadoop.hbase.ipc.NettyRpcDuplexHandler.channelRead(NettyRpcDuplexHandler.java:192)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:359)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:345)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:337)
+	at org.apache.hbase.thirdparty.io.netty.handler.codec.ByteToMessageDecoder.fireChannelRead(ByteToMessageDecoder.java:323)
+	at org.apache.hbase.thirdparty.io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:297)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:359)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:345)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:337)
+	at org.apache.hbase.thirdparty.io.netty.handler.timeout.IdleStateHandler.channelRead(IdleStateHandler.java:286)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:359)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:345)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:337)
+	at org.apache.hbase.thirdparty.io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1408)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:359)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:345)
+	at org.apache.hbase.thirdparty.io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:930)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:163)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:677)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:612)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:529)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:491)
+	at org.apache.hbase.thirdparty.io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:905)
+	at org.apache.hbase.thirdparty.io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	... 1 more
+
+
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is -1
+
+Test vvMode=v2v2
+tr.result is 1
+v1v1 or v2v2 test failed !!!
+reconf_parameter: hbase.regionserver.logroll.period
+component: hbase:HRegionServer
+v1: 30
+v2: 3600000
+testProject: hbase
+unitTest: org.apache.hadoop.hbase.client.TestReplicaWithCluster#testReplicaGetWithPrimaryAndMetaDown
+reconfPoint: -2
+result: -1
+failureMessage: Failed after attempts=2, exceptions:
+2020-08-16T04:48:03.035Z, RpcRetryingCaller{globalStartTime=1597553283032, pause=100, maxAttempts=2}, org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=44995 startCode=1597553253446. As of locationSeqNum=2.
+2020-08-16T04:48:03.267Z, RpcRetryingCaller{globalStartTime=1597553283032, pause=100, maxAttempts=2}, org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=44995 startCode=1597553253446. As of locationSeqNum=2.
+
+stackTrace: org.apache.hadoop.hbase.client.RetriesExhaustedException: Failed after attempts=2, exceptions:
+2020-08-16T04:48:03.035Z, RpcRetryingCaller{globalStartTime=1597553283032, pause=100, maxAttempts=2}, org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=44995 startCode=1597553253446. As of locationSeqNum=2.
+2020-08-16T04:48:03.267Z, RpcRetryingCaller{globalStartTime=1597553283032, pause=100, maxAttempts=2}, org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=44995 startCode=1597553253446. As of locationSeqNum=2.
+
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithRetries(RpcRetryingCallerImpl.java:145)
+	at org.apache.hadoop.hbase.client.ResultBoundedCompletionService$QueueingFuture.run(ResultBoundedCompletionService.java:80)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=44995 startCode=1597553253446. As of locationSeqNum=2.
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at org.apache.hadoop.hbase.ipc.RemoteWithExtrasException.instantiateException(RemoteWithExtrasException.java:99)
+	at org.apache.hadoop.hbase.ipc.RemoteWithExtrasException.unwrapRemoteException(RemoteWithExtrasException.java:89)
+	at org.apache.hadoop.hbase.protobuf.ProtobufUtil.makeIOExceptionOfException(ProtobufUtil.java:282)
+	at org.apache.hadoop.hbase.protobuf.ProtobufUtil.handleRemoteException(ProtobufUtil.java:269)
+	at org.apache.hadoop.hbase.client.RegionServerCallable.call(RegionServerCallable.java:129)
+	at org.apache.hadoop.hbase.client.CancellableRegionServerCallable.call(CancellableRegionServerCallable.java:67)
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithRetries(RpcRetryingCallerImpl.java:107)
+	... 4 more
+Caused by: org.apache.hadoop.hbase.ipc.RemoteWithExtrasException(org.apache.hadoop.hbase.exceptions.RegionMovedException): org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=44995 startCode=1597553253446. As of locationSeqNum=2.
+	at org.apache.hadoop.hbase.regionserver.HRegionServer.getRegionByEncodedName(HRegionServer.java:3367)
+	at org.apache.hadoop.hbase.regionserver.HRegionServer.getRegion(HRegionServer.java:3353)
+	at org.apache.hadoop.hbase.regionserver.RSRpcServices.getRegion(RSRpcServices.java:1439)
+	at org.apache.hadoop.hbase.regionserver.RSRpcServices.get(RSRpcServices.java:2517)
+	at org.apache.hadoop.hbase.shaded.protobuf.generated.ClientProtos$ClientService$2.callBlockingMethod(ClientProtos.java:42274)
+	at org.apache.hadoop.hbase.ipc.RpcServer.call(RpcServer.java:413)
+	at org.apache.hadoop.hbase.ipc.CallRunner.run(CallRunner.java:133)
+	at org.apache.hadoop.hbase.ipc.RpcExecutor$Handler.run(RpcExecutor.java:338)
+	at org.apache.hadoop.hbase.ipc.RpcExecutor$Handler.run(RpcExecutor.java:318)
+
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.onCallFinished(AbstractRpcClient.java:389)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.access$100(AbstractRpcClient.java:97)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:423)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:419)
+	at org.apache.hadoop.hbase.ipc.Call.callComplete(Call.java:117)
+	at org.apache.hadoop.hbase.ipc.Call.setException(Call.java:132)
+	at org.apache.hadoop.hbase.ipc.NettyRpcDuplexHandler.readResponse(NettyRpcDuplexHandler.java:162)
+	at org.apache.hadoop.hbase.ipc.NettyRpcDuplexHandler.channelRead(NettyRpcDuplexHandler.java:192)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:359)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:345)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:337)
+	at org.apache.hbase.thirdparty.io.netty.handler.codec.ByteToMessageDecoder.fireChannelRead(ByteToMessageDecoder.java:323)
+	at org.apache.hbase.thirdparty.io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:297)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:359)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:345)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:337)
+	at org.apache.hbase.thirdparty.io.netty.handler.timeout.IdleStateHandler.channelRead(IdleStateHandler.java:286)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:359)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:345)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:337)
+	at org.apache.hbase.thirdparty.io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1408)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:359)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:345)
+	at org.apache.hbase.thirdparty.io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:930)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:163)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:677)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:612)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:529)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:491)
+	at org.apache.hbase.thirdparty.io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:905)
+	at org.apache.hbase.thirdparty.io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	... 1 more
+
+
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is -1
+v1v2 test failed !!!
+reconf_parameter: hbase.regionserver.logroll.period
+component: hbase:HRegionServer
+v1: 30
+v2: 3600000
+testProject: hbase
+unitTest: org.apache.hadoop.hbase.client.TestReplicaWithCluster#testReplicaGetWithPrimaryAndMetaDown
+reconfPoint: -2
+result: -1
+failureMessage: Failed after attempts=2, exceptions:
+2020-08-16T04:57:54.810Z, RpcRetryingCaller{globalStartTime=1597553874807, pause=100, maxAttempts=2}, org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=37195 startCode=1597553844876. As of locationSeqNum=2.
+2020-08-16T04:57:55.035Z, RpcRetryingCaller{globalStartTime=1597553874807, pause=100, maxAttempts=2}, org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=37195 startCode=1597553844876. As of locationSeqNum=2.
+
+stackTrace: org.apache.hadoop.hbase.client.RetriesExhaustedException: Failed after attempts=2, exceptions:
+2020-08-16T04:57:54.810Z, RpcRetryingCaller{globalStartTime=1597553874807, pause=100, maxAttempts=2}, org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=37195 startCode=1597553844876. As of locationSeqNum=2.
+2020-08-16T04:57:55.035Z, RpcRetryingCaller{globalStartTime=1597553874807, pause=100, maxAttempts=2}, org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=37195 startCode=1597553844876. As of locationSeqNum=2.
+
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithRetries(RpcRetryingCallerImpl.java:145)
+	at org.apache.hadoop.hbase.client.ResultBoundedCompletionService$QueueingFuture.run(ResultBoundedCompletionService.java:80)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=37195 startCode=1597553844876. As of locationSeqNum=2.
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at org.apache.hadoop.hbase.ipc.RemoteWithExtrasException.instantiateException(RemoteWithExtrasException.java:99)
+	at org.apache.hadoop.hbase.ipc.RemoteWithExtrasException.unwrapRemoteException(RemoteWithExtrasException.java:89)
+	at org.apache.hadoop.hbase.protobuf.ProtobufUtil.makeIOExceptionOfException(ProtobufUtil.java:282)
+	at org.apache.hadoop.hbase.protobuf.ProtobufUtil.handleRemoteException(ProtobufUtil.java:269)
+	at org.apache.hadoop.hbase.client.RegionServerCallable.call(RegionServerCallable.java:129)
+	at org.apache.hadoop.hbase.client.CancellableRegionServerCallable.call(CancellableRegionServerCallable.java:67)
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithRetries(RpcRetryingCallerImpl.java:107)
+	... 4 more
+Caused by: org.apache.hadoop.hbase.ipc.RemoteWithExtrasException(org.apache.hadoop.hbase.exceptions.RegionMovedException): org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=37195 startCode=1597553844876. As of locationSeqNum=2.
+	at org.apache.hadoop.hbase.regionserver.HRegionServer.getRegionByEncodedName(HRegionServer.java:3367)
+	at org.apache.hadoop.hbase.regionserver.HRegionServer.getRegion(HRegionServer.java:3353)
+	at org.apache.hadoop.hbase.regionserver.RSRpcServices.getRegion(RSRpcServices.java:1439)
+	at org.apache.hadoop.hbase.regionserver.RSRpcServices.get(RSRpcServices.java:2517)
+	at org.apache.hadoop.hbase.shaded.protobuf.generated.ClientProtos$ClientService$2.callBlockingMethod(ClientProtos.java:42274)
+	at org.apache.hadoop.hbase.ipc.RpcServer.call(RpcServer.java:413)
+	at org.apache.hadoop.hbase.ipc.CallRunner.run(CallRunner.java:133)
+	at org.apache.hadoop.hbase.ipc.RpcExecutor$Handler.run(RpcExecutor.java:338)
+	at org.apache.hadoop.hbase.ipc.RpcExecutor$Handler.run(RpcExecutor.java:318)
+
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.onCallFinished(AbstractRpcClient.java:389)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.access$100(AbstractRpcClient.java:97)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:423)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:419)
+	at org.apache.hadoop.hbase.ipc.Call.callComplete(Call.java:117)
+	at org.apache.hadoop.hbase.ipc.Call.setException(Call.java:132)
+	at org.apache.hadoop.hbase.ipc.NettyRpcDuplexHandler.readResponse(NettyRpcDuplexHandler.java:162)
+	at org.apache.hadoop.hbase.ipc.NettyRpcDuplexHandler.channelRead(NettyRpcDuplexHandler.java:192)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:359)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:345)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:337)
+	at org.apache.hbase.thirdparty.io.netty.handler.codec.ByteToMessageDecoder.fireChannelRead(ByteToMessageDecoder.java:323)
+	at org.apache.hbase.thirdparty.io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:297)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:359)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:345)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:337)
+	at org.apache.hbase.thirdparty.io.netty.handler.timeout.IdleStateHandler.channelRead(IdleStateHandler.java:286)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:359)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:345)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:337)
+	at org.apache.hbase.thirdparty.io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1408)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:359)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:345)
+	at org.apache.hbase.thirdparty.io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:930)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:163)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:677)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:612)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:529)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:491)
+	at org.apache.hbase.thirdparty.io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:905)
+	at org.apache.hbase.thirdparty.io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	... 1 more
+
+
+
+Test vvMode=v1v1
+tr.result is -1
+
+Test vvMode=v2v2
+tr.result is 1
+v1v1 or v2v2 test failed !!!
+reconf_parameter: hbase.regionserver.logroll.period
+component: hbase:HRegionServer
+v1: 30
+v2: 3600000
+testProject: hbase
+unitTest: org.apache.hadoop.hbase.client.TestReplicaWithCluster#testReplicaGetWithPrimaryAndMetaDown
+reconfPoint: -2
+result: -1
+failureMessage: Failed after attempts=2, exceptions:
+2020-08-16T04:59:13.811Z, RpcRetryingCaller{globalStartTime=1597553953808, pause=100, maxAttempts=2}, org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=44775 startCode=1597553925988. As of locationSeqNum=2.
+2020-08-16T04:59:14.069Z, RpcRetryingCaller{globalStartTime=1597553953808, pause=100, maxAttempts=2}, org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=44775 startCode=1597553925988. As of locationSeqNum=2.
+
+stackTrace: org.apache.hadoop.hbase.client.RetriesExhaustedException: Failed after attempts=2, exceptions:
+2020-08-16T04:59:13.811Z, RpcRetryingCaller{globalStartTime=1597553953808, pause=100, maxAttempts=2}, org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=44775 startCode=1597553925988. As of locationSeqNum=2.
+2020-08-16T04:59:14.069Z, RpcRetryingCaller{globalStartTime=1597553953808, pause=100, maxAttempts=2}, org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=44775 startCode=1597553925988. As of locationSeqNum=2.
+
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithRetries(RpcRetryingCallerImpl.java:145)
+	at org.apache.hadoop.hbase.client.ResultBoundedCompletionService$QueueingFuture.run(ResultBoundedCompletionService.java:80)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=44775 startCode=1597553925988. As of locationSeqNum=2.
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at org.apache.hadoop.hbase.ipc.RemoteWithExtrasException.instantiateException(RemoteWithExtrasException.java:99)
+	at org.apache.hadoop.hbase.ipc.RemoteWithExtrasException.unwrapRemoteException(RemoteWithExtrasException.java:89)
+	at org.apache.hadoop.hbase.protobuf.ProtobufUtil.makeIOExceptionOfException(ProtobufUtil.java:282)
+	at org.apache.hadoop.hbase.protobuf.ProtobufUtil.handleRemoteException(ProtobufUtil.java:269)
+	at org.apache.hadoop.hbase.client.RegionServerCallable.call(RegionServerCallable.java:129)
+	at org.apache.hadoop.hbase.client.CancellableRegionServerCallable.call(CancellableRegionServerCallable.java:67)
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithRetries(RpcRetryingCallerImpl.java:107)
+	... 4 more
+Caused by: org.apache.hadoop.hbase.ipc.RemoteWithExtrasException(org.apache.hadoop.hbase.exceptions.RegionMovedException): org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=44775 startCode=1597553925988. As of locationSeqNum=2.
+	at org.apache.hadoop.hbase.regionserver.HRegionServer.getRegionByEncodedName(HRegionServer.java:3367)
+	at org.apache.hadoop.hbase.regionserver.HRegionServer.getRegion(HRegionServer.java:3353)
+	at org.apache.hadoop.hbase.regionserver.RSRpcServices.getRegion(RSRpcServices.java:1439)
+	at org.apache.hadoop.hbase.regionserver.RSRpcServices.get(RSRpcServices.java:2517)
+	at org.apache.hadoop.hbase.shaded.protobuf.generated.ClientProtos$ClientService$2.callBlockingMethod(ClientProtos.java:42274)
+	at org.apache.hadoop.hbase.ipc.RpcServer.call(RpcServer.java:413)
+	at org.apache.hadoop.hbase.ipc.CallRunner.run(CallRunner.java:133)
+	at org.apache.hadoop.hbase.ipc.RpcExecutor$Handler.run(RpcExecutor.java:338)
+	at org.apache.hadoop.hbase.ipc.RpcExecutor$Handler.run(RpcExecutor.java:318)
+
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.onCallFinished(AbstractRpcClient.java:389)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.access$100(AbstractRpcClient.java:97)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:423)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:419)
+	at org.apache.hadoop.hbase.ipc.Call.callComplete(Call.java:117)
+	at org.apache.hadoop.hbase.ipc.Call.setException(Call.java:132)
+	at org.apache.hadoop.hbase.ipc.NettyRpcDuplexHandler.readResponse(NettyRpcDuplexHandler.java:162)
+	at org.apache.hadoop.hbase.ipc.NettyRpcDuplexHandler.channelRead(NettyRpcDuplexHandler.java:192)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:359)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:345)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:337)
+	at org.apache.hbase.thirdparty.io.netty.handler.codec.ByteToMessageDecoder.fireChannelRead(ByteToMessageDecoder.java:323)
+	at org.apache.hbase.thirdparty.io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:297)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:359)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:345)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:337)
+	at org.apache.hbase.thirdparty.io.netty.handler.timeout.IdleStateHandler.channelRead(IdleStateHandler.java:286)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:359)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:345)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:337)
+	at org.apache.hbase.thirdparty.io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1408)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:359)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:345)
+	at org.apache.hbase.thirdparty.io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:930)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:163)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:677)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:612)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:529)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:491)
+	at org.apache.hbase.thirdparty.io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:905)
+	at org.apache.hbase.thirdparty.io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	... 1 more
+
+
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is -1
+v1v2 test failed !!!
+reconf_parameter: hbase.regionserver.logroll.period
+component: hbase:HRegionServer
+v1: 30
+v2: 3600000
+testProject: hbase
+unitTest: org.apache.hadoop.hbase.client.TestReplicaWithCluster#testReplicaGetWithPrimaryAndMetaDown
+reconfPoint: -2
+result: -1
+failureMessage: Failed after attempts=2, exceptions:
+2020-08-16T05:24:50.945Z, RpcRetryingCaller{globalStartTime=1597555490936, pause=100, maxAttempts=2}, org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=42706 startCode=1597555457244. As of locationSeqNum=2.
+2020-08-16T05:24:51.235Z, RpcRetryingCaller{globalStartTime=1597555490936, pause=100, maxAttempts=2}, org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=42706 startCode=1597555457244. As of locationSeqNum=2.
+
+stackTrace: org.apache.hadoop.hbase.client.RetriesExhaustedException: Failed after attempts=2, exceptions:
+2020-08-16T05:24:50.945Z, RpcRetryingCaller{globalStartTime=1597555490936, pause=100, maxAttempts=2}, org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=42706 startCode=1597555457244. As of locationSeqNum=2.
+2020-08-16T05:24:51.235Z, RpcRetryingCaller{globalStartTime=1597555490936, pause=100, maxAttempts=2}, org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=42706 startCode=1597555457244. As of locationSeqNum=2.
+
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithRetries(RpcRetryingCallerImpl.java:145)
+	at org.apache.hadoop.hbase.client.ResultBoundedCompletionService$QueueingFuture.run(ResultBoundedCompletionService.java:80)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=42706 startCode=1597555457244. As of locationSeqNum=2.
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at org.apache.hadoop.hbase.ipc.RemoteWithExtrasException.instantiateException(RemoteWithExtrasException.java:99)
+	at org.apache.hadoop.hbase.ipc.RemoteWithExtrasException.unwrapRemoteException(RemoteWithExtrasException.java:89)
+	at org.apache.hadoop.hbase.protobuf.ProtobufUtil.makeIOExceptionOfException(ProtobufUtil.java:282)
+	at org.apache.hadoop.hbase.protobuf.ProtobufUtil.handleRemoteException(ProtobufUtil.java:269)
+	at org.apache.hadoop.hbase.client.RegionServerCallable.call(RegionServerCallable.java:129)
+	at org.apache.hadoop.hbase.client.CancellableRegionServerCallable.call(CancellableRegionServerCallable.java:67)
+	at org.apache.hadoop.hbase.client.RpcRetryingCallerImpl.callWithRetries(RpcRetryingCallerImpl.java:107)
+	... 4 more
+Caused by: org.apache.hadoop.hbase.ipc.RemoteWithExtrasException(org.apache.hadoop.hbase.exceptions.RegionMovedException): org.apache.hadoop.hbase.exceptions.RegionMovedException: Region moved to: hostname=7429f454c0d6 port=42706 startCode=1597555457244. As of locationSeqNum=2.
+	at org.apache.hadoop.hbase.regionserver.HRegionServer.getRegionByEncodedName(HRegionServer.java:3367)
+	at org.apache.hadoop.hbase.regionserver.HRegionServer.getRegion(HRegionServer.java:3353)
+	at org.apache.hadoop.hbase.regionserver.RSRpcServices.getRegion(RSRpcServices.java:1439)
+	at org.apache.hadoop.hbase.regionserver.RSRpcServices.get(RSRpcServices.java:2517)
+	at org.apache.hadoop.hbase.shaded.protobuf.generated.ClientProtos$ClientService$2.callBlockingMethod(ClientProtos.java:42274)
+	at org.apache.hadoop.hbase.ipc.RpcServer.call(RpcServer.java:413)
+	at org.apache.hadoop.hbase.ipc.CallRunner.run(CallRunner.java:133)
+	at org.apache.hadoop.hbase.ipc.RpcExecutor$Handler.run(RpcExecutor.java:338)
+	at org.apache.hadoop.hbase.ipc.RpcExecutor$Handler.run(RpcExecutor.java:318)
+
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.onCallFinished(AbstractRpcClient.java:389)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient.access$100(AbstractRpcClient.java:97)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:423)
+	at org.apache.hadoop.hbase.ipc.AbstractRpcClient$3.run(AbstractRpcClient.java:419)
+	at org.apache.hadoop.hbase.ipc.Call.callComplete(Call.java:117)
+	at org.apache.hadoop.hbase.ipc.Call.setException(Call.java:132)
+	at org.apache.hadoop.hbase.ipc.NettyRpcDuplexHandler.readResponse(NettyRpcDuplexHandler.java:162)
+	at org.apache.hadoop.hbase.ipc.NettyRpcDuplexHandler.channelRead(NettyRpcDuplexHandler.java:192)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:359)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:345)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:337)
+	at org.apache.hbase.thirdparty.io.netty.handler.codec.ByteToMessageDecoder.fireChannelRead(ByteToMessageDecoder.java:323)
+	at org.apache.hbase.thirdparty.io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:297)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:359)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:345)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:337)
+	at org.apache.hbase.thirdparty.io.netty.handler.timeout.IdleStateHandler.channelRead(IdleStateHandler.java:286)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:359)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:345)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:337)
+	at org.apache.hbase.thirdparty.io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1408)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:359)
+	at org.apache.hbase.thirdparty.io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:345)
+	at org.apache.hbase.thirdparty.io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:930)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:163)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:677)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:612)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:529)
+	at org.apache.hbase.thirdparty.io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:491)
+	at org.apache.hbase.thirdparty.io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:905)
+	at org.apache.hbase.thirdparty.io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	... 1 more
+
+
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+v1v2 failed with probability 7 out of 50
+v1v1v2v2 failed with probability 11 out of 50
+result: false positive !!!
+Total execution time in seconds : 11603
