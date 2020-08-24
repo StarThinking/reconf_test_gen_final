@@ -1,0 +1,707 @@
+reconf_parameter: dfs.namenode.block-placement-policy.default.prefer-local-node
+component: hdfs:NameNode
+v1: false
+v2: true
+testProject: hdfs
+unitTest: org.apache.hadoop.hdfs.server.namenode.TestFSImage#testSaveAndLoadErasureCodingPolicies
+reconfPoint: -1
+result: -1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is -1
+v1v1 or v2v2 test failed !!!
+reconf_parameter: dfs.namenode.block-placement-policy.default.prefer-local-node
+component: hdfs:NameNode
+v1: false
+v2: true
+testProject: hdfs
+unitTest: org.apache.hadoop.hdfs.server.namenode.TestFSImage#testSaveAndLoadErasureCodingPolicies
+reconfPoint: -1
+result: -1
+failureMessage: 3 missing blocks, the stripe is: AlignedStripe(Offset=0, length=1048576, fetchedChunksNum=0, missingChunksNum=3); locatedBlocks is: LocatedBlocks{;  fileLength=50331648;  underConstruction=false;  blocks=[LocatedStripedBlock{BP-1658875194-172.17.0.4-1598114716678:blk_-9223372036854775760_1003; getBlockSize()=50331648; corrupt=false; offset=0; locs=[DatanodeInfoWithStorage[127.0.0.1:32981,DS-13066d96-3ff1-4a13-8b66-c63b86639fa7,DISK], DatanodeInfoWithStorage[127.0.0.1:39893,DS-0005d914-7cc6-4ad1-9c26-a762c79041f5,DISK]]; indices=[0, 3]}];  lastLocatedBlock=LocatedStripedBlock{BP-1658875194-172.17.0.4-1598114716678:blk_-9223372036854775760_1003; getBlockSize()=50331648; corrupt=false; offset=0; locs=[DatanodeInfoWithStorage[127.0.0.1:32981,DS-13066d96-3ff1-4a13-8b66-c63b86639fa7,DISK], DatanodeInfoWithStorage[127.0.0.1:39893,DS-0005d914-7cc6-4ad1-9c26-a762c79041f5,DISK]]; indices=[0, 3]};  isLastBlockComplete=true;  ecPolicy=ErasureCodingPolicy=[Name=RS-3-2-1024k, Schema=[ECSchema=[Codec=rs, numDataUnits=3, numParityUnits=2]], CellSize=1048576, Id=2]}
+stackTrace: java.io.IOException: 3 missing blocks, the stripe is: AlignedStripe(Offset=0, length=1048576, fetchedChunksNum=0, missingChunksNum=3); locatedBlocks is: LocatedBlocks{;  fileLength=50331648;  underConstruction=false;  blocks=[LocatedStripedBlock{BP-1658875194-172.17.0.4-1598114716678:blk_-9223372036854775760_1003; getBlockSize()=50331648; corrupt=false; offset=0; locs=[DatanodeInfoWithStorage[127.0.0.1:32981,DS-13066d96-3ff1-4a13-8b66-c63b86639fa7,DISK], DatanodeInfoWithStorage[127.0.0.1:39893,DS-0005d914-7cc6-4ad1-9c26-a762c79041f5,DISK]]; indices=[0, 3]}];  lastLocatedBlock=LocatedStripedBlock{BP-1658875194-172.17.0.4-1598114716678:blk_-9223372036854775760_1003; getBlockSize()=50331648; corrupt=false; offset=0; locs=[DatanodeInfoWithStorage[127.0.0.1:32981,DS-13066d96-3ff1-4a13-8b66-c63b86639fa7,DISK], DatanodeInfoWithStorage[127.0.0.1:39893,DS-0005d914-7cc6-4ad1-9c26-a762c79041f5,DISK]]; indices=[0, 3]};  isLastBlockComplete=true;  ecPolicy=ErasureCodingPolicy=[Name=RS-3-2-1024k, Schema=[ECSchema=[Codec=rs, numDataUnits=3, numParityUnits=2]], CellSize=1048576, Id=2]}
+	at org.apache.hadoop.hdfs.StripeReader.checkMissingBlocks(StripeReader.java:179)
+	at org.apache.hadoop.hdfs.StripeReader.readParityChunks(StripeReader.java:211)
+	at org.apache.hadoop.hdfs.StripeReader.readStripe(StripeReader.java:341)
+	at org.apache.hadoop.hdfs.DFSStripedInputStream.readOneStripe(DFSStripedInputStream.java:326)
+	at org.apache.hadoop.hdfs.DFSStripedInputStream.readWithStrategy(DFSStripedInputStream.java:419)
+	at org.apache.hadoop.hdfs.DFSInputStream.read(DFSInputStream.java:829)
+	at java.io.DataInputStream.read(DataInputStream.java:100)
+	at org.apache.hadoop.io.IOUtils.copyBytes(IOUtils.java:94)
+	at org.apache.hadoop.hdfs.DFSTestUtil.readFileAsBytes(DFSTestUtil.java:372)
+	at org.apache.hadoop.hdfs.server.namenode.TestFSImage.testChangeErasureCodingPolicyState(TestFSImage.java:960)
+	at org.apache.hadoop.hdfs.server.namenode.TestFSImage.testSaveAndLoadErasureCodingPolicies(TestFSImage.java:892)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:271)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:70)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:50)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:365)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeWithRerun(JUnit4Provider.java:273)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:238)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:159)
+	at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:384)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:345)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:126)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:418)
+
+
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is -1
+v1v2 test failed !!!
+reconf_parameter: dfs.namenode.block-placement-policy.default.prefer-local-node
+component: hdfs:NameNode
+v1: false
+v2: true
+testProject: hdfs
+unitTest: org.apache.hadoop.hdfs.server.namenode.TestFSImage#testSaveAndLoadErasureCodingPolicies
+reconfPoint: -1
+result: -1
+failureMessage: 4 missing blocks, the stripe is: AlignedStripe(Offset=0, length=1048576, fetchedChunksNum=0, missingChunksNum=4); locatedBlocks is: LocatedBlocks{;  fileLength=100663296;  underConstruction=false;  blocks=[LocatedStripedBlock{BP-2106459547-172.17.0.4-1598119765200:blk_-9223372036854775776_1002; getBlockSize()=100663296; corrupt=false; offset=0; locs=[DatanodeInfoWithStorage[127.0.0.1:35916,DS-3c23cdd6-6a4a-4086-bfb7-0281656cdbef,DISK], DatanodeInfoWithStorage[127.0.0.1:35826,DS-b7fca6fe-10ef-4417-aff0-318affaf2d63,DISK], DatanodeInfoWithStorage[127.0.0.1:38113,DS-876a0727-45ab-49dc-a567-fa0d69dcb590,DISK], DatanodeInfoWithStorage[127.0.0.1:43919,DS-ee66f37c-bfc6-4d9a-bacd-0cd1422b312c,DISK], DatanodeInfoWithStorage[127.0.0.1:34624,DS-3b745852-b95b-40b0-8374-e97291fe9600,DISK]]; indices=[1, 4, 5, 7, 8]}];  lastLocatedBlock=LocatedStripedBlock{BP-2106459547-172.17.0.4-1598119765200:blk_-9223372036854775776_1002; getBlockSize()=100663296; corrupt=false; offset=0; locs=[DatanodeInfoWithStorage[127.0.0.1:35916,DS-3c23cdd6-6a4a-4086-bfb7-0281656cdbef,DISK], DatanodeInfoWithStorage[127.0.0.1:35826,DS-b7fca6fe-10ef-4417-aff0-318affaf2d63,DISK], DatanodeInfoWithStorage[127.0.0.1:38113,DS-876a0727-45ab-49dc-a567-fa0d69dcb590,DISK], DatanodeInfoWithStorage[127.0.0.1:43919,DS-ee66f37c-bfc6-4d9a-bacd-0cd1422b312c,DISK], DatanodeInfoWithStorage[127.0.0.1:34624,DS-3b745852-b95b-40b0-8374-e97291fe9600,DISK]]; indices=[1, 4, 5, 7, 8]};  isLastBlockComplete=true;  ecPolicy=ErasureCodingPolicy=[Name=RS-6-3-1024k, Schema=[ECSchema=[Codec=rs, numDataUnits=6, numParityUnits=3]], CellSize=1048576, Id=1]}
+stackTrace: java.io.IOException: 4 missing blocks, the stripe is: AlignedStripe(Offset=0, length=1048576, fetchedChunksNum=0, missingChunksNum=4); locatedBlocks is: LocatedBlocks{;  fileLength=100663296;  underConstruction=false;  blocks=[LocatedStripedBlock{BP-2106459547-172.17.0.4-1598119765200:blk_-9223372036854775776_1002; getBlockSize()=100663296; corrupt=false; offset=0; locs=[DatanodeInfoWithStorage[127.0.0.1:35916,DS-3c23cdd6-6a4a-4086-bfb7-0281656cdbef,DISK], DatanodeInfoWithStorage[127.0.0.1:35826,DS-b7fca6fe-10ef-4417-aff0-318affaf2d63,DISK], DatanodeInfoWithStorage[127.0.0.1:38113,DS-876a0727-45ab-49dc-a567-fa0d69dcb590,DISK], DatanodeInfoWithStorage[127.0.0.1:43919,DS-ee66f37c-bfc6-4d9a-bacd-0cd1422b312c,DISK], DatanodeInfoWithStorage[127.0.0.1:34624,DS-3b745852-b95b-40b0-8374-e97291fe9600,DISK]]; indices=[1, 4, 5, 7, 8]}];  lastLocatedBlock=LocatedStripedBlock{BP-2106459547-172.17.0.4-1598119765200:blk_-9223372036854775776_1002; getBlockSize()=100663296; corrupt=false; offset=0; locs=[DatanodeInfoWithStorage[127.0.0.1:35916,DS-3c23cdd6-6a4a-4086-bfb7-0281656cdbef,DISK], DatanodeInfoWithStorage[127.0.0.1:35826,DS-b7fca6fe-10ef-4417-aff0-318affaf2d63,DISK], DatanodeInfoWithStorage[127.0.0.1:38113,DS-876a0727-45ab-49dc-a567-fa0d69dcb590,DISK], DatanodeInfoWithStorage[127.0.0.1:43919,DS-ee66f37c-bfc6-4d9a-bacd-0cd1422b312c,DISK], DatanodeInfoWithStorage[127.0.0.1:34624,DS-3b745852-b95b-40b0-8374-e97291fe9600,DISK]]; indices=[1, 4, 5, 7, 8]};  isLastBlockComplete=true;  ecPolicy=ErasureCodingPolicy=[Name=RS-6-3-1024k, Schema=[ECSchema=[Codec=rs, numDataUnits=6, numParityUnits=3]], CellSize=1048576, Id=1]}
+	at org.apache.hadoop.hdfs.StripeReader.checkMissingBlocks(StripeReader.java:179)
+	at org.apache.hadoop.hdfs.StripeReader.readParityChunks(StripeReader.java:211)
+	at org.apache.hadoop.hdfs.StripeReader.readStripe(StripeReader.java:341)
+	at org.apache.hadoop.hdfs.DFSStripedInputStream.readOneStripe(DFSStripedInputStream.java:326)
+	at org.apache.hadoop.hdfs.DFSStripedInputStream.readWithStrategy(DFSStripedInputStream.java:419)
+	at org.apache.hadoop.hdfs.DFSInputStream.read(DFSInputStream.java:829)
+	at java.io.DataInputStream.read(DataInputStream.java:100)
+	at org.apache.hadoop.io.IOUtils.copyBytes(IOUtils.java:94)
+	at org.apache.hadoop.hdfs.DFSTestUtil.readFileAsBytes(DFSTestUtil.java:372)
+	at org.apache.hadoop.hdfs.server.namenode.TestFSImage.testChangeErasureCodingPolicyState(TestFSImage.java:932)
+	at org.apache.hadoop.hdfs.server.namenode.TestFSImage.testSaveAndLoadErasureCodingPolicies(TestFSImage.java:889)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:271)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:70)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:50)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:365)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeWithRerun(JUnit4Provider.java:273)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:238)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:159)
+	at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:384)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:345)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:126)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:418)
+
+
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is -1
+v1v1 or v2v2 test failed !!!
+reconf_parameter: dfs.namenode.block-placement-policy.default.prefer-local-node
+component: hdfs:NameNode
+v1: false
+v2: true
+testProject: hdfs
+unitTest: org.apache.hadoop.hdfs.server.namenode.TestFSImage#testSaveAndLoadErasureCodingPolicies
+reconfPoint: -1
+result: -1
+failureMessage: 4 missing blocks, the stripe is: AlignedStripe(Offset=0, length=1048576, fetchedChunksNum=0, missingChunksNum=4); locatedBlocks is: LocatedBlocks{;  fileLength=100663296;  underConstruction=false;  blocks=[LocatedStripedBlock{BP-1274282056-172.17.0.4-1598121481495:blk_-9223372036854775776_1002; getBlockSize()=100663296; corrupt=false; offset=0; locs=[DatanodeInfoWithStorage[127.0.0.1:34641,DS-a64d0a05-7186-420b-93fc-390ba5f0298a,DISK], DatanodeInfoWithStorage[127.0.0.1:43269,DS-84c7a8ad-e810-47aa-8414-9934304532b6,DISK], DatanodeInfoWithStorage[127.0.0.1:35869,DS-16ca7c46-168e-459b-9905-c8cf0f5ed4e1,DISK], DatanodeInfoWithStorage[127.0.0.1:46677,DS-e238e433-4a2a-4362-9dab-6ef11b457cf6,DISK], DatanodeInfoWithStorage[127.0.0.1:41591,DS-6aae56f9-8d7b-4849-ae96-b26ab53ed76d,DISK]]; indices=[0, 2, 3, 4, 7]}];  lastLocatedBlock=LocatedStripedBlock{BP-1274282056-172.17.0.4-1598121481495:blk_-9223372036854775776_1002; getBlockSize()=100663296; corrupt=false; offset=0; locs=[DatanodeInfoWithStorage[127.0.0.1:34641,DS-a64d0a05-7186-420b-93fc-390ba5f0298a,DISK], DatanodeInfoWithStorage[127.0.0.1:43269,DS-84c7a8ad-e810-47aa-8414-9934304532b6,DISK], DatanodeInfoWithStorage[127.0.0.1:35869,DS-16ca7c46-168e-459b-9905-c8cf0f5ed4e1,DISK], DatanodeInfoWithStorage[127.0.0.1:46677,DS-e238e433-4a2a-4362-9dab-6ef11b457cf6,DISK], DatanodeInfoWithStorage[127.0.0.1:41591,DS-6aae56f9-8d7b-4849-ae96-b26ab53ed76d,DISK]]; indices=[0, 2, 3, 4, 7]};  isLastBlockComplete=true;  ecPolicy=ErasureCodingPolicy=[Name=RS-6-3-1024k, Schema=[ECSchema=[Codec=rs, numDataUnits=6, numParityUnits=3]], CellSize=1048576, Id=1]}
+stackTrace: java.io.IOException: 4 missing blocks, the stripe is: AlignedStripe(Offset=0, length=1048576, fetchedChunksNum=0, missingChunksNum=4); locatedBlocks is: LocatedBlocks{;  fileLength=100663296;  underConstruction=false;  blocks=[LocatedStripedBlock{BP-1274282056-172.17.0.4-1598121481495:blk_-9223372036854775776_1002; getBlockSize()=100663296; corrupt=false; offset=0; locs=[DatanodeInfoWithStorage[127.0.0.1:34641,DS-a64d0a05-7186-420b-93fc-390ba5f0298a,DISK], DatanodeInfoWithStorage[127.0.0.1:43269,DS-84c7a8ad-e810-47aa-8414-9934304532b6,DISK], DatanodeInfoWithStorage[127.0.0.1:35869,DS-16ca7c46-168e-459b-9905-c8cf0f5ed4e1,DISK], DatanodeInfoWithStorage[127.0.0.1:46677,DS-e238e433-4a2a-4362-9dab-6ef11b457cf6,DISK], DatanodeInfoWithStorage[127.0.0.1:41591,DS-6aae56f9-8d7b-4849-ae96-b26ab53ed76d,DISK]]; indices=[0, 2, 3, 4, 7]}];  lastLocatedBlock=LocatedStripedBlock{BP-1274282056-172.17.0.4-1598121481495:blk_-9223372036854775776_1002; getBlockSize()=100663296; corrupt=false; offset=0; locs=[DatanodeInfoWithStorage[127.0.0.1:34641,DS-a64d0a05-7186-420b-93fc-390ba5f0298a,DISK], DatanodeInfoWithStorage[127.0.0.1:43269,DS-84c7a8ad-e810-47aa-8414-9934304532b6,DISK], DatanodeInfoWithStorage[127.0.0.1:35869,DS-16ca7c46-168e-459b-9905-c8cf0f5ed4e1,DISK], DatanodeInfoWithStorage[127.0.0.1:46677,DS-e238e433-4a2a-4362-9dab-6ef11b457cf6,DISK], DatanodeInfoWithStorage[127.0.0.1:41591,DS-6aae56f9-8d7b-4849-ae96-b26ab53ed76d,DISK]]; indices=[0, 2, 3, 4, 7]};  isLastBlockComplete=true;  ecPolicy=ErasureCodingPolicy=[Name=RS-6-3-1024k, Schema=[ECSchema=[Codec=rs, numDataUnits=6, numParityUnits=3]], CellSize=1048576, Id=1]}
+	at org.apache.hadoop.hdfs.StripeReader.checkMissingBlocks(StripeReader.java:179)
+	at org.apache.hadoop.hdfs.StripeReader.readParityChunks(StripeReader.java:211)
+	at org.apache.hadoop.hdfs.StripeReader.readStripe(StripeReader.java:341)
+	at org.apache.hadoop.hdfs.DFSStripedInputStream.readOneStripe(DFSStripedInputStream.java:326)
+	at org.apache.hadoop.hdfs.DFSStripedInputStream.readWithStrategy(DFSStripedInputStream.java:419)
+	at org.apache.hadoop.hdfs.DFSInputStream.read(DFSInputStream.java:829)
+	at java.io.DataInputStream.read(DataInputStream.java:100)
+	at org.apache.hadoop.io.IOUtils.copyBytes(IOUtils.java:94)
+	at org.apache.hadoop.hdfs.DFSTestUtil.readFileAsBytes(DFSTestUtil.java:372)
+	at org.apache.hadoop.hdfs.server.namenode.TestFSImage.testChangeErasureCodingPolicyState(TestFSImage.java:932)
+	at org.apache.hadoop.hdfs.server.namenode.TestFSImage.testSaveAndLoadErasureCodingPolicies(TestFSImage.java:889)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:271)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:70)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:50)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:365)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeWithRerun(JUnit4Provider.java:273)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:238)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:159)
+	at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:384)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:345)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:126)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:418)
+
+
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is -1
+v1v1 or v2v2 test failed !!!
+reconf_parameter: dfs.namenode.block-placement-policy.default.prefer-local-node
+component: hdfs:NameNode
+v1: false
+v2: true
+testProject: hdfs
+unitTest: org.apache.hadoop.hdfs.server.namenode.TestFSImage#testSaveAndLoadErasureCodingPolicies
+reconfPoint: -1
+result: -1
+failureMessage: 3 missing blocks, the stripe is: AlignedStripe(Offset=0, length=1048576, fetchedChunksNum=0, missingChunksNum=3); locatedBlocks is: LocatedBlocks{;  fileLength=50331648;  underConstruction=false;  blocks=[LocatedStripedBlock{BP-400913367-172.17.0.4-1598128493745:blk_-9223372036854775760_1003; getBlockSize()=50331648; corrupt=false; offset=0; locs=[DatanodeInfoWithStorage[127.0.0.1:43601,DS-065d0e76-d7a5-471f-ac7e-aa198b26410f,DISK], DatanodeInfoWithStorage[127.0.0.1:39914,DS-e763a77c-e53b-4213-9adb-dd09a7cb29bb,DISK]]; indices=[1, 3]}];  lastLocatedBlock=LocatedStripedBlock{BP-400913367-172.17.0.4-1598128493745:blk_-9223372036854775760_1003; getBlockSize()=50331648; corrupt=false; offset=0; locs=[DatanodeInfoWithStorage[127.0.0.1:43601,DS-065d0e76-d7a5-471f-ac7e-aa198b26410f,DISK], DatanodeInfoWithStorage[127.0.0.1:39914,DS-e763a77c-e53b-4213-9adb-dd09a7cb29bb,DISK]]; indices=[1, 3]};  isLastBlockComplete=true;  ecPolicy=ErasureCodingPolicy=[Name=RS-3-2-1024k, Schema=[ECSchema=[Codec=rs, numDataUnits=3, numParityUnits=2]], CellSize=1048576, Id=2]}
+stackTrace: java.io.IOException: 3 missing blocks, the stripe is: AlignedStripe(Offset=0, length=1048576, fetchedChunksNum=0, missingChunksNum=3); locatedBlocks is: LocatedBlocks{;  fileLength=50331648;  underConstruction=false;  blocks=[LocatedStripedBlock{BP-400913367-172.17.0.4-1598128493745:blk_-9223372036854775760_1003; getBlockSize()=50331648; corrupt=false; offset=0; locs=[DatanodeInfoWithStorage[127.0.0.1:43601,DS-065d0e76-d7a5-471f-ac7e-aa198b26410f,DISK], DatanodeInfoWithStorage[127.0.0.1:39914,DS-e763a77c-e53b-4213-9adb-dd09a7cb29bb,DISK]]; indices=[1, 3]}];  lastLocatedBlock=LocatedStripedBlock{BP-400913367-172.17.0.4-1598128493745:blk_-9223372036854775760_1003; getBlockSize()=50331648; corrupt=false; offset=0; locs=[DatanodeInfoWithStorage[127.0.0.1:43601,DS-065d0e76-d7a5-471f-ac7e-aa198b26410f,DISK], DatanodeInfoWithStorage[127.0.0.1:39914,DS-e763a77c-e53b-4213-9adb-dd09a7cb29bb,DISK]]; indices=[1, 3]};  isLastBlockComplete=true;  ecPolicy=ErasureCodingPolicy=[Name=RS-3-2-1024k, Schema=[ECSchema=[Codec=rs, numDataUnits=3, numParityUnits=2]], CellSize=1048576, Id=2]}
+	at org.apache.hadoop.hdfs.StripeReader.checkMissingBlocks(StripeReader.java:179)
+	at org.apache.hadoop.hdfs.StripeReader.readParityChunks(StripeReader.java:211)
+	at org.apache.hadoop.hdfs.StripeReader.readStripe(StripeReader.java:341)
+	at org.apache.hadoop.hdfs.DFSStripedInputStream.readOneStripe(DFSStripedInputStream.java:326)
+	at org.apache.hadoop.hdfs.DFSStripedInputStream.readWithStrategy(DFSStripedInputStream.java:419)
+	at org.apache.hadoop.hdfs.DFSInputStream.read(DFSInputStream.java:829)
+	at java.io.DataInputStream.read(DataInputStream.java:100)
+	at org.apache.hadoop.io.IOUtils.copyBytes(IOUtils.java:94)
+	at org.apache.hadoop.hdfs.DFSTestUtil.readFileAsBytes(DFSTestUtil.java:372)
+	at org.apache.hadoop.hdfs.server.namenode.TestFSImage.testChangeErasureCodingPolicyState(TestFSImage.java:932)
+	at org.apache.hadoop.hdfs.server.namenode.TestFSImage.testSaveAndLoadErasureCodingPolicies(TestFSImage.java:892)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:271)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:70)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:50)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:365)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeWithRerun(JUnit4Provider.java:273)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:238)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:159)
+	at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:384)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:345)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:126)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:418)
+
+
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is -1
+
+Test vvMode=v2v2
+tr.result is 1
+v1v1 or v2v2 test failed !!!
+reconf_parameter: dfs.namenode.block-placement-policy.default.prefer-local-node
+component: hdfs:NameNode
+v1: false
+v2: true
+testProject: hdfs
+unitTest: org.apache.hadoop.hdfs.server.namenode.TestFSImage#testSaveAndLoadErasureCodingPolicies
+reconfPoint: -1
+result: -1
+failureMessage: 3 missing blocks, the stripe is: AlignedStripe(Offset=0, length=1048576, fetchedChunksNum=0, missingChunksNum=3); locatedBlocks is: LocatedBlocks{;  fileLength=50331648;  underConstruction=false;  blocks=[LocatedStripedBlock{BP-1025454759-172.17.0.4-1598128999035:blk_-9223372036854775760_1003; getBlockSize()=50331648; corrupt=false; offset=0; locs=[DatanodeInfoWithStorage[127.0.0.1:45647,DS-7b956c79-43c0-428a-b151-25e261ad628b,DISK], DatanodeInfoWithStorage[127.0.0.1:45849,DS-9604849b-27e7-466f-9ef1-8963475f58c8,DISK]]; indices=[1, 3]}];  lastLocatedBlock=LocatedStripedBlock{BP-1025454759-172.17.0.4-1598128999035:blk_-9223372036854775760_1003; getBlockSize()=50331648; corrupt=false; offset=0; locs=[DatanodeInfoWithStorage[127.0.0.1:45647,DS-7b956c79-43c0-428a-b151-25e261ad628b,DISK], DatanodeInfoWithStorage[127.0.0.1:45849,DS-9604849b-27e7-466f-9ef1-8963475f58c8,DISK]]; indices=[1, 3]};  isLastBlockComplete=true;  ecPolicy=ErasureCodingPolicy=[Name=RS-3-2-1024k, Schema=[ECSchema=[Codec=rs, numDataUnits=3, numParityUnits=2]], CellSize=1048576, Id=2]}
+stackTrace: java.io.IOException: 3 missing blocks, the stripe is: AlignedStripe(Offset=0, length=1048576, fetchedChunksNum=0, missingChunksNum=3); locatedBlocks is: LocatedBlocks{;  fileLength=50331648;  underConstruction=false;  blocks=[LocatedStripedBlock{BP-1025454759-172.17.0.4-1598128999035:blk_-9223372036854775760_1003; getBlockSize()=50331648; corrupt=false; offset=0; locs=[DatanodeInfoWithStorage[127.0.0.1:45647,DS-7b956c79-43c0-428a-b151-25e261ad628b,DISK], DatanodeInfoWithStorage[127.0.0.1:45849,DS-9604849b-27e7-466f-9ef1-8963475f58c8,DISK]]; indices=[1, 3]}];  lastLocatedBlock=LocatedStripedBlock{BP-1025454759-172.17.0.4-1598128999035:blk_-9223372036854775760_1003; getBlockSize()=50331648; corrupt=false; offset=0; locs=[DatanodeInfoWithStorage[127.0.0.1:45647,DS-7b956c79-43c0-428a-b151-25e261ad628b,DISK], DatanodeInfoWithStorage[127.0.0.1:45849,DS-9604849b-27e7-466f-9ef1-8963475f58c8,DISK]]; indices=[1, 3]};  isLastBlockComplete=true;  ecPolicy=ErasureCodingPolicy=[Name=RS-3-2-1024k, Schema=[ECSchema=[Codec=rs, numDataUnits=3, numParityUnits=2]], CellSize=1048576, Id=2]}
+	at org.apache.hadoop.hdfs.StripeReader.checkMissingBlocks(StripeReader.java:179)
+	at org.apache.hadoop.hdfs.StripeReader.readParityChunks(StripeReader.java:211)
+	at org.apache.hadoop.hdfs.StripeReader.readStripe(StripeReader.java:341)
+	at org.apache.hadoop.hdfs.DFSStripedInputStream.readOneStripe(DFSStripedInputStream.java:326)
+	at org.apache.hadoop.hdfs.DFSStripedInputStream.readWithStrategy(DFSStripedInputStream.java:419)
+	at org.apache.hadoop.hdfs.DFSInputStream.read(DFSInputStream.java:829)
+	at java.io.DataInputStream.read(DataInputStream.java:100)
+	at org.apache.hadoop.io.IOUtils.copyBytes(IOUtils.java:94)
+	at org.apache.hadoop.hdfs.DFSTestUtil.readFileAsBytes(DFSTestUtil.java:372)
+	at org.apache.hadoop.hdfs.server.namenode.TestFSImage.testChangeErasureCodingPolicyState(TestFSImage.java:960)
+	at org.apache.hadoop.hdfs.server.namenode.TestFSImage.testSaveAndLoadErasureCodingPolicies(TestFSImage.java:892)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:271)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:70)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:50)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:365)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeWithRerun(JUnit4Provider.java:273)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:238)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:159)
+	at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:384)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:345)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:126)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:418)
+
+
+v1v2 failed with probability 1 out of 50
+v1v1v2v2 failed with probability 4 out of 50
+result: false positive !!!
+Total execution time in seconds : 14677
