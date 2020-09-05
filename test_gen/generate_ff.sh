@@ -57,6 +57,12 @@ do
     for log in ${logs[@]}
     do
 	#echo log is $log
+ 	cannot_identify=$(echo $log | awk -F '/ultimate/' '{print $2}' | awk -F '-ultimate-meta.txt' '{print $1"-identify-cannot.txt"}')
+	cannot_identify_log=$(echo "$p/final/identify/""$cannot_identify")
+	if [ "$(grep ^"$parameter"$ $cannot_identify_log)" != "" ]; then 
+	    #echo "$parameter is not identifiable in test $log"
+	    continue; 
+	fi
         
     	the_proj="$(echo $log | awk -F '/' '{print $1}')"
         the_test="$(echo $log | awk -F '/' '{print $4}' | awk -F '-ultimate-meta.txt' '{print $1}')"
