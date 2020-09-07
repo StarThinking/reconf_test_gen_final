@@ -1,0 +1,1089 @@
+reconf_parameter: dfs.namenode.max-corrupt-file-blocks-returned
+component: hdfs:NameNode
+v1: 10000
+v2: 100
+testProject: hdfs
+unitTest: org.apache.hadoop.hdfs.TestFileChecksum#testStripedFileChecksumWithMissedDataBlocksRangeQuery17
+reconfPoint: 1
+result: -1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is -1
+
+Test vvMode=v2v2
+tr.result is 1
+v1v1 or v2v2 test failed !!!
+reconf_parameter: dfs.namenode.max-corrupt-file-blocks-returned
+component: hdfs:NameNode
+v1: 10000
+v2: 100
+testProject: hdfs
+unitTest: org.apache.hadoop.hdfs.TestFileChecksum#testStripedFileChecksumWithMissedDataBlocksRangeQuery17
+reconfPoint: 1
+result: -1
+failureMessage: `/striped/stripedFileChecksum3': Fail to get block checksum for LocatedStripedBlock{BP-1785006888-172.17.0.14-1599370757286:blk_-9223372036854775776_1002; getBlockSize()=37748736; corrupt=false; offset=0; locs=[DatanodeInfoWithStorage[127.0.0.1:36634,DS-78974347-8e7d-4390-bc97-1a69d98dbb71,DISK], DatanodeInfoWithStorage[127.0.0.1:38478,DS-1fbb1e5f-a757-4ac1-8e05-c26a1e4cabd5,DISK], DatanodeInfoWithStorage[127.0.0.1:37352,DS-b872455b-902c-4e00-bf0f-789c2e1e97fa,DISK], DatanodeInfoWithStorage[127.0.0.1:42636,DS-3d282def-7ef8-47d0-9f62-e42e385c3fa9,DISK], DatanodeInfoWithStorage[127.0.0.1:45248,DS-49ce25fe-3cba-491d-95e0-cbaf26f7a594,DISK], DatanodeInfoWithStorage[127.0.0.1:44845,DS-201c76b6-78b5-4e5a-a795-c297fb3dc944,DISK], DatanodeInfoWithStorage[127.0.0.1:33723,DS-4c37708f-0f6a-47cf-9442-bab4a423ae22,DISK], DatanodeInfoWithStorage[127.0.0.1:33165,DS-17c4c91a-6248-4739-9077-c91c41a546a2,DISK]]; indices=[1, 2, 3, 4, 5, 6, 7, 8]}
+stackTrace: org.apache.hadoop.fs.PathIOException: `/striped/stripedFileChecksum3': Fail to get block checksum for LocatedStripedBlock{BP-1785006888-172.17.0.14-1599370757286:blk_-9223372036854775776_1002; getBlockSize()=37748736; corrupt=false; offset=0; locs=[DatanodeInfoWithStorage[127.0.0.1:36634,DS-78974347-8e7d-4390-bc97-1a69d98dbb71,DISK], DatanodeInfoWithStorage[127.0.0.1:38478,DS-1fbb1e5f-a757-4ac1-8e05-c26a1e4cabd5,DISK], DatanodeInfoWithStorage[127.0.0.1:37352,DS-b872455b-902c-4e00-bf0f-789c2e1e97fa,DISK], DatanodeInfoWithStorage[127.0.0.1:42636,DS-3d282def-7ef8-47d0-9f62-e42e385c3fa9,DISK], DatanodeInfoWithStorage[127.0.0.1:45248,DS-49ce25fe-3cba-491d-95e0-cbaf26f7a594,DISK], DatanodeInfoWithStorage[127.0.0.1:44845,DS-201c76b6-78b5-4e5a-a795-c297fb3dc944,DISK], DatanodeInfoWithStorage[127.0.0.1:33723,DS-4c37708f-0f6a-47cf-9442-bab4a423ae22,DISK], DatanodeInfoWithStorage[127.0.0.1:33165,DS-17c4c91a-6248-4739-9077-c91c41a546a2,DISK]]; indices=[1, 2, 3, 4, 5, 6, 7, 8]}
+	at org.apache.hadoop.hdfs.FileChecksumHelper$StripedFileNonStripedChecksumComputer.checksumBlocks(FileChecksumHelper.java:640)
+	at org.apache.hadoop.hdfs.FileChecksumHelper$FileChecksumComputer.compute(FileChecksumHelper.java:252)
+	at org.apache.hadoop.hdfs.DFSClient.getFileChecksumInternal(DFSClient.java:1790)
+	at org.apache.hadoop.hdfs.DFSClient.getFileChecksumWithCombineMode(DFSClient.java:1810)
+	at org.apache.hadoop.hdfs.DistributedFileSystem$34.doCall(DistributedFileSystem.java:1712)
+	at org.apache.hadoop.hdfs.DistributedFileSystem$34.doCall(DistributedFileSystem.java:1709)
+	at org.apache.hadoop.fs.FileSystemLinkResolver.resolve(FileSystemLinkResolver.java:81)
+	at org.apache.hadoop.hdfs.DistributedFileSystem.getFileChecksum(DistributedFileSystem.java:1726)
+	at org.apache.hadoop.hdfs.TestFileChecksum.getFileChecksum(TestFileChecksum.java:584)
+	at org.apache.hadoop.hdfs.TestFileChecksum.testStripedFileChecksumWithMissedDataBlocksRangeQuery(TestFileChecksum.java:295)
+	at org.apache.hadoop.hdfs.TestFileChecksum.testStripedFileChecksumWithMissedDataBlocksRangeQuery17(TestFileChecksum.java:493)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.FailOnTimeout$StatementThread.run(FailOnTimeout.java:74)
+
+
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is -1
+v1v1 or v2v2 test failed !!!
+reconf_parameter: dfs.namenode.max-corrupt-file-blocks-returned
+component: hdfs:NameNode
+v1: 10000
+v2: 100
+testProject: hdfs
+unitTest: org.apache.hadoop.hdfs.TestFileChecksum#testStripedFileChecksumWithMissedDataBlocksRangeQuery17
+reconfPoint: 1
+result: -1
+failureMessage: `/striped/stripedFileChecksum3': Fail to get block checksum for LocatedStripedBlock{BP-413909500-172.17.0.14-1599370902477:blk_-9223372036854775776_1002; getBlockSize()=37748736; corrupt=false; offset=0; locs=[DatanodeInfoWithStorage[127.0.0.1:44139,DS-2ffe559f-ac85-4534-bbf6-edfdacbc54fa,DISK], DatanodeInfoWithStorage[127.0.0.1:35621,DS-7c93210c-97f4-480f-9710-14b406840e33,DISK], DatanodeInfoWithStorage[127.0.0.1:35757,DS-d761549a-7dc6-4152-a4fb-18bbecf54476,DISK], DatanodeInfoWithStorage[127.0.0.1:46608,DS-0c2ff343-1739-4f29-963a-f54e98258312,DISK], DatanodeInfoWithStorage[127.0.0.1:39285,DS-aeba8614-e1c6-4ea3-a470-a69db7e94304,DISK], DatanodeInfoWithStorage[127.0.0.1:34670,DS-50d6ccb7-066d-4f4d-a80a-708d39c46322,DISK], DatanodeInfoWithStorage[127.0.0.1:35192,DS-2ab8e18d-52fe-4367-b566-ec4993df09da,DISK], DatanodeInfoWithStorage[127.0.0.1:43578,DS-00e7b381-0467-490d-9253-b8c5b44d228e,DISK]]; indices=[1, 2, 3, 4, 5, 6, 7, 8]}
+stackTrace: org.apache.hadoop.fs.PathIOException: `/striped/stripedFileChecksum3': Fail to get block checksum for LocatedStripedBlock{BP-413909500-172.17.0.14-1599370902477:blk_-9223372036854775776_1002; getBlockSize()=37748736; corrupt=false; offset=0; locs=[DatanodeInfoWithStorage[127.0.0.1:44139,DS-2ffe559f-ac85-4534-bbf6-edfdacbc54fa,DISK], DatanodeInfoWithStorage[127.0.0.1:35621,DS-7c93210c-97f4-480f-9710-14b406840e33,DISK], DatanodeInfoWithStorage[127.0.0.1:35757,DS-d761549a-7dc6-4152-a4fb-18bbecf54476,DISK], DatanodeInfoWithStorage[127.0.0.1:46608,DS-0c2ff343-1739-4f29-963a-f54e98258312,DISK], DatanodeInfoWithStorage[127.0.0.1:39285,DS-aeba8614-e1c6-4ea3-a470-a69db7e94304,DISK], DatanodeInfoWithStorage[127.0.0.1:34670,DS-50d6ccb7-066d-4f4d-a80a-708d39c46322,DISK], DatanodeInfoWithStorage[127.0.0.1:35192,DS-2ab8e18d-52fe-4367-b566-ec4993df09da,DISK], DatanodeInfoWithStorage[127.0.0.1:43578,DS-00e7b381-0467-490d-9253-b8c5b44d228e,DISK]]; indices=[1, 2, 3, 4, 5, 6, 7, 8]}
+	at org.apache.hadoop.hdfs.FileChecksumHelper$StripedFileNonStripedChecksumComputer.checksumBlocks(FileChecksumHelper.java:640)
+	at org.apache.hadoop.hdfs.FileChecksumHelper$FileChecksumComputer.compute(FileChecksumHelper.java:252)
+	at org.apache.hadoop.hdfs.DFSClient.getFileChecksumInternal(DFSClient.java:1790)
+	at org.apache.hadoop.hdfs.DFSClient.getFileChecksumWithCombineMode(DFSClient.java:1810)
+	at org.apache.hadoop.hdfs.DistributedFileSystem$34.doCall(DistributedFileSystem.java:1712)
+	at org.apache.hadoop.hdfs.DistributedFileSystem$34.doCall(DistributedFileSystem.java:1709)
+	at org.apache.hadoop.fs.FileSystemLinkResolver.resolve(FileSystemLinkResolver.java:81)
+	at org.apache.hadoop.hdfs.DistributedFileSystem.getFileChecksum(DistributedFileSystem.java:1726)
+	at org.apache.hadoop.hdfs.TestFileChecksum.getFileChecksum(TestFileChecksum.java:584)
+	at org.apache.hadoop.hdfs.TestFileChecksum.testStripedFileChecksumWithMissedDataBlocksRangeQuery(TestFileChecksum.java:295)
+	at org.apache.hadoop.hdfs.TestFileChecksum.testStripedFileChecksumWithMissedDataBlocksRangeQuery17(TestFileChecksum.java:493)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.FailOnTimeout$StatementThread.run(FailOnTimeout.java:74)
+
+
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is -1
+v1v2 test failed !!!
+reconf_parameter: dfs.namenode.max-corrupt-file-blocks-returned
+component: hdfs:NameNode
+v1: 10000
+v2: 100
+testProject: hdfs
+unitTest: org.apache.hadoop.hdfs.TestFileChecksum#testStripedFileChecksumWithMissedDataBlocksRangeQuery17
+reconfPoint: 1
+result: -1
+failureMessage: `/striped/stripedFileChecksum3': Fail to get block checksum for LocatedStripedBlock{BP-547695130-172.17.0.14-1599371161398:blk_-9223372036854775776_1002; getBlockSize()=37748736; corrupt=false; offset=0; locs=[DatanodeInfoWithStorage[127.0.0.1:41869,DS-3d3a8014-697f-4c53-a3a5-d1528f8cefc9,DISK], DatanodeInfoWithStorage[127.0.0.1:46159,DS-981c99e1-8e79-499e-912d-83e61fd10e80,DISK], DatanodeInfoWithStorage[127.0.0.1:37417,DS-6d3e540e-ac38-43eb-abf7-6ce2f620de9a,DISK], DatanodeInfoWithStorage[127.0.0.1:38869,DS-6a1e320e-64df-4e05-82ff-d3aa94905725,DISK], DatanodeInfoWithStorage[127.0.0.1:46329,DS-7a8d85f5-a254-46d6-a3e8-f631f94385ac,DISK], DatanodeInfoWithStorage[127.0.0.1:41938,DS-32767ade-b173-47f6-aa01-01f4d60b6fb9,DISK], DatanodeInfoWithStorage[127.0.0.1:45377,DS-56650516-3104-4c41-b0bf-c831f186cbb0,DISK], DatanodeInfoWithStorage[127.0.0.1:33638,DS-56867653-d033-448f-a0dc-764b3f6b3e01,DISK]]; indices=[1, 2, 3, 4, 5, 6, 7, 8]}
+stackTrace: org.apache.hadoop.fs.PathIOException: `/striped/stripedFileChecksum3': Fail to get block checksum for LocatedStripedBlock{BP-547695130-172.17.0.14-1599371161398:blk_-9223372036854775776_1002; getBlockSize()=37748736; corrupt=false; offset=0; locs=[DatanodeInfoWithStorage[127.0.0.1:41869,DS-3d3a8014-697f-4c53-a3a5-d1528f8cefc9,DISK], DatanodeInfoWithStorage[127.0.0.1:46159,DS-981c99e1-8e79-499e-912d-83e61fd10e80,DISK], DatanodeInfoWithStorage[127.0.0.1:37417,DS-6d3e540e-ac38-43eb-abf7-6ce2f620de9a,DISK], DatanodeInfoWithStorage[127.0.0.1:38869,DS-6a1e320e-64df-4e05-82ff-d3aa94905725,DISK], DatanodeInfoWithStorage[127.0.0.1:46329,DS-7a8d85f5-a254-46d6-a3e8-f631f94385ac,DISK], DatanodeInfoWithStorage[127.0.0.1:41938,DS-32767ade-b173-47f6-aa01-01f4d60b6fb9,DISK], DatanodeInfoWithStorage[127.0.0.1:45377,DS-56650516-3104-4c41-b0bf-c831f186cbb0,DISK], DatanodeInfoWithStorage[127.0.0.1:33638,DS-56867653-d033-448f-a0dc-764b3f6b3e01,DISK]]; indices=[1, 2, 3, 4, 5, 6, 7, 8]}
+	at org.apache.hadoop.hdfs.FileChecksumHelper$StripedFileNonStripedChecksumComputer.checksumBlocks(FileChecksumHelper.java:640)
+	at org.apache.hadoop.hdfs.FileChecksumHelper$FileChecksumComputer.compute(FileChecksumHelper.java:252)
+	at org.apache.hadoop.hdfs.DFSClient.getFileChecksumInternal(DFSClient.java:1790)
+	at org.apache.hadoop.hdfs.DFSClient.getFileChecksumWithCombineMode(DFSClient.java:1810)
+	at org.apache.hadoop.hdfs.DistributedFileSystem$34.doCall(DistributedFileSystem.java:1712)
+	at org.apache.hadoop.hdfs.DistributedFileSystem$34.doCall(DistributedFileSystem.java:1709)
+	at org.apache.hadoop.fs.FileSystemLinkResolver.resolve(FileSystemLinkResolver.java:81)
+	at org.apache.hadoop.hdfs.DistributedFileSystem.getFileChecksum(DistributedFileSystem.java:1726)
+	at org.apache.hadoop.hdfs.TestFileChecksum.getFileChecksum(TestFileChecksum.java:584)
+	at org.apache.hadoop.hdfs.TestFileChecksum.testStripedFileChecksumWithMissedDataBlocksRangeQuery(TestFileChecksum.java:295)
+	at org.apache.hadoop.hdfs.TestFileChecksum.testStripedFileChecksumWithMissedDataBlocksRangeQuery17(TestFileChecksum.java:493)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.FailOnTimeout$StatementThread.run(FailOnTimeout.java:74)
+
+
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is -1
+
+Test vvMode=v2v2
+tr.result is 1
+v1v1 or v2v2 test failed !!!
+reconf_parameter: dfs.namenode.max-corrupt-file-blocks-returned
+component: hdfs:NameNode
+v1: 10000
+v2: 100
+testProject: hdfs
+unitTest: org.apache.hadoop.hdfs.TestFileChecksum#testStripedFileChecksumWithMissedDataBlocksRangeQuery17
+reconfPoint: 1
+result: -1
+failureMessage: `/striped/stripedFileChecksum3': Fail to get block checksum for LocatedStripedBlock{BP-1331719736-172.17.0.14-1599371297603:blk_-9223372036854775776_1002; getBlockSize()=37748736; corrupt=false; offset=0; locs=[DatanodeInfoWithStorage[127.0.0.1:34458,DS-1dbda522-645e-4985-b644-b65f65bb5556,DISK], DatanodeInfoWithStorage[127.0.0.1:32808,DS-b83ba585-aa9a-4916-b5eb-4a359f09ce7d,DISK], DatanodeInfoWithStorage[127.0.0.1:35438,DS-c70b871d-df05-436c-b446-dc6d37a623fb,DISK], DatanodeInfoWithStorage[127.0.0.1:39688,DS-9120c87a-9c7b-47ee-95b3-0cfcf36e0fb7,DISK], DatanodeInfoWithStorage[127.0.0.1:42884,DS-819b778f-2cea-41b5-90cd-2fabf313c890,DISK], DatanodeInfoWithStorage[127.0.0.1:36876,DS-05fd6bd8-6696-46bd-9749-5478a77e917f,DISK], DatanodeInfoWithStorage[127.0.0.1:42983,DS-aa7be6ba-1e99-4092-b6f7-8549daca03d2,DISK], DatanodeInfoWithStorage[127.0.0.1:35117,DS-aa4baa6a-6330-475a-8528-40d9f39da683,DISK]]; indices=[1, 2, 3, 4, 5, 6, 7, 8]}
+stackTrace: org.apache.hadoop.fs.PathIOException: `/striped/stripedFileChecksum3': Fail to get block checksum for LocatedStripedBlock{BP-1331719736-172.17.0.14-1599371297603:blk_-9223372036854775776_1002; getBlockSize()=37748736; corrupt=false; offset=0; locs=[DatanodeInfoWithStorage[127.0.0.1:34458,DS-1dbda522-645e-4985-b644-b65f65bb5556,DISK], DatanodeInfoWithStorage[127.0.0.1:32808,DS-b83ba585-aa9a-4916-b5eb-4a359f09ce7d,DISK], DatanodeInfoWithStorage[127.0.0.1:35438,DS-c70b871d-df05-436c-b446-dc6d37a623fb,DISK], DatanodeInfoWithStorage[127.0.0.1:39688,DS-9120c87a-9c7b-47ee-95b3-0cfcf36e0fb7,DISK], DatanodeInfoWithStorage[127.0.0.1:42884,DS-819b778f-2cea-41b5-90cd-2fabf313c890,DISK], DatanodeInfoWithStorage[127.0.0.1:36876,DS-05fd6bd8-6696-46bd-9749-5478a77e917f,DISK], DatanodeInfoWithStorage[127.0.0.1:42983,DS-aa7be6ba-1e99-4092-b6f7-8549daca03d2,DISK], DatanodeInfoWithStorage[127.0.0.1:35117,DS-aa4baa6a-6330-475a-8528-40d9f39da683,DISK]]; indices=[1, 2, 3, 4, 5, 6, 7, 8]}
+	at org.apache.hadoop.hdfs.FileChecksumHelper$StripedFileNonStripedChecksumComputer.checksumBlocks(FileChecksumHelper.java:640)
+	at org.apache.hadoop.hdfs.FileChecksumHelper$FileChecksumComputer.compute(FileChecksumHelper.java:252)
+	at org.apache.hadoop.hdfs.DFSClient.getFileChecksumInternal(DFSClient.java:1790)
+	at org.apache.hadoop.hdfs.DFSClient.getFileChecksumWithCombineMode(DFSClient.java:1810)
+	at org.apache.hadoop.hdfs.DistributedFileSystem$34.doCall(DistributedFileSystem.java:1712)
+	at org.apache.hadoop.hdfs.DistributedFileSystem$34.doCall(DistributedFileSystem.java:1709)
+	at org.apache.hadoop.fs.FileSystemLinkResolver.resolve(FileSystemLinkResolver.java:81)
+	at org.apache.hadoop.hdfs.DistributedFileSystem.getFileChecksum(DistributedFileSystem.java:1726)
+	at org.apache.hadoop.hdfs.TestFileChecksum.getFileChecksum(TestFileChecksum.java:584)
+	at org.apache.hadoop.hdfs.TestFileChecksum.testStripedFileChecksumWithMissedDataBlocksRangeQuery(TestFileChecksum.java:295)
+	at org.apache.hadoop.hdfs.TestFileChecksum.testStripedFileChecksumWithMissedDataBlocksRangeQuery17(TestFileChecksum.java:493)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.FailOnTimeout$StatementThread.run(FailOnTimeout.java:74)
+
+
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is -1
+
+Test vvMode=v2v2
+tr.result is 1
+v1v1 or v2v2 test failed !!!
+reconf_parameter: dfs.namenode.max-corrupt-file-blocks-returned
+component: hdfs:NameNode
+v1: 10000
+v2: 100
+testProject: hdfs
+unitTest: org.apache.hadoop.hdfs.TestFileChecksum#testStripedFileChecksumWithMissedDataBlocksRangeQuery17
+reconfPoint: 1
+result: -1
+failureMessage: `/striped/stripedFileChecksum3': Fail to get block checksum for LocatedStripedBlock{BP-272903560-172.17.0.14-1599371500730:blk_-9223372036854775776_1002; getBlockSize()=37748736; corrupt=false; offset=0; locs=[DatanodeInfoWithStorage[127.0.0.1:34730,DS-ca09c287-911d-43c6-aaff-ce280e9f279d,DISK], DatanodeInfoWithStorage[127.0.0.1:39741,DS-50d05485-fe29-4dc1-8cfd-6260cea482af,DISK], DatanodeInfoWithStorage[127.0.0.1:40124,DS-ce633cbd-439b-4de3-bbcf-1cec5a2ca97c,DISK], DatanodeInfoWithStorage[127.0.0.1:44377,DS-e69ac058-c032-434d-a8ca-43be063381b7,DISK], DatanodeInfoWithStorage[127.0.0.1:38172,DS-54064e7f-43f4-4174-adfb-9c40a0a55b55,DISK], DatanodeInfoWithStorage[127.0.0.1:37660,DS-c3d3bce6-ab8a-446f-9228-f690d2c54b8b,DISK], DatanodeInfoWithStorage[127.0.0.1:45697,DS-3da3ed21-2be3-4a12-865d-8c39d1020f8c,DISK], DatanodeInfoWithStorage[127.0.0.1:38136,DS-649c740a-dffb-4b5a-9fa1-4a143848cd8d,DISK]]; indices=[1, 2, 3, 4, 5, 6, 7, 8]}
+stackTrace: org.apache.hadoop.fs.PathIOException: `/striped/stripedFileChecksum3': Fail to get block checksum for LocatedStripedBlock{BP-272903560-172.17.0.14-1599371500730:blk_-9223372036854775776_1002; getBlockSize()=37748736; corrupt=false; offset=0; locs=[DatanodeInfoWithStorage[127.0.0.1:34730,DS-ca09c287-911d-43c6-aaff-ce280e9f279d,DISK], DatanodeInfoWithStorage[127.0.0.1:39741,DS-50d05485-fe29-4dc1-8cfd-6260cea482af,DISK], DatanodeInfoWithStorage[127.0.0.1:40124,DS-ce633cbd-439b-4de3-bbcf-1cec5a2ca97c,DISK], DatanodeInfoWithStorage[127.0.0.1:44377,DS-e69ac058-c032-434d-a8ca-43be063381b7,DISK], DatanodeInfoWithStorage[127.0.0.1:38172,DS-54064e7f-43f4-4174-adfb-9c40a0a55b55,DISK], DatanodeInfoWithStorage[127.0.0.1:37660,DS-c3d3bce6-ab8a-446f-9228-f690d2c54b8b,DISK], DatanodeInfoWithStorage[127.0.0.1:45697,DS-3da3ed21-2be3-4a12-865d-8c39d1020f8c,DISK], DatanodeInfoWithStorage[127.0.0.1:38136,DS-649c740a-dffb-4b5a-9fa1-4a143848cd8d,DISK]]; indices=[1, 2, 3, 4, 5, 6, 7, 8]}
+	at org.apache.hadoop.hdfs.FileChecksumHelper$StripedFileNonStripedChecksumComputer.checksumBlocks(FileChecksumHelper.java:640)
+	at org.apache.hadoop.hdfs.FileChecksumHelper$FileChecksumComputer.compute(FileChecksumHelper.java:252)
+	at org.apache.hadoop.hdfs.DFSClient.getFileChecksumInternal(DFSClient.java:1790)
+	at org.apache.hadoop.hdfs.DFSClient.getFileChecksumWithCombineMode(DFSClient.java:1810)
+	at org.apache.hadoop.hdfs.DistributedFileSystem$34.doCall(DistributedFileSystem.java:1712)
+	at org.apache.hadoop.hdfs.DistributedFileSystem$34.doCall(DistributedFileSystem.java:1709)
+	at org.apache.hadoop.fs.FileSystemLinkResolver.resolve(FileSystemLinkResolver.java:81)
+	at org.apache.hadoop.hdfs.DistributedFileSystem.getFileChecksum(DistributedFileSystem.java:1726)
+	at org.apache.hadoop.hdfs.TestFileChecksum.getFileChecksum(TestFileChecksum.java:584)
+	at org.apache.hadoop.hdfs.TestFileChecksum.testStripedFileChecksumWithMissedDataBlocksRangeQuery(TestFileChecksum.java:295)
+	at org.apache.hadoop.hdfs.TestFileChecksum.testStripedFileChecksumWithMissedDataBlocksRangeQuery17(TestFileChecksum.java:493)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.FailOnTimeout$StatementThread.run(FailOnTimeout.java:74)
+
+
+
+Test vvMode=v1v2
+tr.result is -1
+v1v2 test failed !!!
+reconf_parameter: dfs.namenode.max-corrupt-file-blocks-returned
+component: hdfs:NameNode
+v1: 10000
+v2: 100
+testProject: hdfs
+unitTest: org.apache.hadoop.hdfs.TestFileChecksum#testStripedFileChecksumWithMissedDataBlocksRangeQuery17
+reconfPoint: 1
+result: -1
+failureMessage: `/striped/stripedFileChecksum3': Fail to get block checksum for LocatedStripedBlock{BP-1277759739-172.17.0.14-1599371570965:blk_-9223372036854775776_1002; getBlockSize()=37748736; corrupt=false; offset=0; locs=[DatanodeInfoWithStorage[127.0.0.1:43857,DS-f0441cbb-5ec8-4b0e-b091-7fe6f32cef42,DISK], DatanodeInfoWithStorage[127.0.0.1:38206,DS-68b101c1-bdf1-42f9-bc1e-ee85a6e4551b,DISK], DatanodeInfoWithStorage[127.0.0.1:33279,DS-92bd5ce0-6ba1-4eeb-8e31-2a07b66e917b,DISK], DatanodeInfoWithStorage[127.0.0.1:34355,DS-bc89d409-8a33-4336-85e1-5c5aa3eecbdf,DISK], DatanodeInfoWithStorage[127.0.0.1:41525,DS-cd3b3271-d731-4d15-906d-c0a1732b5542,DISK], DatanodeInfoWithStorage[127.0.0.1:43108,DS-b3ed66f5-3cf8-4041-bd53-87fd88611ccc,DISK], DatanodeInfoWithStorage[127.0.0.1:34419,DS-9be74539-c715-46a4-98ff-7485c0941c28,DISK], DatanodeInfoWithStorage[127.0.0.1:39695,DS-54a17664-f927-4146-ba0b-c31fa5fb435b,DISK]]; indices=[1, 2, 3, 4, 5, 6, 7, 8]}
+stackTrace: org.apache.hadoop.fs.PathIOException: `/striped/stripedFileChecksum3': Fail to get block checksum for LocatedStripedBlock{BP-1277759739-172.17.0.14-1599371570965:blk_-9223372036854775776_1002; getBlockSize()=37748736; corrupt=false; offset=0; locs=[DatanodeInfoWithStorage[127.0.0.1:43857,DS-f0441cbb-5ec8-4b0e-b091-7fe6f32cef42,DISK], DatanodeInfoWithStorage[127.0.0.1:38206,DS-68b101c1-bdf1-42f9-bc1e-ee85a6e4551b,DISK], DatanodeInfoWithStorage[127.0.0.1:33279,DS-92bd5ce0-6ba1-4eeb-8e31-2a07b66e917b,DISK], DatanodeInfoWithStorage[127.0.0.1:34355,DS-bc89d409-8a33-4336-85e1-5c5aa3eecbdf,DISK], DatanodeInfoWithStorage[127.0.0.1:41525,DS-cd3b3271-d731-4d15-906d-c0a1732b5542,DISK], DatanodeInfoWithStorage[127.0.0.1:43108,DS-b3ed66f5-3cf8-4041-bd53-87fd88611ccc,DISK], DatanodeInfoWithStorage[127.0.0.1:34419,DS-9be74539-c715-46a4-98ff-7485c0941c28,DISK], DatanodeInfoWithStorage[127.0.0.1:39695,DS-54a17664-f927-4146-ba0b-c31fa5fb435b,DISK]]; indices=[1, 2, 3, 4, 5, 6, 7, 8]}
+	at org.apache.hadoop.hdfs.FileChecksumHelper$StripedFileNonStripedChecksumComputer.checksumBlocks(FileChecksumHelper.java:640)
+	at org.apache.hadoop.hdfs.FileChecksumHelper$FileChecksumComputer.compute(FileChecksumHelper.java:252)
+	at org.apache.hadoop.hdfs.DFSClient.getFileChecksumInternal(DFSClient.java:1790)
+	at org.apache.hadoop.hdfs.DFSClient.getFileChecksumWithCombineMode(DFSClient.java:1810)
+	at org.apache.hadoop.hdfs.DistributedFileSystem$34.doCall(DistributedFileSystem.java:1712)
+	at org.apache.hadoop.hdfs.DistributedFileSystem$34.doCall(DistributedFileSystem.java:1709)
+	at org.apache.hadoop.fs.FileSystemLinkResolver.resolve(FileSystemLinkResolver.java:81)
+	at org.apache.hadoop.hdfs.DistributedFileSystem.getFileChecksum(DistributedFileSystem.java:1726)
+	at org.apache.hadoop.hdfs.TestFileChecksum.getFileChecksum(TestFileChecksum.java:584)
+	at org.apache.hadoop.hdfs.TestFileChecksum.testStripedFileChecksumWithMissedDataBlocksRangeQuery(TestFileChecksum.java:295)
+	at org.apache.hadoop.hdfs.TestFileChecksum.testStripedFileChecksumWithMissedDataBlocksRangeQuery17(TestFileChecksum.java:493)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.FailOnTimeout$StatementThread.run(FailOnTimeout.java:74)
+
+
+
+Test vvMode=v1v1
+tr.result is -1
+
+Test vvMode=v2v2
+tr.result is 1
+v1v1 or v2v2 test failed !!!
+reconf_parameter: dfs.namenode.max-corrupt-file-blocks-returned
+component: hdfs:NameNode
+v1: 10000
+v2: 100
+testProject: hdfs
+unitTest: org.apache.hadoop.hdfs.TestFileChecksum#testStripedFileChecksumWithMissedDataBlocksRangeQuery17
+reconfPoint: 1
+result: -1
+failureMessage: `/striped/stripedFileChecksum3': Fail to get block checksum for LocatedStripedBlock{BP-1709933787-172.17.0.14-1599371605849:blk_-9223372036854775776_1002; getBlockSize()=37748736; corrupt=false; offset=0; locs=[DatanodeInfoWithStorage[127.0.0.1:42597,DS-6bf79d3f-1525-472f-8707-fe3c920b6455,DISK], DatanodeInfoWithStorage[127.0.0.1:40054,DS-096e0d27-f995-4298-acae-c526c25b5251,DISK], DatanodeInfoWithStorage[127.0.0.1:34687,DS-370c25f8-00e9-4903-9ece-3a24ee976afa,DISK], DatanodeInfoWithStorage[127.0.0.1:36568,DS-386fa62a-8d29-4653-840e-2044b6e064f3,DISK], DatanodeInfoWithStorage[127.0.0.1:37143,DS-156066d6-ef09-4415-a51b-a3787bd6c3bc,DISK], DatanodeInfoWithStorage[127.0.0.1:34345,DS-0d0fb66c-6dee-4ea5-822f-d01728d5202c,DISK], DatanodeInfoWithStorage[127.0.0.1:34140,DS-3added03-54a2-4ca9-b2c0-c68819f5f6ee,DISK], DatanodeInfoWithStorage[127.0.0.1:36078,DS-75316f71-f03c-469c-9821-b2e04af82eba,DISK]]; indices=[1, 2, 3, 4, 5, 6, 7, 8]}
+stackTrace: org.apache.hadoop.fs.PathIOException: `/striped/stripedFileChecksum3': Fail to get block checksum for LocatedStripedBlock{BP-1709933787-172.17.0.14-1599371605849:blk_-9223372036854775776_1002; getBlockSize()=37748736; corrupt=false; offset=0; locs=[DatanodeInfoWithStorage[127.0.0.1:42597,DS-6bf79d3f-1525-472f-8707-fe3c920b6455,DISK], DatanodeInfoWithStorage[127.0.0.1:40054,DS-096e0d27-f995-4298-acae-c526c25b5251,DISK], DatanodeInfoWithStorage[127.0.0.1:34687,DS-370c25f8-00e9-4903-9ece-3a24ee976afa,DISK], DatanodeInfoWithStorage[127.0.0.1:36568,DS-386fa62a-8d29-4653-840e-2044b6e064f3,DISK], DatanodeInfoWithStorage[127.0.0.1:37143,DS-156066d6-ef09-4415-a51b-a3787bd6c3bc,DISK], DatanodeInfoWithStorage[127.0.0.1:34345,DS-0d0fb66c-6dee-4ea5-822f-d01728d5202c,DISK], DatanodeInfoWithStorage[127.0.0.1:34140,DS-3added03-54a2-4ca9-b2c0-c68819f5f6ee,DISK], DatanodeInfoWithStorage[127.0.0.1:36078,DS-75316f71-f03c-469c-9821-b2e04af82eba,DISK]]; indices=[1, 2, 3, 4, 5, 6, 7, 8]}
+	at org.apache.hadoop.hdfs.FileChecksumHelper$StripedFileNonStripedChecksumComputer.checksumBlocks(FileChecksumHelper.java:640)
+	at org.apache.hadoop.hdfs.FileChecksumHelper$FileChecksumComputer.compute(FileChecksumHelper.java:252)
+	at org.apache.hadoop.hdfs.DFSClient.getFileChecksumInternal(DFSClient.java:1790)
+	at org.apache.hadoop.hdfs.DFSClient.getFileChecksumWithCombineMode(DFSClient.java:1810)
+	at org.apache.hadoop.hdfs.DistributedFileSystem$34.doCall(DistributedFileSystem.java:1712)
+	at org.apache.hadoop.hdfs.DistributedFileSystem$34.doCall(DistributedFileSystem.java:1709)
+	at org.apache.hadoop.fs.FileSystemLinkResolver.resolve(FileSystemLinkResolver.java:81)
+	at org.apache.hadoop.hdfs.DistributedFileSystem.getFileChecksum(DistributedFileSystem.java:1726)
+	at org.apache.hadoop.hdfs.TestFileChecksum.getFileChecksum(TestFileChecksum.java:584)
+	at org.apache.hadoop.hdfs.TestFileChecksum.testStripedFileChecksumWithMissedDataBlocksRangeQuery(TestFileChecksum.java:295)
+	at org.apache.hadoop.hdfs.TestFileChecksum.testStripedFileChecksumWithMissedDataBlocksRangeQuery17(TestFileChecksum.java:493)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.FailOnTimeout$StatementThread.run(FailOnTimeout.java:74)
+
+
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is -1
+v1v2 test failed !!!
+reconf_parameter: dfs.namenode.max-corrupt-file-blocks-returned
+component: hdfs:NameNode
+v1: 10000
+v2: 100
+testProject: hdfs
+unitTest: org.apache.hadoop.hdfs.TestFileChecksum#testStripedFileChecksumWithMissedDataBlocksRangeQuery17
+reconfPoint: 1
+result: -1
+failureMessage: `/striped/stripedFileChecksum3': Fail to get block checksum for LocatedStripedBlock{BP-1899703646-172.17.0.14-1599371863280:blk_-9223372036854775776_1002; getBlockSize()=37748736; corrupt=false; offset=0; locs=[DatanodeInfoWithStorage[127.0.0.1:46436,DS-b8b869be-efcc-4553-891e-c503bb669f64,DISK], DatanodeInfoWithStorage[127.0.0.1:33531,DS-24b09037-e7df-4ec3-810f-0a36e26e8057,DISK], DatanodeInfoWithStorage[127.0.0.1:40069,DS-81c51f3d-effd-44b2-b2bc-b36fdebc7cf7,DISK], DatanodeInfoWithStorage[127.0.0.1:40225,DS-36b038fb-129e-403d-8913-c5eee22dbda8,DISK], DatanodeInfoWithStorage[127.0.0.1:46055,DS-5c151b2e-9591-4766-acf8-62ca36b039e5,DISK], DatanodeInfoWithStorage[127.0.0.1:38148,DS-9dd48c3b-e571-4b22-84c2-afdb2deca1c1,DISK], DatanodeInfoWithStorage[127.0.0.1:37893,DS-e81d8e9e-49d9-4b6a-91b7-0aa228bdfc0e,DISK], DatanodeInfoWithStorage[127.0.0.1:34255,DS-9b527a2f-0102-40c9-a92f-0271928870dc,DISK]]; indices=[1, 2, 3, 4, 5, 6, 7, 8]}
+stackTrace: org.apache.hadoop.fs.PathIOException: `/striped/stripedFileChecksum3': Fail to get block checksum for LocatedStripedBlock{BP-1899703646-172.17.0.14-1599371863280:blk_-9223372036854775776_1002; getBlockSize()=37748736; corrupt=false; offset=0; locs=[DatanodeInfoWithStorage[127.0.0.1:46436,DS-b8b869be-efcc-4553-891e-c503bb669f64,DISK], DatanodeInfoWithStorage[127.0.0.1:33531,DS-24b09037-e7df-4ec3-810f-0a36e26e8057,DISK], DatanodeInfoWithStorage[127.0.0.1:40069,DS-81c51f3d-effd-44b2-b2bc-b36fdebc7cf7,DISK], DatanodeInfoWithStorage[127.0.0.1:40225,DS-36b038fb-129e-403d-8913-c5eee22dbda8,DISK], DatanodeInfoWithStorage[127.0.0.1:46055,DS-5c151b2e-9591-4766-acf8-62ca36b039e5,DISK], DatanodeInfoWithStorage[127.0.0.1:38148,DS-9dd48c3b-e571-4b22-84c2-afdb2deca1c1,DISK], DatanodeInfoWithStorage[127.0.0.1:37893,DS-e81d8e9e-49d9-4b6a-91b7-0aa228bdfc0e,DISK], DatanodeInfoWithStorage[127.0.0.1:34255,DS-9b527a2f-0102-40c9-a92f-0271928870dc,DISK]]; indices=[1, 2, 3, 4, 5, 6, 7, 8]}
+	at org.apache.hadoop.hdfs.FileChecksumHelper$StripedFileNonStripedChecksumComputer.checksumBlocks(FileChecksumHelper.java:640)
+	at org.apache.hadoop.hdfs.FileChecksumHelper$FileChecksumComputer.compute(FileChecksumHelper.java:252)
+	at org.apache.hadoop.hdfs.DFSClient.getFileChecksumInternal(DFSClient.java:1790)
+	at org.apache.hadoop.hdfs.DFSClient.getFileChecksumWithCombineMode(DFSClient.java:1810)
+	at org.apache.hadoop.hdfs.DistributedFileSystem$34.doCall(DistributedFileSystem.java:1712)
+	at org.apache.hadoop.hdfs.DistributedFileSystem$34.doCall(DistributedFileSystem.java:1709)
+	at org.apache.hadoop.fs.FileSystemLinkResolver.resolve(FileSystemLinkResolver.java:81)
+	at org.apache.hadoop.hdfs.DistributedFileSystem.getFileChecksum(DistributedFileSystem.java:1726)
+	at org.apache.hadoop.hdfs.TestFileChecksum.getFileChecksum(TestFileChecksum.java:584)
+	at org.apache.hadoop.hdfs.TestFileChecksum.testStripedFileChecksumWithMissedDataBlocksRangeQuery(TestFileChecksum.java:295)
+	at org.apache.hadoop.hdfs.TestFileChecksum.testStripedFileChecksumWithMissedDataBlocksRangeQuery17(TestFileChecksum.java:493)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.FailOnTimeout$StatementThread.run(FailOnTimeout.java:74)
+
+
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is -1
+v1v2 test failed !!!
+reconf_parameter: dfs.namenode.max-corrupt-file-blocks-returned
+component: hdfs:NameNode
+v1: 10000
+v2: 100
+testProject: hdfs
+unitTest: org.apache.hadoop.hdfs.TestFileChecksum#testStripedFileChecksumWithMissedDataBlocksRangeQuery17
+reconfPoint: 1
+result: -1
+failureMessage: `/striped/stripedFileChecksum3': Fail to get block checksum for LocatedStripedBlock{BP-604799616-172.17.0.14-1599372441149:blk_-9223372036854775776_1002; getBlockSize()=37748736; corrupt=false; offset=0; locs=[DatanodeInfoWithStorage[127.0.0.1:40675,DS-be6c3b51-102f-48b9-8eb4-e2823f02818e,DISK], DatanodeInfoWithStorage[127.0.0.1:39837,DS-752d6d09-5322-4ffe-9546-6f2c4b1f55c7,DISK], DatanodeInfoWithStorage[127.0.0.1:40746,DS-85ff2e36-b084-4e34-8f17-aed81c0dccc5,DISK], DatanodeInfoWithStorage[127.0.0.1:43593,DS-6ef5dde0-6141-4f99-9580-cc7d5a626339,DISK], DatanodeInfoWithStorage[127.0.0.1:44943,DS-9f118b60-aef8-445a-a5a7-78146bb22299,DISK], DatanodeInfoWithStorage[127.0.0.1:40883,DS-d9e7f5ac-37ee-4104-b390-e398c5345bf6,DISK], DatanodeInfoWithStorage[127.0.0.1:44207,DS-4a95803b-1b01-4912-a47d-38951d595508,DISK], DatanodeInfoWithStorage[127.0.0.1:41140,DS-55a2a838-d78b-45bb-b7c3-50b5bb6b8578,DISK]]; indices=[1, 2, 3, 4, 5, 6, 7, 8]}
+stackTrace: org.apache.hadoop.fs.PathIOException: `/striped/stripedFileChecksum3': Fail to get block checksum for LocatedStripedBlock{BP-604799616-172.17.0.14-1599372441149:blk_-9223372036854775776_1002; getBlockSize()=37748736; corrupt=false; offset=0; locs=[DatanodeInfoWithStorage[127.0.0.1:40675,DS-be6c3b51-102f-48b9-8eb4-e2823f02818e,DISK], DatanodeInfoWithStorage[127.0.0.1:39837,DS-752d6d09-5322-4ffe-9546-6f2c4b1f55c7,DISK], DatanodeInfoWithStorage[127.0.0.1:40746,DS-85ff2e36-b084-4e34-8f17-aed81c0dccc5,DISK], DatanodeInfoWithStorage[127.0.0.1:43593,DS-6ef5dde0-6141-4f99-9580-cc7d5a626339,DISK], DatanodeInfoWithStorage[127.0.0.1:44943,DS-9f118b60-aef8-445a-a5a7-78146bb22299,DISK], DatanodeInfoWithStorage[127.0.0.1:40883,DS-d9e7f5ac-37ee-4104-b390-e398c5345bf6,DISK], DatanodeInfoWithStorage[127.0.0.1:44207,DS-4a95803b-1b01-4912-a47d-38951d595508,DISK], DatanodeInfoWithStorage[127.0.0.1:41140,DS-55a2a838-d78b-45bb-b7c3-50b5bb6b8578,DISK]]; indices=[1, 2, 3, 4, 5, 6, 7, 8]}
+	at org.apache.hadoop.hdfs.FileChecksumHelper$StripedFileNonStripedChecksumComputer.checksumBlocks(FileChecksumHelper.java:640)
+	at org.apache.hadoop.hdfs.FileChecksumHelper$FileChecksumComputer.compute(FileChecksumHelper.java:252)
+	at org.apache.hadoop.hdfs.DFSClient.getFileChecksumInternal(DFSClient.java:1790)
+	at org.apache.hadoop.hdfs.DFSClient.getFileChecksumWithCombineMode(DFSClient.java:1810)
+	at org.apache.hadoop.hdfs.DistributedFileSystem$34.doCall(DistributedFileSystem.java:1712)
+	at org.apache.hadoop.hdfs.DistributedFileSystem$34.doCall(DistributedFileSystem.java:1709)
+	at org.apache.hadoop.fs.FileSystemLinkResolver.resolve(FileSystemLinkResolver.java:81)
+	at org.apache.hadoop.hdfs.DistributedFileSystem.getFileChecksum(DistributedFileSystem.java:1726)
+	at org.apache.hadoop.hdfs.TestFileChecksum.getFileChecksum(TestFileChecksum.java:584)
+	at org.apache.hadoop.hdfs.TestFileChecksum.testStripedFileChecksumWithMissedDataBlocksRangeQuery(TestFileChecksum.java:295)
+	at org.apache.hadoop.hdfs.TestFileChecksum.testStripedFileChecksumWithMissedDataBlocksRangeQuery17(TestFileChecksum.java:493)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.FailOnTimeout$StatementThread.run(FailOnTimeout.java:74)
+
+
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is -1
+v1v2 test failed !!!
+reconf_parameter: dfs.namenode.max-corrupt-file-blocks-returned
+component: hdfs:NameNode
+v1: 10000
+v2: 100
+testProject: hdfs
+unitTest: org.apache.hadoop.hdfs.TestFileChecksum#testStripedFileChecksumWithMissedDataBlocksRangeQuery17
+reconfPoint: 1
+result: -1
+failureMessage: `/striped/stripedFileChecksum3': Fail to get block checksum for LocatedStripedBlock{BP-713618365-172.17.0.14-1599372654241:blk_-9223372036854775776_1002; getBlockSize()=37748736; corrupt=false; offset=0; locs=[DatanodeInfoWithStorage[127.0.0.1:46436,DS-e36ee8b7-b58d-4eba-86d4-99e041685077,DISK], DatanodeInfoWithStorage[127.0.0.1:43908,DS-f27a94a4-fb6c-453f-9b97-8bb93638c908,DISK], DatanodeInfoWithStorage[127.0.0.1:45879,DS-27fed5f2-2064-4fc2-8b9a-72b81432c427,DISK], DatanodeInfoWithStorage[127.0.0.1:39182,DS-e1ea83c0-d521-4bd9-9ecd-2cf467a43136,DISK], DatanodeInfoWithStorage[127.0.0.1:33084,DS-98395c42-1b91-4796-9e7a-5da705225a62,DISK], DatanodeInfoWithStorage[127.0.0.1:37723,DS-da747c18-eb4c-42a4-a531-6ef440c0f527,DISK], DatanodeInfoWithStorage[127.0.0.1:39469,DS-7deefa62-8573-4e17-b785-10adbf4157bf,DISK], DatanodeInfoWithStorage[127.0.0.1:40079,DS-272a2563-1119-41c7-9711-2307253d89ce,DISK]]; indices=[1, 2, 3, 4, 5, 6, 7, 8]}
+stackTrace: org.apache.hadoop.fs.PathIOException: `/striped/stripedFileChecksum3': Fail to get block checksum for LocatedStripedBlock{BP-713618365-172.17.0.14-1599372654241:blk_-9223372036854775776_1002; getBlockSize()=37748736; corrupt=false; offset=0; locs=[DatanodeInfoWithStorage[127.0.0.1:46436,DS-e36ee8b7-b58d-4eba-86d4-99e041685077,DISK], DatanodeInfoWithStorage[127.0.0.1:43908,DS-f27a94a4-fb6c-453f-9b97-8bb93638c908,DISK], DatanodeInfoWithStorage[127.0.0.1:45879,DS-27fed5f2-2064-4fc2-8b9a-72b81432c427,DISK], DatanodeInfoWithStorage[127.0.0.1:39182,DS-e1ea83c0-d521-4bd9-9ecd-2cf467a43136,DISK], DatanodeInfoWithStorage[127.0.0.1:33084,DS-98395c42-1b91-4796-9e7a-5da705225a62,DISK], DatanodeInfoWithStorage[127.0.0.1:37723,DS-da747c18-eb4c-42a4-a531-6ef440c0f527,DISK], DatanodeInfoWithStorage[127.0.0.1:39469,DS-7deefa62-8573-4e17-b785-10adbf4157bf,DISK], DatanodeInfoWithStorage[127.0.0.1:40079,DS-272a2563-1119-41c7-9711-2307253d89ce,DISK]]; indices=[1, 2, 3, 4, 5, 6, 7, 8]}
+	at org.apache.hadoop.hdfs.FileChecksumHelper$StripedFileNonStripedChecksumComputer.checksumBlocks(FileChecksumHelper.java:640)
+	at org.apache.hadoop.hdfs.FileChecksumHelper$FileChecksumComputer.compute(FileChecksumHelper.java:252)
+	at org.apache.hadoop.hdfs.DFSClient.getFileChecksumInternal(DFSClient.java:1790)
+	at org.apache.hadoop.hdfs.DFSClient.getFileChecksumWithCombineMode(DFSClient.java:1810)
+	at org.apache.hadoop.hdfs.DistributedFileSystem$34.doCall(DistributedFileSystem.java:1712)
+	at org.apache.hadoop.hdfs.DistributedFileSystem$34.doCall(DistributedFileSystem.java:1709)
+	at org.apache.hadoop.fs.FileSystemLinkResolver.resolve(FileSystemLinkResolver.java:81)
+	at org.apache.hadoop.hdfs.DistributedFileSystem.getFileChecksum(DistributedFileSystem.java:1726)
+	at org.apache.hadoop.hdfs.TestFileChecksum.getFileChecksum(TestFileChecksum.java:584)
+	at org.apache.hadoop.hdfs.TestFileChecksum.testStripedFileChecksumWithMissedDataBlocksRangeQuery(TestFileChecksum.java:295)
+	at org.apache.hadoop.hdfs.TestFileChecksum.testStripedFileChecksumWithMissedDataBlocksRangeQuery17(TestFileChecksum.java:493)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.FailOnTimeout$StatementThread.run(FailOnTimeout.java:74)
+
+
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is -1
+v1v1 or v2v2 test failed !!!
+reconf_parameter: dfs.namenode.max-corrupt-file-blocks-returned
+component: hdfs:NameNode
+v1: 10000
+v2: 100
+testProject: hdfs
+unitTest: org.apache.hadoop.hdfs.TestFileChecksum#testStripedFileChecksumWithMissedDataBlocksRangeQuery17
+reconfPoint: 1
+result: -1
+failureMessage: `/striped/stripedFileChecksum3': Fail to get block checksum for LocatedStripedBlock{BP-1204213775-172.17.0.14-1599373030921:blk_-9223372036854775776_1002; getBlockSize()=37748736; corrupt=false; offset=0; locs=[DatanodeInfoWithStorage[127.0.0.1:46005,DS-8fbbdaf1-f689-41c0-8002-8740c595251d,DISK], DatanodeInfoWithStorage[127.0.0.1:37044,DS-a68edbb0-fff4-47d6-bcb0-d414f36ae0fd,DISK], DatanodeInfoWithStorage[127.0.0.1:33715,DS-8249888b-7577-4637-a6d7-09132b880316,DISK], DatanodeInfoWithStorage[127.0.0.1:45957,DS-6b3c0386-bc82-4f61-8342-615d7e9b7431,DISK], DatanodeInfoWithStorage[127.0.0.1:38258,DS-75a084ef-cef0-4070-830a-53cb6a181625,DISK], DatanodeInfoWithStorage[127.0.0.1:38641,DS-c80bbead-e164-4b48-866c-d61b36456442,DISK], DatanodeInfoWithStorage[127.0.0.1:46827,DS-6cfa7393-cb0d-4b4d-a4ff-f5238b4bc1fd,DISK], DatanodeInfoWithStorage[127.0.0.1:34009,DS-e9c76b6f-5a47-4966-a0cb-0452a328d618,DISK]]; indices=[1, 2, 3, 4, 5, 6, 7, 8]}
+stackTrace: org.apache.hadoop.fs.PathIOException: `/striped/stripedFileChecksum3': Fail to get block checksum for LocatedStripedBlock{BP-1204213775-172.17.0.14-1599373030921:blk_-9223372036854775776_1002; getBlockSize()=37748736; corrupt=false; offset=0; locs=[DatanodeInfoWithStorage[127.0.0.1:46005,DS-8fbbdaf1-f689-41c0-8002-8740c595251d,DISK], DatanodeInfoWithStorage[127.0.0.1:37044,DS-a68edbb0-fff4-47d6-bcb0-d414f36ae0fd,DISK], DatanodeInfoWithStorage[127.0.0.1:33715,DS-8249888b-7577-4637-a6d7-09132b880316,DISK], DatanodeInfoWithStorage[127.0.0.1:45957,DS-6b3c0386-bc82-4f61-8342-615d7e9b7431,DISK], DatanodeInfoWithStorage[127.0.0.1:38258,DS-75a084ef-cef0-4070-830a-53cb6a181625,DISK], DatanodeInfoWithStorage[127.0.0.1:38641,DS-c80bbead-e164-4b48-866c-d61b36456442,DISK], DatanodeInfoWithStorage[127.0.0.1:46827,DS-6cfa7393-cb0d-4b4d-a4ff-f5238b4bc1fd,DISK], DatanodeInfoWithStorage[127.0.0.1:34009,DS-e9c76b6f-5a47-4966-a0cb-0452a328d618,DISK]]; indices=[1, 2, 3, 4, 5, 6, 7, 8]}
+	at org.apache.hadoop.hdfs.FileChecksumHelper$StripedFileNonStripedChecksumComputer.checksumBlocks(FileChecksumHelper.java:640)
+	at org.apache.hadoop.hdfs.FileChecksumHelper$FileChecksumComputer.compute(FileChecksumHelper.java:252)
+	at org.apache.hadoop.hdfs.DFSClient.getFileChecksumInternal(DFSClient.java:1790)
+	at org.apache.hadoop.hdfs.DFSClient.getFileChecksumWithCombineMode(DFSClient.java:1810)
+	at org.apache.hadoop.hdfs.DistributedFileSystem$34.doCall(DistributedFileSystem.java:1712)
+	at org.apache.hadoop.hdfs.DistributedFileSystem$34.doCall(DistributedFileSystem.java:1709)
+	at org.apache.hadoop.fs.FileSystemLinkResolver.resolve(FileSystemLinkResolver.java:81)
+	at org.apache.hadoop.hdfs.DistributedFileSystem.getFileChecksum(DistributedFileSystem.java:1726)
+	at org.apache.hadoop.hdfs.TestFileChecksum.getFileChecksum(TestFileChecksum.java:584)
+	at org.apache.hadoop.hdfs.TestFileChecksum.testStripedFileChecksumWithMissedDataBlocksRangeQuery(TestFileChecksum.java:295)
+	at org.apache.hadoop.hdfs.TestFileChecksum.testStripedFileChecksumWithMissedDataBlocksRangeQuery17(TestFileChecksum.java:493)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.FailOnTimeout$StatementThread.run(FailOnTimeout.java:74)
+
+
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is -1
+
+Test vvMode=v2v2
+tr.result is 1
+v1v1 or v2v2 test failed !!!
+reconf_parameter: dfs.namenode.max-corrupt-file-blocks-returned
+component: hdfs:NameNode
+v1: 10000
+v2: 100
+testProject: hdfs
+unitTest: org.apache.hadoop.hdfs.TestFileChecksum#testStripedFileChecksumWithMissedDataBlocksRangeQuery17
+reconfPoint: 1
+result: -1
+failureMessage: `/striped/stripedFileChecksum3': Fail to get block checksum for LocatedStripedBlock{BP-1974042815-172.17.0.14-1599373288748:blk_-9223372036854775776_1002; getBlockSize()=37748736; corrupt=false; offset=0; locs=[DatanodeInfoWithStorage[127.0.0.1:40382,DS-8c6e536e-07d4-4587-83cb-3de820abf339,DISK], DatanodeInfoWithStorage[127.0.0.1:35879,DS-f4660521-b513-4639-a883-ef1b8777c4b8,DISK], DatanodeInfoWithStorage[127.0.0.1:37371,DS-866be48c-8b07-4c03-a42a-29ce629760f4,DISK], DatanodeInfoWithStorage[127.0.0.1:42847,DS-c27da2cb-5871-4577-9442-b9320e85cbea,DISK], DatanodeInfoWithStorage[127.0.0.1:40682,DS-68464744-9bac-4734-8cd4-f23baefbcf50,DISK], DatanodeInfoWithStorage[127.0.0.1:45712,DS-d7ae7e05-5448-47aa-a09c-aa8700727db8,DISK], DatanodeInfoWithStorage[127.0.0.1:36058,DS-44f0c6d3-e395-4d6b-a11d-67ae522cedcc,DISK], DatanodeInfoWithStorage[127.0.0.1:41249,DS-6cf0f528-134e-4637-b656-b214203df983,DISK]]; indices=[1, 2, 3, 4, 5, 6, 7, 8]}
+stackTrace: org.apache.hadoop.fs.PathIOException: `/striped/stripedFileChecksum3': Fail to get block checksum for LocatedStripedBlock{BP-1974042815-172.17.0.14-1599373288748:blk_-9223372036854775776_1002; getBlockSize()=37748736; corrupt=false; offset=0; locs=[DatanodeInfoWithStorage[127.0.0.1:40382,DS-8c6e536e-07d4-4587-83cb-3de820abf339,DISK], DatanodeInfoWithStorage[127.0.0.1:35879,DS-f4660521-b513-4639-a883-ef1b8777c4b8,DISK], DatanodeInfoWithStorage[127.0.0.1:37371,DS-866be48c-8b07-4c03-a42a-29ce629760f4,DISK], DatanodeInfoWithStorage[127.0.0.1:42847,DS-c27da2cb-5871-4577-9442-b9320e85cbea,DISK], DatanodeInfoWithStorage[127.0.0.1:40682,DS-68464744-9bac-4734-8cd4-f23baefbcf50,DISK], DatanodeInfoWithStorage[127.0.0.1:45712,DS-d7ae7e05-5448-47aa-a09c-aa8700727db8,DISK], DatanodeInfoWithStorage[127.0.0.1:36058,DS-44f0c6d3-e395-4d6b-a11d-67ae522cedcc,DISK], DatanodeInfoWithStorage[127.0.0.1:41249,DS-6cf0f528-134e-4637-b656-b214203df983,DISK]]; indices=[1, 2, 3, 4, 5, 6, 7, 8]}
+	at org.apache.hadoop.hdfs.FileChecksumHelper$StripedFileNonStripedChecksumComputer.checksumBlocks(FileChecksumHelper.java:640)
+	at org.apache.hadoop.hdfs.FileChecksumHelper$FileChecksumComputer.compute(FileChecksumHelper.java:252)
+	at org.apache.hadoop.hdfs.DFSClient.getFileChecksumInternal(DFSClient.java:1790)
+	at org.apache.hadoop.hdfs.DFSClient.getFileChecksumWithCombineMode(DFSClient.java:1810)
+	at org.apache.hadoop.hdfs.DistributedFileSystem$34.doCall(DistributedFileSystem.java:1712)
+	at org.apache.hadoop.hdfs.DistributedFileSystem$34.doCall(DistributedFileSystem.java:1709)
+	at org.apache.hadoop.fs.FileSystemLinkResolver.resolve(FileSystemLinkResolver.java:81)
+	at org.apache.hadoop.hdfs.DistributedFileSystem.getFileChecksum(DistributedFileSystem.java:1726)
+	at org.apache.hadoop.hdfs.TestFileChecksum.getFileChecksum(TestFileChecksum.java:584)
+	at org.apache.hadoop.hdfs.TestFileChecksum.testStripedFileChecksumWithMissedDataBlocksRangeQuery(TestFileChecksum.java:295)
+	at org.apache.hadoop.hdfs.TestFileChecksum.testStripedFileChecksumWithMissedDataBlocksRangeQuery17(TestFileChecksum.java:493)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.FailOnTimeout$StatementThread.run(FailOnTimeout.java:74)
+
+
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is -1
+v1v1 or v2v2 test failed !!!
+reconf_parameter: dfs.namenode.max-corrupt-file-blocks-returned
+component: hdfs:NameNode
+v1: 10000
+v2: 100
+testProject: hdfs
+unitTest: org.apache.hadoop.hdfs.TestFileChecksum#testStripedFileChecksumWithMissedDataBlocksRangeQuery17
+reconfPoint: 1
+result: -1
+failureMessage: `/striped/stripedFileChecksum3': Fail to get block checksum for LocatedStripedBlock{BP-136939049-172.17.0.14-1599373495186:blk_-9223372036854775776_1002; getBlockSize()=37748736; corrupt=false; offset=0; locs=[DatanodeInfoWithStorage[127.0.0.1:38448,DS-94e85020-8789-4b9d-bdd1-b8a834384a27,DISK], DatanodeInfoWithStorage[127.0.0.1:46373,DS-0b38314e-4c06-42df-9dc5-c3b2088d94f6,DISK], DatanodeInfoWithStorage[127.0.0.1:33123,DS-8fec6bf4-7d16-4841-8da4-1c89a5191279,DISK], DatanodeInfoWithStorage[127.0.0.1:43048,DS-de8bd500-0ad0-4c06-84de-00f099b4780e,DISK], DatanodeInfoWithStorage[127.0.0.1:42722,DS-7e2ca669-02ff-44b2-8c69-2df35150befe,DISK], DatanodeInfoWithStorage[127.0.0.1:43375,DS-58175d29-e5f7-4d4f-b488-832e22705968,DISK], DatanodeInfoWithStorage[127.0.0.1:44396,DS-fc158ad0-d00f-4db8-86f2-c70944c65500,DISK], DatanodeInfoWithStorage[127.0.0.1:42077,DS-3f0a58ce-20b2-4189-9293-3ed3981e5f78,DISK]]; indices=[1, 2, 3, 4, 5, 6, 7, 8]}
+stackTrace: org.apache.hadoop.fs.PathIOException: `/striped/stripedFileChecksum3': Fail to get block checksum for LocatedStripedBlock{BP-136939049-172.17.0.14-1599373495186:blk_-9223372036854775776_1002; getBlockSize()=37748736; corrupt=false; offset=0; locs=[DatanodeInfoWithStorage[127.0.0.1:38448,DS-94e85020-8789-4b9d-bdd1-b8a834384a27,DISK], DatanodeInfoWithStorage[127.0.0.1:46373,DS-0b38314e-4c06-42df-9dc5-c3b2088d94f6,DISK], DatanodeInfoWithStorage[127.0.0.1:33123,DS-8fec6bf4-7d16-4841-8da4-1c89a5191279,DISK], DatanodeInfoWithStorage[127.0.0.1:43048,DS-de8bd500-0ad0-4c06-84de-00f099b4780e,DISK], DatanodeInfoWithStorage[127.0.0.1:42722,DS-7e2ca669-02ff-44b2-8c69-2df35150befe,DISK], DatanodeInfoWithStorage[127.0.0.1:43375,DS-58175d29-e5f7-4d4f-b488-832e22705968,DISK], DatanodeInfoWithStorage[127.0.0.1:44396,DS-fc158ad0-d00f-4db8-86f2-c70944c65500,DISK], DatanodeInfoWithStorage[127.0.0.1:42077,DS-3f0a58ce-20b2-4189-9293-3ed3981e5f78,DISK]]; indices=[1, 2, 3, 4, 5, 6, 7, 8]}
+	at org.apache.hadoop.hdfs.FileChecksumHelper$StripedFileNonStripedChecksumComputer.checksumBlocks(FileChecksumHelper.java:640)
+	at org.apache.hadoop.hdfs.FileChecksumHelper$FileChecksumComputer.compute(FileChecksumHelper.java:252)
+	at org.apache.hadoop.hdfs.DFSClient.getFileChecksumInternal(DFSClient.java:1790)
+	at org.apache.hadoop.hdfs.DFSClient.getFileChecksumWithCombineMode(DFSClient.java:1810)
+	at org.apache.hadoop.hdfs.DistributedFileSystem$34.doCall(DistributedFileSystem.java:1712)
+	at org.apache.hadoop.hdfs.DistributedFileSystem$34.doCall(DistributedFileSystem.java:1709)
+	at org.apache.hadoop.fs.FileSystemLinkResolver.resolve(FileSystemLinkResolver.java:81)
+	at org.apache.hadoop.hdfs.DistributedFileSystem.getFileChecksum(DistributedFileSystem.java:1726)
+	at org.apache.hadoop.hdfs.TestFileChecksum.getFileChecksum(TestFileChecksum.java:584)
+	at org.apache.hadoop.hdfs.TestFileChecksum.testStripedFileChecksumWithMissedDataBlocksRangeQuery(TestFileChecksum.java:295)
+	at org.apache.hadoop.hdfs.TestFileChecksum.testStripedFileChecksumWithMissedDataBlocksRangeQuery17(TestFileChecksum.java:493)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.FailOnTimeout$StatementThread.run(FailOnTimeout.java:74)
+
+
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is -1
+
+Test vvMode=v2v2
+tr.result is 1
+v1v1 or v2v2 test failed !!!
+reconf_parameter: dfs.namenode.max-corrupt-file-blocks-returned
+component: hdfs:NameNode
+v1: 10000
+v2: 100
+testProject: hdfs
+unitTest: org.apache.hadoop.hdfs.TestFileChecksum#testStripedFileChecksumWithMissedDataBlocksRangeQuery17
+reconfPoint: 1
+result: -1
+failureMessage: `/striped/stripedFileChecksum3': Fail to get block checksum for LocatedStripedBlock{BP-1223802608-172.17.0.14-1599373555799:blk_-9223372036854775776_1002; getBlockSize()=37748736; corrupt=false; offset=0; locs=[DatanodeInfoWithStorage[127.0.0.1:43334,DS-e8c05fe5-c0be-46d1-ad90-c7c7cdebebed,DISK], DatanodeInfoWithStorage[127.0.0.1:46418,DS-d7622a3d-557b-4588-b132-a280df769f88,DISK], DatanodeInfoWithStorage[127.0.0.1:39185,DS-0fd27515-b201-4673-b9e6-075a52d48775,DISK], DatanodeInfoWithStorage[127.0.0.1:39119,DS-e5ae64d4-79f4-4561-b935-e1b8f57920a3,DISK], DatanodeInfoWithStorage[127.0.0.1:39678,DS-9194910e-6d0e-42ef-abd5-7b3e552c1fed,DISK], DatanodeInfoWithStorage[127.0.0.1:41371,DS-c1231ec7-88f9-4f7a-8c0b-523908edd29b,DISK], DatanodeInfoWithStorage[127.0.0.1:44607,DS-bb4503ae-14a2-413e-9057-d50d4621a0cd,DISK], DatanodeInfoWithStorage[127.0.0.1:35193,DS-9c520cc0-6eff-4073-a4d6-47ba8a6358fe,DISK]]; indices=[1, 2, 3, 4, 5, 6, 7, 8]}
+stackTrace: org.apache.hadoop.fs.PathIOException: `/striped/stripedFileChecksum3': Fail to get block checksum for LocatedStripedBlock{BP-1223802608-172.17.0.14-1599373555799:blk_-9223372036854775776_1002; getBlockSize()=37748736; corrupt=false; offset=0; locs=[DatanodeInfoWithStorage[127.0.0.1:43334,DS-e8c05fe5-c0be-46d1-ad90-c7c7cdebebed,DISK], DatanodeInfoWithStorage[127.0.0.1:46418,DS-d7622a3d-557b-4588-b132-a280df769f88,DISK], DatanodeInfoWithStorage[127.0.0.1:39185,DS-0fd27515-b201-4673-b9e6-075a52d48775,DISK], DatanodeInfoWithStorage[127.0.0.1:39119,DS-e5ae64d4-79f4-4561-b935-e1b8f57920a3,DISK], DatanodeInfoWithStorage[127.0.0.1:39678,DS-9194910e-6d0e-42ef-abd5-7b3e552c1fed,DISK], DatanodeInfoWithStorage[127.0.0.1:41371,DS-c1231ec7-88f9-4f7a-8c0b-523908edd29b,DISK], DatanodeInfoWithStorage[127.0.0.1:44607,DS-bb4503ae-14a2-413e-9057-d50d4621a0cd,DISK], DatanodeInfoWithStorage[127.0.0.1:35193,DS-9c520cc0-6eff-4073-a4d6-47ba8a6358fe,DISK]]; indices=[1, 2, 3, 4, 5, 6, 7, 8]}
+	at org.apache.hadoop.hdfs.FileChecksumHelper$StripedFileNonStripedChecksumComputer.checksumBlocks(FileChecksumHelper.java:640)
+	at org.apache.hadoop.hdfs.FileChecksumHelper$FileChecksumComputer.compute(FileChecksumHelper.java:252)
+	at org.apache.hadoop.hdfs.DFSClient.getFileChecksumInternal(DFSClient.java:1790)
+	at org.apache.hadoop.hdfs.DFSClient.getFileChecksumWithCombineMode(DFSClient.java:1810)
+	at org.apache.hadoop.hdfs.DistributedFileSystem$34.doCall(DistributedFileSystem.java:1712)
+	at org.apache.hadoop.hdfs.DistributedFileSystem$34.doCall(DistributedFileSystem.java:1709)
+	at org.apache.hadoop.fs.FileSystemLinkResolver.resolve(FileSystemLinkResolver.java:81)
+	at org.apache.hadoop.hdfs.DistributedFileSystem.getFileChecksum(DistributedFileSystem.java:1726)
+	at org.apache.hadoop.hdfs.TestFileChecksum.getFileChecksum(TestFileChecksum.java:584)
+	at org.apache.hadoop.hdfs.TestFileChecksum.testStripedFileChecksumWithMissedDataBlocksRangeQuery(TestFileChecksum.java:295)
+	at org.apache.hadoop.hdfs.TestFileChecksum.testStripedFileChecksumWithMissedDataBlocksRangeQuery17(TestFileChecksum.java:493)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.FailOnTimeout$StatementThread.run(FailOnTimeout.java:74)
+
+
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is -1
+v1v1 or v2v2 test failed !!!
+reconf_parameter: dfs.namenode.max-corrupt-file-blocks-returned
+component: hdfs:NameNode
+v1: 10000
+v2: 100
+testProject: hdfs
+unitTest: org.apache.hadoop.hdfs.TestFileChecksum#testStripedFileChecksumWithMissedDataBlocksRangeQuery17
+reconfPoint: 1
+result: -1
+failureMessage: `/striped/stripedFileChecksum3': Fail to get block checksum for LocatedStripedBlock{BP-1932710765-172.17.0.14-1599374723209:blk_-9223372036854775776_1002; getBlockSize()=37748736; corrupt=false; offset=0; locs=[DatanodeInfoWithStorage[127.0.0.1:44736,DS-d0e0f624-68ed-4d41-b143-dfb7742b73a5,DISK], DatanodeInfoWithStorage[127.0.0.1:34515,DS-d953cb75-2798-417d-9b02-9cd29edfab95,DISK], DatanodeInfoWithStorage[127.0.0.1:35840,DS-b0e965e3-1f2d-4236-a8b5-8b5e0d72ed46,DISK], DatanodeInfoWithStorage[127.0.0.1:37953,DS-269dc5fe-6a5a-4f76-a4db-c747c7af6c46,DISK], DatanodeInfoWithStorage[127.0.0.1:36816,DS-f198155b-56d0-4e93-929e-e04cc4d7fced,DISK], DatanodeInfoWithStorage[127.0.0.1:43565,DS-be6260bb-ed73-4747-9f55-3e8249129b73,DISK], DatanodeInfoWithStorage[127.0.0.1:36368,DS-c2b9b8c4-51a2-4303-8bd4-231a5e8bbd42,DISK], DatanodeInfoWithStorage[127.0.0.1:40639,DS-75fc7b6d-c2c5-4d70-9a91-8e0ff604a2f2,DISK]]; indices=[1, 2, 3, 4, 5, 6, 7, 8]}
+stackTrace: org.apache.hadoop.fs.PathIOException: `/striped/stripedFileChecksum3': Fail to get block checksum for LocatedStripedBlock{BP-1932710765-172.17.0.14-1599374723209:blk_-9223372036854775776_1002; getBlockSize()=37748736; corrupt=false; offset=0; locs=[DatanodeInfoWithStorage[127.0.0.1:44736,DS-d0e0f624-68ed-4d41-b143-dfb7742b73a5,DISK], DatanodeInfoWithStorage[127.0.0.1:34515,DS-d953cb75-2798-417d-9b02-9cd29edfab95,DISK], DatanodeInfoWithStorage[127.0.0.1:35840,DS-b0e965e3-1f2d-4236-a8b5-8b5e0d72ed46,DISK], DatanodeInfoWithStorage[127.0.0.1:37953,DS-269dc5fe-6a5a-4f76-a4db-c747c7af6c46,DISK], DatanodeInfoWithStorage[127.0.0.1:36816,DS-f198155b-56d0-4e93-929e-e04cc4d7fced,DISK], DatanodeInfoWithStorage[127.0.0.1:43565,DS-be6260bb-ed73-4747-9f55-3e8249129b73,DISK], DatanodeInfoWithStorage[127.0.0.1:36368,DS-c2b9b8c4-51a2-4303-8bd4-231a5e8bbd42,DISK], DatanodeInfoWithStorage[127.0.0.1:40639,DS-75fc7b6d-c2c5-4d70-9a91-8e0ff604a2f2,DISK]]; indices=[1, 2, 3, 4, 5, 6, 7, 8]}
+	at org.apache.hadoop.hdfs.FileChecksumHelper$StripedFileNonStripedChecksumComputer.checksumBlocks(FileChecksumHelper.java:640)
+	at org.apache.hadoop.hdfs.FileChecksumHelper$FileChecksumComputer.compute(FileChecksumHelper.java:252)
+	at org.apache.hadoop.hdfs.DFSClient.getFileChecksumInternal(DFSClient.java:1790)
+	at org.apache.hadoop.hdfs.DFSClient.getFileChecksumWithCombineMode(DFSClient.java:1810)
+	at org.apache.hadoop.hdfs.DistributedFileSystem$34.doCall(DistributedFileSystem.java:1712)
+	at org.apache.hadoop.hdfs.DistributedFileSystem$34.doCall(DistributedFileSystem.java:1709)
+	at org.apache.hadoop.fs.FileSystemLinkResolver.resolve(FileSystemLinkResolver.java:81)
+	at org.apache.hadoop.hdfs.DistributedFileSystem.getFileChecksum(DistributedFileSystem.java:1726)
+	at org.apache.hadoop.hdfs.TestFileChecksum.getFileChecksum(TestFileChecksum.java:584)
+	at org.apache.hadoop.hdfs.TestFileChecksum.testStripedFileChecksumWithMissedDataBlocksRangeQuery(TestFileChecksum.java:295)
+	at org.apache.hadoop.hdfs.TestFileChecksum.testStripedFileChecksumWithMissedDataBlocksRangeQuery17(TestFileChecksum.java:493)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.FailOnTimeout$StatementThread.run(FailOnTimeout.java:74)
+
+
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is -1
+v1v2 test failed !!!
+reconf_parameter: dfs.namenode.max-corrupt-file-blocks-returned
+component: hdfs:NameNode
+v1: 10000
+v2: 100
+testProject: hdfs
+unitTest: org.apache.hadoop.hdfs.TestFileChecksum#testStripedFileChecksumWithMissedDataBlocksRangeQuery17
+reconfPoint: 1
+result: -1
+failureMessage: `/striped/stripedFileChecksum3': Fail to get block checksum for LocatedStripedBlock{BP-2135018969-172.17.0.14-1599374861052:blk_-9223372036854775776_1002; getBlockSize()=37748736; corrupt=false; offset=0; locs=[DatanodeInfoWithStorage[127.0.0.1:36916,DS-89452a43-260f-425a-beab-c85425180de8,DISK], DatanodeInfoWithStorage[127.0.0.1:42194,DS-2c8251c1-6061-4af3-82fe-07cc11195bf5,DISK], DatanodeInfoWithStorage[127.0.0.1:41149,DS-c078c4d6-65af-4d67-9e8e-b0e1cd890593,DISK], DatanodeInfoWithStorage[127.0.0.1:38966,DS-56e307f0-3d2d-4f37-8356-fb237f697226,DISK], DatanodeInfoWithStorage[127.0.0.1:46849,DS-e4010b1d-8e76-4442-994b-c18077a576a3,DISK], DatanodeInfoWithStorage[127.0.0.1:35848,DS-7658a05f-1349-465e-959b-3e42ee46b9de,DISK], DatanodeInfoWithStorage[127.0.0.1:46235,DS-6005e1fd-4b11-4cb1-b26d-690aa20f48b1,DISK], DatanodeInfoWithStorage[127.0.0.1:35432,DS-4b5cb0c7-fe11-4c9d-a864-fca3daa9b093,DISK]]; indices=[1, 2, 3, 4, 5, 6, 7, 8]}
+stackTrace: org.apache.hadoop.fs.PathIOException: `/striped/stripedFileChecksum3': Fail to get block checksum for LocatedStripedBlock{BP-2135018969-172.17.0.14-1599374861052:blk_-9223372036854775776_1002; getBlockSize()=37748736; corrupt=false; offset=0; locs=[DatanodeInfoWithStorage[127.0.0.1:36916,DS-89452a43-260f-425a-beab-c85425180de8,DISK], DatanodeInfoWithStorage[127.0.0.1:42194,DS-2c8251c1-6061-4af3-82fe-07cc11195bf5,DISK], DatanodeInfoWithStorage[127.0.0.1:41149,DS-c078c4d6-65af-4d67-9e8e-b0e1cd890593,DISK], DatanodeInfoWithStorage[127.0.0.1:38966,DS-56e307f0-3d2d-4f37-8356-fb237f697226,DISK], DatanodeInfoWithStorage[127.0.0.1:46849,DS-e4010b1d-8e76-4442-994b-c18077a576a3,DISK], DatanodeInfoWithStorage[127.0.0.1:35848,DS-7658a05f-1349-465e-959b-3e42ee46b9de,DISK], DatanodeInfoWithStorage[127.0.0.1:46235,DS-6005e1fd-4b11-4cb1-b26d-690aa20f48b1,DISK], DatanodeInfoWithStorage[127.0.0.1:35432,DS-4b5cb0c7-fe11-4c9d-a864-fca3daa9b093,DISK]]; indices=[1, 2, 3, 4, 5, 6, 7, 8]}
+	at org.apache.hadoop.hdfs.FileChecksumHelper$StripedFileNonStripedChecksumComputer.checksumBlocks(FileChecksumHelper.java:640)
+	at org.apache.hadoop.hdfs.FileChecksumHelper$FileChecksumComputer.compute(FileChecksumHelper.java:252)
+	at org.apache.hadoop.hdfs.DFSClient.getFileChecksumInternal(DFSClient.java:1790)
+	at org.apache.hadoop.hdfs.DFSClient.getFileChecksumWithCombineMode(DFSClient.java:1810)
+	at org.apache.hadoop.hdfs.DistributedFileSystem$34.doCall(DistributedFileSystem.java:1712)
+	at org.apache.hadoop.hdfs.DistributedFileSystem$34.doCall(DistributedFileSystem.java:1709)
+	at org.apache.hadoop.fs.FileSystemLinkResolver.resolve(FileSystemLinkResolver.java:81)
+	at org.apache.hadoop.hdfs.DistributedFileSystem.getFileChecksum(DistributedFileSystem.java:1726)
+	at org.apache.hadoop.hdfs.TestFileChecksum.getFileChecksum(TestFileChecksum.java:584)
+	at org.apache.hadoop.hdfs.TestFileChecksum.testStripedFileChecksumWithMissedDataBlocksRangeQuery(TestFileChecksum.java:295)
+	at org.apache.hadoop.hdfs.TestFileChecksum.testStripedFileChecksumWithMissedDataBlocksRangeQuery17(TestFileChecksum.java:493)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.FailOnTimeout$StatementThread.run(FailOnTimeout.java:74)
+
+
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is -1
+v1v1 or v2v2 test failed !!!
+reconf_parameter: dfs.namenode.max-corrupt-file-blocks-returned
+component: hdfs:NameNode
+v1: 10000
+v2: 100
+testProject: hdfs
+unitTest: org.apache.hadoop.hdfs.TestFileChecksum#testStripedFileChecksumWithMissedDataBlocksRangeQuery17
+reconfPoint: 1
+result: -1
+failureMessage: `/striped/stripedFileChecksum3': Fail to get block checksum for LocatedStripedBlock{BP-2088511569-172.17.0.14-1599375128409:blk_-9223372036854775776_1002; getBlockSize()=37748736; corrupt=false; offset=0; locs=[DatanodeInfoWithStorage[127.0.0.1:42024,DS-910908f6-72fc-479d-b3e5-1f87eec50274,DISK], DatanodeInfoWithStorage[127.0.0.1:33179,DS-1d019004-72dd-4a6c-9a4c-b8d58aef73e7,DISK], DatanodeInfoWithStorage[127.0.0.1:42181,DS-5ba6655c-74e8-45ab-958a-5afd127e3cdc,DISK], DatanodeInfoWithStorage[127.0.0.1:43910,DS-0e83acc5-3165-48a9-831f-4a25b46e0e69,DISK], DatanodeInfoWithStorage[127.0.0.1:40517,DS-3d66dc73-6741-49be-acd2-658a4c2b5a11,DISK], DatanodeInfoWithStorage[127.0.0.1:32772,DS-eb07916f-0315-4800-9053-9e9cc3e33aab,DISK], DatanodeInfoWithStorage[127.0.0.1:45337,DS-2d7c6849-0e7b-48e4-8ae4-c32878fea048,DISK], DatanodeInfoWithStorage[127.0.0.1:43080,DS-3c69671a-7e4b-460c-a216-c3ee4099ecba,DISK]]; indices=[1, 2, 3, 4, 5, 6, 7, 8]}
+stackTrace: org.apache.hadoop.fs.PathIOException: `/striped/stripedFileChecksum3': Fail to get block checksum for LocatedStripedBlock{BP-2088511569-172.17.0.14-1599375128409:blk_-9223372036854775776_1002; getBlockSize()=37748736; corrupt=false; offset=0; locs=[DatanodeInfoWithStorage[127.0.0.1:42024,DS-910908f6-72fc-479d-b3e5-1f87eec50274,DISK], DatanodeInfoWithStorage[127.0.0.1:33179,DS-1d019004-72dd-4a6c-9a4c-b8d58aef73e7,DISK], DatanodeInfoWithStorage[127.0.0.1:42181,DS-5ba6655c-74e8-45ab-958a-5afd127e3cdc,DISK], DatanodeInfoWithStorage[127.0.0.1:43910,DS-0e83acc5-3165-48a9-831f-4a25b46e0e69,DISK], DatanodeInfoWithStorage[127.0.0.1:40517,DS-3d66dc73-6741-49be-acd2-658a4c2b5a11,DISK], DatanodeInfoWithStorage[127.0.0.1:32772,DS-eb07916f-0315-4800-9053-9e9cc3e33aab,DISK], DatanodeInfoWithStorage[127.0.0.1:45337,DS-2d7c6849-0e7b-48e4-8ae4-c32878fea048,DISK], DatanodeInfoWithStorage[127.0.0.1:43080,DS-3c69671a-7e4b-460c-a216-c3ee4099ecba,DISK]]; indices=[1, 2, 3, 4, 5, 6, 7, 8]}
+	at org.apache.hadoop.hdfs.FileChecksumHelper$StripedFileNonStripedChecksumComputer.checksumBlocks(FileChecksumHelper.java:640)
+	at org.apache.hadoop.hdfs.FileChecksumHelper$FileChecksumComputer.compute(FileChecksumHelper.java:252)
+	at org.apache.hadoop.hdfs.DFSClient.getFileChecksumInternal(DFSClient.java:1790)
+	at org.apache.hadoop.hdfs.DFSClient.getFileChecksumWithCombineMode(DFSClient.java:1810)
+	at org.apache.hadoop.hdfs.DistributedFileSystem$34.doCall(DistributedFileSystem.java:1712)
+	at org.apache.hadoop.hdfs.DistributedFileSystem$34.doCall(DistributedFileSystem.java:1709)
+	at org.apache.hadoop.fs.FileSystemLinkResolver.resolve(FileSystemLinkResolver.java:81)
+	at org.apache.hadoop.hdfs.DistributedFileSystem.getFileChecksum(DistributedFileSystem.java:1726)
+	at org.apache.hadoop.hdfs.TestFileChecksum.getFileChecksum(TestFileChecksum.java:584)
+	at org.apache.hadoop.hdfs.TestFileChecksum.testStripedFileChecksumWithMissedDataBlocksRangeQuery(TestFileChecksum.java:295)
+	at org.apache.hadoop.hdfs.TestFileChecksum.testStripedFileChecksumWithMissedDataBlocksRangeQuery17(TestFileChecksum.java:493)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.FailOnTimeout$StatementThread.run(FailOnTimeout.java:74)
+
+
+
+Test vvMode=v1v2
+tr.result is -1
+v1v2 test failed !!!
+reconf_parameter: dfs.namenode.max-corrupt-file-blocks-returned
+component: hdfs:NameNode
+v1: 10000
+v2: 100
+testProject: hdfs
+unitTest: org.apache.hadoop.hdfs.TestFileChecksum#testStripedFileChecksumWithMissedDataBlocksRangeQuery17
+reconfPoint: 1
+result: -1
+failureMessage: `/striped/stripedFileChecksum3': Fail to get block checksum for LocatedStripedBlock{BP-202418248-172.17.0.14-1599375160732:blk_-9223372036854775776_1002; getBlockSize()=37748736; corrupt=false; offset=0; locs=[DatanodeInfoWithStorage[127.0.0.1:35810,DS-688b819a-fff4-4d60-b085-fe07d9cc9eaa,DISK], DatanodeInfoWithStorage[127.0.0.1:39453,DS-9635876f-70bb-406a-95e7-e1c2b4038c8b,DISK], DatanodeInfoWithStorage[127.0.0.1:35647,DS-b5e24cbc-b93c-4b3d-b05b-b52c38367002,DISK], DatanodeInfoWithStorage[127.0.0.1:36445,DS-4bb2016b-2a99-4bb1-b98e-2a2e795efa9e,DISK], DatanodeInfoWithStorage[127.0.0.1:42564,DS-428a058b-f9dc-4244-ba5b-41a85a13312a,DISK], DatanodeInfoWithStorage[127.0.0.1:33693,DS-27984e05-09e3-4925-84c8-a1ad55563aff,DISK], DatanodeInfoWithStorage[127.0.0.1:32970,DS-b172649c-c443-4593-a350-a040bd80299e,DISK], DatanodeInfoWithStorage[127.0.0.1:37182,DS-690f2c06-aeb8-45f6-a55d-2c577c0fbce3,DISK]]; indices=[1, 2, 3, 4, 5, 6, 7, 8]}
+stackTrace: org.apache.hadoop.fs.PathIOException: `/striped/stripedFileChecksum3': Fail to get block checksum for LocatedStripedBlock{BP-202418248-172.17.0.14-1599375160732:blk_-9223372036854775776_1002; getBlockSize()=37748736; corrupt=false; offset=0; locs=[DatanodeInfoWithStorage[127.0.0.1:35810,DS-688b819a-fff4-4d60-b085-fe07d9cc9eaa,DISK], DatanodeInfoWithStorage[127.0.0.1:39453,DS-9635876f-70bb-406a-95e7-e1c2b4038c8b,DISK], DatanodeInfoWithStorage[127.0.0.1:35647,DS-b5e24cbc-b93c-4b3d-b05b-b52c38367002,DISK], DatanodeInfoWithStorage[127.0.0.1:36445,DS-4bb2016b-2a99-4bb1-b98e-2a2e795efa9e,DISK], DatanodeInfoWithStorage[127.0.0.1:42564,DS-428a058b-f9dc-4244-ba5b-41a85a13312a,DISK], DatanodeInfoWithStorage[127.0.0.1:33693,DS-27984e05-09e3-4925-84c8-a1ad55563aff,DISK], DatanodeInfoWithStorage[127.0.0.1:32970,DS-b172649c-c443-4593-a350-a040bd80299e,DISK], DatanodeInfoWithStorage[127.0.0.1:37182,DS-690f2c06-aeb8-45f6-a55d-2c577c0fbce3,DISK]]; indices=[1, 2, 3, 4, 5, 6, 7, 8]}
+	at org.apache.hadoop.hdfs.FileChecksumHelper$StripedFileNonStripedChecksumComputer.checksumBlocks(FileChecksumHelper.java:640)
+	at org.apache.hadoop.hdfs.FileChecksumHelper$FileChecksumComputer.compute(FileChecksumHelper.java:252)
+	at org.apache.hadoop.hdfs.DFSClient.getFileChecksumInternal(DFSClient.java:1790)
+	at org.apache.hadoop.hdfs.DFSClient.getFileChecksumWithCombineMode(DFSClient.java:1810)
+	at org.apache.hadoop.hdfs.DistributedFileSystem$34.doCall(DistributedFileSystem.java:1712)
+	at org.apache.hadoop.hdfs.DistributedFileSystem$34.doCall(DistributedFileSystem.java:1709)
+	at org.apache.hadoop.fs.FileSystemLinkResolver.resolve(FileSystemLinkResolver.java:81)
+	at org.apache.hadoop.hdfs.DistributedFileSystem.getFileChecksum(DistributedFileSystem.java:1726)
+	at org.apache.hadoop.hdfs.TestFileChecksum.getFileChecksum(TestFileChecksum.java:584)
+	at org.apache.hadoop.hdfs.TestFileChecksum.testStripedFileChecksumWithMissedDataBlocksRangeQuery(TestFileChecksum.java:295)
+	at org.apache.hadoop.hdfs.TestFileChecksum.testStripedFileChecksumWithMissedDataBlocksRangeQuery17(TestFileChecksum.java:493)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.FailOnTimeout$StatementThread.run(FailOnTimeout.java:74)
+
+
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is -1
+v1v1 or v2v2 test failed !!!
+reconf_parameter: dfs.namenode.max-corrupt-file-blocks-returned
+component: hdfs:NameNode
+v1: 10000
+v2: 100
+testProject: hdfs
+unitTest: org.apache.hadoop.hdfs.TestFileChecksum#testStripedFileChecksumWithMissedDataBlocksRangeQuery17
+reconfPoint: 1
+result: -1
+failureMessage: `/striped/stripedFileChecksum3': Fail to get block checksum for LocatedStripedBlock{BP-1025394129-172.17.0.14-1599375351987:blk_-9223372036854775776_1002; getBlockSize()=37748736; corrupt=false; offset=0; locs=[DatanodeInfoWithStorage[127.0.0.1:41325,DS-2833cc6e-0fbe-40c8-98d4-aef63255097a,DISK], DatanodeInfoWithStorage[127.0.0.1:37160,DS-18b4228e-f969-4d59-bb1b-6d92ac9a7cec,DISK], DatanodeInfoWithStorage[127.0.0.1:45042,DS-783b349e-c685-411e-a0d1-89e5b6299cca,DISK], DatanodeInfoWithStorage[127.0.0.1:43456,DS-ef0ae1fc-4462-42c8-b040-37f7c488b1ec,DISK], DatanodeInfoWithStorage[127.0.0.1:46703,DS-ef1c66f7-eef5-4a82-8988-36c75a221214,DISK], DatanodeInfoWithStorage[127.0.0.1:37624,DS-bee9c16d-98a3-4ced-9671-69086a298759,DISK], DatanodeInfoWithStorage[127.0.0.1:40690,DS-77a00a66-2eb1-4e4c-8c79-d26492baabf2,DISK], DatanodeInfoWithStorage[127.0.0.1:40902,DS-720febee-2a4e-42c7-8264-700fcfa29c1c,DISK]]; indices=[1, 2, 3, 4, 5, 6, 7, 8]}
+stackTrace: org.apache.hadoop.fs.PathIOException: `/striped/stripedFileChecksum3': Fail to get block checksum for LocatedStripedBlock{BP-1025394129-172.17.0.14-1599375351987:blk_-9223372036854775776_1002; getBlockSize()=37748736; corrupt=false; offset=0; locs=[DatanodeInfoWithStorage[127.0.0.1:41325,DS-2833cc6e-0fbe-40c8-98d4-aef63255097a,DISK], DatanodeInfoWithStorage[127.0.0.1:37160,DS-18b4228e-f969-4d59-bb1b-6d92ac9a7cec,DISK], DatanodeInfoWithStorage[127.0.0.1:45042,DS-783b349e-c685-411e-a0d1-89e5b6299cca,DISK], DatanodeInfoWithStorage[127.0.0.1:43456,DS-ef0ae1fc-4462-42c8-b040-37f7c488b1ec,DISK], DatanodeInfoWithStorage[127.0.0.1:46703,DS-ef1c66f7-eef5-4a82-8988-36c75a221214,DISK], DatanodeInfoWithStorage[127.0.0.1:37624,DS-bee9c16d-98a3-4ced-9671-69086a298759,DISK], DatanodeInfoWithStorage[127.0.0.1:40690,DS-77a00a66-2eb1-4e4c-8c79-d26492baabf2,DISK], DatanodeInfoWithStorage[127.0.0.1:40902,DS-720febee-2a4e-42c7-8264-700fcfa29c1c,DISK]]; indices=[1, 2, 3, 4, 5, 6, 7, 8]}
+	at org.apache.hadoop.hdfs.FileChecksumHelper$StripedFileNonStripedChecksumComputer.checksumBlocks(FileChecksumHelper.java:640)
+	at org.apache.hadoop.hdfs.FileChecksumHelper$FileChecksumComputer.compute(FileChecksumHelper.java:252)
+	at org.apache.hadoop.hdfs.DFSClient.getFileChecksumInternal(DFSClient.java:1790)
+	at org.apache.hadoop.hdfs.DFSClient.getFileChecksumWithCombineMode(DFSClient.java:1810)
+	at org.apache.hadoop.hdfs.DistributedFileSystem$34.doCall(DistributedFileSystem.java:1712)
+	at org.apache.hadoop.hdfs.DistributedFileSystem$34.doCall(DistributedFileSystem.java:1709)
+	at org.apache.hadoop.fs.FileSystemLinkResolver.resolve(FileSystemLinkResolver.java:81)
+	at org.apache.hadoop.hdfs.DistributedFileSystem.getFileChecksum(DistributedFileSystem.java:1726)
+	at org.apache.hadoop.hdfs.TestFileChecksum.getFileChecksum(TestFileChecksum.java:584)
+	at org.apache.hadoop.hdfs.TestFileChecksum.testStripedFileChecksumWithMissedDataBlocksRangeQuery(TestFileChecksum.java:295)
+	at org.apache.hadoop.hdfs.TestFileChecksum.testStripedFileChecksumWithMissedDataBlocksRangeQuery17(TestFileChecksum.java:493)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.FailOnTimeout$StatementThread.run(FailOnTimeout.java:74)
+
+
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is 1
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+v1v2 failed with probability 7 out of 50
+v1v1v2v2 failed with probability 12 out of 50
+result: false positive !!!
+Total execution time in seconds : 4947

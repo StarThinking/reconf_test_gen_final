@@ -1,0 +1,363 @@
+reconf_parameter: dfs.client.socket-timeout
+component: hdfs:DataNode
+v1: 5000
+v2: 600
+testProject: hbase
+unitTest: org.apache.hadoop.hbase.regionserver.wal.TestFSHLog#testUnflushedSeqIdTrackingWithAsyncWal
+reconfPoint: -3
+result: -1
+
+Test vvMode=v1v2
+tr.result is -1
+v1v2 test failed !!!
+reconf_parameter: dfs.client.socket-timeout
+component: hdfs:DataNode
+v1: 5000
+v2: 600
+testProject: hbase
+unitTest: org.apache.hadoop.hbase.regionserver.wal.TestFSHLog#testUnflushedSeqIdTrackingWithAsyncWal
+reconfPoint: -3
+result: -1
+failureMessage: Append sequenceId=3, requesting roll of WAL
+stackTrace: org.apache.hadoop.hbase.regionserver.wal.DamagedWALException: Append sequenceId=3, requesting roll of WAL
+	at org.apache.hadoop.hbase.regionserver.wal.FSHLog$RingBufferEventHandler.append(FSHLog.java:1081)
+	at org.apache.hadoop.hbase.regionserver.wal.FSHLog$RingBufferEventHandler.onEvent(FSHLog.java:964)
+	at org.apache.hadoop.hbase.regionserver.wal.FSHLog$RingBufferEventHandler.onEvent(FSHLog.java:873)
+	at com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:129)
+	at java.lang.Thread.run(Thread.java:748)
+	Suppressed: java.io.IOException: Failed to replace a bad datanode on the existing pipeline due to no more good datanodes being available to try. (Nodes: current=[DatanodeInfoWithStorage[127.0.0.1:39813,DS-2f92ffb3-043c-4016-8a74-5ea9e84835b8,DISK], DatanodeInfoWithStorage[127.0.0.1:44618,DS-0ee91927-216d-4801-a66e-ff623ddf06a4,DISK]], original=[DatanodeInfoWithStorage[127.0.0.1:44618,DS-0ee91927-216d-4801-a66e-ff623ddf06a4,DISK], DatanodeInfoWithStorage[127.0.0.1:39813,DS-2f92ffb3-043c-4016-8a74-5ea9e84835b8,DISK]]). The current failed datanode replacement policy is DEFAULT, and a client may configure this via 'dfs.client.block.write.replace-datanode-on-failure.policy' in its configuration.
+		at org.apache.hadoop.hdfs.DataStreamer.findNewDatanode(DataStreamer.java:1281)
+		at org.apache.hadoop.hdfs.DataStreamer.addDatanode2ExistingPipeline(DataStreamer.java:1353)
+		at org.apache.hadoop.hdfs.DataStreamer.handleDatanodeReplacement(DataStreamer.java:1568)
+		at org.apache.hadoop.hdfs.DataStreamer.setupPipelineForAppendOrRecovery(DataStreamer.java:1469)
+		at org.apache.hadoop.hdfs.DataStreamer.processDatanodeError(DataStreamer.java:1237)
+		at org.apache.hadoop.hdfs.DataStreamer.run(DataStreamer.java:657)
+	[CIRCULAR REFERENCE:java.io.IOException: Failed to replace a bad datanode on the existing pipeline due to no more good datanodes being available to try. (Nodes: current=[DatanodeInfoWithStorage[127.0.0.1:39813,DS-2f92ffb3-043c-4016-8a74-5ea9e84835b8,DISK], DatanodeInfoWithStorage[127.0.0.1:44618,DS-0ee91927-216d-4801-a66e-ff623ddf06a4,DISK]], original=[DatanodeInfoWithStorage[127.0.0.1:44618,DS-0ee91927-216d-4801-a66e-ff623ddf06a4,DISK], DatanodeInfoWithStorage[127.0.0.1:39813,DS-2f92ffb3-043c-4016-8a74-5ea9e84835b8,DISK]]). The current failed datanode replacement policy is DEFAULT, and a client may configure this via 'dfs.client.block.write.replace-datanode-on-failure.policy' in its configuration.]
+
+
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is -1
+v1v2 test failed !!!
+reconf_parameter: dfs.client.socket-timeout
+component: hdfs:DataNode
+v1: 5000
+v2: 600
+testProject: hbase
+unitTest: org.apache.hadoop.hbase.regionserver.wal.TestFSHLog#testUnflushedSeqIdTrackingWithAsyncWal
+reconfPoint: -3
+result: -1
+failureMessage: Append sequenceId=3, requesting roll of WAL
+stackTrace: org.apache.hadoop.hbase.regionserver.wal.DamagedWALException: Append sequenceId=3, requesting roll of WAL
+	at org.apache.hadoop.hbase.regionserver.wal.FSHLog$RingBufferEventHandler.append(FSHLog.java:1081)
+	at org.apache.hadoop.hbase.regionserver.wal.FSHLog$RingBufferEventHandler.onEvent(FSHLog.java:964)
+	at org.apache.hadoop.hbase.regionserver.wal.FSHLog$RingBufferEventHandler.onEvent(FSHLog.java:873)
+	at com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:129)
+	at java.lang.Thread.run(Thread.java:748)
+	Suppressed: java.io.IOException: Failed to replace a bad datanode on the existing pipeline due to no more good datanodes being available to try. (Nodes: current=[DatanodeInfoWithStorage[127.0.0.1:39256,DS-6f4f1859-6ade-4512-b460-4c452f827cad,DISK], DatanodeInfoWithStorage[127.0.0.1:32960,DS-f793b0a3-44ea-4823-97fd-21b731c0d1ac,DISK]], original=[DatanodeInfoWithStorage[127.0.0.1:32960,DS-f793b0a3-44ea-4823-97fd-21b731c0d1ac,DISK], DatanodeInfoWithStorage[127.0.0.1:39256,DS-6f4f1859-6ade-4512-b460-4c452f827cad,DISK]]). The current failed datanode replacement policy is DEFAULT, and a client may configure this via 'dfs.client.block.write.replace-datanode-on-failure.policy' in its configuration.
+		at org.apache.hadoop.hdfs.DataStreamer.findNewDatanode(DataStreamer.java:1281)
+		at org.apache.hadoop.hdfs.DataStreamer.addDatanode2ExistingPipeline(DataStreamer.java:1353)
+		at org.apache.hadoop.hdfs.DataStreamer.handleDatanodeReplacement(DataStreamer.java:1568)
+		at org.apache.hadoop.hdfs.DataStreamer.setupPipelineForAppendOrRecovery(DataStreamer.java:1469)
+		at org.apache.hadoop.hdfs.DataStreamer.processDatanodeError(DataStreamer.java:1237)
+		at org.apache.hadoop.hdfs.DataStreamer.run(DataStreamer.java:657)
+	[CIRCULAR REFERENCE:java.io.IOException: Failed to replace a bad datanode on the existing pipeline due to no more good datanodes being available to try. (Nodes: current=[DatanodeInfoWithStorage[127.0.0.1:39256,DS-6f4f1859-6ade-4512-b460-4c452f827cad,DISK], DatanodeInfoWithStorage[127.0.0.1:32960,DS-f793b0a3-44ea-4823-97fd-21b731c0d1ac,DISK]], original=[DatanodeInfoWithStorage[127.0.0.1:32960,DS-f793b0a3-44ea-4823-97fd-21b731c0d1ac,DISK], DatanodeInfoWithStorage[127.0.0.1:39256,DS-6f4f1859-6ade-4512-b460-4c452f827cad,DISK]]). The current failed datanode replacement policy is DEFAULT, and a client may configure this via 'dfs.client.block.write.replace-datanode-on-failure.policy' in its configuration.]
+
+
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is -1
+v1v2 test failed !!!
+reconf_parameter: dfs.client.socket-timeout
+component: hdfs:DataNode
+v1: 5000
+v2: 600
+testProject: hbase
+unitTest: org.apache.hadoop.hbase.regionserver.wal.TestFSHLog#testUnflushedSeqIdTrackingWithAsyncWal
+reconfPoint: -3
+result: -1
+failureMessage: Append sequenceId=3, requesting roll of WAL
+stackTrace: org.apache.hadoop.hbase.regionserver.wal.DamagedWALException: Append sequenceId=3, requesting roll of WAL
+	at org.apache.hadoop.hbase.regionserver.wal.FSHLog$RingBufferEventHandler.append(FSHLog.java:1081)
+	at org.apache.hadoop.hbase.regionserver.wal.FSHLog$RingBufferEventHandler.onEvent(FSHLog.java:964)
+	at org.apache.hadoop.hbase.regionserver.wal.FSHLog$RingBufferEventHandler.onEvent(FSHLog.java:873)
+	at com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:129)
+	at java.lang.Thread.run(Thread.java:748)
+	Suppressed: java.io.IOException: Failed to replace a bad datanode on the existing pipeline due to no more good datanodes being available to try. (Nodes: current=[DatanodeInfoWithStorage[127.0.0.1:46847,DS-e2684e2e-18de-4ee8-b68a-7792b42fc24b,DISK], DatanodeInfoWithStorage[127.0.0.1:41206,DS-1a8573d1-0666-4255-a725-3cfdd77721aa,DISK]], original=[DatanodeInfoWithStorage[127.0.0.1:46847,DS-e2684e2e-18de-4ee8-b68a-7792b42fc24b,DISK], DatanodeInfoWithStorage[127.0.0.1:41206,DS-1a8573d1-0666-4255-a725-3cfdd77721aa,DISK]]). The current failed datanode replacement policy is DEFAULT, and a client may configure this via 'dfs.client.block.write.replace-datanode-on-failure.policy' in its configuration.
+		at org.apache.hadoop.hdfs.DataStreamer.findNewDatanode(DataStreamer.java:1281)
+		at org.apache.hadoop.hdfs.DataStreamer.addDatanode2ExistingPipeline(DataStreamer.java:1353)
+		at org.apache.hadoop.hdfs.DataStreamer.handleDatanodeReplacement(DataStreamer.java:1568)
+		at org.apache.hadoop.hdfs.DataStreamer.setupPipelineForAppendOrRecovery(DataStreamer.java:1469)
+		at org.apache.hadoop.hdfs.DataStreamer.processDatanodeError(DataStreamer.java:1237)
+		at org.apache.hadoop.hdfs.DataStreamer.run(DataStreamer.java:657)
+	[CIRCULAR REFERENCE:java.io.IOException: Failed to replace a bad datanode on the existing pipeline due to no more good datanodes being available to try. (Nodes: current=[DatanodeInfoWithStorage[127.0.0.1:46847,DS-e2684e2e-18de-4ee8-b68a-7792b42fc24b,DISK], DatanodeInfoWithStorage[127.0.0.1:41206,DS-1a8573d1-0666-4255-a725-3cfdd77721aa,DISK]], original=[DatanodeInfoWithStorage[127.0.0.1:46847,DS-e2684e2e-18de-4ee8-b68a-7792b42fc24b,DISK], DatanodeInfoWithStorage[127.0.0.1:41206,DS-1a8573d1-0666-4255-a725-3cfdd77721aa,DISK]]). The current failed datanode replacement policy is DEFAULT, and a client may configure this via 'dfs.client.block.write.replace-datanode-on-failure.policy' in its configuration.]
+
+
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is -1
+v1v2 test failed !!!
+reconf_parameter: dfs.client.socket-timeout
+component: hdfs:DataNode
+v1: 5000
+v2: 600
+testProject: hbase
+unitTest: org.apache.hadoop.hbase.regionserver.wal.TestFSHLog#testUnflushedSeqIdTrackingWithAsyncWal
+reconfPoint: -3
+result: -1
+failureMessage: Append sequenceId=3, requesting roll of WAL
+stackTrace: org.apache.hadoop.hbase.regionserver.wal.DamagedWALException: Append sequenceId=3, requesting roll of WAL
+	at org.apache.hadoop.hbase.regionserver.wal.FSHLog$RingBufferEventHandler.append(FSHLog.java:1081)
+	at org.apache.hadoop.hbase.regionserver.wal.FSHLog$RingBufferEventHandler.onEvent(FSHLog.java:964)
+	at org.apache.hadoop.hbase.regionserver.wal.FSHLog$RingBufferEventHandler.onEvent(FSHLog.java:873)
+	at com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:129)
+	at java.lang.Thread.run(Thread.java:748)
+	Suppressed: java.io.IOException: Failed to replace a bad datanode on the existing pipeline due to no more good datanodes being available to try. (Nodes: current=[DatanodeInfoWithStorage[127.0.0.1:40936,DS-fafc2444-2e88-4f12-8122-a38d933ad2f9,DISK], DatanodeInfoWithStorage[127.0.0.1:43177,DS-6f1efcbc-0603-4d3d-85ec-c979f52716f0,DISK]], original=[DatanodeInfoWithStorage[127.0.0.1:40936,DS-fafc2444-2e88-4f12-8122-a38d933ad2f9,DISK], DatanodeInfoWithStorage[127.0.0.1:43177,DS-6f1efcbc-0603-4d3d-85ec-c979f52716f0,DISK]]). The current failed datanode replacement policy is DEFAULT, and a client may configure this via 'dfs.client.block.write.replace-datanode-on-failure.policy' in its configuration.
+		at org.apache.hadoop.hdfs.DataStreamer.findNewDatanode(DataStreamer.java:1281)
+		at org.apache.hadoop.hdfs.DataStreamer.addDatanode2ExistingPipeline(DataStreamer.java:1353)
+		at org.apache.hadoop.hdfs.DataStreamer.handleDatanodeReplacement(DataStreamer.java:1568)
+		at org.apache.hadoop.hdfs.DataStreamer.setupPipelineForAppendOrRecovery(DataStreamer.java:1469)
+		at org.apache.hadoop.hdfs.DataStreamer.processDatanodeError(DataStreamer.java:1237)
+		at org.apache.hadoop.hdfs.DataStreamer.run(DataStreamer.java:657)
+	[CIRCULAR REFERENCE:java.io.IOException: Failed to replace a bad datanode on the existing pipeline due to no more good datanodes being available to try. (Nodes: current=[DatanodeInfoWithStorage[127.0.0.1:40936,DS-fafc2444-2e88-4f12-8122-a38d933ad2f9,DISK], DatanodeInfoWithStorage[127.0.0.1:43177,DS-6f1efcbc-0603-4d3d-85ec-c979f52716f0,DISK]], original=[DatanodeInfoWithStorage[127.0.0.1:40936,DS-fafc2444-2e88-4f12-8122-a38d933ad2f9,DISK], DatanodeInfoWithStorage[127.0.0.1:43177,DS-6f1efcbc-0603-4d3d-85ec-c979f52716f0,DISK]]). The current failed datanode replacement policy is DEFAULT, and a client may configure this via 'dfs.client.block.write.replace-datanode-on-failure.policy' in its configuration.]
+
+
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is -1
+v1v2 test failed !!!
+reconf_parameter: dfs.client.socket-timeout
+component: hdfs:DataNode
+v1: 5000
+v2: 600
+testProject: hbase
+unitTest: org.apache.hadoop.hbase.regionserver.wal.TestFSHLog#testUnflushedSeqIdTrackingWithAsyncWal
+reconfPoint: -3
+result: -1
+failureMessage: Append sequenceId=3, requesting roll of WAL
+stackTrace: org.apache.hadoop.hbase.regionserver.wal.DamagedWALException: Append sequenceId=3, requesting roll of WAL
+	at org.apache.hadoop.hbase.regionserver.wal.FSHLog$RingBufferEventHandler.append(FSHLog.java:1081)
+	at org.apache.hadoop.hbase.regionserver.wal.FSHLog$RingBufferEventHandler.onEvent(FSHLog.java:964)
+	at org.apache.hadoop.hbase.regionserver.wal.FSHLog$RingBufferEventHandler.onEvent(FSHLog.java:873)
+	at com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:129)
+	at java.lang.Thread.run(Thread.java:748)
+	Suppressed: java.io.IOException: Failed to replace a bad datanode on the existing pipeline due to no more good datanodes being available to try. (Nodes: current=[DatanodeInfoWithStorage[127.0.0.1:44346,DS-8df641f6-afa5-4a7c-9cc2-5653ceb941e1,DISK], DatanodeInfoWithStorage[127.0.0.1:39997,DS-99a4e6a6-cb68-4efd-9238-ae0a72a03cc6,DISK]], original=[DatanodeInfoWithStorage[127.0.0.1:39997,DS-99a4e6a6-cb68-4efd-9238-ae0a72a03cc6,DISK], DatanodeInfoWithStorage[127.0.0.1:44346,DS-8df641f6-afa5-4a7c-9cc2-5653ceb941e1,DISK]]). The current failed datanode replacement policy is DEFAULT, and a client may configure this via 'dfs.client.block.write.replace-datanode-on-failure.policy' in its configuration.
+		at org.apache.hadoop.hdfs.DataStreamer.findNewDatanode(DataStreamer.java:1281)
+		at org.apache.hadoop.hdfs.DataStreamer.addDatanode2ExistingPipeline(DataStreamer.java:1353)
+		at org.apache.hadoop.hdfs.DataStreamer.handleDatanodeReplacement(DataStreamer.java:1568)
+		at org.apache.hadoop.hdfs.DataStreamer.setupPipelineForAppendOrRecovery(DataStreamer.java:1469)
+		at org.apache.hadoop.hdfs.DataStreamer.processDatanodeError(DataStreamer.java:1237)
+		at org.apache.hadoop.hdfs.DataStreamer.run(DataStreamer.java:657)
+	[CIRCULAR REFERENCE:java.io.IOException: Failed to replace a bad datanode on the existing pipeline due to no more good datanodes being available to try. (Nodes: current=[DatanodeInfoWithStorage[127.0.0.1:44346,DS-8df641f6-afa5-4a7c-9cc2-5653ceb941e1,DISK], DatanodeInfoWithStorage[127.0.0.1:39997,DS-99a4e6a6-cb68-4efd-9238-ae0a72a03cc6,DISK]], original=[DatanodeInfoWithStorage[127.0.0.1:39997,DS-99a4e6a6-cb68-4efd-9238-ae0a72a03cc6,DISK], DatanodeInfoWithStorage[127.0.0.1:44346,DS-8df641f6-afa5-4a7c-9cc2-5653ceb941e1,DISK]]). The current failed datanode replacement policy is DEFAULT, and a client may configure this via 'dfs.client.block.write.replace-datanode-on-failure.policy' in its configuration.]
+
+
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is -1
+v1v2 test failed !!!
+reconf_parameter: dfs.client.socket-timeout
+component: hdfs:DataNode
+v1: 5000
+v2: 600
+testProject: hbase
+unitTest: org.apache.hadoop.hbase.regionserver.wal.TestFSHLog#testUnflushedSeqIdTrackingWithAsyncWal
+reconfPoint: -3
+result: -1
+failureMessage: Append sequenceId=3, requesting roll of WAL
+stackTrace: org.apache.hadoop.hbase.regionserver.wal.DamagedWALException: Append sequenceId=3, requesting roll of WAL
+	at org.apache.hadoop.hbase.regionserver.wal.FSHLog$RingBufferEventHandler.append(FSHLog.java:1081)
+	at org.apache.hadoop.hbase.regionserver.wal.FSHLog$RingBufferEventHandler.onEvent(FSHLog.java:964)
+	at org.apache.hadoop.hbase.regionserver.wal.FSHLog$RingBufferEventHandler.onEvent(FSHLog.java:873)
+	at com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:129)
+	at java.lang.Thread.run(Thread.java:748)
+	Suppressed: java.io.IOException: Failed to replace a bad datanode on the existing pipeline due to no more good datanodes being available to try. (Nodes: current=[DatanodeInfoWithStorage[127.0.0.1:45534,DS-47f75090-38de-4dc7-b905-7b182a9003b8,DISK], DatanodeInfoWithStorage[127.0.0.1:39055,DS-fc7384bd-51be-48aa-84b1-989e0525e583,DISK]], original=[DatanodeInfoWithStorage[127.0.0.1:39055,DS-fc7384bd-51be-48aa-84b1-989e0525e583,DISK], DatanodeInfoWithStorage[127.0.0.1:45534,DS-47f75090-38de-4dc7-b905-7b182a9003b8,DISK]]). The current failed datanode replacement policy is DEFAULT, and a client may configure this via 'dfs.client.block.write.replace-datanode-on-failure.policy' in its configuration.
+		at org.apache.hadoop.hdfs.DataStreamer.findNewDatanode(DataStreamer.java:1281)
+		at org.apache.hadoop.hdfs.DataStreamer.addDatanode2ExistingPipeline(DataStreamer.java:1353)
+		at org.apache.hadoop.hdfs.DataStreamer.handleDatanodeReplacement(DataStreamer.java:1568)
+		at org.apache.hadoop.hdfs.DataStreamer.setupPipelineForAppendOrRecovery(DataStreamer.java:1469)
+		at org.apache.hadoop.hdfs.DataStreamer.processDatanodeError(DataStreamer.java:1237)
+		at org.apache.hadoop.hdfs.DataStreamer.run(DataStreamer.java:657)
+	[CIRCULAR REFERENCE:java.io.IOException: Failed to replace a bad datanode on the existing pipeline due to no more good datanodes being available to try. (Nodes: current=[DatanodeInfoWithStorage[127.0.0.1:45534,DS-47f75090-38de-4dc7-b905-7b182a9003b8,DISK], DatanodeInfoWithStorage[127.0.0.1:39055,DS-fc7384bd-51be-48aa-84b1-989e0525e583,DISK]], original=[DatanodeInfoWithStorage[127.0.0.1:39055,DS-fc7384bd-51be-48aa-84b1-989e0525e583,DISK], DatanodeInfoWithStorage[127.0.0.1:45534,DS-47f75090-38de-4dc7-b905-7b182a9003b8,DISK]]). The current failed datanode replacement policy is DEFAULT, and a client may configure this via 'dfs.client.block.write.replace-datanode-on-failure.policy' in its configuration.]
+
+
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is -1
+v1v2 test failed !!!
+reconf_parameter: dfs.client.socket-timeout
+component: hdfs:DataNode
+v1: 5000
+v2: 600
+testProject: hbase
+unitTest: org.apache.hadoop.hbase.regionserver.wal.TestFSHLog#testUnflushedSeqIdTrackingWithAsyncWal
+reconfPoint: -3
+result: -1
+failureMessage: Append sequenceId=3, requesting roll of WAL
+stackTrace: org.apache.hadoop.hbase.regionserver.wal.DamagedWALException: Append sequenceId=3, requesting roll of WAL
+	at org.apache.hadoop.hbase.regionserver.wal.FSHLog$RingBufferEventHandler.append(FSHLog.java:1081)
+	at org.apache.hadoop.hbase.regionserver.wal.FSHLog$RingBufferEventHandler.onEvent(FSHLog.java:964)
+	at org.apache.hadoop.hbase.regionserver.wal.FSHLog$RingBufferEventHandler.onEvent(FSHLog.java:873)
+	at com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:129)
+	at java.lang.Thread.run(Thread.java:748)
+	Suppressed: java.io.IOException: Failed to replace a bad datanode on the existing pipeline due to no more good datanodes being available to try. (Nodes: current=[DatanodeInfoWithStorage[127.0.0.1:39983,DS-b5370dd2-dbed-4679-89d1-89bba5a9263c,DISK], DatanodeInfoWithStorage[127.0.0.1:45965,DS-cec97055-cdf7-48f1-bfb3-6ef65d6e312e,DISK]], original=[DatanodeInfoWithStorage[127.0.0.1:45965,DS-cec97055-cdf7-48f1-bfb3-6ef65d6e312e,DISK], DatanodeInfoWithStorage[127.0.0.1:39983,DS-b5370dd2-dbed-4679-89d1-89bba5a9263c,DISK]]). The current failed datanode replacement policy is DEFAULT, and a client may configure this via 'dfs.client.block.write.replace-datanode-on-failure.policy' in its configuration.
+		at org.apache.hadoop.hdfs.DataStreamer.findNewDatanode(DataStreamer.java:1281)
+		at org.apache.hadoop.hdfs.DataStreamer.addDatanode2ExistingPipeline(DataStreamer.java:1353)
+		at org.apache.hadoop.hdfs.DataStreamer.handleDatanodeReplacement(DataStreamer.java:1568)
+		at org.apache.hadoop.hdfs.DataStreamer.setupPipelineForAppendOrRecovery(DataStreamer.java:1469)
+		at org.apache.hadoop.hdfs.DataStreamer.processDatanodeError(DataStreamer.java:1237)
+		at org.apache.hadoop.hdfs.DataStreamer.run(DataStreamer.java:657)
+	[CIRCULAR REFERENCE:java.io.IOException: Failed to replace a bad datanode on the existing pipeline due to no more good datanodes being available to try. (Nodes: current=[DatanodeInfoWithStorage[127.0.0.1:39983,DS-b5370dd2-dbed-4679-89d1-89bba5a9263c,DISK], DatanodeInfoWithStorage[127.0.0.1:45965,DS-cec97055-cdf7-48f1-bfb3-6ef65d6e312e,DISK]], original=[DatanodeInfoWithStorage[127.0.0.1:45965,DS-cec97055-cdf7-48f1-bfb3-6ef65d6e312e,DISK], DatanodeInfoWithStorage[127.0.0.1:39983,DS-b5370dd2-dbed-4679-89d1-89bba5a9263c,DISK]]). The current failed datanode replacement policy is DEFAULT, and a client may configure this via 'dfs.client.block.write.replace-datanode-on-failure.policy' in its configuration.]
+
+
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is -1
+v1v2 test failed !!!
+reconf_parameter: dfs.client.socket-timeout
+component: hdfs:DataNode
+v1: 5000
+v2: 600
+testProject: hbase
+unitTest: org.apache.hadoop.hbase.regionserver.wal.TestFSHLog#testUnflushedSeqIdTrackingWithAsyncWal
+reconfPoint: -3
+result: -1
+failureMessage: Append sequenceId=3, requesting roll of WAL
+stackTrace: org.apache.hadoop.hbase.regionserver.wal.DamagedWALException: Append sequenceId=3, requesting roll of WAL
+	at org.apache.hadoop.hbase.regionserver.wal.FSHLog$RingBufferEventHandler.append(FSHLog.java:1081)
+	at org.apache.hadoop.hbase.regionserver.wal.FSHLog$RingBufferEventHandler.onEvent(FSHLog.java:964)
+	at org.apache.hadoop.hbase.regionserver.wal.FSHLog$RingBufferEventHandler.onEvent(FSHLog.java:873)
+	at com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:129)
+	at java.lang.Thread.run(Thread.java:748)
+	Suppressed: java.io.IOException: Failed to replace a bad datanode on the existing pipeline due to no more good datanodes being available to try. (Nodes: current=[DatanodeInfoWithStorage[127.0.0.1:41224,DS-4c9ac7d6-a6f4-42d2-ae69-2c44d3275cb3,DISK], DatanodeInfoWithStorage[127.0.0.1:42307,DS-7df45f35-496b-475f-ab2e-699f1c213e59,DISK]], original=[DatanodeInfoWithStorage[127.0.0.1:42307,DS-7df45f35-496b-475f-ab2e-699f1c213e59,DISK], DatanodeInfoWithStorage[127.0.0.1:41224,DS-4c9ac7d6-a6f4-42d2-ae69-2c44d3275cb3,DISK]]). The current failed datanode replacement policy is DEFAULT, and a client may configure this via 'dfs.client.block.write.replace-datanode-on-failure.policy' in its configuration.
+		at org.apache.hadoop.hdfs.DataStreamer.findNewDatanode(DataStreamer.java:1281)
+		at org.apache.hadoop.hdfs.DataStreamer.addDatanode2ExistingPipeline(DataStreamer.java:1353)
+		at org.apache.hadoop.hdfs.DataStreamer.handleDatanodeReplacement(DataStreamer.java:1568)
+		at org.apache.hadoop.hdfs.DataStreamer.setupPipelineForAppendOrRecovery(DataStreamer.java:1469)
+		at org.apache.hadoop.hdfs.DataStreamer.processDatanodeError(DataStreamer.java:1237)
+		at org.apache.hadoop.hdfs.DataStreamer.run(DataStreamer.java:657)
+	[CIRCULAR REFERENCE:java.io.IOException: Failed to replace a bad datanode on the existing pipeline due to no more good datanodes being available to try. (Nodes: current=[DatanodeInfoWithStorage[127.0.0.1:41224,DS-4c9ac7d6-a6f4-42d2-ae69-2c44d3275cb3,DISK], DatanodeInfoWithStorage[127.0.0.1:42307,DS-7df45f35-496b-475f-ab2e-699f1c213e59,DISK]], original=[DatanodeInfoWithStorage[127.0.0.1:42307,DS-7df45f35-496b-475f-ab2e-699f1c213e59,DISK], DatanodeInfoWithStorage[127.0.0.1:41224,DS-4c9ac7d6-a6f4-42d2-ae69-2c44d3275cb3,DISK]]). The current failed datanode replacement policy is DEFAULT, and a client may configure this via 'dfs.client.block.write.replace-datanode-on-failure.policy' in its configuration.]
+
+
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is -1
+v1v2 test failed !!!
+reconf_parameter: dfs.client.socket-timeout
+component: hdfs:DataNode
+v1: 5000
+v2: 600
+testProject: hbase
+unitTest: org.apache.hadoop.hbase.regionserver.wal.TestFSHLog#testUnflushedSeqIdTrackingWithAsyncWal
+reconfPoint: -3
+result: -1
+failureMessage: Append sequenceId=3, requesting roll of WAL
+stackTrace: org.apache.hadoop.hbase.regionserver.wal.DamagedWALException: Append sequenceId=3, requesting roll of WAL
+	at org.apache.hadoop.hbase.regionserver.wal.FSHLog$RingBufferEventHandler.append(FSHLog.java:1081)
+	at org.apache.hadoop.hbase.regionserver.wal.FSHLog$RingBufferEventHandler.onEvent(FSHLog.java:964)
+	at org.apache.hadoop.hbase.regionserver.wal.FSHLog$RingBufferEventHandler.onEvent(FSHLog.java:873)
+	at com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:129)
+	at java.lang.Thread.run(Thread.java:748)
+	Suppressed: java.io.IOException: Failed to replace a bad datanode on the existing pipeline due to no more good datanodes being available to try. (Nodes: current=[DatanodeInfoWithStorage[127.0.0.1:35402,DS-9a297590-175e-432d-8f6a-3e9fb394af77,DISK], DatanodeInfoWithStorage[127.0.0.1:41081,DS-777dfb99-1492-4ab0-a282-0d8791e73dbb,DISK]], original=[DatanodeInfoWithStorage[127.0.0.1:35402,DS-9a297590-175e-432d-8f6a-3e9fb394af77,DISK], DatanodeInfoWithStorage[127.0.0.1:41081,DS-777dfb99-1492-4ab0-a282-0d8791e73dbb,DISK]]). The current failed datanode replacement policy is DEFAULT, and a client may configure this via 'dfs.client.block.write.replace-datanode-on-failure.policy' in its configuration.
+		at org.apache.hadoop.hdfs.DataStreamer.findNewDatanode(DataStreamer.java:1281)
+		at org.apache.hadoop.hdfs.DataStreamer.addDatanode2ExistingPipeline(DataStreamer.java:1353)
+		at org.apache.hadoop.hdfs.DataStreamer.handleDatanodeReplacement(DataStreamer.java:1568)
+		at org.apache.hadoop.hdfs.DataStreamer.setupPipelineForAppendOrRecovery(DataStreamer.java:1469)
+		at org.apache.hadoop.hdfs.DataStreamer.processDatanodeError(DataStreamer.java:1237)
+		at org.apache.hadoop.hdfs.DataStreamer.run(DataStreamer.java:657)
+	[CIRCULAR REFERENCE:java.io.IOException: Failed to replace a bad datanode on the existing pipeline due to no more good datanodes being available to try. (Nodes: current=[DatanodeInfoWithStorage[127.0.0.1:35402,DS-9a297590-175e-432d-8f6a-3e9fb394af77,DISK], DatanodeInfoWithStorage[127.0.0.1:41081,DS-777dfb99-1492-4ab0-a282-0d8791e73dbb,DISK]], original=[DatanodeInfoWithStorage[127.0.0.1:35402,DS-9a297590-175e-432d-8f6a-3e9fb394af77,DISK], DatanodeInfoWithStorage[127.0.0.1:41081,DS-777dfb99-1492-4ab0-a282-0d8791e73dbb,DISK]]). The current failed datanode replacement policy is DEFAULT, and a client may configure this via 'dfs.client.block.write.replace-datanode-on-failure.policy' in its configuration.]
+
+
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+
+Test vvMode=v1v2
+tr.result is -1
+v1v2 test failed !!!
+reconf_parameter: dfs.client.socket-timeout
+component: hdfs:DataNode
+v1: 5000
+v2: 600
+testProject: hbase
+unitTest: org.apache.hadoop.hbase.regionserver.wal.TestFSHLog#testUnflushedSeqIdTrackingWithAsyncWal
+reconfPoint: -3
+result: -1
+failureMessage: Append sequenceId=3, requesting roll of WAL
+stackTrace: org.apache.hadoop.hbase.regionserver.wal.DamagedWALException: Append sequenceId=3, requesting roll of WAL
+	at org.apache.hadoop.hbase.regionserver.wal.FSHLog$RingBufferEventHandler.append(FSHLog.java:1081)
+	at org.apache.hadoop.hbase.regionserver.wal.FSHLog$RingBufferEventHandler.onEvent(FSHLog.java:964)
+	at org.apache.hadoop.hbase.regionserver.wal.FSHLog$RingBufferEventHandler.onEvent(FSHLog.java:873)
+	at com.lmax.disruptor.BatchEventProcessor.run(BatchEventProcessor.java:129)
+	at java.lang.Thread.run(Thread.java:748)
+	Suppressed: java.io.IOException: Failed to replace a bad datanode on the existing pipeline due to no more good datanodes being available to try. (Nodes: current=[DatanodeInfoWithStorage[127.0.0.1:36633,DS-93bb3c54-b18e-4c32-b5c8-da9389fe12d4,DISK], DatanodeInfoWithStorage[127.0.0.1:37420,DS-c2de8ede-061d-45c4-a707-447c05ffe001,DISK]], original=[DatanodeInfoWithStorage[127.0.0.1:36633,DS-93bb3c54-b18e-4c32-b5c8-da9389fe12d4,DISK], DatanodeInfoWithStorage[127.0.0.1:37420,DS-c2de8ede-061d-45c4-a707-447c05ffe001,DISK]]). The current failed datanode replacement policy is DEFAULT, and a client may configure this via 'dfs.client.block.write.replace-datanode-on-failure.policy' in its configuration.
+		at org.apache.hadoop.hdfs.DataStreamer.findNewDatanode(DataStreamer.java:1281)
+		at org.apache.hadoop.hdfs.DataStreamer.addDatanode2ExistingPipeline(DataStreamer.java:1353)
+		at org.apache.hadoop.hdfs.DataStreamer.handleDatanodeReplacement(DataStreamer.java:1568)
+		at org.apache.hadoop.hdfs.DataStreamer.setupPipelineForAppendOrRecovery(DataStreamer.java:1469)
+		at org.apache.hadoop.hdfs.DataStreamer.processDatanodeError(DataStreamer.java:1237)
+		at org.apache.hadoop.hdfs.DataStreamer.run(DataStreamer.java:657)
+	[CIRCULAR REFERENCE:java.io.IOException: Failed to replace a bad datanode on the existing pipeline due to no more good datanodes being available to try. (Nodes: current=[DatanodeInfoWithStorage[127.0.0.1:36633,DS-93bb3c54-b18e-4c32-b5c8-da9389fe12d4,DISK], DatanodeInfoWithStorage[127.0.0.1:37420,DS-c2de8ede-061d-45c4-a707-447c05ffe001,DISK]], original=[DatanodeInfoWithStorage[127.0.0.1:36633,DS-93bb3c54-b18e-4c32-b5c8-da9389fe12d4,DISK], DatanodeInfoWithStorage[127.0.0.1:37420,DS-c2de8ede-061d-45c4-a707-447c05ffe001,DISK]]). The current failed datanode replacement policy is DEFAULT, and a client may configure this via 'dfs.client.block.write.replace-datanode-on-failure.policy' in its configuration.]
+
+
+
+Test vvMode=v1v1
+tr.result is 1
+
+Test vvMode=v2v2
+tr.result is 1
+early stop after 10 is satisfied
+v1v2 failed with probability 10 out of 10
+v1v1v2v2 failed with probability 0 out of 10
+result: might be true error
+Total execution time in seconds : 1576
